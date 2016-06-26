@@ -2,6 +2,8 @@
 
 A number of shaders for [MagicaVoxel](https://ephtracy.github.io/) to simplify common or repetitive tasks.
 
+Tested with MagicaVoxel 0.97.3 for Windows and Mac.
+
 ## Installation
 
 These can be installed by copying the files into the `shader` directory inside your MagicaVoxel installation.
