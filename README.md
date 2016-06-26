@@ -9,7 +9,7 @@ These can be installed by copying the files into the `shader` directory inside y
 ## Shaders
 
 <ul>
-    <li><a href="#del_shader">Slice</a> (<code>sx</code>, <code>sy</code>, <code>sz</code>)</li>
+    <li><a href="#slice_shader">Slice</a> (<code>sx</code>, <code>sy</code>, <code>sz</code>)</li>
     <li><a href="#del_shader">del</a></li>
     <li><a href="#repl_shader">repl</a></li>
     <li><a href="#noise_shader">noise</a></li>
@@ -18,7 +18,7 @@ These can be installed by copying the files into the `shader` directory inside y
     <li><a href="#flood_shader">flood</a></li>
 </ul>
 
-<h3 id="del_shader">Slice</h3>
+<h3 id="slice_shader">Slice</h3>
 
 ```
 xs sx [c] [count]
