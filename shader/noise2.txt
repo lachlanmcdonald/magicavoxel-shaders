@@ -1,5 +1,5 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
-// v. 0.2.0
+// v. 0.2.1
 // xs noise2 [a] [b]
 
 float rand(vec2 co){
@@ -8,7 +8,7 @@ float rand(vec2 co){
 
 float map(vec3 v) {
     float index = voxel(v);
-    float r = rand(vec2(rand(v), v.z));
+    float r = rand(vec2(rand(v.xy), v.z));
     if (index == iColorIndex) {
         return iArgs[0] + (r * (iArgs[1] - iArgs[0]));
     }

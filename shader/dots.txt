@@ -1,15 +1,15 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
-// v. 0.2.0
+// v. 0.2.1
 // xs dots [f] [index]
 
 float rand(vec2 co){
     return fract(sin(dot(co.xy, vec2(12.9898, 78.233))) * 43758.5453);
 }
 
-float map( vec3 v ) {
-    float index = voxel( v );
-    if ( index == iColorIndex ) {
-        if ( rand( v ) > iArgs[0] ) {
+float map(vec3 v) {
+    float index = voxel(v);
+    if (index == iColorIndex) {
+        if (rand(v.xy) > iArgs[0]) {
             return iArgs[1];
         }
     }
