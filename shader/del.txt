@@ -1,5 +1,5 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
-// v. 0.1.0
+// v. 0.2.0
 // xs del
 
 float map( vec3 v ) {

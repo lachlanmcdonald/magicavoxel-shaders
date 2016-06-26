@@ -1,0 +1,18 @@
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+// v. 0.2.0
+// xs sx [x] [count]
+
+float map(vec3 v) {
+    float offset = max(iArgs[1], 1.0);
+    float nx = (v.x + offset);
+
+    if (v.x >= iArgs[0]) {
+        if (nx >= iVolumeSize.x) {
+            return 0;
+        } else {
+            return voxel(vec3(nx, v.y, v.z));
+        }
+    } else {
+        return voxel(v);
+    }
+}
