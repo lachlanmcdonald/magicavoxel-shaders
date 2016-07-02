@@ -2,7 +2,7 @@
 
 A number of shaders for [MagicaVoxel](https://ephtracy.github.io/) to simplify common or repetitive tasks.
 
-Tested with MagicaVoxel 0.97.3 for Windows and Mac.
+Tested with MagicaVoxel 0.97.3 for Windows and Mac. Released under the MIT License.
 
 ## Installation
 
@@ -12,11 +12,14 @@ These can be installed by copying the files into the `shader` directory inside y
 
 <ul>
     <li><a href="#slice_shader">Slice</a> (<code>sx</code>, <code>sy</code>, <code>sz</code>)</li>
+    <li><a href="#lines_shader">Lines</a> (<code>lnx</code>, <code>lny</code>, <code>lnz</code>)</li>
+    <li><a href="#grid_shader">grid</a></li>
     <li><a href="#del_shader">del</a></li>
     <li><a href="#repl_shader">repl</a></li>
     <li><a href="#noise_shader">noise</a></li>
     <li><a href="#noise2_shader">noise2</a></li>
     <li><a href="#dots_shader">dots</a></li>
+    <li><a href="#dots2_shader">dots2</a></li>
     <li><a href="#flood_shader">flood</a></li>
 </ul>
 
@@ -32,7 +35,7 @@ xs sz [c] [count]
 
 ![Shader preview](/img/slice_b.png?raw=true)
 
-The slide shaders removes one or more segments from the x, y or z axis. All other rows are shuffled to full the available space. The first argument `c` is the coordinate of the segment you wish to remove and `count` is the number of rows. Note that `count` is optional and defaults to `1`.
+The slice shaders removes one or more segments from the x, y or z axis. All other rows are shuffled to full the available space. The first argument `c` is the coordinate of the segment you wish to remove and `count` is the number of rows. Note that `count` is optional and defaults to `1`.
 
 For example, in the first image above, the segments are removed with these two commands:
 
@@ -46,6 +49,29 @@ In the second image above, the segment is removed with this command.
 ```
 xs sz 2
 ```
+
+<h3 id="lines_shader">Lines</h3>
+
+```
+xs lnx [index] [spacing] [offset]
+xs lny [index] [spacing] [offset]
+xs lnz [index] [spacing] [offset]
+```
+
+![Shader preview](/img/lines.png?raw=true)
+
+Replaces all voxels which match your selected color with lines set to the color index passed as `index`. Setting the index to `0` will remove the voxels. Lines are spaced based on the `spacing` argument, which defaults to `2`.
+
+<h3 id="grid_shader">Grid</h3>
+
+```
+xs grid [index] [x] [y] [xoffset] [yoffset]
+```
+
+![Shader preview](/img/grid.png?raw=true)
+
+Replaces all voxels which match your selected color with a grid with a cell size determined by `x` and `y`. Grid cells are colored based on the provided `index`. Setting the index to `0` will remove the voxels. Grids can be square or rectangular. You can offset the position of the grid with `xoffset` and `yoffset` arguments, which default to `0`.
+
 
 <h3 id="del_shader">del</h3>
 
@@ -85,7 +111,7 @@ xs noise2 [a] [b]
 
 ![Shader preview](/img/noise2.png?raw=true)
 
-Similar to `noise`, except the z-axis is randomized as well.
+Same as `noise`, except the z-axis is also randomized.
 
 <h3 id="dots_shader">dots</h3>
 
@@ -97,6 +123,10 @@ xs dots [f] [index]
 ![Shader preview](/img/dots_b.png?raw=true)
 
 Replaces all voxels which match your selected color with a randomly chosen index. If `index` is 0, voxels are randomly removed instead. You can control the threshold by adjusting the `f` value. Values closer to `0.0` will replace more voxels. Values closer to `1.0` will replace less. Like with `noise`, dots are not removed randomly on the z-axis.
+
+<h3 id="dots2_shader">dots2</h3>
+
+Same as `dots`, except the z-axis is also randomized.
 
 <h3 id="flood_shader">flood</h3>
 
