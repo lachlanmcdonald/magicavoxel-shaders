@@ -1,5 +1,8 @@
+// MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
-// v. 0.2.1
+// Copyright (c) 2016 Lachlan McDonald
+//
+// v. 0.3.0
 // xs del
 
 float map(vec3 v) {
