@@ -1,0 +1,22 @@
+// MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+// Copyright (c) 2016 Lachlan McDonald
+//
+// v. 0.3.0
+// xs dots2 [f] [index]
+
+float rand(vec2 co){
+    return fract(sin(dot(co.xy, vec2(12.9898, 78.233))) * 43758.5453);
+}
+
+float map(vec3 v) {
+    float index = voxel(v);
+    float r = rand(vec2(rand(v.xy), v.z));
+
+    if (index == iColorIndex) {
+        if (r > iArgs[0]) {
+            return iArgs[1];
+        }
+    }
+    return index;
+}
