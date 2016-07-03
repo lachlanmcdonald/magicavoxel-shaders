@@ -13,20 +13,14 @@ float oy = max(floor(iArgs[4]), 0.0);
 
 float map(vec3 v) {
     float c = voxel(v);
-    float a = mod(v.x + ox, gx * 2.0) < gx;
-    float b = mod(v.y + oy, gy * 2.0) < gy;
 
     if (c == iColorIndex) {
-        if (a) {
-            if (b) {
+        if (mod(v.x + ox, gx * 2.0) < gx) {
+            if (mod(v.y + oy, gy * 2.0) < gy) {
                 return nc;
-            } else {
-                return c;
             }
         } else {
-            if (b) {
-                return c;
-            } else {
+            if (mod(v.y + oy, gy * 2.0) >= gy) {
                 return nc;
             }
         }
