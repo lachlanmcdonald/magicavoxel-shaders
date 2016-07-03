@@ -6,16 +6,16 @@
 // xs sy [c] [count]
 
 float map(vec3 v) {
-    float offset = max(iArgs[1], 1.0);
-    float ny = (v.y + offset);
+	float offset = max(iArgs[1], 1.0);
+	float ny = (v.y + offset);
 
-    if (v.y >= iArgs[0]) {
-        if (ny >= iVolumeSize.y) {
-            return 0.0;
-        } else {
-            return voxel(vec3(v.x, ny, v.z));
-        }
-    } else {
-        return voxel(v);
-    }
+	if (v.y >= iArgs[0]) {
+		if (ny >= iVolumeSize.y) {
+			return 0.0;
+		} else {
+			return voxel(vec3(v.x, ny, v.z));
+		}
+	} else {
+		return voxel(v);
+	}
 }

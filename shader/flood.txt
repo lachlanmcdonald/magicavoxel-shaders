@@ -6,11 +6,11 @@
 // xs flood [n]
 
 float map(vec3 v) {
-    float index = voxel(v);
-    if (index == 0.0) {
-        if (v.z < iArgs[0]) {
-            return iColorIndex;
-        }
-    }
-    return index;
+	float index = voxel(v);
+	if (index == 0.0) {
+		if (v.z < iArgs[0]) {
+			return iColorIndex;
+		}
+	}
+	return index;
 }

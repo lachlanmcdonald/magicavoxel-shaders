@@ -6,9 +6,9 @@
 // xs repl [index]
 
 float map( vec3 v ) {
-    float index = voxel( v );
-    if ( index == iColorIndex ) {
-        return float(iArgs[0]);
-    }
-    return index;
+	float index = voxel( v );
+	if ( index == iColorIndex ) {
+		return float(iArgs[0]);
+	}
+	return index;
 }
