@@ -1,8 +1,9 @@
 # magicavoxel-shaders
 
-A number of shaders for [MagicaVoxel](https://ephtracy.github.io/) to simplify common or repetitive tasks.
+__Shaders for [MagicaVoxel](https://ephtracy.github.io/) to simplify common and repetitive tasks.__
 
-Tested with MagicaVoxel 0.97.3 for Windows and Mac. Released under the MIT License.
+Tested with MagicaVoxel 0.97.3 for Windows and Mac.  
+Released under the MIT License.
 
 ## Installation
 
