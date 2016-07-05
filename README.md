@@ -2,8 +2,8 @@
 
 __Shaders for [MagicaVoxel](https://ephtracy.github.io/) to simplify common and repetitive tasks.__
 
-- Current release: `0.3.1`.
-- Tested with MagicaVoxel 0.97.3 for Windows and Mac. 
+- Current release: `0.3.2`.
+- Tested with MagicaVoxel 0.97.4 for Windows and Mac. 
 - Released under the MIT License.
 
 ## Installation
@@ -16,8 +16,6 @@ These can be installed by copying the files into the `shader` directory inside y
     <li><a href="#slice_shader">Slice</a> (<code>sx</code>, <code>sy</code>, <code>sz</code>)</li>
     <li><a href="#lines_shader">Lines</a> (<code>lnx</code>, <code>lny</code>, <code>lnz</code>)</li>
     <li><a href="#grid_shader">grid</a></li>
-    <li><a href="#del_shader">del</a></li>
-    <li><a href="#repl_shader">repl</a></li>
     <li><a href="#noise_shader">noise</a></li>
     <li><a href="#noise2_shader">noise2</a></li>
     <li><a href="#dots_shader">dots</a></li>
@@ -73,27 +71,6 @@ xs grid [index] [x] [y] [xoffset] [yoffset]
 ![Shader preview](/img/grid.png?raw=true)
 
 Replaces all voxels which match your selected color with a grid with a cell size determined by `x` and `y`. Grid cells are colored based on the provided `index`. Setting the index to `0` will remove the voxels. Grids can be square or rectangular. You can offset the position of the grid with `xoffset` and `yoffset` arguments, which default to `0`.
-
-
-<h3 id="del_shader">del</h3>
-
-```
-xs del
-```
-
-![Shader preview](/img/del.png?raw=true)
-
-Removes all voxels which match your selected color.
-
-<h3 id="repl_shader">repl</h3>
-
-```
-xs repl [index]
-```
-
-![Shader preview](/img/repl.png?raw=true)
-
-Replaces all voxels which match your selected color with the color index passed as `index`.
 
 <h3 id="noise_shader">noise</h3>
 
