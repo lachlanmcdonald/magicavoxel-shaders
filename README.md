@@ -15,6 +15,8 @@ These can be installed by copying the files into the `shader` directory inside y
 <ul>
     <li><a href="#slice_shader">Slice</a> (<code>sx</code>, <code>sy</code>, <code>sz</code>)</li>
     <li><a href="#lines_shader">Lines</a> (<code>lnx</code>, <code>lny</code>, <code>lnz</code>)</li>
+    <li><a href="#outline_shader">outline</a></li>
+    <li><a href="#outline2_shader">outline2</a></li>
     <li><a href="#grid_shader">grid</a></li>
     <li><a href="#noise_shader">noise</a></li>
     <li><a href="#noise2_shader">noise2</a></li>
@@ -61,6 +63,26 @@ xs lnz [index] [spacing] [offset]
 ![Shader preview](/img/lines.png?raw=true)
 
 Replaces all voxels which match your selected color with lines set to the color index passed as `index`. Setting the index to `0` will remove the voxels. Lines are spaced based on the `spacing` argument, which defaults to `2`.
+
+<h3 id="outline_shader">outline</h3>
+
+```
+xs outline [index]
+```
+
+![Shader preview](/img/outline.png?raw=true)
+
+Replaces all voxels which match your selected color which are adjacent to another voxel of a different color. The outline is colored based on the provided `index`. Outline checks adjacent and diagonal neighbors, producing slightly thicker lines.
+
+<h3 id="outline2_shader">outline2</h3>
+
+```
+xs outline2 [index]
+```
+
+![Shader preview](/img/outline2.png?raw=true)
+
+Similar to the `outline` shader, except only adjacent voxels are checked. Produces slightly thinner lines.
 
 <h3 id="grid_shader">Grid</h3>
 
