@@ -2,28 +2,28 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2016 Lachlan McDonald
 //
-// v. 0.3.0
+// v. 0.4.0
 // xs outline2 [index]
 
 float map(vec3 v) {
-    float x = voxel(v);
+	float x = voxel(v);
 
-    if (x == iColorIndex) {
-        float n = voxel(vec3(v.x - 1.0, v.y, v.z));
-        float s = voxel(vec3(v.x + 1.0, v.y, v.z));
-        float e = voxel(vec3(v.x, v.y - 1.0, v.z));
-        float w = voxel(vec3(v.x, v.y + 1.0, v.z));
-        float a = voxel(vec3(v.x, v.y, v.z - 1.0));
-        float b = voxel(vec3(v.x, v.y, v.z + 1.0));
+	if (x == iColorIndex) {
+		float n = voxel(vec3(v.x - 1.0, v.y, v.z));
+		float s = voxel(vec3(v.x + 1.0, v.y, v.z));
+		float e = voxel(vec3(v.x, v.y - 1.0, v.z));
+		float w = voxel(vec3(v.x, v.y + 1.0, v.z));
+		float a = voxel(vec3(v.x, v.y, v.z - 1.0));
+		float b = voxel(vec3(v.x, v.y, v.z + 1.0));
 
-        if ((n != x && n != 0.0) ||
-            (s != x && s != 0.0) ||
-            (e != x && e != 0.0) ||
-            (w != x && w != 0.0) ||
-            (a != x && a != 0.0) ||
-            (b != x && b != 0.0)) {
-            return iArgs[0];
-        }
-    }
-    return x;
+		if ((n != x && n != 0.0) ||
+			(s != x && s != 0.0) ||
+			(e != x && e != 0.0) ||
+			(w != x && w != 0.0) ||
+			(a != x && a != 0.0) ||
+			(b != x && b != 0.0)) {
+			return iArgs[0];
+		}
+	}
+	return x;
 }
