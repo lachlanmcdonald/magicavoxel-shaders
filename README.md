@@ -15,6 +15,8 @@ Install by copying the files into the `shader` directory inside your MagicaVoxel
 <ul>
     <li><a href="#slice_shader">Slice</a> (<code>sx</code>, <code>sy</code>, <code>sz</code>)</li>
     <li><a href="#lines_shader">Lines</a> (<code>lnx</code>, <code>lny</code>, <code>lnz</code>)</li>
+    <li><a href="#soil_shader">soil</a></li>
+    <li><a href="#soil2_shader">soil2</a></li>
     <li><a href="#outline_shader">outline</a></li>
     <li><a href="#outline2_shader">outline2</a></li>
     <li><a href="#grid_shader">grid</a></li>
@@ -64,6 +66,26 @@ xs lnz [index] [spacing] [offset]
 ![Shader preview](/img/lines.png?raw=true)
 
 Replaces all voxels which match your selected color with lines set to the color index passed as `index`. Setting the index to `0` will remove the voxels. Lines are spaced based on the `spacing` argument, which defaults to `2`.
+
+<h3 id="soil_shader">soil</h3>
+
+```
+xs soil [index] [n]
+```
+
+![Shader preview](/img/soil.png?raw=true)
+
+Adds voxels on top of your selected colour if there is empty space. `index` is the color index of the voxels to add. `n` is the number of voxels above each voxel to check. For example, in the images above a `n` of `1` and `10` were used respectively.
+
+<h3 id="soil2_shader">soil2</h3>
+
+```
+xs soil2 [index] [n]
+```
+
+![Shader preview](/img/soil2.png?raw=true)
+
+Similar to `soil`, except that voxels are replaced instead of added ontop.
 
 <h3 id="outline_shader">outline</h3>
 
