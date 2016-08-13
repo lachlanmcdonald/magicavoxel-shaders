@@ -2,13 +2,15 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2016 Lachlan McDonald
 //
-// v. 0.4.0
+// v. 0.4.1
 // xs flood [n]
+
+float l = max(1.0, iArgs[0]);
 
 float map(vec3 v) {
 	float index = voxel(v);
 	if (index == 0.0) {
-		if (v.z < iArgs[0]) {
+		if (v.z < l) {
 			return iColorIndex;
 		}
 	}
