@@ -2,8 +2,8 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2016 Lachlan McDonald
 //
-// v. 0.4.1
-// xs soil [index] [n]
+// v. 0.5.0
+// xs soil [index] [headroom]
 
 float c = max(1.0, iArgs[1]);
 

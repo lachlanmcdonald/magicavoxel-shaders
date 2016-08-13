@@ -2,9 +2,9 @@
 
 __Shaders for [MagicaVoxel](https://ephtracy.github.io/) to simplify common and repetitive tasks.__
 
-- Current release: `0.4.0`.
-- Tested with MagicaVoxel 0.97.4 for Windows and Mac. 
-- Released under the MIT License.
+- Current release: `0.5.0`
+- Tested with MagicaVoxel 0.97.4 for Windows and Mac
+- Released under the MIT License
 
 ## Installation
 
