@@ -8,7 +8,7 @@ __Shaders for [MagicaVoxel](https://ephtracy.github.io/) to simplify common and 
 
 ## Installation
 
-These can be installed by copying the files into the `shader` directory inside your MagicaVoxel installation.
+Install by copying the files into the `shader` directory inside your MagicaVoxel installation.
 
 ## Shaders
 
@@ -23,6 +23,7 @@ These can be installed by copying the files into the `shader` directory inside y
     <li><a href="#dots_shader">dots</a></li>
     <li><a href="#dots2_shader">dots2</a></li>
     <li><a href="#flood_shader">flood</a></li>
+    <li><a href="#flood2_shader">flood2</a></li>
 </ul>
 
 <h3 id="slice_shader">Slice</h3>
@@ -137,4 +138,12 @@ xs flood [n]
 
 ![Shader preview](/img/flood.png?raw=true)
 
-Adds `n` number of layers of voxels with your selected color from the bottom of your model upwards. Voxels are only added to empty space and won't replace existing voxels.
+Adds `n` number of layers of voxels with your selected color from the bottom of your model upwards. Voxels are only added to empty space and won't replace existing voxels. Defaults to 1 layer.
+
+<h3 id="flood2_shader">flood2</h3>
+
+```
+xs flood2 [n]
+```
+
+Similar to `flood`, except flooding stops when a voxel is encountered so that exclosed spaces aren't filled.
