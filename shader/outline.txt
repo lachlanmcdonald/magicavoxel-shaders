@@ -2,7 +2,7 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2016 Lachlan McDonald
 //
-// v. 0.4.0
+// v. 0.5.0
 // xs outline [index]
 
 float map(vec3 v) {
