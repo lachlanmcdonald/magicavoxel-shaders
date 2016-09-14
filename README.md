@@ -3,7 +3,7 @@
 __Shaders for [MagicaVoxel](https://ephtracy.github.io/) to simplify common and repetitive tasks.__
 
 - Current release: `0.5.0`
-- Tested with MagicaVoxel 0.97.4 for Windows and Mac
+- Tested with MagicaVoxel 0.97.5 for Windows and Mac
 - Released under the MIT License
 
 ## Installation
@@ -62,7 +62,7 @@ xs lnz [index] [spacing] [offset]
 
 Replaces all voxels which match your selected color with lines set to the color passed as `index`. Setting the index to `0` will remove the voxels. Lines are spaced based on the `spacing` argument, which defaults to `2`.
 
-<h3 id="soil_shader">Soil</h3>
+<h3 id="soil_shader">soil</h3>
 
 ```
 xs soil [index] [n]
@@ -146,6 +146,10 @@ xs dots [f] [index]
 Replaces all voxels which match your selected color with a randomly chosen index. If `index` is 0, voxels are randomly removed instead. You can control the threshold by adjusting the `f` value. Values closer to `0.0` will replace more voxels. Values closer to `1.0` will replace less. Like with `noise`, dots are not removed randomly on the z-axis.
 
 <h3 id="dots2_shader">dots2</h3>
+
+```
+xs dots2 [f] [index]
+```
 
 Same as `dots`, except the z-axis is also randomized.
 
