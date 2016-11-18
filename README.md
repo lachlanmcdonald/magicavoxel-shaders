@@ -2,13 +2,13 @@
 
 __Shaders for [MagicaVoxel](https://ephtracy.github.io/) to simplify common and repetitive tasks.__
 
-- Current release: `0.5.0`
-- Tested with MagicaVoxel 0.97.5 for Windows and Mac
+- Current release: 0.5.0
+- Tested with MagicaVoxel 0.98 for Windows and Mac
 - Released under the MIT License
 
 ## Installation
 
-Install by copying the files into the `shader` directory inside your MagicaVoxel installation.
+Install by copying the files into the `shader` directory inside of your MagicaVoxel installation.
 
 ## Shaders
 
