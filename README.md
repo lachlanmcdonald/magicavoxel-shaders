@@ -8,7 +8,7 @@ __Shaders for [MagicaVoxel](https://ephtracy.github.io/) to simplify common and 
 
 ## Installation
 
-Install by copying the files into the `shader` directory inside your MagicaVoxel installation.
+Install these shaders by copying the files from the `shader` directory in this project into the `shader` directory of your MagicaVoxel installation.
 
 ## Shaders
 
