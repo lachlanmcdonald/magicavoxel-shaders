@@ -2,7 +2,7 @@
 
 __Shaders for [MagicaVoxel](https://ephtracy.github.io/) to simplify common and repetitive tasks.__
 
-- Current release: `0.5.0`
+- Current release: `0.6.0`
 - Tested with MagicaVoxel 0.98.1 (Beta) for Windows and Mac
 - Released under the MIT License
 
@@ -14,13 +14,15 @@ Install these shaders by copying the files from the `shader` directory in this p
 
 <ul>
     <li><a href="#slice_shader">Slice</a> (<code>sx</code>, <code>sy</code>, <code>sz</code>)</li>
-    <li><a href="#lines_shader">Lines</a> (<code>lnx</code>, <code>lny</code>, <code>lnz</code>)</li>
+    <li><a href="#pyramid_shader">Pyramid</a> (<code>py</code>, <code>py2</code></li>
+    <li><a href="#sand_shader">Sand</a> (<code>sand</code>, <code>sand2</code>)</li>
     <li><a href="#soil_shader">soil</a> \ <a href="#soil2_shader">soil2</a></li>
     <li><a href="#outline_shader">outline</a> \ <a href="#outline2_shader">outline2</a></li>
-    <li><a href="#grid_shader">grid</a></li>
     <li><a href="#noise_shader">noise</a> \ <a href="#noise2_shader">noise2</a></li>
     <li><a href="#dots_shader">dots</a> \ <a href="#dots2_shader">dots2</a></li>
     <li><a href="#flood_shader">flood</a> \ <a href="#flood2_shader">flood2</a></li>
+    <li><a href="#grid_shader">grid</a></li>
+    <li><a href="#lines_shader">Lines</a> (<code>lnx</code>, <code>lny</code>, <code>lnz</code>)</li>
 </ul>
 
 <h3 id="slice_shader">Slice</h3>
@@ -48,6 +50,49 @@ In the second image, segments are removed with this command:
 
 ```
 xs sz 2
+```
+
+<h3 id="pyramid_shader">Pyramid</h3>
+
+```
+xs py [index]
+xs py2 [index]
+```
+
+The `py` and `py2` shaders adds voxels on top of voxels matching the selected colour. A voxel is only added when the voxel beneath has adjacent voxels, creating the effect of a pyramid.
+
+`py` will only add voxels when the adjacent voxels match the selected color. Whereas, `py2` will add voxels if there are adjacent voxels of any color.
+
+If provided, `index` will be the color index of the added voxels. This argument is optional. If ommitted (or set to `0`) the selected color index is used instead. 
+
+Each time the shader is executed, a single layer is added. To add multiple layers at once, you can run the command in a loop (without specifying an `index`.)
+
+```
+xs -n 50 py
+xs -n 50 py2
+```
+
+If neither axis modes (or both X and Y) are set, the shader will form a square pyramid. If either X or Y modes are set, the shader will form a triangle pyramid instead, with the slope facing the X or Y axes respectively.
+
+<h3 id="sand_shader">Sand</h3>
+
+```
+xs sand [index] [add]
+xs sand2 [index] [add]
+```
+
+The `sand` and `sand2` shaders adds voxels on top of voxels matching the selected colour. Voxels are added randomly and only added when the voxel beneath has adjacent voxels, creating the effect of a sand pile. The number of adjacent neighbours affects the randomness, with a higher number of neighbours increasing the odds a voxel will be added.
+
+If provided, `index` will be the color index of the added voxels. This argument is optional. If ommitted (or set to `0`) the selected color index is used instead.
+
+`add` can be used to increase the odds of adding voxels. Numbers between `0.01` and `0.4` have the best effect. Because `add` is the second argument, you can set `index` to `0` if using `add` in a loop.
+
+Each time the shader is executed, a single layer is added. To add multiple layers at once, you can run the command in a loop as shown below.
+
+
+```
+xs -n 50 sand
+xs -n 50 sand2
 ```
 
 <h3 id="lines_shader">Lines</h3>
