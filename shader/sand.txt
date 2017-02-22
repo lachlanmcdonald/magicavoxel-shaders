@@ -3,7 +3,7 @@
 // Copyright (c) 2017 Lachlan McDonald
 //
 // v. 0.6.0
-// xs sand [index] [mod]
+// xs sand [index] [add]
 
 float rand(vec2 co) {
 	return fract(sin(dot(co.xy, vec2(12.9898, 78.233))) * 43758.5453);

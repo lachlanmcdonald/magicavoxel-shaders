@@ -59,13 +59,13 @@ xs py [index]
 xs py2 [index]
 ```
 
-The `py` and `py2` shaders adds voxels on top of voxels matching the selected colour. A voxel is only added when the voxel beneath has adjacent voxels, creating the effect of a pyramid.
+The `py` and `py2` shaders add a layer of voxel on top of voxels matching the selected colour. A voxel is only added when the voxel beneath has adjacent voxels, creating the effect of a pyramid.
 
 `py` will only add voxels when the adjacent voxels match the selected color. Whereas, `py2` will add voxels if there are adjacent voxels of any color.
 
 If provided, `index` will be the color index of the added voxels. This argument is optional. If ommitted (or set to `0`) the selected color index is used instead. 
 
-Each time the shader is executed, a single layer is added. To add multiple layers at once, you can run the command in a loop (without specifying an `index`.)
+Each time the shader is executed, a single layer is added. To add multiple layers at once, you can run the command in a loop.
 
 ```
 xs -n 50 py
@@ -81,7 +81,7 @@ xs sand [index] [add]
 xs sand2 [index] [add]
 ```
 
-The `sand` and `sand2` shaders adds voxels on top of voxels matching the selected colour. Voxels are added randomly and only added when the voxel beneath has adjacent voxels, creating the effect of a sand pile. The number of adjacent neighbours affects the randomness, with a higher number of neighbours increasing the odds a voxel will be added.
+The `sand` and `sand2` shaders add a layer voxels on top of voxels matching the selected colour. Voxels are added randomly and only added when the voxel beneath has adjacent voxels, creating the effect of a rough sand pile. The number of adjacent neighbours affects the randomness, with a higher number of neighbours increasing the odds a voxel will be added.
 
 If provided, `index` will be the color index of the added voxels. This argument is optional. If ommitted (or set to `0`) the selected color index is used instead.
 
