@@ -35,10 +35,6 @@ xs sy [c] [count]
 xs sz [c] [count]
 ```
 
-![Shader preview](/img/slice_a.png?raw=true)
-
-![Shader preview](/img/slice_b.png?raw=true)
-
 The slice shaders removes one or more segments from the x, y or z axis. All other rows are shuffled to full the available space. The first argument `c` is the coordinate of the segment you wish to remove and `count` is the number of rows. Note that `count` is optional and defaults to `1`.
 
 For example, in the first image, segments are removed with these commands:
@@ -105,8 +101,6 @@ xs lny [index] [spacing] [offset]
 xs lnz [index] [spacing] [offset]
 ```
 
-![Shader preview](/img/lines.png?raw=true)
-
 Replaces all voxels which match your selected color with lines set to the color passed as `index`. Setting the index to `0` will remove the voxels. Lines are spaced based on the `spacing` argument, which defaults to `2`.
 
 <h3 id="soil_shader">Soil</h3>
@@ -116,36 +110,26 @@ xs soil [index] [n]
 xs soil2 [index] [n]
 ```
 
-![Shader preview](/img/soil.png?raw=true)
-
 The `soil` and `soil2` shaders adds voxels, set to the color passed as `index`, on top of voxels matching your selected colour. Voxels are only added if there empty space. By default, voxels are added if there is at least one empty space above, however you can adjust the number of voxels that are checked with `n`. For example, in the images above a `n` of `1` and `10` were used respectively.
-
-![Shader preview](/img/soil2.png?raw=true)
 
 `soil2` is similar to `soil`, except voxels are replaced instead of added on top.
 
-<h3 id="outline_shader">outline</h3>
+<h3 id="outline_shader">Outline</h3>
 
 ```
 xs outline [index]
 xs outline2 [index]
 ```
 
-![Shader preview](/img/outline.png?raw=true)
-
 Replaces all voxels which match your selected color which are adjacent to another voxel of a different color. The outline color will be the provided `index`. Setting the index to `0` will remove the voxels.
-
-![Shader preview](/img/outline2.png?raw=true)
 
 `outline2` is similar to `outline`, except fewer adjacent voxels are checked, producing slightly thinner lines.
 
-<h3 id="grid_shader">grid</h3>
+<h3 id="grid_shader">Grid</h3>
 
 ```
 xs grid [index] [x] [y] [xoffset] [yoffset]
 ```
-
-![Shader preview](/img/grid.png?raw=true)
 
 Replaces all voxels which match your selected color with a grid with a cell size determined by `x` and `y`. Grid cells are colored based on the provided `index`. Setting the index to `0` will remove the voxels. Grids can be square or rectangular. You can offset the position of the grid with `xoffset` and `yoffset` arguments, which default to `0`.
 
@@ -170,20 +154,13 @@ Replaces all voxels which match your selected color with a randomly chosen index
 Voxels are replaced across all axes. You can randomize the X, Y, or Z axis (or a combination) with the axis mode.
 
 
-<h3 id="flood_shader">flood</h3>
+<h3 id="flood_shader">Flood</h3>
 
 ```
 xs flood [n]
-```
-
-![Shader preview](/img/flood.png?raw=true)
-
-Adds `n` number of layers of voxels with your selected color from the bottom of your model upwards. Voxels are only added to empty space and won't replace existing voxels. Defaults to 1 layer.
-
-<h3 id="flood2_shader">flood2</h3>
-
-```
 xs flood2 [n]
 ```
 
-Similar to `flood`, except flooding stops when a voxel is encountered so that exclosed spaces aren't filled.
+Adds `n` number of layers of voxels with your selected color from the bottom of your model upwards. Voxels are only added to empty space and won't replace existing voxels. Defaults to a single layer.
+
+`flood2` is similar to `flood`, except flooding stops when a voxel is encountered so that exclosed spaces aren't filled.
