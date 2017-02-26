@@ -5,18 +5,24 @@
 // v. 0.6.0
 // xs noise [a] [b]
 
-float rand(vec2 co){
-	return fract(sin(dot(co.xy, vec2(12.9898, 78.233))) * 43758.5453);
+float rand(vec2 co, float seed) {
+	return fract(sin(dot(co.xy * seed, vec2(12.9898, 78.233))) * 43758.5453);
 }
 
 float map(vec3 v) {
-	float a = iArgs[0];
-	float b = iArgs[1];
 	float index = voxel(v);
+	float a = min(iArgs[0], iArgs[1]);
+	float b = max(iArgs[0], iArgs[1]);
+
+	bool na = (iAxis == vec3(0.0, 0.0, 0.0));
+	float x = (na || iAxis.x == 1.0) ? v.x : 1.0;
+	float y = (na || iAxis.y == 1.0) ? v.y : 1.0;
+	float z = (na || iAxis.z == 1.0) ? v.z : 1.0;
+	float j = rand(vec2(x, y), iIter + 1.0);
+	float k = rand(vec2(j, z), iIter + 1.0);
 
 	if (index == iColorIndex) {
-		return a + (rand(v.xy) * (b - a));
-	} else {
-		return voxel(v);
+		return a + (k * (b - a));
 	}
+	return index;
 }
