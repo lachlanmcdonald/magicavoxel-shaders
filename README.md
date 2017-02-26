@@ -18,12 +18,14 @@ Install these shaders by copying the files from the `shader` directory in this p
     <li><a href="#sand_shader">Sand</a> &mdash; <code>sand</code> <code>sand2</code></li>
     <li><a href="#soil_shader">Soil</a> &mdash; <code>soil</code> <code>soil2</code></li>
     <li><a href="#outline_shader">Outline</a> &mdash; <code>outline</code> <code>outline2</code></li>
-    <li><a href="#noise_shader">Noise</a> &mdash; <code>noise</code> <code>noise2</code></li>
-    <li><a href="#dots_shader">Dots</a> &mdash; <code>dots</code> <code>dots2</code></li>
+    <li><a href="#noise_shader">Noise</a> &mdash; <code>noise</code></li>
+    <li><a href="#rand_shader">Random</a> &mdash; <code>rand</code></li>
     <li><a href="#flood_shader">Flood</a> &mdash; <code>flood</code> <code>flood2</code></li>
     <li><a href="#grid_shader">Grid</a> &mdash; <code>grid</code></li>
     <li><a href="#lines_shader">Lines</a> &mdash; <code>lnx</code> <code>lny</code> <code>lnz</code></li>
 </ul>
+
+From version 0.6.0, `dots` and `dots2` are combined into a single shader (`rand`) that can be configured to produce the same output by using "axis modes."
 
 <h3 id="slice_shader">Slice</h3>
 
@@ -147,34 +149,26 @@ xs grid [index] [x] [y] [xoffset] [yoffset]
 
 Replaces all voxels which match your selected color with a grid with a cell size determined by `x` and `y`. Grid cells are colored based on the provided `index`. Setting the index to `0` will remove the voxels. Grids can be square or rectangular. You can offset the position of the grid with `xoffset` and `yoffset` arguments, which default to `0`.
 
-<h3 id="noise_shader">noise</h3>
+<h3 id="noise_shader">Noise</h3>
 
 ```
 xs noise [a] [b]
-xs noisez [a] [b]
 ```
 
-![Shader preview](/img/noise.png?raw=true)
+Replaces all voxels which match your selected color with a randomly chosen color within a range of colors (`a` and `b`, inclusive).
 
-Replaces all voxels which match your selected color with a randomly chosen color within a range of colors (`a` and `b`, inclusive). The noise will be the same across the z-axis.
+Voxels are replaced across all axes. You can randomize the X, Y, or Z axis (or a combination) with the axis mode.
 
-![Shader preview](/img/noise2.png?raw=true)
-
-`noise2` is the same as `noise`, except the z-axis is also randomized.
-
-<h3 id="dots_shader">dots</h3>
+<h3 id="rand_shader">Random</h3>
 
 ```
-xs dots [f] [index]
-xs dotsz [f] [index]
+xs rand [f] [index]
 ```
 
-![Shader preview](/img/dots_a.png?raw=true)
-![Shader preview](/img/dots_b.png?raw=true)
+Replaces all voxels which match your selected color with a randomly chosen index. If `index` is 0, voxels are randomly removed instead. You can control the threshold by adjusting the `f` value. Values closer to `0.0` will replace more voxels. Values closer to `1.0` will replace less.
 
-Replaces all voxels which match your selected color with a randomly chosen index. If `index` is 0, voxels are randomly removed instead. You can control the threshold by adjusting the `f` value. Values closer to `0.0` will replace more voxels. Values closer to `1.0` will replace less. Like with `noise`, dots are not removed randomly on the z-axis.
+Voxels are replaced across all axes. You can randomize the X, Y, or Z axis (or a combination) with the axis mode.
 
-`dots` is the same as `dots`, except the z-axis is also randomized.
 
 <h3 id="flood_shader">flood</h3>
 
