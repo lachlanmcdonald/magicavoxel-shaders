@@ -5,14 +5,22 @@
 // v. 0.6.0
 // xs dots [f] [index]
 
-float rand(vec2 co){
-	return fract(sin(dot(co.xy, vec2(12.9898, 78.233))) * 43758.5453);
+float rand(vec2 co, float seed) {
+	return fract(sin(dot(co.xy * seed, vec2(12.9898, 78.233))) * 43758.5453);
 }
 
 float map(vec3 v) {
 	float index = voxel(v);
+
+	bool na = (iAxis == vec3(0.0, 0.0, 0.0));
+	float x = (na || iAxis.x == 1.0) ? v.x : 1.0;
+	float y = (na || iAxis.y == 1.0) ? v.y : 1.0;
+	float z = (na || iAxis.z == 1.0) ? v.z : 1.0;
+	float j = rand(vec2(x, y), iIter + 1.0);
+	float k = rand(vec2(j, z), iIter + 1.0);
+
 	if (index == iColorIndex) {
-		if (rand(v.xy) > iArgs[0]) {
+		if (k < iArgs[0]) {
 			return iArgs[1];
 		}
 	}
