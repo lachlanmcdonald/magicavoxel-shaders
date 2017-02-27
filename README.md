@@ -35,19 +35,15 @@ xs sy [c] [count]
 xs sz [c] [count]
 ```
 
+<img src="/img/slice.png?raw=true" alt="" width="238" /><img src="/img/slice_sx_19_1.png?raw=true" alt="" width="238" /><img src="/img/slice_sy_15_1.png?raw=true" alt="" width="238" />
+
 The slice shaders removes one or more segments from the x, y or z axis. All other rows are shuffled to full the available space. The first argument `c` is the coordinate of the segment you wish to remove and `count` is the number of rows. Note that `count` is optional and defaults to `1`.
 
 For example, in the first image, segments are removed with these commands:
 
 ```
-xs sx 16 2
-xs sy 20 2
-```
-
-In the second image, segments are removed with this command:
-
-```
-xs sz 2
+xs sx 19 1
+xs sy 15 1
 ```
 
 <h3 id="pyramid_shader">Pyramid</h3>
@@ -57,18 +53,26 @@ xs py [index]
 xs py2 [index]
 ```
 
+<img src="/img/py1.png?raw=true" alt="" width="238" /><img src="/img/py2.png?raw=true" alt="" width="238" />
+
+<img src="/img/py3.png?raw=true" alt="" width="238" /><img src="/img/py4.png?raw=true" alt="" width="238" />
+
+<img src="/img/py5.png?raw=true" alt="" width="238" /><img src="/img/py6.png?raw=true" alt="" width="238" />
+
 The `py` and `py2` shaders add a layer of voxel on top of voxels matching the selected colour. A voxel is only added when the voxel beneath has adjacent voxels, creating the effect of a pyramid.
 
 `py` will only add voxels when the adjacent voxels match the selected color. Whereas, `py2` will add voxels if there are adjacent voxels of any color.
 
 If provided, `index` will be the color index of the added voxels. This argument is optional. If ommitted (or set to `0`) the selected color index is used instead. 
 
-Each time the shader is executed, a single layer is added. To add multiple layers at once, you can run the command in a loop.
+Each time the shader is executed, a single layer is added. To add multiple layers at once, you can run the command in a loop as shown below:
 
 ```
 xs -n 50 py
 xs -n 50 py2
 ```
+
+<img src="/img/py1.png?raw=true" alt="" width="238" /><img src="/img/py7.png?raw=true" alt="" width="238" />
 
 If neither axis modes (or both X and Y) are set, the shader will form a square pyramid. If either X or Y modes are set, the shader will form a triangle pyramid instead, with the slope facing the X or Y axes respectively.
 
@@ -79,14 +83,15 @@ xs sand [index] [add]
 xs sand2 [index] [add]
 ```
 
+<img src="/img/sand1.png?raw=true" alt="" width="238" /><img src="/img/sand2.png?raw=true" alt="" width="238" />
+
 The `sand` and `sand2` shaders add a layer voxels on top of voxels matching the selected colour. Voxels are added randomly and only added when the voxel beneath has adjacent voxels, creating the effect of a rough sand pile. The number of adjacent neighbours affects the randomness, with a higher number of neighbours increasing the odds a voxel will be added.
 
 If provided, `index` will be the color index of the added voxels. This argument is optional. If ommitted (or set to `0`) the selected color index is used instead.
 
 `add` can be used to increase the odds of adding voxels. Numbers between `0.01` and `0.4` have the best effect. Because `add` is the second argument, you can set `index` to `0` if using `add` in a loop.
 
-Each time the shader is executed, a single layer is added. To add multiple layers at once, you can run the command in a loop as shown below.
-
+Each time the shader is executed, a single layer is added. To add multiple layers at once, you can run the command in a loop as shown below:
 
 ```
 xs -n 50 sand
