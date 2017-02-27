@@ -115,6 +115,8 @@ xs soil [index] [n]
 xs soil2 [index] [n]
 ```
 
+<img src="/img/soil1.png?raw=true" alt="" width="238" /><img src="/img/soil2.png?raw=true" alt="" width="238" />
+
 The `soil` and `soil2` shaders adds voxels, set to the color passed as `index`, on top of voxels matching your selected colour. Voxels are only added if there empty space. By default, voxels are added if there is at least one empty space above, however you can adjust the number of voxels that are checked with `n`. For example, in the images above a `n` of `1` and `10` were used respectively.
 
 `soil2` is similar to `soil`, except voxels are replaced instead of added on top.
@@ -126,6 +128,8 @@ xs outline [index]
 xs outline2 [index]
 ```
 
+<img src="/img/outline1.png?raw=true" alt="" width="238" /><img src="/img/outline2.png?raw=true" alt="" width="238" /><img src="/img/outline3.png?raw=true" alt="" width="238" />
+
 Replaces all voxels which match your selected color which are adjacent to another voxel of a different color. The outline color will be the provided `index`. Setting the index to `0` will remove the voxels.
 
 `outline2` is similar to `outline`, except fewer adjacent voxels are checked, producing slightly thinner lines.
@@ -135,6 +139,8 @@ Replaces all voxels which match your selected color which are adjacent to anothe
 ```
 xs grid [index] [x] [y] [xoffset] [yoffset]
 ```
+
+<img src="/img/grid.png?raw=true" alt="" width="238" /><img src="/img/grid1x5.png?raw=true" alt="" width="238" /><img src="/img/grid5x5.png?raw=true" alt="" width="238" />
 
 Replaces all voxels which match your selected color with a grid with a cell size determined by `x` and `y`. Grid cells are colored based on the provided `index`. Setting the index to `0` will remove the voxels. Grids can be square or rectangular. You can offset the position of the grid with `xoffset` and `yoffset` arguments, which default to `0`.
 
@@ -154,10 +160,13 @@ Voxels are replaced across all axes. You can randomize the X, Y, or Z axis (or a
 xs rand [f] [index]
 ```
 
+<img src="/img/rand_025.png?raw=true" alt="" width="238" /><img src="/img/rand_050.png?raw=true" alt="" width="238" /><img src="/img/rand_075.png?raw=true" alt="" width="238" />
+
 Replaces all voxels which match your selected color with a randomly chosen index. If `index` is 0, voxels are randomly removed instead. You can control the threshold by adjusting the `f` value. Values closer to `0.0` will replace more voxels. Values closer to `1.0` will replace less.
 
-Voxels are replaced across all axes. You can randomize the X, Y, or Z axis (or a combination) with the axis mode.
+<img src="/img/rand_050_xy.png?raw=true" alt="" width="238" /><img src="/img/rand_050_xz.png?raw=true" alt="" width="238" /><img src="/img/rand_050_y.png?raw=true" alt="" width="238" />
 
+Voxels are replaced across all axes. You can randomize the X, Y, or Z axis (or a combination) with the axis mode.
 
 <h3 id="flood_shader">Flood</h3>
 
@@ -165,6 +174,10 @@ Voxels are replaced across all axes. You can randomize the X, Y, or Z axis (or a
 xs flood [n]
 xs flood2 [n]
 ```
+
+<img src="/img/flood_1.png?raw=true" alt="" width="238" /><img src="/img/flood_2.png?raw=true" alt="" width="238" />
+
+<img src="/img/flood2_1.png?raw=true" alt="" width="238" /><img src="/img/flood2_2.png?raw=true" alt="" width="238" />
 
 Adds `n` number of layers of voxels with your selected color from the bottom of your model upwards. Voxels are only added to empty space and won't replace existing voxels. Defaults to a single layer.
 
