@@ -1,0 +1,46 @@
+// MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+// Copyright (c) 2017 Lachlan McDonald
+//
+// v. 0.6.0
+// xs sand [index] [add]
+
+float rand(vec2 co) {
+	return fract(sin(dot(co.xy, vec2(12.9898, 78.233))) * 43758.5453);
+}
+
+float randz(vec3 co) {
+	return rand(vec2(rand(co.xy), co.z));
+}
+
+float map(vec3 v) {
+	float x = voxel(v);
+
+	if (x == 0.0) {
+		if (voxel(vec3(v.x, v.y, v.z - 1.0)) == iColorIndex) {
+			bool a = (v.x == 0.0);
+			bool b = (v.x == iVolumeSize.x - 1.0);
+			bool c = (v.y == 0.0);
+			bool d = (v.y == iVolumeSize.y - 1.0);
+
+			float z = float((a ? 0.0 : voxel(vec3(v.x - 1.0, v.y, v.z - 1.0))) > 0.0) +
+					  float((b ? 0.0 : voxel(vec3(v.x + 1.0, v.y, v.z - 1.0))) > 0.0) +
+					  float((c ? 0.0 : voxel(vec3(v.x, v.y - 1.0, v.z - 1.0))) > 0.0) +
+					  float((d ? 0.0 : voxel(vec3(v.x, v.y + 1.0, v.z - 1.0))) > 0.0) +
+					  float((a && c ? 0.0 : voxel(vec3(v.x - 1.0, v.y - 1.0, v.z - 1.0))) > 0.0) +
+					  float((b && c ? 0.0 : voxel(vec3(v.x + 1.0, v.y - 1.0, v.z - 1.0))) > 0.0) +
+					  float((a && d ? 0.0 : voxel(vec3(v.x - 1.0, v.y + 1.0, v.z - 1.0))) > 0.0) +
+					  float((b && d ? 0.0 : voxel(vec3(v.x + 1.0, v.y + 1.0, v.z - 1.0))) > 0.0);
+
+			if (randz(v) <= (0.125 * z + iArgs[1])) {
+				if (iArgs[0] == 0.0) {
+					return iColorIndex;
+				} else {
+					return iArgs[0];
+				}
+			}
+		}
+	}
+
+	return x;
+}

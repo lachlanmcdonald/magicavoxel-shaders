@@ -3,7 +3,7 @@
 // Copyright (c) 2017 Lachlan McDonald
 //
 // v. 0.6.0
-// xs noise [a] [b]
+// xs rand [f] [index]
 
 float rand(vec2 co, float seed) {
 	return fract(sin(dot(co.xy * seed, vec2(12.9898, 78.233))) * 43758.5453);
@@ -11,8 +11,6 @@ float rand(vec2 co, float seed) {
 
 float map(vec3 v) {
 	float index = voxel(v);
-	float a = min(iArgs[0], iArgs[1]);
-	float b = max(iArgs[0], iArgs[1]);
 
 	bool na = (iAxis == vec3(0.0, 0.0, 0.0));
 	float x = (na || iAxis.x == 1.0) ? v.x : 1.0;
@@ -22,7 +20,9 @@ float map(vec3 v) {
 	float k = rand(vec2(j, z), iIter + 1.0);
 
 	if (index == iColorIndex) {
-		return a + (k * (b - a));
+		if (k < iArgs[0]) {
+			return iArgs[1];
+		}
 	}
 	return index;
 }
