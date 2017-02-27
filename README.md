@@ -83,7 +83,7 @@ xs sand [index] [add]
 xs sand2 [index] [add]
 ```
 
-<img src="/img/sand1.png?raw=true" alt="" width="238" /><img src="/img/sand2.png?raw=true" alt="" width="238" />
+<img src="/img/sand1.png?raw=true" alt="" width="238" /><img src="/img/sand2.png?raw=true" alt="" width="238" /><img src="/img/sand3.png?raw=true" alt="" width="238" />
 
 The `sand` and `sand2` shaders add a layer voxels on top of voxels matching the selected colour. Voxels are added randomly and only added when the voxel beneath has adjacent voxels, creating the effect of a rough sand pile. The number of adjacent neighbours affects the randomness, with a higher number of neighbours increasing the odds a voxel will be added.
 
