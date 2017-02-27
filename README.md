@@ -117,7 +117,7 @@ xs soil2 [index] [n]
 
 <img src="/img/soil1.png?raw=true" alt="" width="238" /><img src="/img/soil2.png?raw=true" alt="" width="238" />
 
-The `soil` and `soil2` shaders adds voxels, set to the color passed as `index`, on top of voxels matching your selected colour. Voxels are only added if there empty space. By default, voxels are added if there is at least one empty space above, however you can adjust the number of voxels that are checked with `n`. For example, in the images above a `n` of `1` and `10` were used respectively.
+The `soil` and `soil2` shaders adds voxels, set to the color passed as `index`, on top of voxels matching your selected colour. Voxels are only added if there empty space. By default, voxels are added if there is at least one empty space above, however you can adjust the number of voxels that are checked with `n`.
 
 `soil2` is similar to `soil`, except voxels are replaced instead of added on top.
 
