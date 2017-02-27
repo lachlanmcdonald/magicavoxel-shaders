@@ -168,6 +168,9 @@ xs noise [a] [b]
 
 Replaces all voxels which match your selected color with a randomly chosen color within a range of colors (`a` and `b`, inclusive).
 
+<img src="/img/noise3.png?raw=true" alt="" width="238" />
+<img src="/img/noise4.png?raw=true" alt="" width="238" />
+
 Voxels are replaced across all axes. You can randomize the X, Y, or Z axis (or a combination) with the axis mode.
 
 <h3 id="rand_shader">Random</h3>
