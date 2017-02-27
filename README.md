@@ -163,6 +163,9 @@ Replaces all voxels which match your selected color with a grid with a cell size
 xs noise [a] [b]
 ```
 
+<img src="/img/noise1.png?raw=true" alt="" width="238" />
+<img src="/img/noise2.png?raw=true" alt="" width="238" />
+
 Replaces all voxels which match your selected color with a randomly chosen color within a range of colors (`a` and `b`, inclusive).
 
 Voxels are replaced across all axes. You can randomize the X, Y, or Z axis (or a combination) with the axis mode.
