@@ -35,9 +35,7 @@ xs sy [c] [count]
 xs sz [c] [count]
 ```
 
-<img src="/img/slice.png?raw=true" alt="" width="238" />
-<img src="/img/slice_sx_19_1.png?raw=true" alt="" width="238" />
-<img src="/img/slice_sy_15_1.png?raw=true" alt="" width="238" />
+<img src="/img/slice.png?raw=true" alt="" width="238"><img src="/img/slice_sx_19_1.png?raw=true" alt="" width="238"><img src="/img/slice_sy_15_1.png?raw=true" alt="" width="238">
 
 The slice shaders removes one or more segments from the x, y or z axis. All other rows are shuffled to full the available space. The first argument `c` is the coordinate of the segment you wish to remove and `count` is the number of rows. Note that `count` is optional and defaults to `1`.
 
@@ -55,14 +53,11 @@ xs py [index]
 xs py2 [index]
 ```
 
-<img src="/img/py1.png?raw=true" alt="" width="238" />
-<img src="/img/py2.png?raw=true" alt="" width="238" />
+<img src="/img/py1.png?raw=true" alt="" width="238"><img src="/img/py2.png?raw=true" alt="" width="238">
 
-<img src="/img/py3.png?raw=true" alt="" width="238" />
-<img src="/img/py4.png?raw=true" alt="" width="238" />
+<img src="/img/py3.png?raw=true" alt="" width="238"><img src="/img/py4.png?raw=true" alt="" width="238">
 
-<img src="/img/py5.png?raw=true" alt="" width="238" />
-<img src="/img/py6.png?raw=true" alt="" width="238" />
+<img src="/img/py5.png?raw=true" alt="" width="238"><img src="/img/py6.png?raw=true" alt="" width="238">
 
 The `py` and `py2` shaders add a layer of voxel on top of voxels matching the selected colour. A voxel is only added when the voxel beneath has adjacent voxels, creating the effect of a pyramid.
 
@@ -77,8 +72,7 @@ xs -n 50 py
 xs -n 50 py2
 ```
 
-<img src="/img/py1.png?raw=true" alt="" width="238" />
-<img src="/img/py7.png?raw=true" alt="" width="238" />
+<img src="/img/py1.png?raw=true" alt="" width="238"><img src="/img/py7.png?raw=true" alt="" width="238">
 
 If neither axis modes (or both X and Y) are set, the shader will form a square pyramid. If either X or Y modes are set, the shader will form a triangle pyramid instead, with the slope facing the X or Y axes respectively.
 
@@ -89,9 +83,7 @@ xs sand [index] [add]
 xs sand2 [index] [add]
 ```
 
-<img src="/img/sand1.png?raw=true" alt="" width="238" />
-<img src="/img/sand2.png?raw=true" alt="" width="238" />
-<img src="/img/sand3.png?raw=true" alt="" width="238" />
+<img src="/img/sand1.png?raw=true" alt="" width="238"><img src="/img/sand2.png?raw=true" alt="" width="238"><img src="/img/sand3.png?raw=true" alt="" width="238">
 
 The `sand` and `sand2` shaders add a layer voxels on top of voxels matching the selected colour. Voxels are added randomly and only added when the voxel beneath has adjacent voxels, creating the effect of a rough sand pile. The number of adjacent neighbours affects the randomness, with a higher number of neighbours increasing the odds a voxel will be added.
 
@@ -123,8 +115,7 @@ xs soil [index] [n]
 xs soil2 [index] [n]
 ```
 
-<img src="/img/soil1.png?raw=true" alt="" width="238" />
-<img src="/img/soil2.png?raw=true" alt="" width="238" />
+<img src="/img/soil1.png?raw=true" alt="" width="238"><img src="/img/soil2.png?raw=true" alt="" width="238">
 
 The `soil` and `soil2` shaders adds voxels, set to the color passed as `index`, on top of voxels matching your selected colour. Voxels are only added if there empty space. By default, voxels are added if there is at least one empty space above, however you can adjust the number of voxels that are checked with `n`.
 
@@ -137,9 +128,7 @@ xs outline [index]
 xs outline2 [index]
 ```
 
-<img src="/img/outline1.png?raw=true" alt="" width="238" />
-<img src="/img/outline2.png?raw=true" alt="" width="238" />
-<img src="/img/outline3.png?raw=true" alt="" width="238" />
+<img src="/img/outline1.png?raw=true" alt="" width="238"><img src="/img/outline2.png?raw=true" alt="" width="238"><img src="/img/outline3.png?raw=true" alt="" width="238">
 
 Replaces all voxels which match your selected color which are adjacent to another voxel of a different color. The outline color will be the provided `index`. Setting the index to `0` will remove the voxels.
 
@@ -151,9 +140,7 @@ Replaces all voxels which match your selected color which are adjacent to anothe
 xs grid [index] [x] [y] [xoffset] [yoffset]
 ```
 
-<img src="/img/grid.png?raw=true" alt="" width="238" />
-<img src="/img/grid1x5.png?raw=true" alt="" width="238" />
-<img src="/img/grid5x5.png?raw=true" alt="" width="238" />
+<img src="/img/grid.png?raw=true" alt="" width="238"><img src="/img/grid1x5.png?raw=true" alt="" width="238"><img src="/img/grid5x5.png?raw=true" alt="" width="238">
 
 Replaces all voxels which match your selected color with a grid with a cell size determined by `x` and `y`. Grid cells are colored based on the provided `index`. Setting the index to `0` will remove the voxels. Grids can be square or rectangular. You can offset the position of the grid with `xoffset` and `yoffset` arguments, which default to `0`.
 
@@ -163,13 +150,11 @@ Replaces all voxels which match your selected color with a grid with a cell size
 xs noise [a] [b]
 ```
 
-<img src="/img/noise1.png?raw=true" alt="" width="238" />
-<img src="/img/noise2.png?raw=true" alt="" width="238" />
+<img src="/img/noise1.png?raw=true" alt="" width="238"><img src="/img/noise2.png?raw=true" alt="" width="238">
 
 Replaces all voxels which match your selected color with a randomly chosen color within a range of colors (`a` and `b`, inclusive).
 
-<img src="/img/noise3.png?raw=true" alt="" width="238" />
-<img src="/img/noise4.png?raw=true" alt="" width="238" />
+<img src="/img/noise3.png?raw=true" alt="" width="238"><img src="/img/noise4.png?raw=true" alt="" width="238">
 
 Voxels are replaced across all axes. You can randomize the X, Y, or Z axis (or a combination) with the axis mode.
 
@@ -179,15 +164,11 @@ Voxels are replaced across all axes. You can randomize the X, Y, or Z axis (or a
 xs rand [f] [index]
 ```
 
-<img src="/img/rand_025.png?raw=true" alt="" width="238" />
-<img src="/img/rand_050.png?raw=true" alt="" width="238" />
-<img src="/img/rand_075.png?raw=true" alt="" width="238" />
+<img src="/img/rand_025.png?raw=true" alt="" width="238"><img src="/img/rand_050.png?raw=true" alt="" width="238"><img src="/img/rand_075.png?raw=true" alt="" width="238">
 
 Replaces all voxels which match your selected color with a randomly chosen index. If `index` is 0, voxels are randomly removed instead. You can control the threshold by adjusting the `f` value. Values closer to `0.0` will replace more voxels. Values closer to `1.0` will replace less.
 
-<img src="/img/rand_050_xy.png?raw=true" alt="" width="238" />
-<img src="/img/rand_050_xz.png?raw=true" alt="" width="238" />
-<img src="/img/rand_050_y.png?raw=true" alt="" width="238" />
+<img src="/img/rand_050_xy.png?raw=true" alt="" width="238"><img src="/img/rand_050_xz.png?raw=true" alt="" width="238"><img src="/img/rand_050_y.png?raw=true" alt="" width="238">
 
 Voxels are replaced across all axes. You can randomize the X, Y, or Z axis (or a combination) with the axis mode.
 
@@ -198,11 +179,9 @@ xs flood [n]
 xs flood2 [n]
 ```
 
-<img src="/img/flood_1.png?raw=true" alt="" width="238" />
-<img src="/img/flood_2.png?raw=true" alt="" width="238" />
+<img src="/img/flood_1.png?raw=true" alt="" width="238"><img src="/img/flood_2.png?raw=true" alt="" width="238">
 
-<img src="/img/flood2_1.png?raw=true" alt="" width="238" />
-<img src="/img/flood2_2.png?raw=true" alt="" width="238" />
+<img src="/img/flood2_1.png?raw=true" alt="" width="238"><img src="/img/flood2_2.png?raw=true" alt="" width="238">
 
 Adds `n` number of layers of voxels with your selected color from the bottom of your model upwards. Voxels are only added to empty space and won't replace existing voxels. Defaults to a single layer.
 
