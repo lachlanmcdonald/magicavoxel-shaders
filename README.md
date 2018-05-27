@@ -3,8 +3,10 @@
 __Shaders for [MagicaVoxel](https://ephtracy.github.io/) to simplify common and repetitive tasks.__
 
 - Current release: `0.6.0`
-- Tested with MagicaVoxel 0.98.1 (Beta) for Windows and Mac
+- Tested with MagicaVoxel 0.98.2 (Beta) for Windows and Mac
 - Released under the MIT License
+
+**Note v0.99.1:** Shaders work with v0.99.1, but the tooltip which shows the color index is not present. It [should be present](https://twitter.com/ephtracy/status/997672870452002816) in a later version.
 
 ## Installation
 
@@ -24,8 +26,6 @@ Install these shaders by copying the files from the `shader` directory in this p
     <li><a href="#grid_shader">Grid</a> &mdash; <code>grid</code></li>
     <li><a href="#lines_shader">Lines</a> &mdash; <code>lnx</code> <code>lny</code> <code>lnz</code></li>
 </ul>
-
-From version 0.6.0, `dots` and `dots2` are combined into a single shader (`rand`) that can be configured to produce the same output by using "axis modes."
 
 <h3 id="slice_shader">Slice</h3>
 
