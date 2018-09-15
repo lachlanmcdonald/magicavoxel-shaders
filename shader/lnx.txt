@@ -2,7 +2,7 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2018 Lachlan McDonald
 //
-// v. 0.6.0
+// v. 0.7.0
 // xs lnx [color] [spacing] [offset]
 
 float n = max(floor(iArgs[1]), 2.0);
