@@ -5,11 +5,12 @@
 // v. 0.7.0
 // xs py [index]
 
+vec2 vol = vec2(iVolumeSize.xy - 1.0);
+bvec3 axis = equal(iAxis, vec3(1.0, 1.0, 1.0));
+bool noAxisMode = all(equal(iAxis, vec3(0.0, 0.0, 0.0)));
+
 float map(vec3 v) {
 	float x = voxel(v);
-	float my = iVolumeSize.x - 1.0;
-	float mx = iVolumeSize.y - 1.0;
-	bool na = (iAxis.xy == vec2(0.0, 0.0));
 
 	if (x == 0.0) {
 		if (voxel(vec3(v.x, v.y, v.z - 1.0)) == iColorIndex) {
@@ -17,16 +18,16 @@ float map(vec3 v) {
 			float a = 0.0;
 			float b = 0.0;
 
-			if (na || iAxis.x == 1.0) {
+			if (noAxisMode || axis.x) {
 				t += 2.0;
-				a = float((v.x == 0.0 ? 0.0 : voxel(vec3(v.x - 1.0, v.y, v.z - 1.0))) == iColorIndex) +
-					float((v.x == mx  ? 0.0 : voxel(vec3(v.x + 1.0, v.y, v.z - 1.0))) == iColorIndex);
+				a = float((v.x == 0.0   ? 0.0 : voxel(vec3(v.x - 1.0, v.y, v.z - 1.0))) == iColorIndex) +
+					float((v.x == vol.x ? 0.0 : voxel(vec3(v.x + 1.0, v.y, v.z - 1.0))) == iColorIndex);
 			}
 
-			if (na || iAxis.y == 1.0) {
+			if (noAxisMode || axis.y) {
 				t += 2.0;
-				b = float((v.y == 0.0 ? 0.0 : voxel(vec3(v.x, v.y - 1.0, v.z - 1.0))) == iColorIndex) +
-					float((v.y == my  ? 0.0 : voxel(vec3(v.x, v.y + 1.0, v.z - 1.0))) == iColorIndex);
+				b = float((v.y == 0.0   ? 0.0 : voxel(vec3(v.x, v.y - 1.0, v.z - 1.0))) == iColorIndex) +
+					float((v.y == vol.y ? 0.0 : voxel(vec3(v.x, v.y + 1.0, v.z - 1.0))) == iColorIndex);
 			}
 
 			if ((a + b) == t) {
