@@ -128,9 +128,9 @@ The `soil` and `soil2` shaders adds voxels, set to the color passed as `index`, 
 xs case [index]
 ```
 
-<img src="/img/case.png?raw=true" alt="" width="250"><img src="/img/case_1.png?raw=true" alt="" width="250"><img src="/img/case_x.png?raw=true" alt="" width="250"><img src="/img/case_y.png?raw=true" alt="" width="250"><img src="/img/case_z.png?raw=true" alt="" width="250"><img src="/img/case_xy.png?raw=true" alt="" width="250">
+<img src="/img/case.png?raw=true" alt="" width="175"><img src="/img/case_1.png?raw=true" alt="" width="175"><img src="/img/case_x.png?raw=true" alt="" width="175"><img src="/img/case_y.png?raw=true" alt="" width="175"><img src="/img/case_z.png?raw=true" alt="" width="175"><img src="/img/case_xy.png?raw=true" alt="" width="175">
 
-Surrounds (encases) the all voxels which match your selected color. Axis modes can use used to only add voxels on certain axes.
+Surrounds (encases) the all voxels which match your selected color. Axis modes can use used to only add voxels on certain axes. The outline color will be the provided index.
  
 <h3 id="outline_shader">Outline</h3>
 
