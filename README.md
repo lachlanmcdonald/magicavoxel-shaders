@@ -3,7 +3,7 @@
 __Shaders for [MagicaVoxel](https://ephtracy.github.io/) to simplify common and repetitive tasks.__
 
 - Current release: `0.6.0`
-- Tested with MagicaVoxel 0.98.2 (Beta) for Windows and Mac
+- Tested with MagicaVoxel 0.99.1 for Windows and Mac
 - Released under the MIT License
 
 **Note v0.99.1:** Shaders work with v0.99.1, but the tooltip which shows the color index is not present. It [should be present](https://twitter.com/ephtracy/status/997672870452002816) in a later version.

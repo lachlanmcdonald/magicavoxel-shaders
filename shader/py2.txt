@@ -1,6 +1,6 @@
 // MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
-// Copyright (c) 2017 Lachlan McDonald
+// Copyright (c) 2018 Lachlan McDonald
 //
 // v. 0.6.0
 // xs py2 [index]
