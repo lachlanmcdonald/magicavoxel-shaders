@@ -118,7 +118,7 @@ xs soil [index] [n]
 xs soil2 [index] [n]
 ```
 
-<img src="/img/soil.png?raw=true" alt="" width="238"><img src="/img/soil_2.png?raw=true" alt="" width="238">
+<img src="/img/soil.png?raw=true" alt="" width="200"><img src="/img/soil_2.png?raw=true" alt="" width="200">
 
 The `soil` and `soil2` shaders adds voxels, set to the color passed as `index`, on top of voxels matching your selected colour.
 
@@ -131,7 +131,7 @@ The `soil` and `soil2` shaders adds voxels, set to the color passed as `index`, 
 xs case [index]
 ```
 
-<img src="/img/case.png?raw=true" alt="" width="175"><img src="/img/case_1.png?raw=true" alt="" width="175"><img src="/img/case_x.png?raw=true" alt="" width="175"><img src="/img/case_y.png?raw=true" alt="" width="175"><img src="/img/case_z.png?raw=true" alt="" width="175"><img src="/img/case_xy.png?raw=true" alt="" width="175">
+<img src="/img/case.png?raw=true" alt="" width="125"><img src="/img/case_1.png?raw=true" alt="" width="125"><img src="/img/case_x.png?raw=true" alt="" width="125"><img src="/img/case_y.png?raw=true" alt="" width="125"><img src="/img/case_z.png?raw=true" alt="" width="125"><img src="/img/case_xy.png?raw=true" alt="" width="125">
 
 Surrounds (encases) the all voxels which match your selected color. Axis modes can use used to only add voxels on certain axes. The outline color will be the provided index.
  
@@ -193,7 +193,7 @@ xs flood [n]
 xs flood2 [n]
 ```
 
-<img src="/img/flood.png?raw=true" alt="" width="180"><img src="/img/flood_1.png?raw=true" alt="" width="238"><img src="/img/flood2.png?raw=true" alt="" width="238">
+<img src="/img/flood.png?raw=true" alt="" width="238"><img src="/img/flood_1.png?raw=true" alt="" width="238"><img src="/img/flood2.png?raw=true" alt="" width="238">
 
 Adds `n` number of layers of voxels with your selected color from the bottom of your model upwards. Voxels are only added to empty space and won't replace existing voxels. Defaults to a single layer.
 
