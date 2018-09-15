@@ -38,7 +38,7 @@ xs sz [c] [count]
 
 <img src="/img/slice.png?raw=true" alt="" width="238"><img src="/img/slice_sx_19_1.png?raw=true" alt="" width="238"><img src="/img/slice_sy_15_1.png?raw=true" alt="" width="238">
 
-The slice shaders removes one or more segments from the x, y or z axis. All other rows are shuffled to full the available space. The first argument `c` is the coordinate of the segment you wish to remove and `count` is the number of rows. Note that `count` is optional and defaults to `1`.
+The slice shaders removes one or more segments from the x, y or z axis. All other rows are shuffled to full the available space. The first parameter `c` is the coordinate of the segment you wish to remove and `count` is the number of rows. Note that `count` is optional and defaults to `1`.
 
 For example, in the first image, segments are removed with these commands:
 
@@ -64,7 +64,7 @@ The `py` and `py2` shaders add a layer of voxel on top of voxels matching the se
 
 `py` will only add voxels when the adjacent voxels match the selected color. Whereas, `py2` will add voxels if there are adjacent voxels of any color.
 
-If provided, `index` will be the color index of the added voxels. This argument is optional. If ommitted (or set to `0`) the selected color index is used instead. 
+If provided, `index` will be the color index of the added voxels. This parameter is optional. If ommitted (or set to `0`) the selected color index is used instead. 
 
 Each time the shader is executed, a single layer is added. To add multiple layers at once, you can run the command in a loop as shown below:
 
@@ -88,9 +88,9 @@ xs sand2 [index] [add]
 
 The `sand` and `sand2` shaders add a layer voxels on top of voxels matching the selected colour. Voxels are added randomly and only added when the voxel beneath has adjacent voxels, creating the effect of a rough sand pile. The number of adjacent neighbours affects the randomness, with a higher number of neighbours increasing the odds a voxel will be added.
 
-If provided, `index` will be the color index of the added voxels. This argument is optional. If ommitted (or set to `0`) the selected color index is used instead.
+If provided, `index` will be the color index of the added voxels. This parameter is optional. If ommitted (or set to `0`) the selected color index is used instead.
 
-`add` can be used to increase the odds of adding voxels. Numbers between `0.01` and `0.4` have the best effect. Because `add` is the second argument, you can set `index` to `0` if using `add` in a loop.
+`add` can be used to increase the odds of adding voxels. Numbers between `0.01` and `0.4` have the best effect. Because `add` is the second parameter, you can set `index` to `0` if using `add` in a loop.
 
 Each time the shader is executed, a single layer is added. To add multiple layers at once, you can run the command in a loop as shown below:
 
@@ -102,12 +102,14 @@ xs -n 50 sand2
 <h3 id="lines_shader">Lines</h3>
 
 ```
-xs lnx [index] [spacing] [offset]
-xs lny [index] [spacing] [offset]
-xs lnz [index] [spacing] [offset]
+xs line [index] [spacing] [offset]
 ```
 
-Replaces all voxels which match your selected color with lines set to the color passed as `index`. Setting the index to `0` will remove the voxels. Lines are spaced based on the `spacing` argument, which defaults to `2`.
+<img src="/img/line.png?raw=true" alt="" width="238"><img src="/img/line_2.png?raw=true" alt="" width="238">
+
+Replaces all voxels which match your selected color with lines set to the color passed as `index`. Setting the index to `0` will remove the voxels. Lines are spaced based on the `spacing` parameter, which defaults to `2`. Lines can be offset with the `offset` parameter. You should use axis modes to limit the lines to a particular axis.
+
+<small>(This shader combines the <code>lnx</code>, <code>lny</code> and <code>lnz</code> shaders from the earlier versions.)</small>
 
 <h3 id="soil_shader">Soil</h3>
 
@@ -116,11 +118,12 @@ xs soil [index] [n]
 xs soil2 [index] [n]
 ```
 
-<img src="/img/soil1.png?raw=true" alt="" width="238"><img src="/img/soil2.png?raw=true" alt="" width="238">
+<img src="/img/soil.png?raw=true" alt="" width="238"><img src="/img/soil_2.png?raw=true" alt="" width="238">
 
-The `soil` and `soil2` shaders adds voxels, set to the color passed as `index`, on top of voxels matching your selected colour. Voxels are only added if there empty space. By default, voxels are added if there is at least one empty space above, however you can adjust the number of voxels that are checked with `n`.
+The `soil` and `soil2` shaders adds voxels, set to the color passed as `index`, on top of voxels matching your selected colour.
 
-`soil2` is similar to `soil`, except voxels are replaced instead of added on top.
+- Voxels are only added if there empty space. By default, voxels are added if there is at least one empty space above, however you can adjust the number of voxels that are checked with `n`.
+- `soil2` is similar to `soil`, except voxels are replaced instead of added on top.
 
 <h3 id="case_shader">Case</h3>
 
@@ -153,7 +156,7 @@ xs grid [index] [x] [y] [xoffset] [yoffset]
 
 <img src="/img/grid.png?raw=true" alt="" width="238"><img src="/img/grid1x5.png?raw=true" alt="" width="238"><img src="/img/grid5x5.png?raw=true" alt="" width="238">
 
-Replaces all voxels which match your selected color with a grid with a cell size determined by `x` and `y`. Grid cells are colored based on the provided `index`. Setting the index to `0` will remove the voxels. Grids can be square or rectangular. You can offset the position of the grid with `xoffset` and `yoffset` arguments, which default to `0`.
+Replaces all voxels which match your selected color with a grid with a cell size determined by `x` and `y`. Grid cells are colored based on the provided `index`. Setting the index to `0` will remove the voxels. Grids can be square or rectangular. You can offset the position of the grid with `xoffset` and `yoffset` parameters, which default to `0`.
 
 <h3 id="noise_shader">Noise</h3>
 
@@ -190,9 +193,7 @@ xs flood [n]
 xs flood2 [n]
 ```
 
-<img src="/img/flood_1.png?raw=true" alt="" width="238"><img src="/img/flood_2.png?raw=true" alt="" width="238">
-
-<img src="/img/flood2_1.png?raw=true" alt="" width="238"><img src="/img/flood2_2.png?raw=true" alt="" width="238">
+<img src="/img/flood.png?raw=true" alt="" width="180"><img src="/img/flood_1.png?raw=true" alt="" width="238"><img src="/img/flood2.png?raw=true" alt="" width="238">
 
 Adds `n` number of layers of voxels with your selected color from the bottom of your model upwards. Voxels are only added to empty space and won't replace existing voxels. Defaults to a single layer.
 
