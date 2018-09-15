@@ -6,8 +6,8 @@
 // xs case [index]
 
 // Determine whether axis modes are set
-bvec3 bAxisMode = equal(iAxis, vec3(1.0, 1.0, 1.0));
-bool bNoAxisMode = all(equal(iAxis, vec3(0.0, 0.0, 0.0)));
+bvec3 axis = equal(iAxis, vec3(1.0, 1.0, 1.0));
+bool noAxisMode = all(equal(iAxis, vec3(0.0, 0.0, 0.0)));
 
 float map(vec3 v) {
 	float p = voxel(v);
@@ -17,17 +17,17 @@ float map(vec3 v) {
 		vec2 yrange = v.yy;
 		vec2 zrange = v.zz;
 
-		if (bNoAxisMode || bAxisMode.x) {
+		if (noAxisMode || axis.x) {
 			xrange.x = v.x - 1.0;
 			xrange.y = v.x + 1.0;
 		}
 
-		if (bNoAxisMode || bAxisMode.y) {
+		if (noAxisMode || axis.y) {
 			yrange.x = v.y - 1.0;
 			yrange.y = v.y + 1.0;
 		}
 
-		if (bNoAxisMode || bAxisMode.z) {
+		if (noAxisMode || axis.z) {
 			zrange.x = v.z - 1.0;
 			zrange.y = v.z + 1.0;
 		}
