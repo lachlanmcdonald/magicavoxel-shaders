@@ -1,0 +1,49 @@
+// MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+// Copyright (c) 2018 Lachlan McDonald
+//
+// v. 0.7.0
+// xs case [index]
+
+// Determine whether axis modes are set
+bvec3 bAxisMode = equal(iAxis, vec3(1.0, 1.0, 1.0));
+bool bNoAxisMode = all(equal(iAxis, vec3(0.0, 0.0, 0.0)));
+
+float map(vec3 v) {
+	float p = voxel(v);
+
+	if (p == 0.0) {
+		vec2 xrange = v.xx;
+		vec2 yrange = v.yy;
+		vec2 zrange = v.zz;
+
+		if (bNoAxisMode || bAxisMode.x) {
+			xrange.x = v.x - 1.0;
+			xrange.y = v.x + 1.0;
+		}
+
+		if (bNoAxisMode || bAxisMode.y) {
+			yrange.x = v.y - 1.0;
+			yrange.y = v.y + 1.0;
+		}
+
+		if (bNoAxisMode || bAxisMode.z) {
+			zrange.x = v.z - 1.0;
+			zrange.y = v.z + 1.0;
+		}
+
+		for (float x = xrange.x; x <= xrange.y; x += 1.0) {
+			for (float y = yrange.x; y <= yrange.y; y += 1.0) {
+				for (float z = zrange.x; z <= zrange.y; z += 1.0) {
+ 					float j = voxel(vec3(x, y, z));
+
+					if (j == iColorIndex) {
+						return iArgs[0];
+					}
+				}
+			}
+		}
+	}
+
+	return p;
+}
