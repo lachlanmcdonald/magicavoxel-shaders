@@ -2,7 +2,7 @@
 
 __Shaders for [MagicaVoxel](https://ephtracy.github.io/) to simplify common and repetitive tasks.__
 
-- Current release: `0.6.0`
+- Current release: `0.7.0`
 - Tested with MagicaVoxel 0.99.1 for Windows and Mac
 - Released under the MIT License
 
@@ -19,6 +19,7 @@ Install these shaders by copying the files from the `shader` directory in this p
     <li><a href="#pyramid_shader">Pyramid</a> &mdash; <code>py</code> <code>py2</code></li>
     <li><a href="#sand_shader">Sand</a> &mdash; <code>sand</code> <code>sand2</code></li>
     <li><a href="#soil_shader">Soil</a> &mdash; <code>soil</code> <code>soil2</code></li>
+    <li><a href="#case_shader">Case</a> &mdash; <code>case</code> <code>outline2</code></li>
     <li><a href="#outline_shader">Outline</a> &mdash; <code>outline</code> <code>outline2</code></li>
     <li><a href="#noise_shader">Noise</a> &mdash; <code>noise</code></li>
     <li><a href="#rand_shader">Random</a> &mdash; <code>rand</code></li>
@@ -121,6 +122,16 @@ The `soil` and `soil2` shaders adds voxels, set to the color passed as `index`, 
 
 `soil2` is similar to `soil`, except voxels are replaced instead of added on top.
 
+<h3 id="case_shader">Case</h3>
+
+```
+xs case [index]
+```
+
+<img src="/img/case.png?raw=true" alt="" width="250"><img src="/img/case_1.png?raw=true" alt="" width="250"><img src="/img/case_x.png?raw=true" alt="" width="250"><img src="/img/case_y.png?raw=true" alt="" width="250"><img src="/img/case_z.png?raw=true" alt="" width="250"><img src="/img/case_xy.png?raw=true" alt="" width="250">
+
+Surrounds (encases) the all voxels which match your selected color. Axis modes can use used to only add voxels on certain axes.
+ 
 <h3 id="outline_shader">Outline</h3>
 
 ```
