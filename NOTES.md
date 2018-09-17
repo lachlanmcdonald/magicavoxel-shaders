@@ -17,7 +17,7 @@ vector(-1.0, -1.0, -1.0); // 0.0
 
 ### Determine if a axis mode is set
 
-`bNoAxisMode` will be `true` when no axis modes are set, false otherwise.
+`bNoAxisMode` will be `true` when no axis modes are set, `false` otherwise.
 
 ```glsl
 bool bNoAxisMode = all(equal(iAxis, vec3(0.0, 0.0, 0.0)));
@@ -31,4 +31,18 @@ bvec3 bAxisMode = equal(iAxis, vec3(1.0, 1.0, 1.0));
 
 `bAxisMode` is a `bvec3` indicating which axis mode is set.
 
-**For example:** `bAxisMode.x` will be `true` if the X-Axis mode is set.
+**For example:** `bAxisMode.x` will be `true` if the X-axis mode is set.
+
+## Editing
+
+In **Visual Studio Code**, GLSL shader syntax-highlighting can be enabled with the [Shader languages support for VS Code](https://marketplace.visualstudio.com/items?itemName=slevesque.shader) extension.
+
+`.txt` files are not automatically detected as shaders. The following snippet can be added to the workspace settings to override the associations for `.txt` files:
+
+```json
+{
+	"files.associations": {
+		"**/shader/*.txt": "glsl"
+	}
+}
+```
