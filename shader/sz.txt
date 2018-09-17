@@ -3,7 +3,7 @@
 // Copyright (c) 2018 Lachlan McDonald
 //
 // v. 0.7.0
-// xs sz [c] [count]
+// xs sz [offset] [count]
 
 float map(vec3 v) {
 	float offset = max(iArgs[1], 1.0);
