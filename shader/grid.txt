@@ -12,9 +12,9 @@ float ox = max(floor(iArgs[3]), 0.0);
 float oy = max(floor(iArgs[4]), 0.0);
 
 float map(vec3 v) {
-	float c = voxel(v);
+	float index = voxel(v);
 
-	if (c == iColorIndex) {
+	if (index == iColorIndex) {
 		if (mod(v.x + ox, gx * 2.0) < gx) {
 			if (mod(v.y + oy, gy * 2.0) < gy) {
 				return nc;
@@ -25,5 +25,5 @@ float map(vec3 v) {
 			}
 		}
 	}
-	return c;
+	return index;
 }

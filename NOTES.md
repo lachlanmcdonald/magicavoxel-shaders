@@ -17,21 +17,21 @@ vector(-1.0, -1.0, -1.0); // 0.0
 
 ### Determine if a axis mode is set
 
-`bNoAxisMode` will be `true` when no axis modes are set, `false` otherwise.
+`noAxisMode` will be `true` when no axis modes are set, `false` otherwise.
 
 ```glsl
-bool bNoAxisMode = all(equal(iAxis, vec3(0.0, 0.0, 0.0)));
+bool noAxisMode = all(equal(iAxis, vec3(0.0, 0.0, 0.0)));
 ```
 
 ### Determine which axis mode is set
 
 ```glsl
-bvec3 bAxisMode = equal(iAxis, vec3(1.0, 1.0, 1.0));
+bvec3 axisMode = equal(iAxis, vec3(1.0, 1.0, 1.0));
 ```
 
-`bAxisMode` is a `bvec3` indicating which axis mode is set.
+`axisMode` is a `bvec3` indicating which axis mode is set.
 
-**For example:** `bAxisMode.x` will be `true` if the X-axis mode is set.
+**For example:** `axisMode.x` will be `true` if the X-axis mode is set.
 
 ## Editing
 

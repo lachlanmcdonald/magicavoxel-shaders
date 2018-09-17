@@ -138,13 +138,13 @@ Surrounds (encases) the all voxels which match your selected color. Axis modes c
 <h3 id="outline_shader">Outline</h3>
 
 ```
-xs outline [index]
-xs outline2 [index]
+xs outline [color]
+xs outline2 [color]
 ```
 
 <img src="/img/outline1.png?raw=true" alt="" width="238"><img src="/img/outline2.png?raw=true" alt="" width="238"><img src="/img/outline3.png?raw=true" alt="" width="238">
 
-Replaces all voxels which match your selected color which are adjacent to another voxel of a different color. The outline color will be the provided `index`. Setting the index to `0` will remove the voxels.
+Replaces all voxels which match your selected color which are adjacent to another voxel of a different color. The outline color will be the provided `color`. Setting the index to `0` will remove the voxels.
 
 `outline2` is similar to `outline`, except fewer adjacent voxels are checked, producing slightly thinner lines.
 

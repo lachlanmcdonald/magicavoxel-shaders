@@ -5,29 +5,28 @@
 // v. 0.7.0
 // xs case [index]
 
-// Determine whether axis modes are set
-bvec3 axis = equal(iAxis, vec3(1.0, 1.0, 1.0));
+bvec3 axisMode = equal(iAxis, vec3(1.0, 1.0, 1.0));
 bool noAxisMode = all(equal(iAxis, vec3(0.0, 0.0, 0.0)));
 
 float map(vec3 v) {
-	float p = voxel(v);
+	float index = voxel(v);
 
-	if (p == 0.0) {
+	if (index == 0.0) {
 		vec2 xrange = v.xx;
 		vec2 yrange = v.yy;
 		vec2 zrange = v.zz;
 
-		if (noAxisMode || axis.x) {
+		if (noAxisMode || axisMode.x) {
 			xrange.x = v.x - 1.0;
 			xrange.y = v.x + 1.0;
 		}
 
-		if (noAxisMode || axis.y) {
+		if (noAxisMode || axisMode.y) {
 			yrange.x = v.y - 1.0;
 			yrange.y = v.y + 1.0;
 		}
 
-		if (noAxisMode || axis.z) {
+		if (noAxisMode || axisMode.z) {
 			zrange.x = v.z - 1.0;
 			zrange.y = v.z + 1.0;
 		}
@@ -45,5 +44,5 @@ float map(vec3 v) {
 		}
 	}
 
-	return p;
+	return index;
 }

@@ -20,13 +20,11 @@ float map(vec3 v) {
 				return iArgs[0];
 			}
 		}
-
 		if (noAxisMode || axis.y) {
 			if (mod(v.y + offset, spacing) == 0.0) {
 				return iArgs[0];
 			}
 		}
-
 		if (noAxisMode || axis.z) {
 			if (mod(v.z + offset, spacing) == 0.0) {
 				return iArgs[0];
