@@ -1,10 +1,10 @@
 # magicavoxel-shaders
 
-__Shaders for [MagicaVoxel](https://ephtracy.github.io/) to simplify common and repetitive tasks.__
+[![Release](https://img.shields.io/badge/dynamic/json.svg?label=release&url=https%3A%2F%2Fapi.github.com%2Frepos%2Flachlanmcdonald%2Fmagicavoxel-shaders%2Freleases&query=%24%5B0%5D.name&color=brightgreen)][release-link]
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)][license-link]
+[![Supports](https://img.shields.io/badge/MagicaVoxel-0.99.1-brightgreen.svg)][mv-link]
 
-- Current release: `0.7.0`
-- Tested with MagicaVoxel 0.99.1 for Windows and Mac
-- Released under the MIT License
+__Shaders for [MagicaVoxel](https://ephtracy.github.io/) to simplify common and repetitive tasks.__
 
 **Note v0.99.1:** Shaders work with v0.99.1, but the tooltip which shows the color index is not present. It [should be present](https://twitter.com/ephtracy/status/997672870452002816) in a later version.
 
@@ -198,3 +198,7 @@ xs flood2 [n]
 Adds `n` number of layers of voxels with your selected color from the bottom of your model upwards. Voxels are only added to empty space and won't replace existing voxels. Defaults to a single layer.
 
 `flood2` is similar to `flood`, except flooding stops when a voxel is encountered so that exclosed spaces aren't filled.
+
+[release-link]: https://github.com/lachlanmcdonald/magicavoxel-shaders/releases
+[license-link]: https://github.com/lachlanmcdonald/magicavoxel-shaders/blob/master/LICENSE.md
+[mv-link]: https://ephtracy.github.io/
