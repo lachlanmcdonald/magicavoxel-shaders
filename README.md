@@ -31,14 +31,14 @@ Install these shaders by copying the files from the `shader` directory in this p
 <h3 id="slice_shader">Slice</h3>
 
 ```
-xs sx [c] [count]
-xs sy [c] [count]
-xs sz [c] [count]
+xs sx [offset] [count]
+xs sy [offset] [count]
+xs sz [offset] [count]
 ```
 
 <img src="/img/slice.png?raw=true" alt="" width="238"><img src="/img/slice_sx_19_1.png?raw=true" alt="" width="238"><img src="/img/slice_sy_15_1.png?raw=true" alt="" width="238">
 
-The slice shaders removes one or more segments from the x, y or z axis. All other rows are shuffled to full the available space. The first parameter `c` is the coordinate of the segment you wish to remove and `count` is the number of rows. Note that `count` is optional and defaults to `1`.
+The slice shaders removes one or more segments from the X, Y or Z-axis. All other segments are shuffled to full the available space. The first parameter `c` is the coordinate of the segment you wish to remove and `count` is the number of segments. Note that `count` is optional and defaults to `1`.
 
 For example, in the first image, segments are removed with these commands:
 
@@ -170,7 +170,7 @@ Replaces all voxels which match your selected color with a randomly chosen color
 
 <img src="/img/noise3.png?raw=true" alt="" width="238"><img src="/img/noise4.png?raw=true" alt="" width="238">
 
-Voxels are replaced across all axes. You can randomize the X, Y, or Z axis (or a combination) with the axis mode.
+Voxels are replaced across all axes. You can randomize the X, Y, or Z-axis (or a combination) with the axis mode.
 
 <h3 id="rand_shader">Random</h3>
 
@@ -184,7 +184,7 @@ Replaces all voxels which match your selected color with a randomly chosen index
 
 <img src="/img/rand_050_xy.png?raw=true" alt="" width="238"><img src="/img/rand_050_xz.png?raw=true" alt="" width="238"><img src="/img/rand_050_y.png?raw=true" alt="" width="238">
 
-Voxels are replaced across all axes. You can randomize the X, Y, or Z axis (or a combination) with the axis mode.
+Voxels are replaced across all axes. You can randomize the X, Y, or Z-axis (or a combination) with the axis mode.
 
 <h3 id="flood_shader">Flood</h3>
 
