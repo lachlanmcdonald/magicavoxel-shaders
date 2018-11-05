@@ -12,6 +12,10 @@ __Shaders for [MagicaVoxel](https://ephtracy.github.io/) to simplify common and 
 
 Install these shaders by copying the files from the `shader` directory in this project into the `shader` directory of your MagicaVoxel installation.
 
+## Issues
+
+If you encounter an issue with these shaders, please review any [open issues][open-issues] and [create a new issue][new-issue] if one does not exist already.
+
 ## Shaders
 
 <ul>
@@ -202,3 +206,5 @@ Adds `n` number of layers of voxels with your selected color from the bottom of 
 [release-link]: https://github.com/lachlanmcdonald/magicavoxel-shaders/releases
 [license-link]: https://github.com/lachlanmcdonald/magicavoxel-shaders/blob/master/LICENSE.md
 [mv-link]: https://ephtracy.github.io/
+[open-issues]: https://github.com/lachlanmcdonald/magicavoxel-shaders/issues?q=is%3Aopen+is%3Aissue
+[new-issue]: https://github.com/lachlanmcdonald/magicavoxel-shaders/issues/new
