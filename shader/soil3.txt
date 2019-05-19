@@ -1,0 +1,24 @@
+// MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+// Copyright (c) 2019 Lachlan McDonald
+//
+// v. 0.7.0
+// xs soil3 [headroom]
+
+float c = max(1.0, iArgs[0]);
+
+float map(vec3 v) {
+	float x = voxel(v);
+
+	if (voxel(vec3(v.x, v.y, v.z - 1.0)) > 0.0) {
+		for (float z = 0.0; z < c; z += 1.0) {
+			if (voxel(vec3(v.x, v.y, v.z + z)) > 0.0) {
+				return x;
+			}
+		}
+
+		return iColorIndex;
+	}
+
+	return x;
+}
