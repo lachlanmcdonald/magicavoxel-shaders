@@ -2,9 +2,43 @@
 
 ## Observations
 
-### Using the `vector` function beyond the volume size
+### `voxel` always refers to original model
 
-The `vector` function for retrieving a color index will return `0.0` when addressing beyond the volume size. Therefore, it is not necessary to check wether the `x`, `y` or `z` co-ordinates will be out-of-bounds before calling `vector`.
+`voxel()` always refers to the original model. For example:
+
+```glsl
+float map(vec3 v) {
+	if (all(equal(v, vec3(0.0, 0.0, 0.0)))) {
+		return 1.0;
+	} else {
+		return voxel(vec3(0.0, 0.0, 0.0));
+	}
+}
+```
+
+Will not result in the entire model being replaced with index `0`. Instead, all voxels will be replaced with the original index at position `0,0,0`.
+
+### Functions must be declared before they are used
+
+For example, `b()` must be defined before `a()`, or it will not be defined when `a()` tries to call it.
+
+```glsl
+float b() {
+	return 1.0;
+}
+
+float a() {
+	return b();
+}
+
+float map(vec3 v) {
+	return a();
+}
+```
+
+### Using the `voxel` function beyond the volume size
+
+`voxel()` for retrieving a color index will return `0.0` when addressing beyond the volume size. Therefore, it is not necessary to check wether the `x`, `y` or `z` co-ordinates will be out-of-bounds before calling `voxel`.
 
 **For example:**
 
