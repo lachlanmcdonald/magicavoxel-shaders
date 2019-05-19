@@ -18,7 +18,7 @@ Install these shaders by copying the files from the `shader` directory in this p
     <li><a href="#slice_shader">Slice</a> &mdash; <code>sx</code> <code>sy</code> <code>sz</code></li>
     <li><a href="#pyramid_shader">Pyramid</a> &mdash; <code>py</code> <code>py2</code></li>
     <li><a href="#sand_shader">Sand</a> &mdash; <code>sand</code> <code>sand2</code></li>
-    <li><a href="#soil_shader">Soil</a> &mdash; <code>soil</code> <code>soil2</code></li>
+    <li><a href="#soil_shader">Soil</a> &mdash; <code>soil</code> <code>soil2</code> <code>soil3</code></li>
     <li><a href="#case_shader">Case</a> &mdash; <code>case</code> <code>outline2</code></li>
     <li><a href="#outline_shader">Outline</a> &mdash; <code>outline</code> <code>outline2</code></li>
     <li><a href="#noise_shader">Noise</a> &mdash; <code>noise</code></li>
@@ -114,15 +114,16 @@ Replaces all voxels which match your selected color with lines set to the color 
 <h3 id="soil_shader">Soil</h3>
 
 ```
-xs soil [index] [n]
-xs soil2 [index] [n]
+xs soil [index] [headroom]
+xs soil2 [index] [headroom]
+xs soil3 [headroom]
 ```
 
 <img src="/img/soil.png?raw=true" alt="" width="200"><img src="/img/soil_2.png?raw=true" alt="" width="200">
 
-The `soil` and `soil2` shaders adds voxels, set to the color passed as `index`, on top of voxels matching your selected colour.
+The `soil` and `soil2` shaders adds voxels, set to the color passed as `index`, on top of voxels matching your selected colour. `soil` adds voxels, set as the selected color, on top of all voxels.
 
-- Voxels are only added if there empty space. By default, voxels are added if there is at least one empty space above, however you can adjust the number of voxels that are checked with `n`.
+- Voxels are only added where there is empty space. By default, voxels are added if there is at least one empty space above, however you can adjust the number of voxels that are checked with `headroom`.
 - `soil2` is similar to `soil`, except voxels are replaced instead of added on top.
 
 <h3 id="case_shader">Case</h3>
@@ -146,7 +147,7 @@ xs outline2 [color]
 
 Replaces all voxels which match your selected color which are adjacent to another voxel of a different color. The outline color will be the provided `color`. Setting the index to `0` will remove the voxels.
 
-`outline2` is similar to `outline`, except fewer adjacent voxels are checked, producing slightly thinner lines.
+`outline2` is similar to `outline`, but produces thinner lines.
 
 <h3 id="grid_shader">Grid</h3>
 
