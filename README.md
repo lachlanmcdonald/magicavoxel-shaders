@@ -133,6 +133,8 @@ xs case [index]
 <img src="/img/case.png?raw=true" alt="" width="125"><img src="/img/case_1.png?raw=true" alt="" width="125"><img src="/img/case_x.png?raw=true" alt="" width="125"><img src="/img/case_y.png?raw=true" alt="" width="125"><img src="/img/case_z.png?raw=true" alt="" width="125"><img src="/img/case_xy.png?raw=true" alt="" width="125">
 
 Surrounds (encases) the all voxels which match your selected color. Axis modes can use used to only add voxels on certain axes. The outline color will be the provided index.
+
+This shader is similar to the _Dilation_ tool; except you can select an axis mode and target color.
  
 <h3 id="outline_shader">Outline</h3>
 
