@@ -4,7 +4,7 @@
 //
 // xs soil3 [headroom]
 
-float c = max(1.0, iArgs[0]);
+float c = max(iArgs[0], 1.0);
 
 float map(vec3 v) {
 	float x = voxel(v);
