@@ -2,7 +2,6 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2019 Lachlan McDonald
 //
-// v. 0.7.0
 // xs grid [color] [x] [y] [offsetx] [offsety]
 
 float nc = floor(iArgs[0]);

@@ -2,7 +2,6 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2019 Lachlan McDonald
 //
-// v. 0.7.0
 // xs sand2 [index] [add]
 
 float rand(vec2 co) {

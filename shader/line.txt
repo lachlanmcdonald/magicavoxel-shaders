@@ -2,7 +2,6 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2019 Lachlan McDonald
 //
-// v. 0.7.0
 // xs line [color] [spacing] [offset]
 
 float spacing = max(floor(iArgs[1]), 2.0);
