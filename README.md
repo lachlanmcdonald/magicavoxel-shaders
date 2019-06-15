@@ -278,16 +278,16 @@ Replaces all voxels which match your selected color with a grid with a cell size
 <h3 id="noise_shader">Noise</h3>
 
 ```
-xs noise [a] [b]
+xs noise [a] [b] [size_x] [size_y] [size_z]
 ```
 
 <img src="img/noise1.png?raw=true" alt="" width="238"><img src="img/noise2.png?raw=true" alt="" width="238">
 
-Replaces all voxels which match your selected color with a randomly chosen color within a range of colors (`a` and `b`, inclusive).
+Replaces all voxels which match your selected color with a randomly chosen color within a range of colors (`a` and `b`, inclusive). `size_x`, `size_y` and `size_z` can be used to increase the size to be larger than a single voxel. For example, `3 3 3` will randomly generate noise in 3 x 3 x 3 cubes.
 
 <img src="img/noise3.png?raw=true" alt="" width="238"><img src="img/noise4.png?raw=true" alt="" width="238">
 
-Voxels are replaced across all axes. You can randomize the X, Y, or Z-axis (or a combination) with the axis mode.
+Voxels are replaced across all axes. The shader can be limited to the X, Y, or Z-axis (or a combination) by setting an axis mode.
 
 <h3 id="rand_shader">Random</h3>
 
