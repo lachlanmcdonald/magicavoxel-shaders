@@ -236,9 +236,9 @@ To generate bricks between color `1` and `8`:
 			<td><img src="img/bricks-2-1-1.png" width="120" alt=""></td>
 		</tr>
 		<tr>
-			<td><code>xs bx 6 4 2 1 8</code></td>
-			<td><code>xs bx 4 2 4 1 8</code></td>
-			<td><code>xs bx 4 2 1 1 8</code></td>
+			<td><code>xs bx 4 2 2 1 8</code></td>
+			<td><code>xs bx 2 4 2 1 8</code></td>
+			<td><code>xs bx 2 1 1 1 8</code></td>
 		</tr>
 	</tbody>
 </table>
