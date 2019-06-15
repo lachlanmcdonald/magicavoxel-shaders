@@ -14,73 +14,73 @@ Install these shaders by copying the files from the `shader` directory in this p
 <table>
 	<tbody>
 		<tr>
-			<td style="background: #373737;"><img src="img/icons/slice.png" style="width: 48px;" /></td>
+			<td style="background: #373737;"><img src="img/icons/slice.png" width="48" /></td>
 			<th><a href="#slice_shader">Slice</a></th>
 			<td>Remove segments from a model</td>
 			<td><code>sx</code> <code>sy</code> <code>sz</code></td>
 		</tr>
 		<tr>
-			<td style="background: #373737;"><img src="img/icons/pyramid.png" style="width: 48px;" /></td>
+			<td style="background: #373737;"><img src="img/icons/pyramid.png" width="48" /></td>
 			<th><a href="#pyramid_shader">Pyramid</a></th>
 			<td>Generates a pyramid effect layer-by-layer</td>
 			<td><code>py</code> <code>py2</code></td>
 		</tr>
 		<tr>
-			<td style="background: #373737;"><img src="img/icons/sand.png" style="width: 48px;" /></td>
+			<td style="background: #373737;"><img src="img/icons/sand.png" width="48" /></td>
 			<th><a href="#sand_shader">Sand</a></th>
 			<td>Generates a sand effect, layer-by-layer</td>
 			<td><code>sand</code> <code>sand2</code></td>
 		</tr>
 		<tr>
-			<td style="background: #373737;"><img src="img/icons/soil.png" style="width: 48px;" /></td>
+			<td style="background: #373737;"><img src="img/icons/soil.png" width="48" /></td>
 			<th><a href="#soil_shader">Soil</a></th>
 			<td>Adds a layer on top of voxels; i.e. sand or snow</td>
 			<td><code>soil</code> <code>soil2</code> <code>soil3</code></td>
 		</tr>
 		<tr>
-			<td style="background: #373737;"><img src="img/icons/bricks.png" style="width: 48px;" /></td>
+			<td style="background: #373737;"><img src="img/icons/bricks.png" width="48" /></td>
 			<th><a href="#soil_shader">Bricks</a></th>
 			<td>Generates a brick pattern of different colors and sizes</td>
 			<td><code>bx</code> <code>by</code></td>
 		</tr>
 		<tr>
-			<td style="background: #373737;"><img src="img/icons/case.png" style="width: 48px;" /></td>
+			<td style="background: #373737;"><img src="img/icons/case.png" width="48" /></td>
 			<th><a href="#case_shader">Case</a></th>
 			<td>Encase voxels in voxels</td>
 			<td><code>case</code></td>
 		</tr>
 		<tr>
-			<td style="background: #373737;"><img src="img/icons/outline.png" style="width: 48px;" /></td>
+			<td style="background: #373737;"><img src="img/icons/outline.png" width="48" /></td>
 			<th><a href="#outline_shader">Outline</a></th>
 			<td>Generate an outline surrounding voxels</td>
 			<td><code>outline</code> <code>outline2</code></td>
 		</tr>
 		<tr>
-			<td style="background: #373737;"><img src="img/icons/noise.png" style="width: 48px;" /></td>
+			<td style="background: #373737;"><img src="img/icons/noise.png" width="48" /></td>
 			<th><a href="#noise_shader">Noise</a></th>
 			<td>Add colored different sized noise</td>
 			<td><code>noise</code></td>
 		</tr>
 		<tr>
-			<td style="background: #373737;"><img src="img/icons/rand.png" style="width: 48px;" /></td>
+			<td style="background: #373737;"><img src="img/icons/rand.png" width="48" /></td>
 			<th><a href="#rand_shader">Random</a></th>
 			<td>Add noise at a specific probability</td>
 			<td><code>rand</code></td>
 		</tr>
 		<tr>
-			<td style="background: #373737;"><img src="img/icons/flood.png" style="width: 48px;" /></td>
+			<td style="background: #373737;"><img src="img/icons/flood.png" width="48" /></td>
 			<th><a href="#flood_shader">Flood</a></th>
 			<td>Add voxels bottom-up, as if it were flooding</td>
 			<td><code>flood</code> <code>flood2</code></td>
 		</tr>
 		<tr>
-			<td style="background: #373737;"><img src="img/icons/grid.png" style="width: 48px;" /></td>
+			<td style="background: #373737;"><img src="img/icons/grid.png" width="48" /></td>
 			<th><a href="#grid_shader">Grid</a></th>
 			<td>Generate a grid of different sizes</td>
 			<td><code>grid</code></td>
 		</tr>
 		<tr>
-			<td style="background: #373737;"><img src="img/icons/lines.png" style="width: 48px;" /></td>
+			<td style="background: #373737;"><img src="img/icons/lines.png" width="48" /></td>
 			<th><a href="#lines_shader">Lines</a></th>
 			<td>Generate lines</td>
 			<td><code>lnx</code> <code>lny</code> <code>lnz</code></td>
@@ -197,6 +197,44 @@ xs by [width] [depth] [height] [a] [b]
 
 Generates a brick texture between two colors; `a` and `b`. The difference between the shaders is the facing direction of the bricks.
 
+**Examples**
+
+To generate bricks between color `1` and `8`:
+
+<table>
+	<tbody>
+		<tr>
+			<td><img src="img/bricks.png" width="120" alt=""></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Model</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td><img src="img/bricks-6-1-1.png" width="120" alt=""></td>
+			<td><img src="img/bricks-4-4-4.png" width="120" alt=""></td>
+			<td><img src="img/bricks-4-3-2.png" width="120" alt=""></td>
+		</tr>
+		<tr>
+			<td><code>xs bx 6 1 1 1 8</code></td>
+			<td><code>xs bx 4 4 4 1 8</code></td>
+			<td><code>xs bx 4 3 2 1 8</code></td>
+		</tr>
+		<tr>
+			<td><img src="img/bricks-4-2-2.png" width="120" alt=""></td>
+			<td><img src="img/bricks-2-4-2.png" width="120" alt=""></td>
+			<td><img src="img/bricks-2-1-1.png" width="120" alt=""></td>
+		</tr>
+		<tr>
+			<td><code>xs bx 6 4 2 2 8</code></td>
+			<td><code>xs bx 4 2 4 2 8</code></td>
+			<td><code>xs bx 4 2 1 1 8</code></td>
+		</tr>
+	</tbody>
+</table>
 
 
 <h3 id="case_shader">Case</h3>
