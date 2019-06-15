@@ -39,7 +39,7 @@ Install these shaders by copying the files from the `shader` directory in this p
 		</tr>
 		<tr>
 			<td style="background: #373737;"><img src="img/icons/bricks.png" width="48" /></td>
-			<th><a href="#soil_shader">Bricks</a></th>
+			<th><a href="#bricks_shader">Bricks</a></th>
 			<td>Generates a brick pattern of different colors and sizes</td>
 			<td><code>bx</code> <code>by</code></td>
 		</tr>
@@ -195,7 +195,9 @@ xs bx [width] [depth] [height] [a] [b]
 xs by [width] [depth] [height] [a] [b]
 ```
 
-Generates a brick texture between two colors; `a` and `b`. The difference between the shaders is the facing direction of the bricks.
+Generates a brick texture between two colors; `a` and `b`. The difference between the shaders is the facing direction of the bricks (if the bricks are not generating, try switching shader)
+
+<img src="img/bx.png" width="200" alt=""><img src="img/by.png" width="200" alt="">
 
 **Examples**
 
@@ -229,8 +231,8 @@ To generate bricks between color `1` and `8`:
 			<td><img src="img/bricks-2-1-1.png" width="120" alt=""></td>
 		</tr>
 		<tr>
-			<td><code>xs bx 6 4 2 2 8</code></td>
-			<td><code>xs bx 4 2 4 2 8</code></td>
+			<td><code>xs bx 6 4 2 1 8</code></td>
+			<td><code>xs bx 4 2 4 1 8</code></td>
 			<td><code>xs bx 4 2 1 1 8</code></td>
 		</tr>
 	</tbody>
