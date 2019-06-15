@@ -1,8 +1,7 @@
 // MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
-// Copyright (c) 2018 Lachlan McDonald
+// Copyright (c) 2019 Lachlan McDonald
 //
-// v. 0.7.0
 // xs line [color] [spacing] [offset]
 
 float spacing = max(floor(iArgs[1]), 2.0);
@@ -20,13 +19,11 @@ float map(vec3 v) {
 				return iArgs[0];
 			}
 		}
-
 		if (noAxisMode || axis.y) {
 			if (mod(v.y + offset, spacing) == 0.0) {
 				return iArgs[0];
 			}
 		}
-
 		if (noAxisMode || axis.z) {
 			if (mod(v.z + offset, spacing) == 0.0) {
 				return iArgs[0];

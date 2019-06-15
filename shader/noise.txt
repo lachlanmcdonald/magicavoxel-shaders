@@ -1,23 +1,26 @@
 // MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
-// Copyright (c) 2018 Lachlan McDonald
+// Copyright (c) 2019 Lachlan McDonald
 //
-// v. 0.7.0
-// xs noise [a] [b]
+// xs noise [a] [b] [size_x] [size_y] [size_z]
 
 float rand(vec2 co, float seed) {
 	return fract(sin(dot(co.xy * seed, vec2(12.9898, 78.233))) * 43758.5453);
 }
 
+float a = min(iArgs[0], iArgs[1]);
+float b = max(iArgs[0], iArgs[1]);
+float size_x = max(iArgs[2], 1.0);
+float size_y = max(iArgs[3], 1.0);
+float size_z = max(iArgs[4], 1.0);
+
 float map(vec3 v) {
 	float index = voxel(v);
-	float a = min(iArgs[0], iArgs[1]);
-	float b = max(iArgs[0], iArgs[1]);
 
 	bool na = (iAxis == vec3(0.0, 0.0, 0.0));
-	float x = (na || iAxis.x == 1.0) ? v.x : 1.0;
-	float y = (na || iAxis.y == 1.0) ? v.y : 1.0;
-	float z = (na || iAxis.z == 1.0) ? v.z : 1.0;
+	float x = (na || iAxis.x == 1.0) ? floor(v.x / size_x) : 1.0;
+	float y = (na || iAxis.y == 1.0) ? floor(v.y / size_y) : 1.0;
+	float z = (na || iAxis.z == 1.0) ? floor(v.z / size_z) : 1.0;
 	float j = rand(vec2(x, y), iIter + 1.0);
 	float k = rand(vec2(j, z), iIter + 1.0);
 

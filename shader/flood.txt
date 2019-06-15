@@ -1,11 +1,10 @@
 // MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
-// Copyright (c) 2018 Lachlan McDonald
+// Copyright (c) 2019 Lachlan McDonald
 //
-// v. 0.7.0
 // xs flood [n]
 
-float n = max(1.0, iArgs[0]);
+float n = max(iArgs[0], 1.0);
 
 float map(vec3 v) {
 	float index = voxel(v);

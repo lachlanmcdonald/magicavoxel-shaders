@@ -1,8 +1,7 @@
 // MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
-// Copyright (c) 2018 Lachlan McDonald
+// Copyright (c) 2019 Lachlan McDonald
 //
-// v. 0.7.0
 // xs grid [color] [x] [y] [offsetx] [offsety]
 
 float nc = floor(iArgs[0]);
@@ -12,9 +11,9 @@ float ox = max(floor(iArgs[3]), 0.0);
 float oy = max(floor(iArgs[4]), 0.0);
 
 float map(vec3 v) {
-	float c = voxel(v);
+	float index = voxel(v);
 
-	if (c == iColorIndex) {
+	if (index == iColorIndex) {
 		if (mod(v.x + ox, gx * 2.0) < gx) {
 			if (mod(v.y + oy, gy * 2.0) < gy) {
 				return nc;
@@ -25,5 +24,5 @@ float map(vec3 v) {
 			}
 		}
 	}
-	return c;
+	return index;
 }
