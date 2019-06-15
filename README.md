@@ -197,7 +197,8 @@ xs by [width] [depth] [height] [a] [b]
 
 Generates a brick texture between two colors; `a` and `b`. The difference between the shaders is the facing direction of the bricks (if the bricks are not generating, try switching shader)
 
-<img src="img/bx.png" width="200" alt=""><img src="img/by.png" width="200" alt="">
+<img src="img/bx.png" width="310" alt="" />  
+<img src="img/by.png" width="310" alt="" />
 
 **Examples**
 
