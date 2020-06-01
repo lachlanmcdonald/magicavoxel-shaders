@@ -1,8 +1,13 @@
 // MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2020 Lachlan McDonald
-//
-// xs rand [f] [index]
+// 
+// xs random [Threshold] [Color]
+// 
+// xs_begin
+// arg : { id = '0'  name = 'Threshold'  value = '0.5'  range = '0 1'  step = '0.01'  decimal = '1' }
+// arg : { id = '1'  name = 'Color'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
+// xs_end
 
 float rand(vec2 co, float seed) {
 	return fract(sin(dot(co.xy * seed, vec2(12.9898, 78.233))) * 43758.5453);

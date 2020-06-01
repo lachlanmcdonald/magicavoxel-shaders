@@ -1,8 +1,14 @@
 // MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2020 Lachlan McDonald
-//
-// xs line [color] [spacing] [offset]
+// 
+// xs lines [Color] [Spacing] [Offset]
+// 
+// xs_begin
+// arg : { id = '0'  name = 'Color'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Spacing'  value = '1'  range = '1 127'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Offset'  value = '0'  range = '0 127'  step = '1'  decimal = '0' }
+// xs_end
 
 float spacing = max(floor(iArgs[1]), 2.0);
 float offset = max(floor(iArgs[2]), 0.0);

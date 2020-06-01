@@ -1,0 +1,152 @@
+{
+	"slice_x": [
+		{
+			"type": "position",
+			"name": "Offset"
+		},
+		{
+			"type": "position",
+			"name": "Count"
+		}
+	],
+	"slice_y": [
+		{
+			"type": "position",
+			"name": "Offset"
+		},
+		{
+			"type": "position",
+			"name": "Count"
+		}
+	],
+	"slice_z": [
+		{
+			"type": "position",
+			"name": "Offset"
+		},
+		{
+			"type": "position",
+			"name": "Count"
+		}
+	],
+	"lines": [
+		{
+			"type": "color_a",
+			"name": "Color"
+		},
+		{
+			"type": "size",
+			"name": "Spacing"
+		},
+		{
+			"type": "position",
+			"name": "Offset"
+		}
+	],
+	"random": [
+		{
+			"type": "fraction",
+			"name": "Threshold"
+		},
+		{
+			"type": "color_a",
+			"name": "Color"
+		}
+	],
+	"case": [
+		{
+			"type": "color_a",
+			"name": "Color"
+		}
+	],
+	"flood": [
+		{
+			"type": "size",
+			"name": "Height"
+		}
+	],
+	"flood2": [
+		{
+			"type": "size",
+			"name": "Height"
+		}
+	],
+	"tiles": [
+		{
+			"type": "color_a",
+			"name": "Color"
+		},
+		{
+			"type": "size",
+			"name": "X Size"
+		},
+		{
+			"type": "size",
+			"name": "Y Size"
+		},
+		{
+			"type": "size",
+			"name": "X Offset"
+		},
+		{
+			"type": "size",
+			"name": "Y Offset"
+		}
+	],
+	"outline": [
+		{
+			"type": "color_a",
+			"name": "Color"
+		}
+	],
+	"outline2": [
+		{
+			"type": "color_a",
+			"name": "Color"
+		}
+	],
+	"noise": [
+		{
+			"type": "color_a",
+			"name": "Color A"
+		},
+		{
+			"type": "color_b",
+			"name": "Color B"
+		},
+		{
+			"type": "size",
+			"name": "X Size"
+		},
+		{
+			"type": "size",
+			"name": "Y Size"
+		},
+		{
+			"type": "size",
+			"name": "Z Size"
+		}
+	],
+	"bricks": [
+		{
+			"type": "size",
+			"name": "Width"
+		},
+		{
+			"type": "size",
+			"name": "Height"
+		},
+		{
+			"type": "size",
+			"name": "Depth"
+		},
+		{
+			"type": "color_a",
+			"name": "Color A"
+		},
+		{
+			"type": "color_b",
+			"name": "Color B"
+		}
+	]
+}
