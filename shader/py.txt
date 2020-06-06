@@ -1,12 +1,17 @@
 // MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2020 Lachlan McDonald
-//
-// xs py [index]
+// 
+// xs py [Color]
+// 
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { id = '0'  name = 'Color'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
+// xs_end
 
 vec2 vol = vec2(i_volume_size.xy - 1.0);
-bvec3 axis = equal(iAxis, vec3(1.0, 1.0, 1.0));
-bool no_axis_mode = all(equal(iAxis, vec3(0.0, 0.0, 0.0)));
+bvec3 axis = equal(i_axis, vec3(1.0, 1.0, 1.0));
+bool no_axis_mode = all(equal(i_axis, vec3(0.0, 0.0, 0.0)));
 
 float map(vec3 v) {
 	float index = voxel(v);

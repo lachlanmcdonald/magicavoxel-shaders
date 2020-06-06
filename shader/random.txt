@@ -5,6 +5,7 @@
 // xs random [Threshold] [Color]
 // 
 // xs_begin
+// author : '@lachlanmcdonald'
 // arg : { id = '0'  name = 'Threshold'  value = '0.5'  range = '0 1'  step = '0.01'  decimal = '1' }
 // arg : { id = '1'  name = 'Color'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
 // xs_end

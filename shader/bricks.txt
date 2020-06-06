@@ -5,6 +5,7 @@
 // xs bricks [Width] [Height] [Depth] [Color A] [Color B]
 // 
 // xs_begin
+// author : '@lachlanmcdonald'
 // arg : { id = '0'  name = 'Width'  value = '1'  range = '1 127'  step = '1'  decimal = '0' }
 // arg : { id = '1'  name = 'Height'  value = '1'  range = '1 127'  step = '1'  decimal = '0' }
 // arg : { id = '2'  name = 'Depth'  value = '1'  range = '1 127'  step = '1'  decimal = '0' }

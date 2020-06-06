@@ -187,7 +187,7 @@ xs soil3 [headroom]
 
 <img src="img/soil.png?raw=true" alt="" width="200"><img src="img/soil_2.png?raw=true" alt="" width="200">
 
-The `soil` and `soil2` shaders adds voxels, set to the color passed as `index`, on top of voxels matching your selected colour. `soil` adds voxels, set as the selected color, on top of all voxels.
+The `soil` and `soil2` shaders adds voxels, set to the color passed as `index`, on top of voxels matching your selected colour. `soil3` adds voxels, set as the selected color, on top of all voxels.
 
 - Voxels are only added where there is empty space. By default, voxels are added if there is at least one empty space above, however you can adjust the number of voxels that are checked with `headroom`.
 - `soil2` is similar to `soil`, except voxels are replaced instead of added on top.

@@ -148,5 +148,59 @@
 			"type": "color_b",
 			"name": "Color B"
 		}
+	],
+	"py": [
+		{
+			"type": "color_a",
+			"name": "Color"
+		}
+	],
+	"py2": [
+		{
+			"type": "color_a",
+			"name": "Color"
+		}
+	],
+	"sand": [
+		{
+			"type": "color_a",
+			"name": "Color",
+			"value": 0
+		}
+	],
+	"sand2": [
+		{
+			"type": "color_a",
+			"name": "Color",
+			"value": 0
+		}
+	],
+	"soil": [
+		{
+			"type": "color_a",
+			"name": "Color"
+		},
+		{
+			"type": "position",
+			"name": "Headroom",
+			"value": 1
+		}
+	],
+	"soil_replace": [
+		{
+			"type": "color_a",
+			"name": "Color"
+		},
+		{
+			"type": "position",
+			"name": "Headroom",
+			"value": 1
+		}
+	],
+	"cover": [
+		{
+			"type": "color_a",
+			"name": "Color"
+		}
 	]
 }

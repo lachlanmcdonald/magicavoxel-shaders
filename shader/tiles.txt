@@ -5,6 +5,7 @@
 // xs tiles [Color] [X Size] [Y Size] [X Offset] [Y Offset]
 // 
 // xs_begin
+// author : '@lachlanmcdonald'
 // arg : { id = '0'  name = 'Color'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
 // arg : { id = '1'  name = 'X Size'  value = '1'  range = '1 127'  step = '1'  decimal = '0' }
 // arg : { id = '2'  name = 'Y Size'  value = '1'  range = '1 127'  step = '1'  decimal = '0' }

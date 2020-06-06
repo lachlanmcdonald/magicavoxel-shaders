@@ -5,16 +5,17 @@
 // xs flood2 [Height]
 // 
 // xs_begin
+// author : '@lachlanmcdonald'
 // arg : { id = '0'  name = 'Height'  value = '1'  range = '1 127'  step = '1'  decimal = '0' }
 // xs_end
 
-float n = max(i_args[0], 1.0);
+float height = max(i_args[0], 1.0);
 
 float map(vec3 v) {
 	float index = voxel(v);
 
 	if (index == 0.0) {
-		if (v.z < n) {
+		if (v.z < height) {
 			for (float z = 0.0; z < v.z; z += 1.0) {
 				if (voxel(vec3(v.x, v.y, z)) > 0.0) {
 					return index;

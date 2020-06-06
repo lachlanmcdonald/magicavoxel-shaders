@@ -45,7 +45,7 @@ FIX_GLOBAL_VARS = {
 	'i_volume_size': 'i_volume_size',
 	'i_color_index': 'i_color_index',
 	'iMirror': 'i_mirror',
-	'iAxis': 'i_axis',
+	'i_axis': 'i_axis',
 	'iIter': 'i_iter',
 }
 
@@ -63,22 +63,24 @@ for shader_name in params.keys():
 	param_strings = ' '.join([ '[{}]'.format(x['name']) for x in params[shader_name] ])
 	header.append('xs {} {}'.format(shader_name, param_strings))
 
-	header.append('')
-	header.append('xs_begin')
-	for index, param in enumerate(params[shader_name]):
-		shader_lines = [
-			ARG_FORMAT.format('id', index),
-			ARG_FORMAT.format('name', param['name'])
-		]
+	if len(params[shader_name]) > 0:
+		header.append('')
+		header.append('xs_begin')
+		header.append('author : \'@lachlanmcdonald\'')
+		for index, param in enumerate(params[shader_name]):
+			shader_lines = [
+				ARG_FORMAT.format('id', index),
+				ARG_FORMAT.format('name', param['name'])
+			]
 
-		for k in ['value', 'range', 'step', 'decimal']:
-			if k in param:
-				shader_lines.append(ARG_FORMAT.format(k, param[k]))
-			elif k in TYPES[param['type']]:
-				shader_lines.append(ARG_FORMAT.format(k, TYPES[param['type']][k]))
+			for k in ['value', 'range', 'step', 'decimal']:
+				if k in param:
+					shader_lines.append(ARG_FORMAT.format(k, param[k]))
+				elif k in TYPES[param['type']]:
+					shader_lines.append(ARG_FORMAT.format(k, TYPES[param['type']][k]))
 
-		header.append('arg : {{ {} }}'.format('  '.join(shader_lines)))
-	header.append('xs_end')
+			header.append('arg : {{ {} }}'.format('  '.join(shader_lines)))
+		header.append('xs_end')
 
 	header_text = '\n'.join([ '// {}'.format(x) for x in header ])
 
@@ -99,7 +101,6 @@ for shader_name in params.keys():
 		shader_text = header_text + '\n' + '\n'.join(shader_lines) + '\n'
 
 		for old, new in FIX_GLOBAL_VARS.items():
-			print(old, new)
 			shader_text = shader_text.replace(old, new)
 
 		f.write(shader_text)

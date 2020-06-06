@@ -5,12 +5,13 @@
 // xs lines [Color] [Spacing] [Offset]
 // 
 // xs_begin
+// author : '@lachlanmcdonald'
 // arg : { id = '0'  name = 'Color'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
 // arg : { id = '1'  name = 'Spacing'  value = '1'  range = '1 127'  step = '1'  decimal = '0' }
 // arg : { id = '2'  name = 'Offset'  value = '0'  range = '0 127'  step = '1'  decimal = '0' }
 // xs_end
 
-float spacing = max(floor(i_args[1]), 2.0);
+float spacing = max(floor(i_args[1]), 1.0) + 1.0;
 float offset = max(floor(i_args[2]), 0.0);
 
 bvec3 axis = equal(i_axis, vec3(1.0, 1.0, 1.0));
@@ -21,17 +22,23 @@ float map(vec3 v) {
 
 	if (index == i_color_index) {
 		if (no_axis_mode || axis.x) {
-			if (mod(v.x + offset, spacing) == 0.0) {
+			float m = floor(mod(v.x + offset, spacing));
+
+			if (m == 0.0) {
 				return i_args[0];
 			}
 		}
 		if (no_axis_mode || axis.y) {
-			if (mod(v.y + offset, spacing) == 0.0) {
+			float m = floor(mod(v.y + offset, spacing));
+
+			if (m == 0.0) {
 				return i_args[0];
 			}
 		}
 		if (no_axis_mode || axis.z) {
-			if (mod(v.z + offset, spacing) == 0.0) {
+			float m = floor(mod(v.z + offset, spacing));
+
+			if (m == 0.0) {
 				return i_args[0];
 			}
 		}
