@@ -4,7 +4,7 @@
 //
 // xs soil3 [headroom]
 
-float c = max(iArgs[0], 1.0);
+float c = max(i_args[0], 1.0);
 
 float map(vec3 v) {
 	float x = voxel(v);
@@ -16,7 +16,7 @@ float map(vec3 v) {
 			}
 		}
 
-		return iColorIndex;
+		return i_color_index;
 	}
 
 	return x;

@@ -40,6 +40,15 @@ TYPES = {
 
 ARG_FORMAT = "{} = '{}'"
 
+FIX_GLOBAL_VARS = {
+	'i_args': 'i_args',
+	'i_volume_size': 'i_volume_size',
+	'i_color_index': 'i_color_index',
+	'iMirror': 'i_mirror',
+	'iAxis': 'i_axis',
+	'iIter': 'i_iter',
+}
+
 with open(path.join(DIR, 'params.json')) as f:
 	params = json.load(f)
 
@@ -57,18 +66,18 @@ for shader_name in params.keys():
 	header.append('')
 	header.append('xs_begin')
 	for index, param in enumerate(params[shader_name]):
-		t = [
+		shader_lines = [
 			ARG_FORMAT.format('id', index),
 			ARG_FORMAT.format('name', param['name'])
 		]
 
 		for k in ['value', 'range', 'step', 'decimal']:
 			if k in param:
-				t.append(ARG_FORMAT.format(k, param[k]))
+				shader_lines.append(ARG_FORMAT.format(k, param[k]))
 			elif k in TYPES[param['type']]:
-				t.append(ARG_FORMAT.format(k, TYPES[param['type']][k]))
+				shader_lines.append(ARG_FORMAT.format(k, TYPES[param['type']][k]))
 
-		header.append('arg : {{ {} }}'.format('  '.join(t)))
+		header.append('arg : {{ {} }}'.format('  '.join(shader_lines)))
 	header.append('xs_end')
 
 	header_text = '\n'.join([ '// {}'.format(x) for x in header ])
@@ -78,13 +87,19 @@ for shader_name in params.keys():
 
 	with open(path.join(DIR, 'shader', "{}.txt".format(shader_name)), 'w') as f:
 		has_comment = shader[0].startswith('//')
-		t = []
+		shader_lines = []
 
 		for line in shader:
 			if has_comment and line.startswith('//'):
 				continue
 			else:
 				has_comment = False
-				t.append(line.rstrip())
+				shader_lines.append(line.rstrip())
 
-		f.write(header_text + '\n' + '\n'.join(t) + '\n')
+		shader_text = header_text + '\n' + '\n'.join(shader_lines) + '\n'
+
+		for old, new in FIX_GLOBAL_VARS.items():
+			print(old, new)
+			shader_text = shader_text.replace(old, new)
+
+		f.write(shader_text)

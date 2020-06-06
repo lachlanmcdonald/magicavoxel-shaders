@@ -8,39 +8,39 @@
 // arg : { id = '0'  name = 'Color'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
 // xs_end
 
-bvec3 axisMode = equal(iAxis, vec3(1.0, 1.0, 1.0));
-bool noAxisMode = all(equal(iAxis, vec3(0.0, 0.0, 0.0)));
+bvec3 axis_mode = equal(i_axis, vec3(1.0, 1.0, 1.0));
+bool no_axis_mode = all(equal(i_axis, vec3(0.0, 0.0, 0.0)));
 
 float map(vec3 v) {
 	float index = voxel(v);
 
 	if (index == 0.0) {
-		vec2 xrange = v.xx;
-		vec2 yrange = v.yy;
-		vec2 zrange = v.zz;
+		vec2 x_range = v.xx;
+		vec2 y_range = v.yy;
+		vec2 z_range = v.zz;
 
-		if (noAxisMode || axisMode.x) {
-			xrange.x = v.x - 1.0;
-			xrange.y = v.x + 1.0;
+		if (no_axis_mode || axis_mode.x) {
+			x_range.x = v.x - 1.0;
+			x_range.y = v.x + 1.0;
 		}
 
-		if (noAxisMode || axisMode.y) {
-			yrange.x = v.y - 1.0;
-			yrange.y = v.y + 1.0;
+		if (no_axis_mode || axis_mode.y) {
+			y_range.x = v.y - 1.0;
+			y_range.y = v.y + 1.0;
 		}
 
-		if (noAxisMode || axisMode.z) {
-			zrange.x = v.z - 1.0;
-			zrange.y = v.z + 1.0;
+		if (no_axis_mode || axis_mode.z) {
+			z_range.x = v.z - 1.0;
+			z_range.y = v.z + 1.0;
 		}
 
-		for (float x = xrange.x; x <= xrange.y; x += 1.0) {
-			for (float y = yrange.x; y <= yrange.y; y += 1.0) {
-				for (float z = zrange.x; z <= zrange.y; z += 1.0) {
+		for (float x = x_range.x; x <= x_range.y; x += 1.0) {
+			for (float y = y_range.x; y <= y_range.y; y += 1.0) {
+				for (float z = z_range.x; z <= z_range.y; z += 1.0) {
  					float j = voxel(vec3(x, y, z));
 
-					if (j == iColorIndex) {
-						return iArgs[0];
+					if (j == i_color_index) {
+						return i_args[0];
 					}
 				}
 			}

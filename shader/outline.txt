@@ -11,7 +11,7 @@
 float map(vec3 v) {
 	float index = voxel(v);
 
-	if (index == iColorIndex) {
+	if (index == i_color_index) {
 		for (float x = -1.0; x <= 1.0; x += 1.0) {
 			for (float y = -1.0; y <= 1.0; y += 1.0) {
 				for (float z = -1.0; z <= 1.0; z += 1.0) {
@@ -21,7 +21,7 @@ float map(vec3 v) {
 						float n = voxel(p);
 
 						if (n != index && n != 0.0) {
-							return iArgs[0];
+							return i_args[0];
 						}
 					}
 				}

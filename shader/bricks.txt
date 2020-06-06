@@ -12,11 +12,11 @@
 // arg : { id = '4'  name = 'Color B'  value = '2'  range = '0 255'  step = '1'  decimal = '0' }
 // xs_end
 
-float width = iArgs[0];
-float height = iArgs[1];
-float depth = iArgs[2];
-float pal_min = floor(iArgs[3]);
-float pal_max = floor(iArgs[4]);
+float width = i_args[0];
+float height = i_args[1];
+float depth = i_args[2];
+float pal_min = floor(i_args[3]);
+float pal_max = floor(i_args[4]);
 
 float random(vec2 st) {
 	return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123);
@@ -25,7 +25,7 @@ float random(vec2 st) {
 float map(vec3 v) {
 	float index = voxel(v);
 
-	if (index == iColorIndex) {
+	if (index == i_color_index) {
 		float j = floor(mod(v.z / height, 2.0)) * width / 2.0;
 		float c = floor(v.z / height);
 		float a = floor(v.x / depth);

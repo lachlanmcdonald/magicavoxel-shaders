@@ -16,26 +16,26 @@ float map(vec3 v) {
 	float x = voxel(v);
 
 	if (x == 0.0) {
-		if (voxel(vec3(v.x, v.y, v.z - 1.0)) == iColorIndex) {
+		if (voxel(vec3(v.x, v.y, v.z - 1.0)) == i_color_index) {
 			bool a = (v.x == 0.0);
-			bool b = (v.x == iVolumeSize.x - 1.0);
+			bool b = (v.x == i_volume_size.x - 1.0);
 			bool c = (v.y == 0.0);
-			bool d = (v.y == iVolumeSize.y - 1.0);
+			bool d = (v.y == i_volume_size.y - 1.0);
 
-			float z = float((a ? 0.0 : voxel(vec3(v.x - 1.0, v.y, v.z - 1.0))) == iColorIndex) +
-					  float((b ? 0.0 : voxel(vec3(v.x + 1.0, v.y, v.z - 1.0))) == iColorIndex) +
-					  float((c ? 0.0 : voxel(vec3(v.x, v.y - 1.0, v.z - 1.0))) == iColorIndex) +
-					  float((d ? 0.0 : voxel(vec3(v.x, v.y + 1.0, v.z - 1.0))) == iColorIndex) +
-					  float((a && c ? 0.0 : voxel(vec3(v.x - 1.0, v.y - 1.0, v.z - 1.0))) == iColorIndex) +
-					  float((b && c ? 0.0 : voxel(vec3(v.x + 1.0, v.y - 1.0, v.z - 1.0))) == iColorIndex) +
-					  float((a && d ? 0.0 : voxel(vec3(v.x - 1.0, v.y + 1.0, v.z - 1.0))) == iColorIndex) +
-					  float((b && d ? 0.0 : voxel(vec3(v.x + 1.0, v.y + 1.0, v.z - 1.0))) == iColorIndex);
+			float z = float((a ? 0.0 : voxel(vec3(v.x - 1.0, v.y, v.z - 1.0))) == i_color_index) +
+					  float((b ? 0.0 : voxel(vec3(v.x + 1.0, v.y, v.z - 1.0))) == i_color_index) +
+					  float((c ? 0.0 : voxel(vec3(v.x, v.y - 1.0, v.z - 1.0))) == i_color_index) +
+					  float((d ? 0.0 : voxel(vec3(v.x, v.y + 1.0, v.z - 1.0))) == i_color_index) +
+					  float((a && c ? 0.0 : voxel(vec3(v.x - 1.0, v.y - 1.0, v.z - 1.0))) == i_color_index) +
+					  float((b && c ? 0.0 : voxel(vec3(v.x + 1.0, v.y - 1.0, v.z - 1.0))) == i_color_index) +
+					  float((a && d ? 0.0 : voxel(vec3(v.x - 1.0, v.y + 1.0, v.z - 1.0))) == i_color_index) +
+					  float((b && d ? 0.0 : voxel(vec3(v.x + 1.0, v.y + 1.0, v.z - 1.0))) == i_color_index);
 
-			if (randz(v) <= (0.125 * z + iArgs[1])) {
-				if (iArgs[0] == 0.0) {
-					return iColorIndex;
+			if (randz(v) <= (0.125 * z + i_args[1])) {
+				if (i_args[0] == 0.0) {
+					return i_color_index;
 				} else {
-					return iArgs[0];
+					return i_args[0];
 				}
 			}
 		}

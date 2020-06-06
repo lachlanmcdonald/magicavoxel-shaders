@@ -4,17 +4,17 @@
 //
 // xs soil2 [index] [headroom]
 
-float c = max(iArgs[1], 1.0);
+float c = max(i_args[1], 1.0);
 
 float map(vec3 v) {
 	float x = voxel(v);
-	if (x == iColorIndex) {
+	if (x == i_color_index) {
 		for (float z = 1.0; z <= c; z += 1.0) {
 			if (voxel(vec3(v.x, v.y, v.z + z)) > 0.0) {
 				return x;
 			}
 		}
-		return iArgs[0];
+		return i_args[0];
 	}
 	return x;
 }

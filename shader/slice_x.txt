@@ -10,11 +10,11 @@
 // xs_end
 
 float map(vec3 v) {
-	float offset = max(iArgs[1], 1.0);
+	float offset = max(i_args[1], 1.0);
 	float nx = (v.x + offset);
 
-	if (v.x >= iArgs[0]) {
-		if (nx >= iVolumeSize.x) {
+	if (v.x >= i_args[0]) {
+		if (nx >= i_volume_size.x) {
 			return 0.0;
 		} else {
 			return voxel(vec3(nx, v.y, v.z));

@@ -16,16 +16,16 @@ float rand(vec2 co, float seed) {
 float map(vec3 v) {
 	float index = voxel(v);
 
-	bool na = (iAxis == vec3(0.0, 0.0, 0.0));
-	float x = (na || iAxis.x == 1.0) ? v.x : 1.0;
-	float y = (na || iAxis.y == 1.0) ? v.y : 1.0;
-	float z = (na || iAxis.z == 1.0) ? v.z : 1.0;
-	float j = rand(vec2(x, y), iArgs[0] + iIter + 1.0);
-	float k = rand(vec2(j, z), iArgs[0] + iIter + 1.0);
+	bool na = (i_axis == vec3(0.0, 0.0, 0.0));
+	float x = (na || i_axis.x == 1.0) ? v.x : 1.0;
+	float y = (na || i_axis.y == 1.0) ? v.y : 1.0;
+	float z = (na || i_axis.z == 1.0) ? v.z : 1.0;
+	float j = rand(vec2(x, y), i_args[0] + i_iter + 1.0);
+	float k = rand(vec2(j, z), i_args[0] + i_iter + 1.0);
 
-	if (index == iColorIndex) {
-		if (k < iArgs[0]) {
-			return iArgs[1];
+	if (index == i_color_index) {
+		if (k < i_args[0]) {
+			return i_args[1];
 		}
 	}
 	return index;
