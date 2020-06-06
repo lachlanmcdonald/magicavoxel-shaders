@@ -43,7 +43,7 @@
 			"name": "Offset"
 		}
 	],
-	"generate/lines": [
+	"brush/grid": [
 		{
 			"type": "color_a",
 			"name": "Color A"
@@ -175,7 +175,7 @@
 			"name": "Color B"
 		}
 	],
-	"generate/bricks": [
+	"brush/bricks": [
 		{
 			"type": "size",
 			"name": "Width"
@@ -202,7 +202,7 @@
 			"value": 1
 		}
 	],
-	"generate/stairs": [
+	"brush/stairs": [
 		{
 			"name": "Alignment",
 			"value": 0,

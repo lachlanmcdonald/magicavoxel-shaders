@@ -2,7 +2,7 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2020 Lachlan McDonald
 // 
-// xs generate/stairs [Alignment] [Count] [Height] [X/Y Gap] [Z Gap]
+// xs brush/stairs [Alignment] [Count] [Height] [X/Y Gap] [Z Gap]
 // 
 // xs_begin
 // author : '@lachlanmcdonald'

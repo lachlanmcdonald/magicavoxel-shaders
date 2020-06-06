@@ -2,7 +2,7 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2020 Lachlan McDonald
 // 
-// xs generate/bricks [Width] [Height] [Depth] [Color A] [Color B] [Threshold]
+// xs brush/bricks [Width] [Height] [Depth] [Color A] [Color B] [Threshold]
 // 
 // xs_begin
 // author : '@lachlanmcdonald'
