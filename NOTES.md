@@ -76,7 +76,7 @@ In **Visual Studio Code**, GLSL shader syntax-highlighting can be enabled with t
 ```json
 {
 	"files.associations": {
-		"**/shader/*.txt": "glsl"
+		"**/shader/**/*.txt": "glsl"
 	}
 }
 ```

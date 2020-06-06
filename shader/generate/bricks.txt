@@ -2,7 +2,7 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2020 Lachlan McDonald
 // 
-// xs bricks_gen [Width] [Height] [Depth] [Color A] [Color B] [Threshold] [seed]
+// xs generate/bricks [Width] [Height] [Depth] [Color A] [Color B] [Threshold]
 // 
 // xs_begin
 // author : '@lachlanmcdonald'
@@ -11,8 +11,7 @@
 // arg : { id = '2'  name = 'Depth'  value = '1'  range = '1 127'  step = '1'  decimal = '0' }
 // arg : { id = '3'  name = 'Color A'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
 // arg : { id = '4'  name = 'Color B'  value = '2'  range = '0 255'  step = '1'  decimal = '0' }
-// arg : { id = '5'  name = 'Threshold'  value = '0.5'  range = '0 1'  step = '0.01'  decimal = '1' }
-// arg : { id = '6'  name = 'seed'  value = '0'  range = '0 100'  step = '1'  decimal = '0' }
+// arg : { id = '5'  name = 'Threshold'  value = '1'  range = '0 1'  step = '0.01'  decimal = '1' }
 // xs_end
 
 float width = i_args[0];
@@ -20,9 +19,10 @@ float height = i_args[1];
 float depth = i_args[2];
 float pal_min = floor(i_args[3]);
 float pal_max = floor(i_args[4]);
+float threshold = max(i_args[5], 0.0);
 
-float random(vec2 st, float seed) {
-	return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * (43758.5453123 - seed));
+float random(vec2 st) {
+	return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123);
 }
 
 float map(vec3 v) {
@@ -31,8 +31,8 @@ float map(vec3 v) {
 	float a = floor(v.x / depth);
 	float b = floor((v.y + j) / width);
 
-	if (random(vec2(c, a + pow(b, 2.0)), i_args[6]) < i_args[5]) {
-		return random(vec2(a + pow(b, 2.0), c), i_args[6]) * (pal_max - pal_min) + (pal_min);
+	if (random(vec2(c, a + pow(b, 2.0))) < threshold) {
+		return random(vec2(a + pow(b, 2.0), c)) * (pal_max - pal_min) + (pal_min);
 	} else {
 		return 0.0;
 	}

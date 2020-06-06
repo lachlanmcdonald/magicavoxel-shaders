@@ -1,0 +1,52 @@
+// MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+// Copyright (c) 2020 Lachlan McDonald
+// 
+// xs generate/stairs [Alignment] [Count] [Height] [X/Y Gap] [Z Gap]
+// 
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { id = '0'  name = 'Alignment'  value = '0'  range = '0 3'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Count'  value = '5'  range = '1 127'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Height'  value = '1'  range = '1 127'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'X/Y Gap'  value = '0'  range = '0 127'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Z Gap'  value = '0'  range = '0 127'  step = '1'  decimal = '0' }
+// xs_end
+
+float align = i_args[0];
+float count = min(i_args[1], i_volume_size.z);
+float height = i_args[2];
+float xy_gap = i_args[3];
+float z_gap = i_args[4];
+
+float map(vec3 v) {
+    float volume_n;
+    float vector_n;
+
+    if (align == 0.0) {
+        vector_n = v.x;
+        volume_n = i_volume_size.x;
+    } else if (align == 1.0) {
+        vector_n = v.y;
+        volume_n = i_volume_size.y;
+    } else if (align == 2.0) {
+        vector_n = i_volume_size.x - v.x;
+        volume_n = i_volume_size.x;
+    } else if (align == 3.0) {
+        vector_n = i_volume_size.y - v.y;
+        volume_n = i_volume_size.y;
+    }
+
+    float w = volume_n / count;
+    float d = floor(vector_n / w);
+    float a = d * height + (d * z_gap);
+    float b = d * height + height + (d * z_gap);
+
+   if (vector_n - (d * w) <= (w - xy_gap)) {
+        if (v.z > a && v.z < b) {
+            return i_color_index;
+        }
+    }
+
+    return 0.0;
+}
