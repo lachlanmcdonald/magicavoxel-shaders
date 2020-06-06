@@ -149,6 +149,39 @@
 			"name": "Color B"
 		}
 	],
+	"bricks_gen": [
+		{
+			"type": "size",
+			"name": "Width"
+		},
+		{
+			"type": "size",
+			"name": "Height"
+		},
+		{
+			"type": "size",
+			"name": "Depth"
+		},
+		{
+			"type": "color_a",
+			"name": "Color A"
+		},
+		{
+			"type": "color_b",
+			"name": "Color B"
+		},
+		{
+			"type": "fraction",
+			"name": "Threshold"
+		},
+		{
+			"name": "Seed",
+			"value": 0,
+			"range": "0 100",
+			"step": 1,
+			"decimal": 0
+		}
+	],
 	"py": [
 		{
 			"type": "color_a",
