@@ -14,11 +14,11 @@
 // arg : { id = '5'  name = 'Threshold'  value = '1'  range = '0 1'  step = '0.01'  decimal = '1' }
 // xs_end
 
-float width = i_args[0];
-float height = i_args[1];
-float depth = i_args[2];
-float pal_min = floor(i_args[3]);
-float pal_max = floor(i_args[4]);
+float width = max(i_args[0], 1.0);
+float height = max(i_args[1], 1.0);
+float depth = max(i_args[2], 1.0);
+float pal_min = min(i_args[3], i_args[4]);
+float pal_max = max(i_args[3], i_args[4]);
 float threshold = max(i_args[5], 0.0);
 
 float random(vec2 st) {
