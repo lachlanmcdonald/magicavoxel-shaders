@@ -6,7 +6,7 @@
 
 > A collection of shaders for [MagicaVoxel](https://ephtracy.github.io/) to simplify common and repetitive tasks.
 
-**Note for 0.99.5.1**: Shaders are being presently being updated to work with the new Shader UI and Brush shaders in release 0.99.5.1. See the [open issue](https://github.com/lachlanmcdonald/magicavoxel-shaders/issues/7) and work-in-progress on the [`develop`](https://github.com/lachlanmcdonald/magicavoxel-shaders/tree/develop) branch.
+**Note for 0.99.5.1**: Shaders are presently being updated to work with the new shader UI and brush shaders in release 0.99.5.1. See the [open issue](https://github.com/lachlanmcdonald/magicavoxel-shaders/issues/7) and work-in-progress on the [`develop` branch](https://github.com/lachlanmcdonald/magicavoxel-shaders/tree/develop).
 
 ## Installation
 
