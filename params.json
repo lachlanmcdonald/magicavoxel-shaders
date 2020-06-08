@@ -204,7 +204,7 @@
 	],
 	"brush/stairs": [
 		{
-			"name": "Alignment",
+			"name": "Direction",
 			"value": 0,
 			"range": "0 3",
 			"step": 1,
