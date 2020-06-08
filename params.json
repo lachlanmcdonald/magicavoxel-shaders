@@ -228,13 +228,13 @@
 			"name": "Z Gap"
 		}
 	],
-	"py": [
+	"pyramid": [
 		{
 			"type": "color_a",
 			"name": "Color"
 		}
 	],
-	"py2": [
+	"pyramid2": [
 		{
 			"type": "color_a",
 			"name": "Color"
