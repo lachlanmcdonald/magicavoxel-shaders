@@ -1,0 +1,58 @@
+// MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+// Copyright (c) 2020 Lachlan McDonald
+// 
+// xs brush/tiles [Color A] [Color B] [Width] [Height] [Depth] [X Offset] [Y Offset] [Z Offset]
+// 
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { id = '0'  name = 'Color A'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Color B'  value = '2'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Width'  value = '2'  range = '1 127'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Height'  value = '2'  range = '1 127'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Depth'  value = '2'  range = '1 127'  step = '1'  decimal = '0' }
+// arg : { id = '5'  name = 'X Offset'  value = '0'  range = '0 127'  step = '1'  decimal = '0' }
+// arg : { id = '6'  name = 'Y Offset'  value = '0'  range = '0 127'  step = '1'  decimal = '0' }
+// arg : { id = '7'  name = 'Z Offset'  value = '0'  range = '0 127'  step = '1'  decimal = '0' }
+// xs_end
+
+float color_a = floor(i_args[0]);
+float color_b = floor(i_args[1]);
+float width = max(i_args[2], 1.0);
+float height = max(i_args[3], 1.0);
+float depth = max(i_args[4], 1.0);
+float ox = max(i_args[5], 0.0);
+float oy = max(i_args[6], 0.0);
+float oz = max(i_args[7], 0.0);
+
+float map(vec3 v) {
+	if (mod(v.x + ox, width * 2.0) < width) {
+		if (mod(v.y + oy, height * 2.0) < height) {
+			if (mod(v.z + oz, depth * 2.0) < depth) {
+				return color_a;
+			} else {
+				return color_b;
+			}
+		} else {
+			if (mod(v.z + oz, depth * 2.0) < depth) {
+				return color_b;
+			} else {
+				return color_a;
+			}
+		}
+	} else {
+		if (mod(v.y + oy, height * 2.0) < height) {
+			if (mod(v.z + oz, depth * 2.0) < depth) {
+				return color_b;
+			} else {
+				return color_a;
+			}
+		} else {
+			if (mod(v.z + oz, depth * 2.0) < depth) {
+				return color_a;
+			} else {
+				return color_b;
+			}
+		}
+	}
+}

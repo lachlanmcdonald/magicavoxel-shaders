@@ -49,8 +49,8 @@ FIX_GLOBAL_VARS = {
 	'iIter': 'i_iter',
 }
 
-with open(path.join(DIR, 'params.json')) as f:
-	params = json.load(f)
+with open(path.join(DIR, 'shaders.json')) as f:
+	params = { k: v['params'] for k, v in json.load(f).items() }
 
 for shader_name in params.keys():
 	header = [
