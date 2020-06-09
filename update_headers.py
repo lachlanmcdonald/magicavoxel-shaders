@@ -5,39 +5,6 @@ import re
 
 DIR = path.dirname(path.realpath(__file__))
 
-TYPES = {
-	'fraction': {
-		'value': 0.5,
-		'range': '0 1',
-		'step': 0.01,
-		'decimal': 1,
-	},
-	'color_a': {
-		'value': 1,
-		'range': '0 255',
-		'step': 1,
-		'decimal': 0
-	},
-	'color_b': {
-		'value': 2,
-		'range': '0 255',
-		'step': 1,
-		'decimal': 0
-	},
-	'size': {
-		'value': 1,
-		'range': '1 127',
-		'step': 1,
-		'decimal': 0
-	},
-	'position': {
-		'value': 0,
-		'range': '0 127',
-		'step': 1,
-		'decimal': 0
-	}
-}
-
 ARG_FORMAT = "{} = '{}'"
 
 FIX_GLOBAL_VARS = {
@@ -50,7 +17,9 @@ FIX_GLOBAL_VARS = {
 }
 
 with open(path.join(DIR, 'shaders.json')) as f:
-	params = { k: v['params'] for k, v in json.load(f).items() }
+	data = json.load(f)
+	params = { k: v['params'] for k, v in data['shaders'].items() }
+	TYPES = data['types']
 
 for shader_name in params.keys():
 	header = [
