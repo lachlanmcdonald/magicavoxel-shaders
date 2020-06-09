@@ -32,6 +32,35 @@
         }
     },
     "shaders": {
+        "brush/diagonal_lines": {
+            "params": [
+                {
+                    "name": "Direction",
+                    "value": 0,
+                    "range": "0 2",
+                    "step": 1,
+                    "decimal": 0
+                },
+                {
+                    "type": "color_a",
+                    "name": "Color A"
+                },
+                {
+                    "type": "color_b",
+                    "name": "Color B"
+                },
+                {
+                    "type": "size",
+                    "name": "Width A",
+                    "value": 5
+                },
+                {
+                    "type": "size",
+                    "name": "Width B",
+                    "value": 5
+                }
+            ]
+        },
         "slice_x": {
             "params": [
                 {
