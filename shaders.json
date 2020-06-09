@@ -52,12 +52,16 @@
                 {
                     "type": "size",
                     "name": "Width A",
-                    "value": 5
+                    "value": 3
                 },
                 {
                     "type": "size",
                     "name": "Width B",
-                    "value": 5
+                    "value": 3
+                },
+                {
+                    "type": "position",
+                    "name": "Offset"
                 }
             ]
         },
