@@ -37,7 +37,7 @@
                 {
                     "name": "Direction",
                     "value": 0,
-                    "range": "0 2",
+                    "range": "0 5",
                     "step": 1,
                     "decimal": 0
                 },
