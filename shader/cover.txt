@@ -2,25 +2,27 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2020 Lachlan McDonald
 // 
-// xs soil [Color] [Headroom]
+// xs cover [Color]
 // 
 // xs_begin
 // author : '@lachlanmcdonald'
 // arg : { id = '0'  name = 'Color'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Headroom'  value = '1'  range = '0 127'  step = '1'  decimal = '0' }
 // xs_end
 
-float c = max(i_args[1], 1.0);
+float c = max(i_args[0], 1.0);
 
 float map(vec3 v) {
 	float x = voxel(v);
-	if (voxel(vec3(v.x, v.y, v.z - 1.0)) == i_color_index) {
+
+	if (voxel(vec3(v.x, v.y, v.z - 1.0)) > 0.0) {
 		for (float z = 0.0; z < c; z += 1.0) {
 			if (voxel(vec3(v.x, v.y, v.z + z)) > 0.0) {
 				return x;
 			}
 		}
-		return i_args[0];
+
+		return i_color_index;
 	}
+
 	return x;
 }

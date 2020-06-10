@@ -1,0 +1,373 @@
+{
+    "types": {
+        "fraction": {
+            "value": 0.5,
+            "range": "0 1",
+            "step": 0.01,
+            "decimal": 1
+        },
+        "color_a": {
+            "value": 1,
+            "range": "0 255",
+            "step": 1,
+            "decimal": 0
+        },
+        "color_b": {
+            "value": 2,
+            "range": "0 255",
+            "step": 1,
+            "decimal": 0
+        },
+        "size": {
+            "value": 1,
+            "range": "1 127",
+            "step": 1,
+            "decimal": 0
+        },
+        "position": {
+            "value": 0,
+            "range": "0 127",
+            "step": 1,
+            "decimal": 0
+        }
+    },
+    "shaders": {
+        "brush/diagonal_lines": {
+            "params": [
+                {
+                    "name": "Direction",
+                    "value": 0,
+                    "range": "0 5",
+                    "step": 1,
+                    "decimal": 0
+                },
+                {
+                    "type": "color_a",
+                    "name": "Color A"
+                },
+                {
+                    "type": "color_b",
+                    "name": "Color B"
+                },
+                {
+                    "type": "size",
+                    "name": "Width A",
+                    "value": 3
+                },
+                {
+                    "type": "size",
+                    "name": "Width B",
+                    "value": 3
+                },
+                {
+                    "type": "position",
+                    "name": "Offset"
+                }
+            ]
+        },
+        "slice_x": {
+            "params": [
+                {
+                    "type": "position",
+                    "name": "Offset"
+                },
+                {
+                    "type": "position",
+                    "name": "Count"
+                }
+            ]
+        },
+        "slice_y": {
+            "params": [
+                {
+                    "type": "position",
+                    "name": "Offset"
+                },
+                {
+                    "type": "position",
+                    "name": "Count"
+                }
+            ]
+        },
+        "slice_z": {
+            "params": [
+                {
+                    "type": "position",
+                    "name": "Offset"
+                },
+                {
+                    "type": "position",
+                    "name": "Count"
+                }
+            ]
+        },
+        "brush/grid": {
+            "params": [
+                {
+                    "type": "color_a",
+                    "name": "Color A"
+                },
+                {
+                    "type": "color_b",
+                    "name": "Color B"
+                },
+                {
+                    "type": "size",
+                    "name": "Thickness"
+                },
+                {
+                    "type": "size",
+                    "name": "X Spacing"
+                },
+                {
+                    "type": "size",
+                    "name": "Y Spacing"
+                },
+                {
+                    "type": "size",
+                    "name": "Z Spacing"
+                }
+            ]
+        },
+        "random": {
+            "params": [
+                {
+                    "type": "fraction",
+                    "name": "Threshold"
+                },
+                {
+                    "type": "color_a",
+                    "name": "Color"
+                }
+            ]
+        },
+        "case": {
+            "params": [
+                {
+                    "type": "color_a",
+                    "name": "Color"
+                }
+            ]
+        },
+        "flood": {
+            "params": [
+                {
+                    "type": "size",
+                    "name": "Height"
+                }
+            ]
+        },
+        "flood2": {
+            "params": [
+                {
+                    "type": "size",
+                    "name": "Height"
+                }
+            ]
+        },
+        "brush/tiles": {
+            "params": [
+                {
+                    "type": "color_a",
+                    "name": "Color A"
+                },
+                {
+                    "type": "color_b",
+                    "name": "Color B"
+                },
+                {
+                    "type": "size",
+                    "name": "Width",
+                    "value": 2
+                },
+                {
+                    "type": "size",
+                    "name": "Height",
+                    "value": 2
+                },
+                {
+                    "type": "size",
+                    "name": "Depth",
+                    "value": 2
+                },
+                {
+                    "type": "position",
+                    "name": "X Offset"
+                },
+                {
+                    "type": "position",
+                    "name": "Y Offset"
+                },
+                {
+                    "type": "position",
+                    "name": "Z Offset"
+                }
+            ]
+        },
+        "outline": {
+            "params": [
+                {
+                    "type": "color_a",
+                    "name": "Color"
+                }
+            ]
+        },
+        "outline2": {
+            "params": [
+                {
+                    "type": "color_a",
+                    "name": "Color"
+                }
+            ]
+        },
+        "noise": {
+            "params": [
+                {
+                    "type": "color_a",
+                    "name": "Color A"
+                },
+                {
+                    "type": "color_b",
+                    "name": "Color B"
+                },
+                {
+                    "type": "size",
+                    "name": "X Size"
+                },
+                {
+                    "type": "size",
+                    "name": "Y Size"
+                },
+                {
+                    "type": "size",
+                    "name": "Z Size"
+                }
+            ]
+        },
+        "brush/bricks": {
+            "params": [
+                {
+                    "type": "size",
+                    "name": "Width"
+                },
+                {
+                    "type": "size",
+                    "name": "Height"
+                },
+                {
+                    "type": "size",
+                    "name": "Depth"
+                },
+                {
+                    "type": "color_a",
+                    "name": "Color A"
+                },
+                {
+                    "type": "color_b",
+                    "name": "Color B"
+                },
+                {
+                    "type": "fraction",
+                    "name": "Threshold",
+                    "value": 1
+                }
+            ]
+        },
+        "brush/stairs": {
+            "params": [
+                {
+                    "name": "Direction",
+                    "value": 0,
+                    "range": "0 3",
+                    "step": 1,
+                    "decimal": 0
+                },
+                {
+                    "type": "size",
+                    "name": "Count",
+                    "value": 5
+                },
+                {
+                    "type": "size",
+                    "name": "Height"
+                },
+                {
+                    "type": "position",
+                    "name": "X/Y Gap"
+                },
+                {
+                    "type": "position",
+                    "name": "Z Gap"
+                }
+            ]
+        },
+        "pyramid": {
+            "params": [
+                {
+                    "type": "color_a",
+                    "name": "Color"
+                }
+            ]
+        },
+        "pyramid2": {
+            "params": [
+                {
+                    "type": "color_a",
+                    "name": "Color"
+                }
+            ]
+        },
+        "sand": {
+            "params": [
+                {
+                    "type": "color_a",
+                    "name": "Color",
+                    "value": 0
+                }
+            ]
+        },
+        "sand2": {
+            "params": [
+                {
+                    "type": "color_a",
+                    "name": "Color",
+                    "value": 0
+                }
+            ]
+        },
+        "soil": {
+            "params": [
+                {
+                    "type": "color_a",
+                    "name": "Color"
+                },
+                {
+                    "type": "position",
+                    "name": "Headroom",
+                    "value": 1
+                }
+            ]
+        },
+        "soil_replace": {
+            "params": [
+                {
+                    "type": "color_a",
+                    "name": "Color"
+                },
+                {
+                    "type": "position",
+                    "name": "Headroom",
+                    "value": 1
+                }
+            ]
+        },
+        "cover": {
+            "params": [
+                {
+                    "type": "color_a",
+                    "name": "Color"
+                }
+            ]
+        }
+    }
+}

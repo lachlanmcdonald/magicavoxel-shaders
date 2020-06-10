@@ -2,7 +2,7 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2020 Lachlan McDonald
 // 
-// xs soil [Color] [Headroom]
+// xs soil_replace [Color] [Headroom]
 // 
 // xs_begin
 // author : '@lachlanmcdonald'
@@ -14,8 +14,8 @@ float c = max(i_args[1], 1.0);
 
 float map(vec3 v) {
 	float x = voxel(v);
-	if (voxel(vec3(v.x, v.y, v.z - 1.0)) == i_color_index) {
-		for (float z = 0.0; z < c; z += 1.0) {
+	if (x == i_color_index) {
+		for (float z = 1.0; z <= c; z += 1.0) {
 			if (voxel(vec3(v.x, v.y, v.z + z)) > 0.0) {
 				return x;
 			}

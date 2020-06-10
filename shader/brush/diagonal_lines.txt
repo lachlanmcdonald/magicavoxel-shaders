@@ -1,0 +1,53 @@
+// MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+// Copyright (c) 2020 Lachlan McDonald
+// 
+// xs brush/diagonal_lines [Direction] [Color A] [Color B] [Width A] [Width B] [Offset]
+// 
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { id = '0'  name = 'Direction'  value = '0'  range = '0 5'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Color A'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Color B'  value = '2'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Width A'  value = '3'  range = '1 127'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Width B'  value = '3'  range = '1 127'  step = '1'  decimal = '0' }
+// arg : { id = '5'  name = 'Offset'  value = '0'  range = '0 127'  step = '1'  decimal = '0' }
+// xs_end
+
+float direction = i_args[0];
+float color_a = floor(i_args[1]);
+float color_b = floor(i_args[2]);
+float width_a = max(i_args[3], 1.0);
+float width_b = max(i_args[4], 1.0);
+float offset = floor(i_args[5]);
+
+float map(vec3 v) {
+	float x;
+	float z;
+
+	if (direction == 0) {
+		x = v.x;
+		z = 0.0;
+	} else if (direction == 1) {
+		x = v.x;
+		z = v.z;
+	} else if (direction == 2) {
+		x = v.x;
+		z = -v.z;
+	} else if (direction == 3) {
+		x = -v.x;
+		z = 0.0;
+	} else if (direction == 4) {
+		x = -v.x;
+		z = v.z;
+	} else if (direction == 5) {
+		x = -v.x;
+		z = -v.z;
+	}
+
+	if (mod(x + v.y + z - offset, width_a + width_b) < width_a) {
+		return color_a;
+	} else {
+		return color_b;
+	}
+}

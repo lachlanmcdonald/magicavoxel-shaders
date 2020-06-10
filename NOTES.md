@@ -51,21 +51,21 @@ vector(-1.0, -1.0, -1.0); // 0.0
 
 ### Determine if a axis mode is set
 
-`noAxisMode` will be `true` when no axis modes are set, `false` otherwise.
+`no_axis_mode` will be `true` when no axis modes are set, `false` otherwise.
 
 ```glsl
-bool noAxisMode = all(equal(iAxis, vec3(0.0, 0.0, 0.0)));
+bool no_axis_mode = all(equal(i_axis, vec3(0.0, 0.0, 0.0)));
 ```
 
 ### Determine which axis mode is set
 
 ```glsl
-bvec3 axisMode = equal(iAxis, vec3(1.0, 1.0, 1.0));
+bvec3 axis_mode = equal(i_axis, vec3(1.0, 1.0, 1.0));
 ```
 
-`axisMode` is a `bvec3` indicating which axis mode is set.
+`axis_mode` is a `bvec3` indicating which axis mode is set.
 
-**For example:** `axisMode.x` will be `true` if the X-axis mode is set.
+**For example:** `axis_mode.x` will be `true` if the X-axis mode is set.
 
 ## Editing
 
@@ -76,7 +76,7 @@ In **Visual Studio Code**, GLSL shader syntax-highlighting can be enabled with t
 ```json
 {
 	"files.associations": {
-		"**/shader/*.txt": "glsl"
+		"**/shader/**/*.txt": "glsl"
 	}
 }
 ```

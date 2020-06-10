@@ -1,0 +1,39 @@
+// MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+// Copyright (c) 2020 Lachlan McDonald
+// 
+// xs brush/bricks [Width] [Height] [Depth] [Color A] [Color B] [Threshold]
+// 
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { id = '0'  name = 'Width'  value = '1'  range = '1 127'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Height'  value = '1'  range = '1 127'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Depth'  value = '1'  range = '1 127'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Color A'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Color B'  value = '2'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '5'  name = 'Threshold'  value = '1'  range = '0 1'  step = '0.01'  decimal = '1' }
+// xs_end
+
+float width = max(i_args[0], 1.0);
+float height = max(i_args[1], 1.0);
+float depth = max(i_args[2], 1.0);
+float pal_min = min(i_args[3], i_args[4]);
+float pal_max = max(i_args[3], i_args[4]);
+float threshold = max(i_args[5], 0.0);
+
+float random(vec2 st) {
+	return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123);
+}
+
+float map(vec3 v) {
+	float j = floor(mod(v.z / height, 2.0)) * width / 2.0;
+	float c = floor(v.z / height);
+	float a = floor(v.x / depth);
+	float b = floor((v.y + j) / width);
+
+	if (random(vec2(c, a + pow(b, 2.0))) < threshold) {
+		return random(vec2(a + pow(b, 2.0), c)) * (pal_max - pal_min) + (pal_min);
+	} else {
+		return 0.0;
+	}
+}

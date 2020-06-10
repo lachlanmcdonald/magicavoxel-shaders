@@ -1,30 +1,39 @@
 // MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
-// Copyright (c) 2019 Lachlan McDonald
-//
-// xs noise [a] [b] [size_x] [size_y] [size_z]
+// Copyright (c) 2020 Lachlan McDonald
+// 
+// xs noise [Color A] [Color B] [X Size] [Y Size] [Z Size]
+// 
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { id = '0'  name = 'Color A'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Color B'  value = '2'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'X Size'  value = '1'  range = '1 127'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Y Size'  value = '1'  range = '1 127'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Z Size'  value = '1'  range = '1 127'  step = '1'  decimal = '0' }
+// xs_end
 
 float rand(vec2 co, float seed) {
 	return fract(sin(dot(co.xy * seed, vec2(12.9898, 78.233))) * 43758.5453);
 }
 
-float a = min(iArgs[0], iArgs[1]);
-float b = max(iArgs[0], iArgs[1]);
-float size_x = max(iArgs[2], 1.0);
-float size_y = max(iArgs[3], 1.0);
-float size_z = max(iArgs[4], 1.0);
+float a = min(i_args[0], i_args[1]);
+float b = max(i_args[0], i_args[1]);
+float size_x = max(i_args[2], 1.0);
+float size_y = max(i_args[3], 1.0);
+float size_z = max(i_args[4], 1.0);
 
 float map(vec3 v) {
 	float index = voxel(v);
 
-	bool na = (iAxis == vec3(0.0, 0.0, 0.0));
-	float x = (na || iAxis.x == 1.0) ? floor(v.x / size_x) : 1.0;
-	float y = (na || iAxis.y == 1.0) ? floor(v.y / size_y) : 1.0;
-	float z = (na || iAxis.z == 1.0) ? floor(v.z / size_z) : 1.0;
-	float j = rand(vec2(x, y), iIter + 1.0);
-	float k = rand(vec2(j, z), iIter + 1.0);
+	bool na = (i_axis == vec3(0.0, 0.0, 0.0));
+	float x = (na || i_axis.x == 1.0) ? floor(v.x / size_x) : 1.0;
+	float y = (na || i_axis.y == 1.0) ? floor(v.y / size_y) : 1.0;
+	float z = (na || i_axis.z == 1.0) ? floor(v.z / size_z) : 1.0;
+	float j = rand(vec2(x, y), i_iter + 1.0);
+	float k = rand(vec2(j, z), i_iter + 1.0);
 
-	if (index == iColorIndex) {
+	if (index == i_color_index) {
 		return a + (k * (b - a));
 	}
 	return index;
