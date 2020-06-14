@@ -269,9 +269,8 @@
                     "value": 2
                 },
                 {
-                    "type": "size",
-                    "name": "Offset",
-                    "value": 3
+                    "type": "position",
+                    "name": "Offset"
                 },
                 {
                     "type": "color_a",
@@ -314,9 +313,8 @@
                     "value": 2
                 },
                 {
-                    "type": "size",
-                    "name": "Offset",
-                    "value": 3
+                    "type": "position",
+                    "name": "Offset"
                 },
                 {
                     "type": "color_a",
