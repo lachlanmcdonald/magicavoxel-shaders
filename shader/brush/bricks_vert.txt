@@ -1,0 +1,62 @@
+// MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+// Copyright (c) 2020 Lachlan McDonald
+// 
+// xs brush/bricks_vert [Direction] [Width] [Height] [Depth] [Offset] [Color A] [Color B] [Threshold]
+// 
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { id = '0'  name = 'Direction'  value = '0'  range = '0 3'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Width'  value = '2'  range = '1 127'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Height'  value = '5'  range = '1 127'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Depth'  value = '2'  range = '1 127'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Offset'  value = '3'  range = '1 127'  step = '1'  decimal = '0' }
+// arg : { id = '5'  name = 'Color A'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '6'  name = 'Color B'  value = '10'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '7'  name = 'Threshold'  value = '1'  range = '0 1'  step = '0.01'  decimal = '1' }
+// xs_end
+
+float direction = i_args[0];
+float height = max(i_args[1], 1.0); // These are deliberately flipped
+float width = max(i_args[2], 1.0); // These are deliberately flipped
+float depth = max(i_args[3], 1.0);
+float row_offset = max(i_args[4], 1.0);
+float pal_min = min(i_args[5], i_args[6]);
+float pal_max = max(i_args[5], i_args[6]);
+float threshold = max(i_args[7], 0.0);
+
+float random(vec2 st, float seed) {
+	return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * (43758.5453123 + seed));
+}
+
+float random(vec3 st, float seed) {
+	float a = random(st.xy, seed);
+	return random(vec2(a, st.z), seed);
+}
+
+float map(vec3 v) {
+    vec3 k;
+
+    if (direction == 0.0) {
+        k = v.zxy;
+    } else if (direction == 1.0) {
+        k = v.zyx;
+    } else if (direction == 2.0) {
+        k = v.xyz;
+    } else if (direction == 3.0) {
+        k = v.yxz;
+    }
+
+    float layer = floor(k.z / depth);
+    float row = floor(k.y / height);
+    float col = floor((k.x - row * row_offset) / width);
+
+	float brick_randomness = random(vec3(row, col, layer), row * col);
+
+    if (brick_randomness < threshold) {
+		float brick_color = random(vec3(row, col, layer), 0.0);
+        return mix(pal_min, pal_max, brick_color);
+    } else {
+        return 0.0;
+    }
+}
