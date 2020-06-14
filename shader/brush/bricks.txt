@@ -32,7 +32,8 @@ float map(vec3 v) {
 	float b = floor((v.y + j) / width);
 
 	if (random(vec2(c, a + pow(b, 2.0))) < threshold) {
-		return random(vec2(a + pow(b, 2.0), c)) * (pal_max - pal_min) + (pal_min);
+		float d = random(vec2(a + pow(b, 2.0), c));
+		return mix(pal_min, pal_max, d);
 	} else {
 		return 0.0;
 	}
