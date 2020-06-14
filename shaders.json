@@ -247,16 +247,30 @@
         "brush/bricks": {
             "params": [
                 {
-                    "type": "size",
-                    "name": "Width"
+                    "name": "Direction",
+                    "value": 0,
+                    "range": "0 3",
+                    "step": 1,
+                    "decimal": 0
                 },
                 {
                     "type": "size",
-                    "name": "Height"
+                    "name": "Width",
+                    "value": 5
                 },
                 {
                     "type": "size",
-                    "name": "Depth"
+                    "name": "Height",
+                    "value": 2
+                },
+                {
+                    "type": "size",
+                    "name": "Depth",
+                    "value": 2
+                },
+                {
+                    "type": "position",
+                    "name": "Offset"
                 },
                 {
                     "type": "color_a",
@@ -264,7 +278,52 @@
                 },
                 {
                     "type": "color_b",
-                    "name": "Color B"
+                    "name": "Color B",
+                    "value": 10
+                },
+                {
+                    "type": "fraction",
+                    "name": "Threshold",
+                    "value": 1
+                }
+            ]
+        },
+        "brush/bricks_vert": {
+            "params": [
+                {
+                    "name": "Direction",
+                    "value": 0,
+                    "range": "0 3",
+                    "step": 1,
+                    "decimal": 0
+                },
+                {
+                    "type": "size",
+                    "name": "Width",
+                    "value": 2
+                },
+                {
+                    "type": "size",
+                    "name": "Height",
+                    "value": 5
+                },
+                {
+                    "type": "size",
+                    "name": "Depth",
+                    "value": 2
+                },
+                {
+                    "type": "position",
+                    "name": "Offset"
+                },
+                {
+                    "type": "color_a",
+                    "name": "Color A"
+                },
+                {
+                    "type": "color_b",
+                    "name": "Color B",
+                    "value": 10
                 },
                 {
                     "type": "fraction",

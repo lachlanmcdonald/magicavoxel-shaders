@@ -17,10 +17,10 @@ float rand(vec2 co, float seed) {
 float map(vec3 v) {
 	float index = voxel(v);
 
-	bool na = (i_axis == vec3(0.0, 0.0, 0.0));
-	float x = (na || i_axis.x == 1.0) ? v.x : 1.0;
-	float y = (na || i_axis.y == 1.0) ? v.y : 1.0;
-	float z = (na || i_axis.z == 1.0) ? v.z : 1.0;
+	bool no_axis_mode = (i_axis == vec3(0.0, 0.0, 0.0));
+	float x = (no_axis_mode || i_axis.x == 1.0) ? v.x : 1.0;
+	float y = (no_axis_mode || i_axis.y == 1.0) ? v.y : 1.0;
+	float z = (no_axis_mode || i_axis.z == 1.0) ? v.z : 1.0;
 	float j = rand(vec2(x, y), i_args[0] + i_iter + 1.0);
 	float k = rand(vec2(j, z), i_args[0] + i_iter + 1.0);
 

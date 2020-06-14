@@ -2,13 +2,13 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2020 Lachlan McDonald
 // 
-// xs brush/bricks [Direction] [Width] [Height] [Depth] [Offset] [Color A] [Color B] [Threshold]
+// xs brush/bricks_vert [Direction] [Width] [Height] [Depth] [Offset] [Color A] [Color B] [Threshold]
 // 
 // xs_begin
 // author : '@lachlanmcdonald'
 // arg : { id = '0'  name = 'Direction'  value = '0'  range = '0 3'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Width'  value = '5'  range = '1 127'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Height'  value = '2'  range = '1 127'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Width'  value = '2'  range = '1 127'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Height'  value = '5'  range = '1 127'  step = '1'  decimal = '0' }
 // arg : { id = '3'  name = 'Depth'  value = '2'  range = '1 127'  step = '1'  decimal = '0' }
 // arg : { id = '4'  name = 'Offset'  value = '0'  range = '0 127'  step = '1'  decimal = '0' }
 // arg : { id = '5'  name = 'Color A'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
@@ -17,8 +17,8 @@
 // xs_end
 
 float direction = i_args[0];
-float width = max(i_args[1], 1.0);
-float height = max(i_args[2], 1.0);
+float height = max(i_args[1], 1.0); // These are deliberately flipped
+float width = max(i_args[2], 1.0); // These are deliberately flipped
 float depth = max(i_args[3], 1.0);
 float row_offset = (i_args[4] == 0.0 ? (width / 2.0) : i_args[4]);
 float pal_min = min(i_args[5], i_args[6]);
@@ -38,9 +38,9 @@ float map(vec3 v) {
     vec3 k;
 
     if (direction == 0.0) {
-        k = v.xzy;
+        k = v.zxy;
     } else if (direction == 1.0) {
-        k = v.yzx;
+        k = v.zyx;
     } else if (direction == 2.0) {
         k = v.xyz;
     } else if (direction == 3.0) {
