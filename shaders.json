@@ -247,16 +247,31 @@
         "brush/bricks": {
             "params": [
                 {
-                    "type": "size",
-                    "name": "Width"
+                    "name": "Direction",
+                    "value": 0,
+                    "range": "0 2",
+                    "step": 1,
+                    "decimal": 0
                 },
                 {
                     "type": "size",
-                    "name": "Height"
+                    "name": "Width",
+                    "value": 5
                 },
                 {
                     "type": "size",
-                    "name": "Depth"
+                    "name": "Height",
+                    "value": 2
+                },
+                {
+                    "type": "size",
+                    "name": "Depth",
+                    "value": 2
+                },
+                {
+                    "type": "size",
+                    "name": "Offset",
+                    "value": 3
                 },
                 {
                     "type": "color_a",
@@ -264,7 +279,8 @@
                 },
                 {
                     "type": "color_b",
-                    "name": "Color B"
+                    "name": "Color B",
+                    "value": 10
                 },
                 {
                     "type": "fraction",
