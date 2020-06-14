@@ -25,22 +25,22 @@ float map(vec3 v) {
 	float x;
 	float z;
 
-	if (direction == 0) {
+	if (direction == 0.0) {
 		x = v.x;
 		z = 0.0;
-	} else if (direction == 1) {
+	} else if (direction == 1.0) {
 		x = v.x;
 		z = v.z;
-	} else if (direction == 2) {
+	} else if (direction == 2.0) {
 		x = v.x;
 		z = -v.z;
-	} else if (direction == 3) {
+	} else if (direction == 3.0) {
 		x = -v.x;
 		z = 0.0;
-	} else if (direction == 4) {
+	} else if (direction == 4.0) {
 		x = -v.x;
 		z = v.z;
-	} else if (direction == 5) {
+	} else if (direction == 5.0) {
 		x = -v.x;
 		z = -v.z;
 	}
