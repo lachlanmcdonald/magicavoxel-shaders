@@ -65,6 +65,42 @@
                 }
             ]
         },
+        "brush/bricks_weave": {
+            "params": [
+				{
+					"name": "Mode",
+					"value": 0,
+					"range": "0 1",
+					"step": 1,
+					"decimal": 0
+				},
+				{
+					"type": "size",
+					"name": "Size",
+					"value": 4
+				},
+                {
+                    "type": "color_a",
+					"name": "Color A",
+					"value": 1
+                },
+                {
+                    "type": "color_b",
+					"name": "Color B",
+					"value": 9
+                },
+                {
+                    "type": "color_b",
+					"name": "Line Color",
+					"value": 10
+                },
+                {
+                    "type": "position",
+					"name": "Line Width",
+					"value": 1
+				}
+            ]
+        },
         "slice_x": {
             "params": [
                 {
