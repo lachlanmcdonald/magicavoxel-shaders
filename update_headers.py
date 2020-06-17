@@ -67,9 +67,10 @@ for shader_name in params.keys():
 				has_comment = False
 				shader_lines.append(line.rstrip())
 
-		shader_text = header_text + '\n' + '\n'.join(shader_lines) + '\n'
+		shader_text = header_text + '\n' + '\n'.join(shader_lines)
+		shader_text = '\n'.join([line.rstrip() for line in shader_text.splitlines()])
 
 		for old, new in FIX_GLOBAL_VARS.items():
 			shader_text = shader_text.replace(old, new)
 
-		f.write(shader_text)
+		f.write(shader_text + '\n')

@@ -1,9 +1,9 @@
 // MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2020 Lachlan McDonald
-// 
+//
 // xs brush/tiles [Color A] [Color B] [Width] [Height] [Depth] [X Offset] [Y Offset] [Z Offset]
-// 
+//
 // xs_begin
 // author : '@lachlanmcdonald'
 // arg : { id = '0'  name = 'Color A'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
