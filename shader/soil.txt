@@ -1,9 +1,9 @@
 // MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2020 Lachlan McDonald
-// 
+//
 // xs soil [Color] [Headroom]
-// 
+//
 // xs_begin
 // author : '@lachlanmcdonald'
 // arg : { id = '0'  name = 'Color'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }

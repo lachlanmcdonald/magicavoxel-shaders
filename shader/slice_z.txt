@@ -1,9 +1,9 @@
 // MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2020 Lachlan McDonald
-// 
+//
 // xs slice_z [Offset] [Count]
-// 
+//
 // xs_begin
 // author : '@lachlanmcdonald'
 // arg : { id = '0'  name = 'Offset'  value = '0'  range = '0 127'  step = '1'  decimal = '0' }

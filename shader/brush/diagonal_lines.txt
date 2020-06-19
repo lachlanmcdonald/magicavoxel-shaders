@@ -1,9 +1,9 @@
 // MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2020 Lachlan McDonald
-// 
+//
 // xs brush/diagonal_lines [Direction] [Color A] [Color B] [Width A] [Width B] [Offset]
-// 
+//
 // xs_begin
 // author : '@lachlanmcdonald'
 // arg : { id = '0'  name = 'Direction'  value = '0'  range = '0 5'  step = '1'  decimal = '0' }
