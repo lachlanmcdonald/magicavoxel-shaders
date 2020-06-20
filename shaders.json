@@ -251,15 +251,15 @@
 				},
 				{
 					"type": "size",
-					"name": "X Spacing"
+					"name": "Size X"
 				},
 				{
 					"type": "size",
-					"name": "Y Spacing"
+					"name": "Size Y"
 				},
 				{
 					"type": "size",
-					"name": "Z Spacing"
+					"name": "Size Z"
 				}
 			]
 		},
@@ -366,15 +366,15 @@
 				},
 				{
 					"type": "size",
-					"name": "X Size"
+					"name": "Size X"
 				},
 				{
 					"type": "size",
-					"name": "Y Size"
+					"name": "Size Y"
 				},
 				{
 					"type": "size",
-					"name": "Z Size"
+					"name": "Size Z"
 				}
 			]
 		},
