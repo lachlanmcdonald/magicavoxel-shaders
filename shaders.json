@@ -326,15 +326,15 @@
 				},
 				{
 					"type": "position",
-					"name": "X Offset"
+					"name": "Offset X"
 				},
 				{
 					"type": "position",
-					"name": "Y Offset"
+					"name": "Offset Y"
 				},
 				{
 					"type": "position",
-					"name": "Z Offset"
+					"name": "Offset Z"
 				}
 			]
 		},
