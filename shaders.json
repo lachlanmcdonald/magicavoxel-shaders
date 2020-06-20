@@ -101,12 +101,38 @@
 				}
 			]
 		},
-		"brush/zigzag": {
+		"brush/zigzag_range": {
 			"params": [
 				{
-					"name": "Flip",
+					"name": "Direction",
 					"value": 0,
-					"range": "0 1",
+					"range": "0 3",
+					"step": 1,
+					"decimal": 0
+				},
+				{
+					"type": "size",
+					"name": "Width",
+					"value": 2
+				},
+				{
+					"type": "color_a",
+					"name": "Color A",
+					"value": 1
+				},
+				{
+					"type": "color_b",
+					"name": "Color B",
+					"value": 9
+				}
+			]
+		},
+		"brush/zigzag2": {
+			"params": [
+				{
+					"name": "Direction",
+					"value": 0,
+					"range": "0 3",
 					"step": 1,
 					"decimal": 0
 				},
@@ -129,6 +155,47 @@
 					"type": "color_b",
 					"name": "Color B",
 					"value": 9
+				}
+			]
+		},
+		"brush/zigzag3": {
+			"params": [
+				{
+					"name": "Direction",
+					"value": 0,
+					"range": "0 3",
+					"step": 1,
+					"decimal": 0
+				},
+				{
+					"type": "size",
+					"name": "Width A",
+					"value": 2
+				},
+				{
+					"type": "size",
+					"name": "Width B",
+					"value": 2
+				},
+				{
+					"type": "size",
+					"name": "Width C",
+					"value": 2
+				},
+				{
+					"type": "color_a",
+					"name": "Color A",
+					"value": 1
+				},
+				{
+					"type": "color_b",
+					"name": "Color B",
+					"value": 9
+				},
+				{
+					"type": "color_b",
+					"name": "Color C",
+					"value": 18
 				}
 			]
 		},
