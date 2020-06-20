@@ -7,7 +7,7 @@
 // xs_begin
 // author : '@lachlanmcdonald'
 // arg : { id = '0'  name = 'Color'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Headroom'  value = '1'  range = '0 127'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Headroom'  value = '1'  range = '0 256'  step = '1'  decimal = '0' }
 // xs_end
 
 float c = max(i_args[1], 1.0);
