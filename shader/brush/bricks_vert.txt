@@ -35,28 +35,28 @@ float random(vec3 st, float seed) {
 }
 
 float map(vec3 v) {
-    vec3 k;
+	vec3 k;
 
-    if (direction == 0.0) {
-        k = v.zxy;
-    } else if (direction == 1.0) {
-        k = v.zyx;
-    } else if (direction == 2.0) {
-        k = v.xyz;
-    } else if (direction == 3.0) {
-        k = v.yxz;
-    }
+	if (direction == 0.0) {
+		k = v.zxy;
+	} else if (direction == 1.0) {
+		k = v.zyx;
+	} else if (direction == 2.0) {
+		k = v.xyz;
+	} else if (direction == 3.0) {
+		k = v.yxz;
+	}
 
-    float layer = floor(k.z / depth);
-    float row = floor(k.y / height);
-    float col = floor((k.x - row * row_offset) / width);
+	float layer = floor(k.z / depth);
+	float row = floor(k.y / height);
+	float col = floor((k.x - row * row_offset) / width);
 
 	float brick_randomness = random(vec3(row, col, layer), row * col);
 
-    if (brick_randomness < threshold) {
+	if (brick_randomness < threshold) {
 		float brick_color = random(vec3(row, col, layer), 0.0);
-        return mix(pal_min, pal_max, brick_color);
-    } else {
-        return 0.0;
-    }
+		return mix(pal_min, pal_max, brick_color);
+	} else {
+		return 0.0;
+	}
 }
