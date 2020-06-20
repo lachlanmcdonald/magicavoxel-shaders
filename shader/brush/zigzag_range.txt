@@ -33,10 +33,8 @@ float map(vec3 v) {
 	}
 
 	if (mod(row + col, 2.0) == 0.0) {
-		// return max(k.x, k.y) * width;
 		return floor(mix(pal_min, pal_max, max(k.x, k.y) / size));
 	} else {
-		// return min(k.x, k.y) * width;
 		return floor(mix(pal_min, pal_max, min(k.x, k.y) / size));
 	}
 }
