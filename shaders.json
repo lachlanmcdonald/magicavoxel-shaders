@@ -20,13 +20,13 @@
 		},
 		"size": {
 			"value": 1,
-			"range": "1 127",
+			"range": "1 256",
 			"step": 1,
 			"decimal": 0
 		},
 		"position": {
 			"value": 0,
-			"range": "0 127",
+			"range": "0 256",
 			"step": 1,
 			"decimal": 0
 		}
@@ -65,7 +65,7 @@
 				}
 			]
 		},
-		"brush/bricks_weave": {
+		"brush/weave": {
 			"params": [
 				{
 					"name": "Mode",
