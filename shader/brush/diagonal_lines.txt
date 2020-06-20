@@ -9,9 +9,9 @@
 // arg : { id = '0'  name = 'Direction'  value = '0'  range = '0 5'  step = '1'  decimal = '0' }
 // arg : { id = '1'  name = 'Color A'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
 // arg : { id = '2'  name = 'Color B'  value = '2'  range = '0 255'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'Width A'  value = '3'  range = '1 127'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'Width B'  value = '3'  range = '1 127'  step = '1'  decimal = '0' }
-// arg : { id = '5'  name = 'Offset'  value = '0'  range = '0 127'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Width A'  value = '3'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Width B'  value = '3'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '5'  name = 'Offset'  value = '0'  range = '0 256'  step = '1'  decimal = '0' }
 // xs_end
 
 float direction = i_args[0];
