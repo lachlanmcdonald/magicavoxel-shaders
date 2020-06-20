@@ -65,7 +65,7 @@
 				}
 			]
 		},
-		"brush/bricks_weave": {
+		"brush/weave": {
 			"params": [
 				{
 					"name": "Mode",

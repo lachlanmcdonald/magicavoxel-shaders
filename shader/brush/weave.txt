@@ -2,7 +2,7 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2020 Lachlan McDonald
 //
-// xs brush/bricks_weave [Mode] [Size] [Color A] [Color B] [Line Color] [Line Width]
+// xs brush/weave [Mode] [Size] [Color A] [Color B] [Line Color] [Line Width]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
