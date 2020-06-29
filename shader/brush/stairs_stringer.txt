@@ -2,18 +2,20 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2020 Lachlan McDonald
 //
-// xs brush/stairs [Direction] [Count] [Height]
+// xs brush/stairs_stringer [Direction] [Count] [Height] [Stringer]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
 // arg : { id = '0'  name = 'Direction'  value = '0'  range = '0 3'  step = '1'  decimal = '0' }
 // arg : { id = '1'  name = 'Count'  value = '5'  range = '1 256'  step = '1'  decimal = '0' }
 // arg : { id = '2'  name = 'Height'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Stringer'  value = '0'  range = '0 256'  step = '1'  decimal = '0' }
 // xs_end
 
 float direction = i_args[0];
 float count = min(i_args[1], i_volume_size.z);
 float height = i_args[2];
+float stringer = max(i_args[3], 0.0);
 
 float map(vec3 v) {
 	float volume_n;
@@ -39,7 +41,7 @@ float map(vec3 v) {
 	float b = d * height + height;
 
 	if (vector_n - (d * w) <= w) {
-		if (v.z < b) {
+		if (v.z > a && v.z < (b + stringer)) {
 			return i_color_index;
 		}
 	}

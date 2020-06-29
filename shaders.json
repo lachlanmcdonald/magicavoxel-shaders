@@ -466,7 +466,7 @@
 				}
 			]
 		},
-		"brush/stairs": {
+		"brush/stairs_runs": {
 			"params": [
 				{
 					"name": "Direction",
@@ -491,6 +491,51 @@
 				{
 					"type": "position",
 					"name": "Z Gap"
+				}
+			]
+		},
+		"brush/stairs_stringer": {
+			"params": [
+				{
+					"name": "Direction",
+					"value": 0,
+					"range": "0 3",
+					"step": 1,
+					"decimal": 0
+				},
+				{
+					"type": "size",
+					"name": "Count",
+					"value": 5
+				},
+				{
+					"type": "size",
+					"name": "Height"
+				},
+				{
+					"type": "position",
+					"name": "Stringer",
+					"value": 0
+				}
+			]
+		},
+		"brush/stairs": {
+			"params": [
+				{
+					"name": "Direction",
+					"value": 0,
+					"range": "0 3",
+					"step": 1,
+					"decimal": 0
+				},
+				{
+					"type": "size",
+					"name": "Count",
+					"value": 5
+				},
+				{
+					"type": "size",
+					"name": "Height"
 				}
 			]
 		},
