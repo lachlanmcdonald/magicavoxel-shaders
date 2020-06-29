@@ -2,30 +2,30 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2020 Lachlan McDonald
 //
-// xs brush/grid [Color A] [Color B] [Thickness] [X Spacing] [Y Spacing] [Z Spacing]
+// xs brush/grid [Color A] [Color B] [Thickness] [Size X] [Size Y] [Size Z]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
 // arg : { id = '0'  name = 'Color A'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
 // arg : { id = '1'  name = 'Color B'  value = '2'  range = '0 255'  step = '1'  decimal = '0' }
 // arg : { id = '2'  name = 'Thickness'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'X Spacing'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'Y Spacing'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '5'  name = 'Z Spacing'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Size X'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Size Y'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '5'  name = 'Size Z'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
 // xs_end
 
 float thickness = max(i_args[2], 1.0) - 1.0;
-float x_spacing = max(i_args[3], 1.0) + 1.0;
-float y_spacing = max(i_args[4], 1.0) + 1.0;
-float z_spacing = max(i_args[5], 1.0) + 1.0;
+float x_size = max(i_args[3], 1.0) + 1.0;
+float y_size = max(i_args[4], 1.0) + 1.0;
+float z_size = max(i_args[5], 1.0) + 1.0;
 
 bvec3 axis = equal(i_axis, vec3(1.0, 1.0, 1.0));
 bool no_axis_mode = all(equal(i_axis, vec3(0.0, 0.0, 0.0)));
 
 float map(vec3 v) {
 	if (no_axis_mode || axis.x) {
-		if (x_spacing > thickness) {
-			float m = floor(mod(v.x, x_spacing));
+		if (x_size > thickness) {
+			float m = floor(mod(v.x, x_size));
 
 			if (m <= thickness) {
 				return i_args[0];
@@ -33,8 +33,8 @@ float map(vec3 v) {
 		}
 	}
 	if (no_axis_mode || axis.y) {
-		if (y_spacing > thickness) {
-			float m = floor(mod(v.y, y_spacing));
+		if (y_size > thickness) {
+			float m = floor(mod(v.y, y_size));
 
 			if (m <= thickness) {
 				return i_args[0];
@@ -42,8 +42,8 @@ float map(vec3 v) {
 		}
 	}
 	if (no_axis_mode || axis.z) {
-		if (z_spacing > thickness) {
-			float m = floor(mod(v.z, z_spacing));
+		if (z_size > thickness) {
+			float m = floor(mod(v.z, z_size));
 
 			if (m <= thickness) {
 				return i_args[0];

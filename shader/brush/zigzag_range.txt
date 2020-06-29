@@ -1,0 +1,40 @@
+// MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+// Copyright (c) 2020 Lachlan McDonald
+//
+// xs brush/zigzag_range [Direction] [Width] [Color A] [Color B]
+//
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { id = '0'  name = 'Direction'  value = '0'  range = '0 3'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Width'  value = '2'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Color A'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Color B'  value = '9'  range = '0 255'  step = '1'  decimal = '0' }
+// xs_end
+
+float direction = i_args[0];
+float width = i_args[1];
+float pal_min = min(i_args[2], i_args[3]);
+float pal_max = max(i_args[2], i_args[3]);
+
+float map(vec3 v) {
+	float size = floor((pal_max - pal_min) * width);
+	float row = floor(v.y / size);
+	float col = floor(v.x / size);
+	vec2 k = v.xy - vec2(col, row) * size;
+
+	if (direction == 0.0) {
+		k.x = size - k.x;
+	} else if (direction == 2.0) {
+		k.y = size - k.y;
+	} else if (direction == 3.0) {
+		k.x = size - k.x;
+		k.y = size - k.y;
+	}
+
+	if (mod(row + col, 2.0) == 0.0) {
+		return floor(mix(pal_min, pal_max, max(k.x, k.y) / size));
+	} else {
+		return floor(mix(pal_min, pal_max, min(k.x, k.y) / size));
+	}
+}
