@@ -300,7 +300,7 @@
 				}
 			]
 		},
-		"brush/moss": {
+		"brush/grass_inv": {
 			"params": [
 				{
 					"name": "Mode",
