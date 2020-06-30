@@ -263,6 +263,80 @@
 				}
 			]
 		},
+		"brush/grass": {
+			"params": [
+				{
+					"name": "Mode",
+					"value": 0,
+					"range": "0 3",
+					"step": 1,
+					"decimal": 0
+				},
+				{
+					"type": "size",
+					"name": "Density",
+					"value": 2.0
+				},
+				{
+					"type": "fraction",
+					"name": "Growth",
+					"value": 0.5
+				},
+				{
+					"name": "Seed",
+					"value": 1,
+					"range": "0 100",
+					"step": 1,
+					"decimal": 0
+				},
+				{
+					"type": "color_a",
+					"name": "Color A"
+				},
+				{
+					"type": "color_b",
+					"name": "Color B",
+					"value": 8
+				}
+			]
+		},
+		"brush/moss": {
+			"params": [
+				{
+					"name": "Mode",
+					"value": 0,
+					"range": "0 3",
+					"step": 1,
+					"decimal": 0
+				},
+				{
+					"type": "size",
+					"name": "Density",
+					"value": 2.0
+				},
+				{
+					"type": "fraction",
+					"name": "Growth",
+					"value": 0.5
+				},
+				{
+					"name": "Seed",
+					"value": 1,
+					"range": "0 100",
+					"step": 1,
+					"decimal": 0
+				},
+				{
+					"type": "color_a",
+					"name": "Color A"
+				},
+				{
+					"type": "color_b",
+					"name": "Color B",
+					"value": 8
+				}
+			]
+		},
 		"random": {
 			"params": [
 				{
