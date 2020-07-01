@@ -34,7 +34,7 @@ float map(vec3 v) {
 	float col = floor(v.x / size);
 	vec2 k = v.xy - vec2(col, row) * size;
 
-	float p = mod(row + col, 2) == 0.0 ? min(k.x, k.y) : max(k.x, k.y);
+	float p = mod(row + col, 2.0) == 0.0 ? min(k.x, k.y) : max(k.x, k.y);
 
 	if (pal_min > pal_max) {
 		return pal_min - floor(p / width);
