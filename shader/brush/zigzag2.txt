@@ -9,8 +9,8 @@
 // arg : { id = '0'  name = 'Direction'  value = '0'  range = '0 3'  step = '1'  decimal = '0' }
 // arg : { id = '1'  name = 'Width A'  value = '2'  range = '1 256'  step = '1'  decimal = '0' }
 // arg : { id = '2'  name = 'Width B'  value = '2'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'Color A'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'Color B'  value = '9'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Color A'  value = '0'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Color B'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
 // xs_end
 
 float direction = i_args[0];
@@ -20,19 +20,21 @@ float color_a = i_args[3];
 float color_b = i_args[4];
 
 float map(vec3 v) {
+	v = floor(v);
+
+	if (direction == 1.0) {
+		v.y = -v.y;
+	} else if (direction == 2.0) {
+		v.x = -v.x;
+		v.y = -v.y;
+	} else if (direction == 3.0) {
+		v.x = -v.x;
+	}
+
 	float size = width_a + width_b;
 	float row = floor(v.y / size);
 	float col = floor(v.x / size);
 	vec2 k = v.xy - vec2(col, row) * size;
-
-	if (direction == 0.0) {
-		k.x = size - k.x;
-	} else if (direction == 2.0) {
-		k.y = size - k.y;
-	} else if (direction == 3.0) {
-		k.x = size - k.x;
-		k.y = size - k.y;
-	}
 
 	if (mod(row + col, 2.0) == 0.0) {
 		if (k.x < width_a && k.y < width_a) {
