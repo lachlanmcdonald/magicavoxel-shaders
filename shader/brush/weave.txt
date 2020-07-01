@@ -16,8 +16,8 @@
 
 float mode = i_args[0];
 float size = i_args[1];
-float pal_min = min(i_args[2], i_args[3]);
-float pal_max = max(i_args[2], i_args[3]);
+float pal_min = i_args[2];
+float pal_max = i_args[3];
 float line_color = i_args[4];
 float line_width = i_args[5];
 

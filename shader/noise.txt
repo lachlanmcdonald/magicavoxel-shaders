@@ -17,8 +17,8 @@ float rand(vec2 co, float seed) {
 	return fract(sin(dot(co.xy * seed, vec2(12.9898, 78.233))) * 43758.5453);
 }
 
-float pal_min = min(i_args[0], i_args[1]);
-float pal_max = max(i_args[0], i_args[1]);
+float pal_min = i_args[0];
+float pal_max = i_args[1];
 float size_x = max(i_args[2], 1.0);
 float size_y = max(i_args[3], 1.0);
 float size_z = max(i_args[4], 1.0);

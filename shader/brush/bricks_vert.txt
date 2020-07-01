@@ -21,8 +21,8 @@ float height = max(i_args[1], 1.0); // These are deliberately flipped
 float width = max(i_args[2], 1.0); // These are deliberately flipped
 float depth = max(i_args[3], 1.0);
 float row_offset = (i_args[4] == 0.0 ? (width / 2.0) : i_args[4]);
-float pal_min = min(i_args[5], i_args[6]);
-float pal_max = max(i_args[5], i_args[6]);
+float pal_min = i_args[5];
+float pal_max = i_args[6];
 float threshold = max(i_args[7], 0.0);
 
 float random(vec2 st, float seed) {
