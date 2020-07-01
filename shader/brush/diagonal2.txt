@@ -2,15 +2,15 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2020 Lachlan McDonald
 //
-// xs brush/diagonal_lines [Direction] [Color A] [Color B] [Width A] [Width B] [Offset]
+// xs brush/diagonal2 [Direction] [Color A] [Color B] [Width A] [Width B] [Offset]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
 // arg : { id = '0'  name = 'Direction'  value = '0'  range = '0 5'  step = '1'  decimal = '0' }
 // arg : { id = '1'  name = 'Color A'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
 // arg : { id = '2'  name = 'Color B'  value = '2'  range = '0 255'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'Width A'  value = '3'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'Width B'  value = '3'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Width A'  value = '2'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Width B'  value = '2'  range = '1 256'  step = '1'  decimal = '0' }
 // arg : { id = '5'  name = 'Offset'  value = '0'  range = '0 256'  step = '1'  decimal = '0' }
 // xs_end
 
@@ -22,6 +22,8 @@ float width_b = max(i_args[4], 1.0);
 float offset = floor(i_args[5]);
 
 float map(vec3 v) {
+	v = floor(v);
+
 	float x;
 	float z;
 

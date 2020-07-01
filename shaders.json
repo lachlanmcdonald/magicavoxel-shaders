@@ -32,7 +32,7 @@
 		}
 	},
 	"shaders": {
-		"brush/diagonal_lines": {
+		"brush/diagonal2": {
 			"params": [
 				{
 					"name": "Direction",
@@ -47,17 +47,91 @@
 				},
 				{
 					"type": "color_b",
-					"name": "Color B"
+					"name": "Color B",
+					"value:": 8
 				},
 				{
 					"type": "size",
 					"name": "Width A",
-					"value": 3
+					"value": 2
 				},
 				{
 					"type": "size",
 					"name": "Width B",
-					"value": 3
+					"value": 2
+				},
+				{
+					"type": "position",
+					"name": "Offset"
+				}
+			]
+		},
+		"brush/diagonal3": {
+			"params": [
+				{
+					"name": "Direction",
+					"value": 0,
+					"range": "0 5",
+					"step": 1,
+					"decimal": 0
+				},
+				{
+					"type": "color_a",
+					"name": "Color A"
+				},
+				{
+					"type": "color_b",
+					"name": "Color B",
+					"value": 8
+				},
+				{
+					"type": "color_b",
+					"name": "Color C",
+					"value": 16
+				},
+				{
+					"type": "size",
+					"name": "Width A",
+					"value": 2
+				},
+				{
+					"type": "size",
+					"name": "Width B",
+					"value": 2
+				},
+				{
+					"type": "size",
+					"name": "Width C",
+					"value": 2
+				},
+				{
+					"type": "position",
+					"name": "Offset"
+				}
+			]
+		},
+		"brush/diagonal_range": {
+			"params": [
+				{
+					"name": "Direction",
+					"value": 0,
+					"range": "0 5",
+					"step": 1,
+					"decimal": 0
+				},
+				{
+					"type": "color_a",
+					"name": "Color A"
+				},
+				{
+					"type": "color_b",
+					"name": "Color B",
+					"value": 8
+				},
+				{
+					"type": "size",
+					"name": "Width",
+					"value": 2
 				},
 				{
 					"type": "position",
