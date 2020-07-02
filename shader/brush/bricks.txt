@@ -29,9 +29,9 @@ float random(vec2 co, float seed) {
     return fract(cos(dot(co.xy, vec2(23.14069263277926, pow(sqrt(2.0), 2.0)))) * (43758.5453 + seed));
 }
 
-float random(vec3 st, float seed) {
+float random(vec3 co, float seed) {
 	float a = random(co.xy, seed);
-	return random(vec2(a, st.z), seed);
+	return random(vec2(a, co.z), seed);
 }
 
 float map(vec3 v) {

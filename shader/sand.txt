@@ -9,8 +9,8 @@
 // arg : { id = '0'  name = 'Color'  value = '0'  range = '0 255'  step = '1'  decimal = '0' }
 // xs_end
 
-float random(vec2 co, float seed) {
-    return fract(cos(dot(co.xy, vec2(23.14069263277926, pow(sqrt(2.0), 2.0)))) * (43758.5453 + seed));
+float random(vec2 co) {
+    return fract(cos(dot(co.xy, vec2(23.14069263277926, pow(sqrt(2.0), 2.0)))) * 43758.5453);
 }
 
 float random(vec3 co) {
