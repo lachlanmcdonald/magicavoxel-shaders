@@ -21,8 +21,8 @@ float seed = i_args[3];
 float pal_min = i_args[4];
 float pal_max = i_args[5];
 
-float random(vec2 co, float s) {
-    return fract(sin(dot(co, vec2(12.9898, 78.233))) * (43758.5453 + s));
+float random(vec2 co, float seed) {
+    return fract(cos(dot(co.xy, vec2(23.14069263277926, pow(sqrt(2.0), 2.0)))) * (43758.5453 + seed));
 }
 
 float map(vec3 v) {

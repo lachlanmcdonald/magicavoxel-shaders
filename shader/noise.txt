@@ -13,8 +13,8 @@
 // arg : { id = '4'  name = 'Size Z'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
 // xs_end
 
-float rand(vec2 co, float seed) {
-	return fract(sin(dot(co.xy * seed, vec2(12.9898, 78.233))) * 43758.5453);
+float random(vec2 co, float seed) {
+    return fract(cos(dot(co.xy, vec2(23.14069263277926, pow(sqrt(2.0), 2.0)))) * (43758.5453 + seed));
 }
 
 float pal_min = i_args[0];
@@ -30,8 +30,8 @@ float map(vec3 v) {
 	float x = (no_axis_mode || i_axis.x == 1.0) ? floor(v.x / size_x) : 1.0;
 	float y = (no_axis_mode || i_axis.y == 1.0) ? floor(v.y / size_y) : 1.0;
 	float z = (no_axis_mode || i_axis.z == 1.0) ? floor(v.z / size_z) : 1.0;
-	float j = rand(vec2(x, y), i_iter + 1.0);
-	float k = rand(vec2(j, z), i_iter + 1.0);
+	float j = random(vec2(x, y), i_iter + 1.0);
+	float k = random(vec2(j, z), i_iter + 1.0);
 
 	if (index == i_color_index) {
 		return mix(pal_min, pal_max, k);
