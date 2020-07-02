@@ -617,6 +617,13 @@
 		"brush/stairs_runs": {
 			"params": [
 				{
+					"name": "Mode",
+					"value": 0,
+					"range": "0 3",
+					"step": 1,
+					"decimal": 0
+				},
+				{
 					"name": "Direction",
 					"value": 0,
 					"range": "0 3",
@@ -645,6 +652,13 @@
 		"brush/stairs_stringer": {
 			"params": [
 				{
+					"name": "Mode",
+					"value": 0,
+					"range": "0 3",
+					"step": 1,
+					"decimal": 0
+				},
+				{
 					"name": "Direction",
 					"value": 0,
 					"range": "0 3",
@@ -669,6 +683,13 @@
 		},
 		"brush/stairs": {
 			"params": [
+				{
+					"name": "Mode",
+					"value": 0,
+					"range": "0 2",
+					"step": 1,
+					"decimal": 0
+				},
 				{
 					"name": "Direction",
 					"value": 0,
