@@ -1,0 +1,66 @@
+// MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+// Copyright (c) 2020 Lachlan McDonald
+//
+// xs brush/arch [Mode] [Rotation] [Width] [Thickness]
+//
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { id = '0'  name = 'Mode'  value = '0'  range = '0 1'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Rotation'  value = '0'  range = '0 1'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Width'  value = '12'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Thickness'  value = '2'  range = '1 256'  step = '1'  decimal = '0' }
+// xs_end
+
+const float PI2 = 3.141592653589793238 * 2.0;
+
+int mode = i_args[0];
+int rotation = i_args[1];
+float width = i_args[2];
+float thickness = i_args[3];
+
+float random(vec2 co) {
+    return fract(cos(dot(co.xy, vec2(23.14069263277926, pow(sqrt(2.0), 2.0)))) * 43758.5453);
+}
+
+float random(vec3 co) {
+    return random(vec2(random(co.xy), co.z));
+}
+
+float check(float pos, float width, float max_pos) {
+    if (pos <= width) {
+        if (mode == 0) {
+            return pos / width * i_volume_size.z;
+        } else if (mode == 1) {
+            float d1 = pos / width;
+            return sin(PI2 * (d1 / 4.0)) * i_volume_size.z;
+        }
+    } else if (pos >= max_pos - width) {
+        if (mode == 0) {
+            return (max_pos - pos) / width * i_volume_size.z;
+        } else if (mode == 1) {
+            float d1 = (max_pos - pos) / width;
+            return sin(PI2 * (d1 / 4.0)) * i_volume_size.z;
+        }
+    } else {
+        return i_volume_size.z;
+    }
+}
+
+float map(vec3 v) {
+    float h;
+
+    if (rotation == 0) {
+        float w = min(width, i_volume_size.x / 2.0);
+        h = check(v.x, w, i_volume_size.x);
+    } else if (rotation == 1) {
+        float w = min(width, i_volume_size.y / 2.0);
+        h = check(v.y, w, i_volume_size.y);
+    }
+
+    if (v.z <= ceil(h) && v.z >= ceil(h - thickness)) {
+        return i_color_index;
+    } else {
+        return 0.0;
+    }
+}

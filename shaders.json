@@ -1,5 +1,54 @@
 {
 	"shaders": {
+		"brush/arch": {
+			"params": [
+				{
+					"decimal": 0,
+					"name": "Mode",
+					"range": "0 1",
+					"step": 1,
+					"value": 0
+				},
+				{
+					"decimal": 0,
+					"name": "Rotation",
+					"range": "0 1",
+					"step": 1,
+					"value": 0
+				},
+				{
+					"name": "Width",
+					"type": "size",
+					"value": 12
+				},
+				{
+					"name": "Thickness",
+					"type": "size",
+					"value": 2
+				}
+			]
+		},
+		"brush/prism": {
+			"params": [
+				{
+					"decimal": 0,
+					"name": "Mode",
+					"range": "0 1",
+					"step": 1,
+					"value": 0
+				},
+				{
+					"name": "Width X",
+					"type": "position",
+					"value": 12
+				},
+				{
+					"name": "Width Y",
+					"type": "position",
+					"value": 12
+				}
+			]
+		},
 		"brush/bricks": {
 			"params": [
 				{
