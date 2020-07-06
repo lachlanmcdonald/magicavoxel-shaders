@@ -28,27 +28,6 @@
                 }
             ]
         },
-		"brush/prism": {
-			"params": [
-				{
-					"decimal": 0,
-					"name": "Mode",
-					"range": "0 1",
-					"step": 1,
-					"value": 0
-				},
-				{
-					"name": "Width X",
-					"type": "position",
-					"value": 12
-				},
-				{
-					"name": "Width Y",
-					"type": "position",
-					"value": 12
-				}
-			]
-		},
         "brush/bricks": {
             "params": [
                 {
@@ -346,42 +325,24 @@
                 }
             ]
         },
-        "brush/tiles_puzzle": {
+        "brush/prism": {
             "params": [
                 {
-                    "name": "Color A",
-                    "type": "color_a",
-                    "value": 1
+                    "decimal": 0,
+                    "name": "Mode",
+                    "range": "0 1",
+                    "step": 1,
+                    "value": 0
                 },
                 {
-                    "name": "Color B",
-                    "type": "color_b",
-                    "value": 8
-                },
-                {
-                    "name": "Size X",
-                    "type": "size",
-                    "value": 4
-                },
-                {
-                    "name": "Size Y",
-                    "type": "size",
-                    "value": 4
-                },
-                {
-                    "name": "Size Z",
-                    "type": "size",
-                    "value": 4
-                },
-                {
-                    "name": "Line Color",
-                    "type": "color_b",
-                    "value": 16
-                },
-                {
-                    "name": "Line Width",
+                    "name": "Width X",
                     "type": "position",
-                    "value": 1
+                    "value": 12
+                },
+                {
+                    "name": "Width Y",
+                    "type": "position",
+                    "value": 12
                 }
             ]
         },
@@ -515,6 +476,54 @@
                 {
                     "name": "Offset Z",
                     "type": "position"
+                }
+            ]
+        },
+        "brush/tiles_puzzle": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Mode",
+                    "range": "0 4",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "name": "Color A",
+                    "type": "color_a",
+                    "value": 1
+                },
+                {
+                    "name": "Color B",
+                    "type": "color_b",
+                    "value": 8
+                },
+                {
+                    "name": "Size X",
+                    "type": "size",
+                    "value": 4
+                },
+                {
+                    "name": "Size Y",
+                    "type": "size",
+                    "value": 4
+                },
+                {
+                    "name": "Line Color",
+                    "type": "color_b",
+                    "value": 16
+                },
+                {
+                    "name": "Line Width",
+                    "type": "position",
+                    "value": 1
+                },
+                {
+                    "decimal": 0,
+                    "name": "Seed",
+                    "range": "0 100",
+                    "step": 1,
+                    "value": 1
                 }
             ]
         },
