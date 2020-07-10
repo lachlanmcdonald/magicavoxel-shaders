@@ -1,0 +1,98 @@
+// MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+// Copyright (c) 2020 Lachlan McDonald
+//
+// xs brush/tiles_puzzle [Mode] [Color A] [Color B] [Size X] [Size Y] [Line Color] [Line Width] [Seed]
+//
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { id = '0'  name = 'Mode'  value = '0'  range = '0 4'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Color A'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Color B'  value = '8'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Size X'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Size Y'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '5'  name = 'Line Color'  value = '16'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '6'  name = 'Line Width'  value = '1'  range = '0 256'  step = '1'  decimal = '0' }
+// arg : { id = '7'  name = 'Seed'  value = '1'  range = '0 100'  step = '1'  decimal = '0' }
+// xs_end
+
+int mode = i_args[0];
+float color_a = floor(i_args[1]);
+float color_b = floor(i_args[2]);
+
+float line_color = floor(i_args[5]);
+float thickness = floor(i_args[6]);
+
+float width = max(i_args[3], 1.0) + thickness;
+float height = max(i_args[4], 1.0) + thickness;
+
+float global_seed = mix(-43758.5453, 43758.5453, i_args[7] / 100.0);
+
+float random(vec2 co) {
+    return fract(cos(dot(co.xy, vec2(23.14069263277926, pow(sqrt(2.0), 2.0)))) * (43758.5453 + global_seed));
+}
+
+float map(vec3 v) {
+	vec3 shape = vec3(width, height, 1.0);
+	vec3 j = floor(v / shape);
+	vec3 m = mod(v, shape);
+	float tile = random(j.xy);
+	float next = tile;
+	int i;
+
+	if (tile > 0.5) {
+		for (i = 0; i < 5; i += 1) {
+			float b = random(j.xy + vec2(float(i), 0.0));
+
+			if (b > 0.5) {
+				next = b;
+			} else {
+				break;
+			}
+		}
+
+		if (i == 1) {
+			if (any(greaterThan(m.xy, shape.xy - vec2(thickness)))) {
+				return line_color;
+			}
+		} else if (m.y > (shape.y - thickness)) {
+			return line_color;
+		}
+
+		if (mode != 4) {
+			next = (next - 0.5) * 2.0;
+		}
+	} else {
+		for (i = 0; i < 5; i += 1) {
+			float b = random(j.xy + vec2(0.0, float(i)));
+
+			if (b <= 0.5) {
+				next = b;
+			} else {
+				break;
+			}
+		}
+
+		if (i == 1) {
+			if (any(greaterThan(m.xy, shape.xy - vec2(thickness)))) {
+				return line_color;
+			}
+		} else if (m.x > (shape.x - thickness)) {
+			return line_color;
+		}
+
+		if (mode != 4) {
+			next *= 2.0;
+		}
+	}
+
+	if (mode == 1) {
+		return tile > 0.5 ? color_a : color_b;
+	} else if (mode == 2) {
+		return tile > 0.5 ? line_color : mix(color_a, color_b, next);;
+	} else if (mode == 3) {
+		return tile <= 0.5 ? line_color : mix(color_a, color_b, next);;
+	} else {
+		return mix(color_a, color_b, next);
+	}
+}

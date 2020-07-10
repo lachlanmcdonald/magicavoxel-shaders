@@ -2,20 +2,22 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2020 Lachlan McDonald
 //
-// xs brush/stairs_stringer [Direction] [Count] [Height] [Stringer]
+// xs brush/stairs_stringer [Mode] [Direction] [Count] [Height] [Stringer]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Direction'  value = '0'  range = '0 3'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Count'  value = '5'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Height'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'Stringer'  value = '0'  range = '0 256'  step = '1'  decimal = '0' }
+// arg : { id = '0'  name = 'Mode'  value = '0'  range = '0 3'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Direction'  value = '0'  range = '0 3'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Count'  value = '5'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Height'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Stringer'  value = '0'  range = '0 256'  step = '1'  decimal = '0' }
 // xs_end
 
-float direction = i_args[0];
-float count = min(i_args[1], i_volume_size.z);
-float height = i_args[2];
-float stringer = max(i_args[3], 0.0);
+float mode = i_args[0];
+float direction = i_args[1];
+float count = min(i_args[2], i_volume_size.z);
+float height = i_args[3];
+float stringer = max(i_args[4], 0.0);
 
 float map(vec3 v) {
 	float volume_n;
@@ -33,6 +35,14 @@ float map(vec3 v) {
 	} else if (direction == 3.0) {
 		vector_n = i_volume_size.y - v.y;
 		volume_n = i_volume_size.y;
+	}
+
+	if (mode == 1.0) {
+		height = max(1.0, floor(i_volume_size.z / count));
+	} else if (mode == 2.0) {
+		count = max(2.0, floor(i_volume_size.z / height));
+	} else if (mode == 3.0) {
+		stringer = max(0.0, floor(i_volume_size.z / (count + height)) - 1.0);
 	}
 
 	float w = volume_n / count;

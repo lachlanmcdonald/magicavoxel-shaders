@@ -1,759 +1,877 @@
 {
-	"types": {
-		"fraction": {
-			"value": 0.5,
-			"range": "0 1",
-			"step": 0.01,
-			"decimal": 1
-		},
-		"color_a": {
-			"value": 1,
-			"range": "0 255",
-			"step": 1,
-			"decimal": 0
-		},
-		"color_b": {
-			"value": 2,
-			"range": "0 255",
-			"step": 1,
-			"decimal": 0
-		},
-		"size": {
-			"value": 1,
-			"range": "1 256",
-			"step": 1,
-			"decimal": 0
-		},
-		"position": {
-			"value": 0,
-			"range": "0 256",
-			"step": 1,
-			"decimal": 0
-		}
-	},
-	"shaders": {
-		"brush/diagonal2": {
-			"params": [
-				{
-					"name": "Direction",
-					"value": 0,
-					"range": "0 5",
-					"step": 1,
-					"decimal": 0
-				},
-				{
-					"type": "color_a",
-					"name": "Color A"
-				},
-				{
-					"type": "color_b",
-					"name": "Color B",
-					"value:": 8
-				},
-				{
-					"type": "size",
-					"name": "Width A",
-					"value": 2
-				},
-				{
-					"type": "size",
-					"name": "Width B",
-					"value": 2
-				},
-				{
-					"type": "position",
-					"name": "Offset"
-				}
-			]
-		},
-		"brush/diagonal3": {
-			"params": [
-				{
-					"name": "Direction",
-					"value": 0,
-					"range": "0 5",
-					"step": 1,
-					"decimal": 0
-				},
-				{
-					"type": "color_a",
-					"name": "Color A"
-				},
-				{
-					"type": "color_b",
-					"name": "Color B",
-					"value": 8
-				},
-				{
-					"type": "color_b",
-					"name": "Color C",
-					"value": 16
-				},
-				{
-					"type": "size",
-					"name": "Width A",
-					"value": 2
-				},
-				{
-					"type": "size",
-					"name": "Width B",
-					"value": 2
-				},
-				{
-					"type": "size",
-					"name": "Width C",
-					"value": 2
-				},
-				{
-					"type": "position",
-					"name": "Offset"
-				}
-			]
-		},
-		"brush/diagonal_range": {
-			"params": [
-				{
-					"name": "Direction",
-					"value": 0,
-					"range": "0 5",
-					"step": 1,
-					"decimal": 0
-				},
-				{
-					"type": "color_a",
-					"name": "Color A"
-				},
-				{
-					"type": "color_b",
-					"name": "Color B",
-					"value": 8
-				},
-				{
-					"type": "size",
-					"name": "Width",
-					"value": 2
-				},
-				{
-					"type": "position",
-					"name": "Offset"
-				}
-			]
-		},
-		"brush/weave": {
-			"params": [
-				{
-					"name": "Mode",
-					"value": 0,
-					"range": "0 1",
-					"step": 1,
-					"decimal": 0
-				},
-				{
-					"type": "size",
-					"name": "Size",
-					"value": 4
-				},
-				{
-					"type": "color_a",
-					"name": "Color A",
-					"value": 1
-				},
-				{
-					"type": "color_b",
-					"name": "Color B",
-					"value": 9
-				},
-				{
-					"type": "color_b",
-					"name": "Line Color",
-					"value": 10
-				},
-				{
-					"type": "position",
-					"name": "Line Width",
-					"value": 1
-				}
-			]
-		},
-		"brush/zigzag_range": {
-			"params": [
-				{
-					"name": "Direction",
-					"value": 0,
-					"range": "0 3",
-					"step": 1,
-					"decimal": 0
-				},
-				{
-					"type": "size",
-					"name": "Width",
-					"value": 2
-				},
-				{
-					"type": "color_a",
-					"name": "Color A",
-					"value": 1
-				},
-				{
-					"type": "color_b",
-					"name": "Color B",
-					"value": 9
-				}
-			]
-		},
-		"brush/zigzag2": {
-			"params": [
-				{
-					"name": "Direction",
-					"value": 0,
-					"range": "0 3",
-					"step": 1,
-					"decimal": 0
-				},
-				{
-					"type": "size",
-					"name": "Width A",
-					"value": 2
-				},
-				{
-					"type": "size",
-					"name": "Width B",
-					"value": 2
-				},
-				{
-					"type": "color_a",
-					"name": "Color A",
-					"value": 1
-				},
-				{
-					"type": "color_b",
-					"name": "Color B",
-					"value": 9
-				}
-			]
-		},
-		"brush/zigzag3": {
-			"params": [
-				{
-					"name": "Direction",
-					"value": 0,
-					"range": "0 3",
-					"step": 1,
-					"decimal": 0
-				},
-				{
-					"type": "size",
-					"name": "Width A",
-					"value": 2
-				},
-				{
-					"type": "size",
-					"name": "Width B",
-					"value": 2
-				},
-				{
-					"type": "size",
-					"name": "Width C",
-					"value": 2
-				},
-				{
-					"type": "color_a",
-					"name": "Color A",
-					"value": 1
-				},
-				{
-					"type": "color_b",
-					"name": "Color B",
-					"value": 9
-				},
-				{
-					"type": "color_b",
-					"name": "Color C",
-					"value": 18
-				}
-			]
-		},
-		"slice_x": {
-			"params": [
-				{
-					"type": "position",
-					"name": "Offset"
-				},
-				{
-					"type": "position",
-					"name": "Count"
-				}
-			]
-		},
-		"slice_y": {
-			"params": [
-				{
-					"type": "position",
-					"name": "Offset"
-				},
-				{
-					"type": "position",
-					"name": "Count"
-				}
-			]
-		},
-		"slice_z": {
-			"params": [
-				{
-					"type": "position",
-					"name": "Offset"
-				},
-				{
-					"type": "position",
-					"name": "Count"
-				}
-			]
-		},
-		"brush/grid": {
-			"params": [
-				{
-					"type": "color_a",
-					"name": "Color A"
-				},
-				{
-					"type": "color_b",
-					"name": "Color B"
-				},
-				{
-					"type": "size",
-					"name": "Thickness"
-				},
-				{
-					"type": "size",
-					"name": "Size X"
-				},
-				{
-					"type": "size",
-					"name": "Size Y"
-				},
-				{
-					"type": "size",
-					"name": "Size Z"
-				}
-			]
-		},
-		"brush/grass": {
-			"params": [
-				{
-					"name": "Mode",
-					"value": 0,
-					"range": "0 3",
-					"step": 1,
-					"decimal": 0
-				},
-				{
-					"type": "size",
-					"name": "Density",
-					"value": 2.0
-				},
-				{
-					"type": "fraction",
-					"name": "Growth",
-					"value": 0.5
-				},
-				{
-					"name": "Seed",
-					"value": 1,
-					"range": "0 100",
-					"step": 1,
-					"decimal": 0
-				},
-				{
-					"type": "color_a",
-					"name": "Color A"
-				},
-				{
-					"type": "color_b",
-					"name": "Color B",
-					"value": 8
-				}
-			]
-		},
-		"brush/grass_inv": {
-			"params": [
-				{
-					"name": "Mode",
-					"value": 0,
-					"range": "0 3",
-					"step": 1,
-					"decimal": 0
-				},
-				{
-					"type": "size",
-					"name": "Density",
-					"value": 2.0
-				},
-				{
-					"type": "fraction",
-					"name": "Growth",
-					"value": 0.5
-				},
-				{
-					"name": "Seed",
-					"value": 1,
-					"range": "0 100",
-					"step": 1,
-					"decimal": 0
-				},
-				{
-					"type": "color_a",
-					"name": "Color A"
-				},
-				{
-					"type": "color_b",
-					"name": "Color B",
-					"value": 8
-				}
-			]
-		},
-		"random": {
-			"params": [
-				{
-					"type": "fraction",
-					"name": "Threshold"
-				},
-				{
-					"type": "color_a",
-					"name": "Color"
-				}
-			]
-		},
-		"case": {
-			"params": [
-				{
-					"type": "color_a",
-					"name": "Color"
-				}
-			]
-		},
-		"flood": {
-			"params": [
-				{
-					"type": "size",
-					"name": "Height"
-				}
-			]
-		},
-		"flood2": {
-			"params": [
-				{
-					"type": "size",
-					"name": "Height"
-				}
-			]
-		},
-		"brush/tiles": {
-			"params": [
-				{
-					"type": "color_a",
-					"name": "Color A"
-				},
-				{
-					"type": "color_b",
-					"name": "Color B"
-				},
-				{
-					"type": "size",
-					"name": "Width",
-					"value": 2
-				},
-				{
-					"type": "size",
-					"name": "Height",
-					"value": 2
-				},
-				{
-					"type": "size",
-					"name": "Depth",
-					"value": 2
-				},
-				{
-					"type": "position",
-					"name": "Offset X"
-				},
-				{
-					"type": "position",
-					"name": "Offset Y"
-				},
-				{
-					"type": "position",
-					"name": "Offset Z"
-				}
-			]
-		},
-		"outline": {
-			"params": [
-				{
-					"type": "color_a",
-					"name": "Color"
-				}
-			]
-		},
-		"outline2": {
-			"params": [
-				{
-					"type": "color_a",
-					"name": "Color"
-				}
-			]
-		},
-		"noise": {
-			"params": [
-				{
-					"type": "color_a",
-					"name": "Color A"
-				},
-				{
-					"type": "color_b",
-					"name": "Color B"
-				},
-				{
-					"type": "size",
-					"name": "Size X"
-				},
-				{
-					"type": "size",
-					"name": "Size Y"
-				},
-				{
-					"type": "size",
-					"name": "Size Z"
-				}
-			]
-		},
-		"brush/bricks": {
-			"params": [
-				{
-					"name": "Direction",
-					"value": 0,
-					"range": "0 3",
-					"step": 1,
-					"decimal": 0
-				},
-				{
-					"type": "size",
-					"name": "Width",
-					"value": 5
-				},
-				{
-					"type": "size",
-					"name": "Height",
-					"value": 2
-				},
-				{
-					"type": "size",
-					"name": "Depth",
-					"value": 2
-				},
-				{
-					"type": "position",
-					"name": "Offset"
-				},
-				{
-					"type": "color_a",
-					"name": "Color A"
-				},
-				{
-					"type": "color_b",
-					"name": "Color B",
-					"value": 10
-				},
-				{
-					"type": "fraction",
-					"name": "Threshold",
-					"value": 1
-				}
-			]
-		},
-		"brush/bricks_vert": {
-			"params": [
-				{
-					"name": "Direction",
-					"value": 0,
-					"range": "0 3",
-					"step": 1,
-					"decimal": 0
-				},
-				{
-					"type": "size",
-					"name": "Width",
-					"value": 2
-				},
-				{
-					"type": "size",
-					"name": "Height",
-					"value": 5
-				},
-				{
-					"type": "size",
-					"name": "Depth",
-					"value": 2
-				},
-				{
-					"type": "position",
-					"name": "Offset"
-				},
-				{
-					"type": "color_a",
-					"name": "Color A"
-				},
-				{
-					"type": "color_b",
-					"name": "Color B",
-					"value": 10
-				},
-				{
-					"type": "fraction",
-					"name": "Threshold",
-					"value": 1
-				}
-			]
-		},
-		"brush/stairs_runs": {
-			"params": [
-				{
-					"name": "Direction",
-					"value": 0,
-					"range": "0 3",
-					"step": 1,
-					"decimal": 0
-				},
-				{
-					"type": "size",
-					"name": "Count",
-					"value": 5
-				},
-				{
-					"type": "size",
-					"name": "Height"
-				},
-				{
-					"type": "position",
-					"name": "X/Y Gap"
-				},
-				{
-					"type": "position",
-					"name": "Z Gap"
-				}
-			]
-		},
-		"brush/stairs_stringer": {
-			"params": [
-				{
-					"name": "Direction",
-					"value": 0,
-					"range": "0 3",
-					"step": 1,
-					"decimal": 0
-				},
-				{
-					"type": "size",
-					"name": "Count",
-					"value": 5
-				},
-				{
-					"type": "size",
-					"name": "Height"
-				},
-				{
-					"type": "position",
-					"name": "Stringer",
-					"value": 0
-				}
-			]
-		},
-		"brush/stairs": {
-			"params": [
-				{
-					"name": "Direction",
-					"value": 0,
-					"range": "0 3",
-					"step": 1,
-					"decimal": 0
-				},
-				{
-					"type": "size",
-					"name": "Count",
-					"value": 5
-				},
-				{
-					"type": "size",
-					"name": "Height"
-				}
-			]
-		},
-		"pyramid": {
-			"params": [
-				{
-					"type": "color_a",
-					"name": "Color"
-				}
-			]
-		},
-		"pyramid2": {
-			"params": [
-				{
-					"type": "color_a",
-					"name": "Color"
-				}
-			]
-		},
-		"sand": {
-			"params": [
-				{
-					"type": "color_a",
-					"name": "Color",
-					"value": 0
-				}
-			]
-		},
-		"sand2": {
-			"params": [
-				{
-					"type": "color_a",
-					"name": "Color",
-					"value": 0
-				}
-			]
-		},
-		"soil": {
-			"params": [
-				{
-					"type": "color_a",
-					"name": "Color"
-				},
-				{
-					"type": "position",
-					"name": "Headroom",
-					"value": 1
-				}
-			]
-		},
-		"soil_replace": {
-			"params": [
-				{
-					"type": "color_a",
-					"name": "Color"
-				},
-				{
-					"type": "position",
-					"name": "Headroom",
-					"value": 1
-				}
-			]
-		},
-		"cover": {
-			"params": [
-				{
-					"type": "color_a",
-					"name": "Color"
-				}
-			]
-		}
-	}
+    "shaders": {
+        "brush/arch": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Mode",
+                    "range": "0 1",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "decimal": 0,
+                    "name": "Rotation",
+                    "range": "0 1",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "name": "Width",
+                    "type": "size",
+                    "value": 12
+                },
+                {
+                    "name": "Thickness",
+                    "type": "size",
+                    "value": 2
+                }
+            ]
+        },
+        "brush/bricks": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Direction",
+                    "range": "0 3",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "name": "Width",
+                    "type": "size",
+                    "value": 5
+                },
+                {
+                    "name": "Height",
+                    "type": "size",
+                    "value": 2
+                },
+                {
+                    "name": "Depth",
+                    "type": "size",
+                    "value": 2
+                },
+                {
+                    "name": "Offset",
+                    "type": "position"
+                },
+                {
+                    "name": "Color A",
+                    "type": "color_a"
+                },
+                {
+                    "name": "Color B",
+                    "type": "color_b",
+                    "value": 10
+                },
+                {
+                    "name": "Threshold",
+                    "type": "fraction",
+                    "value": 1
+                }
+            ]
+        },
+        "brush/bricks_vert": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Direction",
+                    "range": "0 3",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "name": "Width",
+                    "type": "size",
+                    "value": 2
+                },
+                {
+                    "name": "Height",
+                    "type": "size",
+                    "value": 5
+                },
+                {
+                    "name": "Depth",
+                    "type": "size",
+                    "value": 2
+                },
+                {
+                    "name": "Offset",
+                    "type": "position"
+                },
+                {
+                    "name": "Color A",
+                    "type": "color_a"
+                },
+                {
+                    "name": "Color B",
+                    "type": "color_b",
+                    "value": 10
+                },
+                {
+                    "name": "Threshold",
+                    "type": "fraction",
+                    "value": 1
+                }
+            ]
+        },
+        "brush/diagonal2": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Direction",
+                    "range": "0 5",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "name": "Color A",
+                    "type": "color_a"
+                },
+                {
+                    "name": "Color B",
+                    "type": "color_b",
+                    "value:": 8
+                },
+                {
+                    "name": "Width A",
+                    "type": "size",
+                    "value": 2
+                },
+                {
+                    "name": "Width B",
+                    "type": "size",
+                    "value": 2
+                },
+                {
+                    "name": "Offset",
+                    "type": "position"
+                }
+            ]
+        },
+        "brush/diagonal3": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Direction",
+                    "range": "0 5",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "name": "Color A",
+                    "type": "color_a"
+                },
+                {
+                    "name": "Color B",
+                    "type": "color_b",
+                    "value": 8
+                },
+                {
+                    "name": "Color C",
+                    "type": "color_b",
+                    "value": 16
+                },
+                {
+                    "name": "Width A",
+                    "type": "size",
+                    "value": 2
+                },
+                {
+                    "name": "Width B",
+                    "type": "size",
+                    "value": 2
+                },
+                {
+                    "name": "Width C",
+                    "type": "size",
+                    "value": 2
+                },
+                {
+                    "name": "Offset",
+                    "type": "position"
+                }
+            ]
+        },
+        "brush/diagonal_range": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Direction",
+                    "range": "0 5",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "name": "Color A",
+                    "type": "color_a"
+                },
+                {
+                    "name": "Color B",
+                    "type": "color_b",
+                    "value": 8
+                },
+                {
+                    "name": "Width",
+                    "type": "size",
+                    "value": 2
+                },
+                {
+                    "name": "Offset",
+                    "type": "position"
+                }
+            ]
+        },
+        "brush/grass": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Mode",
+                    "range": "0 3",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "name": "Density",
+                    "type": "size",
+                    "value": 2
+                },
+                {
+                    "name": "Growth",
+                    "type": "fraction",
+                    "value": 0.5
+                },
+                {
+                    "decimal": 0,
+                    "name": "Seed",
+                    "range": "0 100",
+                    "step": 1,
+                    "value": 1
+                },
+                {
+                    "name": "Color A",
+                    "type": "color_a"
+                },
+                {
+                    "name": "Color B",
+                    "type": "color_b",
+                    "value": 8
+                }
+            ]
+        },
+        "brush/grass_inv": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Mode",
+                    "range": "0 3",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "name": "Density",
+                    "type": "size",
+                    "value": 2
+                },
+                {
+                    "name": "Growth",
+                    "type": "fraction",
+                    "value": 0.5
+                },
+                {
+                    "decimal": 0,
+                    "name": "Seed",
+                    "range": "0 100",
+                    "step": 1,
+                    "value": 1
+                },
+                {
+                    "name": "Color A",
+                    "type": "color_a"
+                },
+                {
+                    "name": "Color B",
+                    "type": "color_b",
+                    "value": 8
+                }
+            ]
+        },
+        "brush/grid": {
+            "params": [
+                {
+                    "name": "Color A",
+                    "type": "color_a"
+                },
+                {
+                    "name": "Color B",
+                    "type": "color_b"
+                },
+                {
+                    "name": "Thickness",
+                    "type": "size"
+                },
+                {
+                    "name": "Size X",
+                    "type": "size"
+                },
+                {
+                    "name": "Size Y",
+                    "type": "size"
+                },
+                {
+                    "name": "Size Z",
+                    "type": "size"
+                }
+            ]
+        },
+        "brush/prism": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Mode",
+                    "range": "0 1",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "name": "Width X",
+                    "type": "position",
+                    "value": 12
+                },
+                {
+                    "name": "Width Y",
+                    "type": "position",
+                    "value": 12
+                }
+            ]
+        },
+        "brush/stairs": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Mode",
+                    "range": "0 2",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "decimal": 0,
+                    "name": "Direction",
+                    "range": "0 3",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "name": "Count",
+                    "type": "size",
+                    "value": 5
+                },
+                {
+                    "name": "Height",
+                    "type": "size"
+                }
+            ]
+        },
+        "brush/stairs_runs": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Mode",
+                    "range": "0 3",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "decimal": 0,
+                    "name": "Direction",
+                    "range": "0 3",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "name": "Count",
+                    "type": "size",
+                    "value": 5
+                },
+                {
+                    "name": "Height",
+                    "type": "size"
+                },
+                {
+                    "name": "X/Y Gap",
+                    "type": "position"
+                },
+                {
+                    "name": "Z Gap",
+                    "type": "position"
+                }
+            ]
+        },
+        "brush/stairs_stringer": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Mode",
+                    "range": "0 3",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "decimal": 0,
+                    "name": "Direction",
+                    "range": "0 3",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "name": "Count",
+                    "type": "size",
+                    "value": 5
+                },
+                {
+                    "name": "Height",
+                    "type": "size"
+                },
+                {
+                    "name": "Stringer",
+                    "type": "position",
+                    "value": 0
+                }
+            ]
+        },
+        "brush/tiles": {
+            "params": [
+                {
+                    "name": "Color A",
+                    "type": "color_a"
+                },
+                {
+                    "name": "Color B",
+                    "type": "color_b"
+                },
+                {
+                    "name": "Width",
+                    "type": "size",
+                    "value": 2
+                },
+                {
+                    "name": "Height",
+                    "type": "size",
+                    "value": 2
+                },
+                {
+                    "name": "Depth",
+                    "type": "size",
+                    "value": 2
+                },
+                {
+                    "name": "Offset X",
+                    "type": "position"
+                },
+                {
+                    "name": "Offset Y",
+                    "type": "position"
+                },
+                {
+                    "name": "Offset Z",
+                    "type": "position"
+                }
+            ]
+        },
+        "brush/tiles_puzzle": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Mode",
+                    "range": "0 4",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "name": "Color A",
+                    "type": "color_a",
+                    "value": 1
+                },
+                {
+                    "name": "Color B",
+                    "type": "color_b",
+                    "value": 8
+                },
+                {
+                    "name": "Size X",
+                    "type": "size",
+                    "value": 4
+                },
+                {
+                    "name": "Size Y",
+                    "type": "size",
+                    "value": 4
+                },
+                {
+                    "name": "Line Color",
+                    "type": "color_b",
+                    "value": 16
+                },
+                {
+                    "name": "Line Width",
+                    "type": "position",
+                    "value": 1
+                },
+                {
+                    "decimal": 0,
+                    "name": "Seed",
+                    "range": "0 100",
+                    "step": 1,
+                    "value": 1
+                }
+            ]
+        },
+        "brush/weave": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Mode",
+                    "range": "0 1",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "name": "Size",
+                    "type": "size",
+                    "value": 4
+                },
+                {
+                    "name": "Color A",
+                    "type": "color_a",
+                    "value": 1
+                },
+                {
+                    "name": "Color B",
+                    "type": "color_b",
+                    "value": 9
+                },
+                {
+                    "name": "Line Color",
+                    "type": "color_b",
+                    "value": 10
+                },
+                {
+                    "name": "Line Width",
+                    "type": "position",
+                    "value": 1
+                }
+            ]
+        },
+        "brush/zigzag2": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Direction",
+                    "range": "0 3",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "name": "Width A",
+                    "type": "size",
+                    "value": 2
+                },
+                {
+                    "name": "Width B",
+                    "type": "size",
+                    "value": 2
+                },
+                {
+                    "name": "Color A",
+                    "type": "color_a",
+                    "value": 1
+                },
+                {
+                    "name": "Color B",
+                    "type": "color_b",
+                    "value": 9
+                }
+            ]
+        },
+        "brush/zigzag3": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Direction",
+                    "range": "0 3",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "name": "Width A",
+                    "type": "size",
+                    "value": 2
+                },
+                {
+                    "name": "Width B",
+                    "type": "size",
+                    "value": 2
+                },
+                {
+                    "name": "Width C",
+                    "type": "size",
+                    "value": 2
+                },
+                {
+                    "name": "Color A",
+                    "type": "color_a",
+                    "value": 1
+                },
+                {
+                    "name": "Color B",
+                    "type": "color_b",
+                    "value": 9
+                },
+                {
+                    "name": "Color C",
+                    "type": "color_b",
+                    "value": 18
+                }
+            ]
+        },
+        "brush/zigzag_range": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Direction",
+                    "range": "0 3",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "name": "Width",
+                    "type": "size",
+                    "value": 2
+                },
+                {
+                    "name": "Color A",
+                    "type": "color_a",
+                    "value": 1
+                },
+                {
+                    "name": "Color B",
+                    "type": "color_b",
+                    "value": 9
+                }
+            ]
+        },
+        "case": {
+            "params": [
+                {
+                    "name": "Color",
+                    "type": "color_a"
+                }
+            ]
+        },
+        "cover": {
+            "params": [
+                {
+                    "name": "Color",
+                    "type": "color_a"
+                }
+            ]
+        },
+        "flood": {
+            "params": [
+                {
+                    "name": "Height",
+                    "type": "size"
+                }
+            ]
+        },
+        "flood2": {
+            "params": [
+                {
+                    "name": "Height",
+                    "type": "size"
+                }
+            ]
+        },
+        "noise": {
+            "params": [
+                {
+                    "name": "Color A",
+                    "type": "color_a"
+                },
+                {
+                    "name": "Color B",
+                    "type": "color_b"
+                },
+                {
+                    "name": "Size X",
+                    "type": "size"
+                },
+                {
+                    "name": "Size Y",
+                    "type": "size"
+                },
+                {
+                    "name": "Size Z",
+                    "type": "size"
+                }
+            ]
+        },
+        "outline": {
+            "params": [
+                {
+                    "name": "Color",
+                    "type": "color_a"
+                }
+            ]
+        },
+        "outline2": {
+            "params": [
+                {
+                    "name": "Color",
+                    "type": "color_a"
+                }
+            ]
+        },
+        "pyramid": {
+            "params": [
+                {
+                    "name": "Color",
+                    "type": "color_a"
+                }
+            ]
+        },
+        "pyramid2": {
+            "params": [
+                {
+                    "name": "Color",
+                    "type": "color_a"
+                }
+            ]
+        },
+        "random": {
+            "params": [
+                {
+                    "name": "Threshold",
+                    "type": "fraction"
+                },
+                {
+                    "name": "Color",
+                    "type": "color_a"
+                }
+            ]
+        },
+        "sand": {
+            "params": [
+                {
+                    "name": "Color",
+                    "type": "color_a",
+                    "value": 0
+                }
+            ]
+        },
+        "sand2": {
+            "params": [
+                {
+                    "name": "Color",
+                    "type": "color_a",
+                    "value": 0
+                }
+            ]
+        },
+        "slice_x": {
+            "params": [
+                {
+                    "name": "Offset",
+                    "type": "position"
+                },
+                {
+                    "name": "Count",
+                    "type": "position"
+                }
+            ]
+        },
+        "slice_y": {
+            "params": [
+                {
+                    "name": "Offset",
+                    "type": "position"
+                },
+                {
+                    "name": "Count",
+                    "type": "position"
+                }
+            ]
+        },
+        "slice_z": {
+            "params": [
+                {
+                    "name": "Offset",
+                    "type": "position"
+                },
+                {
+                    "name": "Count",
+                    "type": "position"
+                }
+            ]
+        },
+        "soil": {
+            "params": [
+                {
+                    "name": "Color",
+                    "type": "color_a"
+                },
+                {
+                    "name": "Headroom",
+                    "type": "position",
+                    "value": 1
+                }
+            ]
+        },
+        "soil_replace": {
+            "params": [
+                {
+                    "name": "Color",
+                    "type": "color_a"
+                },
+                {
+                    "name": "Headroom",
+                    "type": "position",
+                    "value": 1
+                }
+            ]
+        }
+    },
+    "types": {
+        "color_a": {
+            "decimal": 0,
+            "range": "0 255",
+            "step": 1,
+            "value": 1
+        },
+        "color_b": {
+            "decimal": 0,
+            "range": "0 255",
+            "step": 1,
+            "value": 2
+        },
+        "fraction": {
+            "decimal": 1,
+            "range": "0 1",
+            "step": 0.01,
+            "value": 0.5
+        },
+        "position": {
+            "decimal": 0,
+            "range": "0 256",
+            "step": 1,
+            "value": 0
+        },
+        "size": {
+            "decimal": 0,
+            "range": "1 256",
+            "step": 1,
+            "value": 1
+        }
+    }
 }
