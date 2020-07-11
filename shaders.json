@@ -1,33 +1,5 @@
 {
     "shaders": {
-        "brush/arch": {
-            "params": [
-                {
-                    "decimal": 0,
-                    "name": "Mode",
-                    "range": "0 1",
-                    "step": 1,
-                    "value": 0
-                },
-                {
-                    "decimal": 0,
-                    "name": "Rotation",
-                    "range": "0 1",
-                    "step": 1,
-                    "value": 0
-                },
-                {
-                    "name": "Width",
-                    "type": "size",
-                    "value": 12
-                },
-                {
-                    "name": "Thickness",
-                    "type": "size",
-                    "value": 2
-                }
-            ]
-        },
         "brush/bricks": {
             "params": [
                 {
@@ -322,27 +294,6 @@
                 {
                     "name": "Size Z",
                     "type": "size"
-                }
-            ]
-        },
-        "primitive/prism": {
-            "params": [
-                {
-                    "decimal": 0,
-                    "name": "Mode",
-                    "range": "0 1",
-                    "step": 1,
-                    "value": 0
-                },
-                {
-                    "name": "Width X",
-                    "type": "position",
-                    "value": 12
-                },
-                {
-                    "name": "Width Y",
-                    "type": "position",
-                    "value": 12
                 }
             ]
         },
@@ -730,6 +681,45 @@
                 {
                     "name": "Color",
                     "type": "color_a"
+                }
+            ]
+        },
+        "primitive/cylinder": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Rotation",
+                    "range": "0 2",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "decimal": 0,
+                    "name": "Thickness",
+                    "range": "0 100",
+                    "step": 5,
+                    "value": 50
+                }
+            ]
+        },
+        "primitive/prism": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Mode",
+                    "range": "0 1",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "name": "Width X",
+                    "type": "position",
+                    "value": 12
+                },
+                {
+                    "name": "Width Y",
+                    "type": "position",
+                    "value": 12
                 }
             ]
         },
