@@ -35,27 +35,27 @@ float random(vec2 co) {
 float map(vec3 v) {
 	vec3 shape = vec3(width, height, 1.0);
 	vec3 j = floor(v / shape);
-	vec3 m = mod(v, shape);
+	vec3 m = floor(mod(v, shape));
 	float tile = random(j.xy);
 	float next = tile;
 	int i;
 
 	if (tile > 0.5) {
-		for (i = 0; i < 5; i += 1) {
-			float b = random(j.xy + vec2(float(i), 0.0));
+		for (i = 0; i < 256; i += 1) {
+			float adjacent_tile = random(j.xy + vec2(float(i + 1), 0.0));
 
-			if (b > 0.5) {
-				next = b;
+			if (adjacent_tile > 0.5) {
+				next = adjacent_tile;
 			} else {
 				break;
 			}
 		}
 
-		if (i == 1) {
-			if (any(greaterThan(m.xy, shape.xy - vec2(thickness)))) {
+		if (i == 0) {
+			if (any(greaterThanEqual(m.xy, shape.xy - thickness))) {
 				return line_color;
 			}
-		} else if (m.y > (shape.y - thickness)) {
+		} else if (m.y >= (shape.y - thickness)) {
 			return line_color;
 		}
 
@@ -63,21 +63,21 @@ float map(vec3 v) {
 			next = (next - 0.5) * 2.0;
 		}
 	} else {
-		for (i = 0; i < 5; i += 1) {
-			float b = random(j.xy + vec2(0.0, float(i)));
+		for (i = 0; i < 256; i += 1) {
+			float adjacent_tile = random(j.xy + vec2(0.0, float(i + 1)));
 
-			if (b <= 0.5) {
-				next = b;
+			if (adjacent_tile <= 0.5) {
+				next = adjacent_tile;
 			} else {
 				break;
 			}
 		}
 
-		if (i == 1) {
-			if (any(greaterThan(m.xy, shape.xy - vec2(thickness)))) {
+		if (i == 0) {
+			if (any(greaterThanEqual(m.xy, shape.xy - thickness))) {
 				return line_color;
 			}
-		} else if (m.x > (shape.x - thickness)) {
+		} else if (m.x >= (shape.x - thickness)) {
 			return line_color;
 		}
 
