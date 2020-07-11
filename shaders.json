@@ -325,7 +325,7 @@
                 }
             ]
         },
-        "brush/prism": {
+        "primitive/prism": {
             "params": [
                 {
                     "decimal": 0,
