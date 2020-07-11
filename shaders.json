@@ -712,12 +712,12 @@
                     "value": 0
                 },
                 {
-                    "name": "Width X",
+                    "name": "Size X",
                     "type": "position",
                     "value": 12
                 },
                 {
-                    "name": "Width Y",
+                    "name": "Size Y",
                     "type": "position",
                     "value": 12
                 }
