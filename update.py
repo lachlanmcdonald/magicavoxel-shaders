@@ -56,7 +56,7 @@ for shader_name in params.keys():
 	with open(path.join(DIR, 'shader', "{}.txt".format(shader_name)), 'r') as f:
 		shader = f.readlines()
 
-	with open(path.join(DIR, 'shader', "{}.txt".format(shader_name)), 'w') as f:
+	with open(path.join(DIR, 'shader', "{}.txt".format(shader_name)), 'w', newline="\n") as f:
 		has_comment = shader[0].startswith('//')
 		shader_lines = []
 
