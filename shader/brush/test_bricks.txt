@@ -1,0 +1,108 @@
+// MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+// Copyright (c) 2020 Lachlan McDonald
+//
+// xs brush/bricks [Direction] [Width] [Height] [Depth] [Offset] [Color A] [Color B] [Threshold]
+//
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { id = '0'  name = 'Width'  value = '5'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Height'  value = '3'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Depth'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Color A'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Color B'  value = '8'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '5'  name = 'Line Width'  value = '1'  range = '0 64'  step = '1'  decimal = '0' }
+// arg : { id = '6'  name = 'Line Color'  value = '80'  range = '0 255'  step = '1'  decimal = '0' }
+// xs_end
+
+float pal_min = i_args[3];
+float pal_max = i_args[4];
+float thickness = floor(i_args[5]);
+float line_color = i_args[6];
+vec3 dim = vec3(i_args[0], i_args[1], i_args[2]) + thickness;
+
+float random(vec2 co, float seed) {
+    return fract(cos(dot(co.xy, vec2(23.14069263277926, pow(sqrt(2.0), 2.0)))) * (43758.5453 + seed));
+}
+
+float random(vec3 co, float seed) {
+	float a = random(co.xy, seed);
+	return random(vec2(a, co.z), seed);
+}
+
+vec3 mod3(vec3 a, vec3 b) {
+	return vec3(mod(a.x, b.x),
+				mod(a.y, b.y),
+				mod(a.z, b.z));
+}
+
+float map(vec3 v) {
+	vec3 horz;
+	vec3 vert;
+	float z_offset;
+
+	if (mod(floor(v.z / dim.z), 2.0) == 0.0) {
+		z_offset = 0;
+	} else {
+		v = v.yxz;
+		z_offset = dim.y;
+	}
+
+	if (v.y < (i_volume_size.y / 2.0)) {
+		horz = floor(v / dim);
+	} else {
+		horz = floor(vec3(v.x, i_volume_size.y - v.y, v.z) / dim);
+	}
+
+	if (v.x < (i_volume_size.x / 2.0)) {
+		vert = floor(v.xyz / dim.yxz);
+	} else {
+		vert = floor(vec3(i_volume_size.x - v.x, v.y, v.z) / dim.yxz);
+	}
+
+	float horz_offset = horz.y * dim.y + z_offset;
+	float vert_offset = vert.x * dim.y + z_offset;
+	vec3 local_v;
+	float brick;
+
+	if (v.x > horz_offset && v.x < i_volume_size.x - horz_offset) {
+		vec3 offset = vec3(horz_offset, 0.0, 0.0);
+		float f;
+
+		if (v.y < i_volume_size.y / 2.0) {
+			vec3 co = floor((v - offset) / dim);
+			local_v = mod3(v - offset, dim);
+			brick = random(co, 0.0);
+		} else {
+			vec3 k = vec3(v.x, i_volume_size.y - v.y, v.z);
+			vec3 co = floor((k - offset) / dim);
+			local_v = mod3((k - offset), dim);
+			brick = random(co, dot(dim.x, dim.y));
+		}
+
+		if (any(greaterThanEqual(local_v, dim - thickness))) {
+			return line_color;
+		} else {
+			return mix(pal_min, pal_max, brick);
+		}
+	} else {
+		vec3 offset = vec3(0.0, vert_offset, 0.0);
+
+		if (v.x < i_volume_size.x / 2.0) {
+			vec3 co = floor((v - offset) / dim.yxz);
+			local_v = mod3(v - offset, dim.yxz);
+			brick = random(co, 0.0);
+		} else {
+			vec3 k = vec3(v.x - i_volume_size.x - 1.0, v.y, v.z);
+			vec3 co = floor((k - offset) / dim.yxz);
+			local_v = mod3(k - offset, dim.yxz);
+			brick = random(co, 0.0);
+		}
+
+		if (any(greaterThanEqual(local_v, dim.yxz - thickness))) {
+			return line_color;
+		} else {
+			return mix(pal_min, pal_max, brick);
+		}
+	}
+}
