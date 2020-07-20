@@ -20,7 +20,7 @@ float y_size = max(i_args[4], 1.0) + 1.0;
 float z_size = max(i_args[5], 1.0) + 1.0;
 
 bvec3 axis = equal(i_axis, vec3(1.0, 1.0, 1.0));
-bool no_axis_mode = all(equal(i_axis, vec3(0.0, 0.0, 0.0)));
+bool no_axis_mode = all(equal(ivec3(i_axis), ivec3(0, 0, 0)));
 
 float map(vec3 v) {
 	if (no_axis_mode || axis.x) {

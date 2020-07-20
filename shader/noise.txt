@@ -26,7 +26,7 @@ float size_z = max(i_args[4], 1.0);
 float map(vec3 v) {
 	float index = voxel(v);
 
-	bool no_axis_mode = (i_axis == vec3(0.0, 0.0, 0.0));
+	bool no_axis_mode = all(equal(ivec3(i_axis), ivec3(0, 0, 0)));
 	float x = (no_axis_mode || i_axis.x == 1.0) ? floor(v.x / size_x) : 1.0;
 	float y = (no_axis_mode || i_axis.y == 1.0) ? floor(v.y / size_y) : 1.0;
 	float z = (no_axis_mode || i_axis.z == 1.0) ? floor(v.z / size_z) : 1.0;

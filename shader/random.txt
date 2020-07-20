@@ -10,6 +10,7 @@
 // arg : { id = '1'  name = 'Color'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
 // xs_end
 
+bool no_axis_mode = all(equal(ivec3(i_axis), ivec3(0, 0, 0)));
 float random(vec2 co, float seed) {
     return fract(cos(dot(co.xy, vec2(23.14069263277926, pow(sqrt(2.0), 2.0)))) * (43758.5453 + seed));
 }
@@ -17,7 +18,6 @@ float random(vec2 co, float seed) {
 float map(vec3 v) {
 	float index = voxel(v);
 
-	bool no_axis_mode = (i_axis == vec3(0.0, 0.0, 0.0));
 	float x = (no_axis_mode || i_axis.x == 1.0) ? v.x : 1.0;
 	float y = (no_axis_mode || i_axis.y == 1.0) ? v.y : 1.0;
 	float z = (no_axis_mode || i_axis.z == 1.0) ? v.z : 1.0;
