@@ -89,9 +89,9 @@ float map(vec3 v) {
 	if (mode == 1) {
 		return tile > 0.5 ? color_a : color_b;
 	} else if (mode == 2) {
-		return tile > 0.5 ? line_color : mix(color_a, color_b, next);;
+		return tile > 0.5 ? line_color : mix(color_a, color_b, next);
 	} else if (mode == 3) {
-		return tile <= 0.5 ? line_color : mix(color_a, color_b, next);;
+		return tile <= 0.5 ? line_color : mix(color_a, color_b, next);
 	} else {
 		return mix(color_a, color_b, next);
 	}
