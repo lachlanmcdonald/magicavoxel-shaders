@@ -14,7 +14,7 @@
 // arg : { id = '5'  name = 'Color B'  value = '8'  range = '0 255'  step = '1'  decimal = '0' }
 // xs_end
 
-float mode = i_args[0];
+int mode = int(i_args[0]);
 float size = i_args[1];
 float growth = mix(1.0, -1.0, i_args[2]);
 float seed = i_args[3];
@@ -40,13 +40,13 @@ float map(vec3 v) {
         if (z < p2) {
             float f;
 
-            if (mode == 0.0) {
+            if (mode == 0) {
                 f = p2;
-            } else if (mode == 1.0) {
+            } else if (mode == 1) {
                 f = random(vec2(z, p), seed);
-            } else if (mode == 2.0) {
+            } else if (mode == 2) {
                 f = random(v.xy, seed);
-            } else if (mode == 3.0) {
+            } else if (mode == 3) {
                 f = z / p2;
             }
 

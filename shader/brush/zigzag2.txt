@@ -13,7 +13,7 @@
 // arg : { id = '4'  name = 'Color B'  value = '9'  range = '0 255'  step = '1'  decimal = '0' }
 // xs_end
 
-float direction = i_args[0];
+int direction = int(i_args[0]);
 float width_a = i_args[1];
 float width_b = i_args[2];
 float color_a = i_args[3];
@@ -22,12 +22,12 @@ float color_b = i_args[4];
 float map(vec3 v) {
 	v = floor(v);
 
-	if (direction == 1.0) {
+	if (direction == 1) {
 		v.y = -v.y;
-	} else if (direction == 2.0) {
+	} else if (direction == 2) {
 		v.x = -v.x;
 		v.y = -v.y;
-	} else if (direction == 3.0) {
+	} else if (direction == 3) {
 		v.x = -v.x;
 	}
 
