@@ -45,8 +45,8 @@ float map(vec3 v) {
 		z = -v.z;
 	}
 
-	int n = max(pal_min, pal_max) - min(pal_min, pal_max) + 1.0;
-	int f = mod(x + v.y + z - offset, n * width);
+	float n = max(pal_min, pal_max) - min(pal_min, pal_max) + 1.0;
+	float f = mod(x + v.y + z - offset, n * width);
 
 	if (pal_min > pal_max) {
 		return pal_min - floor(f / width);
