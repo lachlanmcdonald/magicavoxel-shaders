@@ -727,7 +727,8 @@
             "params": [
                 {
                     "name": "Color",
-                    "type": "color_a"
+					"type": "color_a",
+					"value": 0
                 }
             ]
         },
@@ -735,7 +736,8 @@
             "params": [
                 {
                     "name": "Color",
-                    "type": "color_a"
+					"type": "color_a",
+					"value": 0
                 }
             ]
         },

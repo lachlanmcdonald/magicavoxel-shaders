@@ -6,7 +6,7 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Color'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '0'  name = 'Color'  value = '0'  range = '0 255'  step = '1'  decimal = '0' }
 // xs_end
 
 vec2 vol = vec2(i_volume_size.xy - 1.0);
