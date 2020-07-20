@@ -13,20 +13,21 @@
 // arg : { id = '4'  name = 'Size Z'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
 // xs_end
 
-float random(vec2 co, float seed) {
-    return fract(cos(dot(co.xy, vec2(23.14069263277926, pow(sqrt(2.0), 2.0)))) * (43758.5453 + seed));
-}
-
 float pal_min = i_args[0];
 float pal_max = i_args[1];
 float size_x = max(i_args[2], 1.0);
 float size_y = max(i_args[3], 1.0);
 float size_z = max(i_args[4], 1.0);
 
+bool no_axis_mode = all(equal(ivec3(i_axis), ivec3(0)));
+
+float random(vec2 co, float seed) {
+    return fract(cos(dot(co.xy, vec2(23.14069263277926, pow(sqrt(2.0), 2.0)))) * (43758.5453 + seed));
+}
+
 float map(vec3 v) {
 	float index = voxel(v);
 
-	bool no_axis_mode = all(equal(ivec3(i_axis), ivec3(0, 0, 0)));
 	float x = (no_axis_mode || i_axis.x == 1.0) ? floor(v.x / size_x) : 1.0;
 	float y = (no_axis_mode || i_axis.y == 1.0) ? floor(v.y / size_y) : 1.0;
 	float z = (no_axis_mode || i_axis.z == 1.0) ? floor(v.z / size_z) : 1.0;

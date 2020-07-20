@@ -9,8 +9,8 @@
 // arg : { id = '0'  name = 'Color'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
 // xs_end
 
-bvec3 axis_mode = equal(ivec3(i_axis), ivec3(1, 1, 1));
-bool no_axis_mode = all(equal(ivec3(i_axis), ivec3(0, 0, 0)));
+bvec3 axis_mode = equal(ivec3(i_axis), ivec3(1));
+bool no_axis_mode = all(equal(ivec3(i_axis), ivec3(0)));
 
 float map(vec3 v) {
 	float index = voxel(v);

@@ -11,7 +11,7 @@
 
 vec2 vol = vec2(i_volume_size.xy - 1.0);
 bvec3 axis = equal(i_axis, vec3(1.0, 1.0, 1.0));
-bool no_axis_mode = all(equal(ivec3(i_axis), ivec3(0, 0, 0)));
+bool no_axis_mode = all(equal(ivec3(i_axis), ivec3(0)));
 
 float map(vec3 v) {
 	float index = voxel(v);
