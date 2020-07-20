@@ -10,15 +10,16 @@
 // arg : { id = '1'  name = 'Count'  value = '0'  range = '0 256'  step = '1'  decimal = '0' }
 // xs_end
 
+float offset = max(i_args[1], 1.0);
+
 float map(vec3 v) {
-	float offset = max(i_args[1], 1.0);
-	float nx = (v.x + offset);
+	float dx = v.x + offset;
 
 	if (v.x >= i_args[0]) {
-		if (nx >= i_volume_size.x) {
+		if (dx >= i_volume_size.x) {
 			return 0.0;
 		} else {
-			return voxel(vec3(nx, v.y, v.z));
+			return voxel(vec3(dx, v.y, v.z));
 		}
 	} else {
 		return voxel(v);

@@ -12,17 +12,17 @@
 float c = max(i_args[0], 1.0);
 
 float map(vec3 v) {
-	float x = voxel(v);
+	float index = voxel(v);
 
 	if (voxel(vec3(v.x, v.y, v.z - 1.0)) > 0.0) {
 		for (float z = 0.0; z < c; z += 1.0) {
 			if (voxel(vec3(v.x, v.y, v.z + z)) > 0.0) {
-				return x;
+				return index;
 			}
 		}
 
 		return i_color_index;
 	}
 
-	return x;
+	return index;
 }
