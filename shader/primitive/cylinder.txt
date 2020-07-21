@@ -10,7 +10,7 @@
 // arg : { id = '1'  name = 'Thickness'  value = '50'  range = '0 100'  step = '5'  decimal = '0' }
 // xs_end
 
-int direction = i_args[0];
+int direction = int(i_args[0]);
 float thickness = 1.0 - (i_args[1] / 100.0);
 
 vec3 pow3(vec3 v, float d) {

@@ -13,7 +13,7 @@
 
 const float PI2 = 3.141592653589793238 * 2.0;
 
-int mode = i_args[0];
+int mode = int(i_args[0]);
 float width_x = min(i_args[1], i_volume_size.x / 2.0);
 float width_y = min(i_args[2], i_volume_size.y / 2.0);
 
