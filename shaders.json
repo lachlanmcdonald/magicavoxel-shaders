@@ -219,7 +219,7 @@
                     "name": "Seed",
                     "range": "0 100",
                     "step": 1,
-                    "value": 1
+                    "value": 0
                 },
                 {
                     "name": "Color A",
@@ -256,7 +256,7 @@
                     "name": "Seed",
                     "range": "0 100",
                     "step": 1,
-                    "value": 1
+                    "value": 0
                 },
                 {
                     "name": "Color A",
@@ -474,7 +474,7 @@
                     "name": "Seed",
                     "range": "0 100",
                     "step": 1,
-                    "value": 1
+                    "value": 0
                 }
             ]
         },
@@ -727,8 +727,8 @@
             "params": [
                 {
                     "name": "Color",
-					"type": "color_a",
-					"value": 0
+                    "type": "color_a",
+                    "value": 0
                 }
             ]
         },
@@ -736,8 +736,8 @@
             "params": [
                 {
                     "name": "Color",
-					"type": "color_a",
-					"value": 0
+                    "type": "color_a",
+                    "value": 0
                 }
             ]
         },
