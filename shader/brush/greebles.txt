@@ -2,24 +2,26 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2020 Lachlan McDonald
 //
-// xs brush/greebles [Count] [Width] [Height] [Depth] [Seed]
+// xs brush/greebles [Mode] [Count] [Width] [Height] [Depth] [Seed]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Count'  value = '32'  range = '1 256'  step = '8'  decimal = '0' }
-// arg : { id = '1'  name = 'Width'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Height'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'Depth'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'Seed'  value = '0'  range = '0 100'  step = '1'  decimal = '0' }
+// arg : { id = '0'  name = 'Mode'  value = '0'  range = '0 1'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Count'  value = '32'  range = '1 256'  step = '8'  decimal = '0' }
+// arg : { id = '2'  name = 'Width'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Height'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Depth'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '5'  name = 'Seed'  value = '1'  range = '0 100'  step = '1'  decimal = '0' }
 // xs_end
 
-int count = int(i_args[0]);
+int mode = int(i_args[0]);
+int count = int(i_args[1]);
 
 vec3 dim_min = vec3(1.0);
-vec3 dim_max = vec3(max(i_args[1], 1.0),
-					max(i_args[2], 1.0),
-					max(i_args[3], 1.0));
-float global_seed = mix(-437.5453, 437.5453, i_args[4] / 100.0);
+vec3 dim_max = vec3(max(i_args[2], 1.0),
+					max(i_args[3], 1.0),
+					max(i_args[4], 1.0));
+float global_seed = mix(-437.5453, 437.5453, i_args[5] / 100.0);
 
 bvec3 axis_mode = equal(ivec3(i_axis), ivec3(1));
 bool no_axis_mode = all(equal(ivec3(i_axis), ivec3(0)));
@@ -97,28 +99,28 @@ float map(vec3 v) {
 
 	if (no_axis_mode || axis_mode.x) {
 		if (lower_region(iv.zyx, dim_min.yxz, dim_max.yxz, 64.0 * 1.0)) {
-			return 0.0;
+			return (mode == 0) ? 0.0 : i_color_index;
 		}
 		if (upper_region((ivs - iv).zyx, dim_min.yxz, dim_max.yxz, 64.0 * 2.0)) {
-			return 0.0;
+			return (mode == 0) ? 0.0 : i_color_index;
 		}
 	}
 	if (no_axis_mode || axis_mode.y) {
 		if (lower_region(iv.xzy, dim_min.xyz, dim_max.xyz, 64.0 * 3.0)) {
-			return 0.0;
+			return (mode == 0) ? 0.0 : i_color_index;
 		}
 		if (upper_region((ivs - iv).xzy, dim_min.xyz, dim_max.xyz, 64.0 * 4.0)) {
-			return 0.0;
+			return (mode == 0) ? 0.0 : i_color_index;
 		}
 	}
 	if (no_axis_mode || axis_mode.z) {
 		if (lower_region(iv, dim_min.yxz, dim_max.yxz, 64.0 * 5.0)) {
-			return 0.0;
+			return (mode == 0) ? 0.0 : i_color_index;
 		}
 		if (upper_region(ivs - iv, dim_min.yxz, dim_max.yxz, 64.0 * 6.0)) {
-			return 0.0;
+			return (mode == 0) ? 0.0 : i_color_index;
 		}
 	}
 
-	return i_color_index;
+	return (mode == 0) ? i_color_index : 0.0;
 }

@@ -273,6 +273,13 @@
             "params": [
                 {
                     "decimal": 0,
+                    "name": "Mode",
+                    "range": "0 1",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "decimal": 0,
                     "name": "Count",
                     "range": "1 256",
                     "step": 8,
