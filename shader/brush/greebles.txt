@@ -33,18 +33,6 @@ float random(vec2 co) {
     return fract(cos(dot(co.xy, vec2(23.14069263277926, pow(sqrt(2.0), 2.0)))) * (43758.5453 + global_seed));
 }
 
-float random(vec3 co) {
-    float j = random(co.xy);
-    return random(vec2(j, co.z));
-}
-
-vec3 random_vec3(vec3 range_min, vec3 range_max, float seed) {
-    float x = mix(range_min.x, range_max.x, random(vec2(seed * 64.0)));
-    float y = mix(range_min.y, range_max.y, random(vec2(seed * 64.0 + 64.0)));
-    float z = mix(range_min.z, range_max.z, random(vec2(seed * 64.0 + 128.0)));
-    return vec3(x, y, z);
-}
-
 float roundf(float f) {
 	return fract(f) > 0.5 ? ceil(f) : floor(f);
 }
