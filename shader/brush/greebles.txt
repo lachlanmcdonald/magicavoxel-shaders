@@ -2,16 +2,18 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2020 Lachlan McDonald
 //
+// xs brush/greebles [Count] [Width] [Height] [Depth] [Seed]
+//
 // xs_begin
 // author : '@lachlanmcdonald'
 // arg : { id = '0'  name = 'Count'  value = '32'  range = '1 256'  step = '8'  decimal = '0' }
 // arg : { id = '1'  name = 'Width'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
 // arg : { id = '2'  name = 'Height'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
 // arg : { id = '3'  name = 'Depth'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'Seed'  value = '1'  range = '1 100'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Seed'  value = '0'  range = '0 100'  step = '1'  decimal = '0' }
 // xs_end
 
-int count = i_args[0];
+int count = int(i_args[0]);
 
 vec3 dim_min = vec3(1.0);
 vec3 dim_max = vec3(max(i_args[1], 1.0),
@@ -48,15 +50,15 @@ float roundf(float f) {
 }
 
 int imix(float a, float b, float f) {
-	return roundf(mix(a, b, f));
+	return int(roundf(mix(a, b, f)));
 }
 
 float max3(vec3 a) {
 	return max(max(a.x, a.y), a.z);
 }
 
-Box region(ivec3 dim_min, ivec3 dim_max, float iter, float seed) {
-	int max_size = max3(i_volume_size);
+Box region(vec3 dim_min, vec3 dim_max, float iter, float seed) {
+	float max_size = max3(i_volume_size);
 
 	float r[5];
 	r[0] = random(vec2(iter * seed));
@@ -73,13 +75,13 @@ Box region(ivec3 dim_min, ivec3 dim_max, float iter, float seed) {
 					  imix(dim_min.y, dim_max.y, r[3]),
 					  imix(dim_min.z, dim_max.z, r[4]));
 
-	ivec3 lower = ivec3(p - floor(vec3(dim) / 2.0));
-	ivec3 upper = ivec3(p + ceil(vec3(dim) / 2.0));
+	ivec3 lower = p - ivec3(floor(vec3(dim) / 2.0));
+	ivec3 upper = p + ivec3(ceil(vec3(dim) / 2.0));
 
 	return Box(lower, upper);
 }
 
-bool lower_region(ivec3 iv, ivec3 dim_min, ivec3 dim_max, float seed) {
+bool lower_region(ivec3 iv, vec3 dim_min, vec3 dim_max, float seed) {
 	for (int i = 0; i < count; i += 1) {
 		Box j = region(dim_min, dim_max, float(i), seed);
 
@@ -87,13 +89,10 @@ bool lower_region(ivec3 iv, ivec3 dim_min, ivec3 dim_max, float seed) {
 			return true;
 		}
     }
-
 	return false;
 }
 
-bool upper_region(ivec3 iv, ivec3 dim_min, ivec3 dim_max, float seed) {
-	int max_size = max3(i_volume_size);
-
+bool upper_region(ivec3 iv, vec3 dim_min, vec3 dim_max, float seed) {
 	for (int i = 0; i < count; i += 1) {
 		Box j = region(dim_min, dim_max, float(i), seed);
 
@@ -101,10 +100,8 @@ bool upper_region(ivec3 iv, ivec3 dim_min, ivec3 dim_max, float seed) {
 			return true;
 		}
     }
-
 	return false;
 }
-
 
 float map(vec3 v) {
 	ivec3 iv = ivec3(v);

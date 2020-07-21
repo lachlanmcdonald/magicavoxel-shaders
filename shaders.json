@@ -269,6 +269,45 @@
                 }
             ]
         },
+        "brush/greebles": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Count",
+                    "range": "1 256",
+                    "step": 8,
+                    "value": 32
+                },
+                {
+                    "decimal": 0,
+                    "name": "Width",
+                    "range": "1 256",
+                    "step": 1,
+                    "value": 4
+                },
+                {
+                    "decimal": 0,
+                    "name": "Height",
+                    "range": "1 256",
+                    "step": 1,
+                    "value": 4
+                },
+                {
+                    "decimal": 0,
+                    "name": "Depth",
+                    "range": "1 256",
+                    "step": 1,
+                    "value": 4
+                },
+                {
+                    "decimal": 0,
+                    "name": "Seed",
+                    "range": "0 100",
+                    "step": 1,
+                    "value": 1
+                }
+            ]
+        },
         "brush/grid": {
             "params": [
                 {
@@ -727,8 +766,8 @@
             "params": [
                 {
                     "name": "Color",
-					"type": "color_a",
-					"value": 0
+                    "type": "color_a",
+                    "value": 0
                 }
             ]
         },
@@ -736,8 +775,8 @@
             "params": [
                 {
                     "name": "Color",
-					"type": "color_a",
-					"value": 0
+                    "type": "color_a",
+                    "value": 0
                 }
             ]
         },
