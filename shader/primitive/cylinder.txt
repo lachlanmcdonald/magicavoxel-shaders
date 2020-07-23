@@ -20,7 +20,7 @@ vec3 pow3(vec3 v, float d) {
 	return v;
 }
 
-vec3 dist(vec3 volume_size, vec3 v) {
+float dist(vec3 volume_size, vec3 v) {
 	vec3 a = volume_size / 2.0;
 	vec3 c = pow3(a, 2.0);
 	vec3 j = pow3(v - a, 2.0);
@@ -28,14 +28,16 @@ vec3 dist(vec3 volume_size, vec3 v) {
 }
 
 float map(vec3 v) {
-	if (direction == 1) {
-		v = v.zxy;
-		i_volume_size = i_volume_size.zxy;
+	float f;
+
+	if (direction == 0) {
+		f = dist(i_volume_size, v);
+	} else if (direction == 1) {
+		f = dist(i_volume_size.zxy, v.zxy);
 	} else if (direction == 2) {
-		v = v.zyx;
-		i_volume_size = i_volume_size.zyx;
+		f = dist(i_volume_size.zyx, v.zyx);
 	}
 
-	float f = dist(i_volume_size, v);
 	return (f <= 1.0 && f > thickness) ? i_color_index : 0.0;
+	return 1.0;
 }

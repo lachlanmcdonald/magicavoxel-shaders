@@ -1,0 +1,74 @@
+// MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+// Copyright (c) 2020 Lachlan McDonald
+//
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { id = '0'  name = 'Count'  value = '128'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Scale %'  value = '100'  range = '1 100'  step = '5'  decimal = '0' }
+// arg : { id = '2'  name = 'Spread %'  value = '50'  range = '1 100'  step = '5'  decimal = '0' }
+// arg : { id = '3'  name = 'Overlap'  value = '8'  range = '1 100'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Noise'  value = '0'  range = '0 16'  step = '1'  decimal = '0' }
+// arg : { id = '5'  name = 'Seed'  value = '1'  range = '1 100'  step = '1'  decimal = '0' }
+// xs_end
+
+int count = i_args[0];
+float scale = i_args[1] / 100.0;
+float spread = i_args[2] / 100.0;
+int overlap_count = i_args[3];
+// int noise_count = overlap_count - i_args[4];
+// int noise_count = overlap_count;
+// int overlap_count = min(i_args[3], count - 1) - (i_args[4] / 2.0);
+// int noise_count = overlap_count - i_args[4] / 2.0;
+
+float global_seed = mix(-43758.5453, 43758.5453, i_args[5] / 100.0);
+
+float random(vec2 co, float seed) {
+    return fract(cos(dot(co.xy, vec2(23.14069263277926, pow(sqrt(2.0), 2.0)))) * (43758.5453 + global_seed + seed));
+}
+
+vec3 random_vec3(vec3 range_min, vec3 range_max, float seed) {
+    int x = mix(range_min.x, range_max.x, random(vec2(seed * 64.0), seed));
+    int y = mix(range_min.y, range_max.y, random(vec2(seed * 64.0 + 64.0), seed));
+    int z = mix(range_min.z, range_max.z, random(vec2(seed * 64.0 + 128.0), seed));
+    return vec3(x, y, z);
+}
+
+float map(vec3 v) {
+    float vol_max = vec3(max(max(i_volume_size.x, i_volume_size.y), i_volume_size.z));
+    vec3 half_vol_max = vol_max * 0.5;
+
+    int sum = 0;
+
+    for (int i = 0; i < count; i += 1) {
+        // Random sphere size and position
+        // vec3 dim = vol_max * random(vec2(seed), 0.0);
+        
+        float seed = mix(-4096.0, 4096.0, float(i) / float(count));
+        float dim = random(i_volume_size.xy, seed);
+        vec3 random_offset = random_vec3(i_volume_size * -spread, i_volume_size * spread, seed);
+
+        // Sphere geometry
+        vec3 vol_offset = (i_volume_size - vol_max) / 2;
+        vec3 sphere_offset = v - random_offset - vol_offset;
+        vec3 k = (sphere_offset - half_vol_max) / half_vol_max;
+
+        if (step(length(k), scale * dim) > 0.0) {
+            sum  += 1;
+        }
+    }
+
+    if (sum >= overlap_count) {
+        return i_color_index;
+    // } else if (sum >= noise_count) {
+    //     float d = float(sum - noise_count) / float(overlap_count);
+    //     float f1 = random(v.xy, 0.0);
+    //     float f2 = random(vec2(v.z, f1), 0.0);
+
+    //     if (f2 < d) {
+    //         return i_color_index;
+    //     }
+    }
+
+    return 0.0;
+}

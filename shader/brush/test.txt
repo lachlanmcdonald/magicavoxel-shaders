@@ -1,0 +1,71 @@
+// MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+// Copyright (c) 2020 Lachlan McDonald
+//
+// xs brush/greebles [Mode] [Count] [Width] [Height] [Depth] [Seed]
+//
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { id = '0'  name = 'Min'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Max'  value = '8'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Seed'  value = '1'  range = '0 100'  step = '1'  decimal = '0' }
+// xs_end
+
+float size_min = min(i_args[0], i_args[1]);
+float size_max = max(i_args[0], i_args[1]);
+float global_seed = mix(-437.5453, 437.5453, i_args[2] / 100.0);
+
+struct Series {
+	float index;
+	float size;
+};
+
+struct Cell {
+	float x_index;
+	float y_index;
+	float z_index;
+	float x_size;
+	float y_size;
+	float z_size;
+};
+
+float random(vec2 co) {
+    return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.5453 + global_seed));
+}
+
+Series find_series(int limit, vec2 seed_multiplier) {
+	float count = 0.0;
+	float cell_index = 0.0;
+	float cell_size = 0.0;
+
+	for (int i = 0; i < limit;) {
+		vec2 seed = vec2(float(i)) * seed_multiplier;
+
+		cell_index += 1.0;
+		cell_size = floor(mix(size_min, size_max, random(seed)));
+		i += int(cell_size);
+	}
+
+	Series j = Series(cell_index, cell_size);
+	return j;
+}
+
+Cell find_cell(vec3 v) {
+	ivec3 iv = ivec3(v);
+	Series x = find_series(iv.x, vec2(64.0,  0.0));
+	Series y = find_series(iv.y, vec2( 0.0, 64.0));
+	Series z = find_series(iv.z, vec2(64.0, 64.0));
+
+	return Cell(x.index,
+				y.index,
+				z.index,
+				x.size,
+				y.size,
+				z.size);
+}
+
+float map(vec3 v) {
+	Cell j = find_cell(v);
+
+	return j.x_size + j.y_size + j.z_size;
+}

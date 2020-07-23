@@ -1,0 +1,108 @@
+// MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+// Copyright (c) 2020 Lachlan McDonald
+//
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { id = '0'  name = 'Count'  value = '32'  range = '1 128'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Size'  value = '1.0'  range = '0.05 1.0'  step = '0.05'  decimal = '1' }
+// arg : { id = '2'  name = 'Overlap'  value = '4'  range = '1 128'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Noise'  value = '0'  range = '0 8'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Seed'  value = '1'  range = '1 100'  step = '1'  decimal = '0' }
+// xs_end
+
+int count = i_args[0];
+float size = i_args[1];
+int overlap_count = min(i_args[2], count);
+int noise_count = min(i_args[3], count);
+float global_seed = mix(-43758.5453, 43758.5453, i_args[4] / 100.0);
+
+ivec3 boxes[128][2];
+
+float random(vec2 co) {
+    return fract(cos(dot(co.xy, vec2(23.14069263277926, pow(sqrt(2.0), 2.0)))) * (43758.5453 + global_seed));
+}
+
+float random(vec3 co) {
+    float j = random(co.xy);
+    return random(vec2(j, co.z));
+}
+
+vec3 random_vec3(vec3 range_min, vec3 range_max, float seed) {
+    int x = mix(range_min.x, range_max.x, random(vec2(seed * 64.0)));
+    int y = mix(range_min.y, range_max.y, random(vec2(seed * 64.0 + 64.0)));
+    int z = mix(range_min.z, range_max.z, random(vec2(seed * 64.0 + 128.0)));
+    return vec3(x, y, z);
+}
+
+float map(vec3 v) {
+    v = ivec3(v);
+    vec3 h_volume_size = i_volume_size / 2.0;
+
+    for (int i = 0; i < count; i += 1) {
+        vec3 dim = random_vec3(i_volume_size * 0.1,
+                                 i_volume_size * size,
+                                 i);
+        vec3 k = (i_volume_size - dim) / 2.0;
+        vec3 offset = random_vec3(-k, k, i + 64.0);
+        
+        boxes[i][0] = ivec3(round(h_volume_size - (vec3(dim) / 2.0) + offset));
+        boxes[i][1] = ivec3(round(h_volume_size + (vec3(dim) / 2.0) + offset));
+    }
+
+    // int i = min(int(v.x), count);
+    // if (v.y == 0.0) {
+    //     return boxes[i][0].x;
+    // } else if (v.y == 1.0) {
+    //     return boxes[i][0].y;
+    // } else if (v.y == 2.0) {
+    //     return boxes[i][0].z;
+    // } else if (v.y == 3.0) {
+    //     return boxes[i][1].x;
+    // } else if (v.y == 4.0) {
+    //     return boxes[i][1].y;
+    // } else if (v.y == 5.0) {
+    //     return boxes[i][1].z;
+    // } else {
+    //     return 0.0;
+    // }
+
+    int sum = 0;
+
+    for (int i = 0; i < count; i += 1) {
+        ivec3 lower = boxes[i][0];
+        ivec3 upper = boxes[i][1];
+        bool gte = all(greaterThanEqual(v, lower));
+        bool lte = all(lessThanEqual(v, upper));
+
+        if (lte && gte) {
+            sum += 1.0;
+        }
+    }
+
+    if (sum >= overlap_count) {
+        return sum;
+    } else {
+        return 0.0;
+    }
+
+    // int overlaps = 0;
+
+    // for (int i = count; i > 0; i -= 1) {
+    //     vec3 lower = boxes[i][0];
+    //     vec3 upper = boxes[i][1];
+
+    //     if (all(lessThanEqual(v, lower)) && all(greaterThanEqual(v, upper))) {
+    //         overlaps += 1;
+    //         // return 1.0;
+    //     }
+    // }
+    
+    // return overlaps;
+
+    // if (overlaps >= overlap_count) {
+    //     return overlaps;
+    // } else {
+    //     return 0.0;
+    // }
+}

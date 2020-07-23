@@ -1,0 +1,89 @@
+// MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+// Copyright (c) 2020 Lachlan McDonald
+//
+// xs brush/greebles [Mode] [Count] [Width] [Height] [Depth] [Seed]
+//
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { id = '0'  name = 'Min'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Max'  value = '8'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Thickness'  value = '1'  range = '0 256'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Seed'  value = '1'  range = '0 100'  step = '1'  decimal = '0' }
+// xs_end
+
+float thickness = max(i_args[2], 0.0);
+float size_min = min(i_args[0], i_args[1]) + thickness;
+float size_max = max(i_args[0], i_args[1]) + thickness;
+float global_seed = mix(-437.5453, 437.5453, i_args[3] / 100.0);
+
+struct Series {
+	float index;
+	float size;
+	float local;
+};
+
+float random(vec2 co) {
+    return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.5453 + global_seed));
+}
+
+float random(vec3 co) {
+	return random(vec2(random(co.xy), co.z));
+}
+
+Series find_series(int limit, vec2 seed_multiplier) {
+	float cell_index = 0.0;
+	float cell_size = 0.0;
+	int last_index = 0;
+
+	for (int i = 0; i < limit;) {
+		vec2 seed = vec2(float(i)) * seed_multiplier;
+
+		last_index = i;
+		cell_index += 1.0;
+		cell_size = floor(mix(size_min, size_max, random(seed)));
+		i += int(cell_size);
+	}
+
+	float local_pos = (cell_index == 0.0) ? float(limit) : float(limit - last_index - 1);
+	Series j = Series(cell_index, cell_size, local_pos);
+	return j;
+}
+
+float map(vec3 v) {
+	ivec3 iv = ivec3(v);
+	Series x = find_series(iv.x, vec2(64.0,  0.0));
+	Series y = find_series(iv.y, vec2( 0.0, 64.0));
+	Series z = find_series(iv.z, vec2(64.0, 64.0));
+
+	vec3 index = vec3(x.index, y.index, z.index);
+	vec3 local = vec3(x.local, y.local, z.local);
+	vec3 size = vec3(x.size, y.size, z.size);
+
+	if (iv.x < 1) {
+		return v.y;
+	}
+	if (iv.x < 9) {
+		return index.y;
+	}
+	if (iv.x < 10) {
+		return v.y;
+	}
+	if (iv.x < 19) {
+		return size.y;
+	}
+	if (iv.x < 20) {
+		return v.y;
+	}
+
+	return local.y;
+
+	// if (local.x >= thickness) {
+	// // if (any(lessThan(local, vec3(thickness)))) {
+	// 	return i_color_index;
+	// } else {
+	// 	vec3 index = vec3(x.index, y.index, z.index);
+	// 	float f = random(index);
+	// 	return f >= 0.5 ? 1.0 : 0.0;
+	// }
+}
