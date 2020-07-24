@@ -13,7 +13,7 @@
 // arg : { id = '4'  name = 'Size Y'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
 // arg : { id = '5'  name = 'Line Color'  value = '16'  range = '0 255'  step = '1'  decimal = '0' }
 // arg : { id = '6'  name = 'Line Width'  value = '1'  range = '0 256'  step = '1'  decimal = '0' }
-// arg : { id = '7'  name = 'Seed'  value = '0'  range = '0 100'  step = '1'  decimal = '0' }
+// arg : { id = '7'  name = 'Seed'  value = '0'  range = '1 100'  step = '1'  decimal = '0' }
 // xs_end
 
 int mode = int(i_args[0]);

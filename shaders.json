@@ -217,7 +217,7 @@
                 {
                     "decimal": 0,
                     "name": "Seed",
-                    "range": "0 100",
+                    "range": "1 100",
                     "step": 1,
                     "value": 0
                 },
@@ -254,7 +254,7 @@
                 {
                     "decimal": 0,
                     "name": "Seed",
-                    "range": "0 100",
+                    "range": "1 100",
                     "step": 1,
                     "value": 0
                 },
@@ -269,7 +269,7 @@
                 }
             ]
         },
-        "brush/greebles": {
+        "primitive/greebles1": {
             "params": [
                 {
                     "decimal": 0,
@@ -309,7 +309,7 @@
                 {
                     "decimal": 0,
                     "name": "Seed",
-                    "range": "0 100",
+                    "range": "1 100",
                     "step": 1,
                     "value": 1
                 }
@@ -518,7 +518,7 @@
                 {
                     "decimal": 0,
                     "name": "Seed",
-                    "range": "0 100",
+                    "range": "1 100",
                     "step": 1,
                     "value": 0
                 }
@@ -566,7 +566,7 @@
                 {
                     "decimal": 0,
                     "name": "Seed",
-                    "range": "0 100",
+                    "range": "1 100",
                     "step": 1,
                     "value": 1
                 }

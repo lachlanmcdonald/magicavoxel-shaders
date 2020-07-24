@@ -2,7 +2,7 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2020 Lachlan McDonald
 //
-// xs brush/greebles [Mode] [Count] [Width] [Height] [Depth] [Seed]
+// xs primitive/greebles1 [Mode] [Count] [Width] [Height] [Depth] [Seed]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
@@ -11,7 +11,7 @@
 // arg : { id = '2'  name = 'Width'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
 // arg : { id = '3'  name = 'Height'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
 // arg : { id = '4'  name = 'Depth'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '5'  name = 'Seed'  value = '1'  range = '0 100'  step = '1'  decimal = '0' }
+// arg : { id = '5'  name = 'Seed'  value = '1'  range = '1 100'  step = '1'  decimal = '0' }
 // xs_end
 
 int mode = int(i_args[0]);

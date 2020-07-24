@@ -52,11 +52,12 @@ for shader_name in params.keys():
 		header.append('xs_end')
 
 	header_text = '\n'.join([ '// {}'.format(x) for x in header ])
+	shader_path = shader_name.replace('/', path.sep)
 
-	with open(path.join(DIR, 'shader', "{}.txt".format(shader_name)), 'r') as f:
+	with open(path.join(DIR, 'shader', "{}.txt".format(shader_path)), 'r') as f:
 		shader = f.readlines()
 
-	with open(path.join(DIR, 'shader', "{}.txt".format(shader_name)), 'w', newline="\n") as f:
+	with open(path.join(DIR, 'shader', "{}.txt".format(shader_path)), 'w', newline="\n") as f:
 		has_comment = shader[0].startswith('//')
 		shader_lines = []
 
