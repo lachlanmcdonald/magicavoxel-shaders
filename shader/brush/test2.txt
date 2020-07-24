@@ -24,7 +24,7 @@ struct Series {
 };
 
 float random(vec2 co) {
-    return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.5453 + global_seed));
+    return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + global_seed));
 }
 
 float random(vec3 co) {

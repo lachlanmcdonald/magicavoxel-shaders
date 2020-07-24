@@ -21,10 +21,10 @@ int overlap_count = i_args[3];
 // int overlap_count = min(i_args[3], count - 1) - (i_args[4] / 2.0);
 // int noise_count = overlap_count - i_args[4] / 2.0;
 
-float global_seed = mix(-43758.5453, 43758.5453, i_args[5] / 100.0);
+float global_seed = mix(-43758.6980280632, 43758.6980280632, i_args[5] / 100.0);
 
 float random(vec2 co, float seed) {
-    return fract(cos(dot(co.xy, vec2(23.14069263277926, pow(sqrt(2.0), 2.0)))) * (43758.5453 + global_seed + seed));
+    return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + global_seed + seed));
 }
 
 vec3 random_vec3(vec3 range_min, vec3 range_max, float seed) {
@@ -43,7 +43,7 @@ float map(vec3 v) {
     for (int i = 0; i < count; i += 1) {
         // Random sphere size and position
         // vec3 dim = vol_max * random(vec2(seed), 0.0);
-        
+
         float seed = mix(-4096.0, 4096.0, float(i) / float(count));
         float dim = random(i_volume_size.xy, seed);
         vec3 random_offset = random_vec3(i_volume_size * -spread, i_volume_size * spread, seed);

@@ -22,7 +22,7 @@ float line_color = i_args[4];
 float line_width = i_args[5];
 
 float random(vec2 co) {
-    return fract(cos(dot(co.xy, vec2(23.14069263277926, pow(sqrt(2.0), 2.0)))) * 43758.5453);
+    return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * 43758.6980280632);
 }
 
 float map(vec3 v) {

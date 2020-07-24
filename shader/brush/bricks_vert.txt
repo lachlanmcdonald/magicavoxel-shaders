@@ -26,7 +26,7 @@ float pal_max = i_args[6];
 float threshold = max(i_args[7], 0.0);
 
 float random(vec2 co, float seed) {
-    return fract(cos(dot(co.xy, vec2(23.14069263277926, pow(sqrt(2.0), 2.0)))) * (43758.5453 + seed));
+    return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + seed));
 }
 
 float random(vec3 co, float seed) {
