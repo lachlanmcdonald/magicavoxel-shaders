@@ -219,7 +219,7 @@
                     "name": "Seed",
                     "range": "1 100",
                     "step": 1,
-                    "value": 0
+                    "value": 1
                 },
                 {
                     "name": "Color A",
@@ -256,7 +256,7 @@
                     "name": "Seed",
                     "range": "1 100",
                     "step": 1,
-                    "value": 0
+                    "value": 1
                 },
                 {
                     "name": "Color A",
@@ -520,7 +520,7 @@
                     "name": "Seed",
                     "range": "1 100",
                     "step": 1,
-                    "value": 0
+                    "value": 1
                 }
             ]
         },
