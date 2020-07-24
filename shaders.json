@@ -529,7 +529,7 @@
                 {
                     "decimal": 0,
                     "name": "Mode",
-                    "range": "0 2",
+                    "range": "0 4",
                     "step": 1,
                     "value": 0
                 },
