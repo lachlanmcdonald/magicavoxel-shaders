@@ -6,7 +6,7 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Mode'  value = '0'  range = '0 1'  step = '1'  decimal = '0' }
+// arg : { id = '0'  name = 'Mode'  value = '0'  range = '0 2'  step = '1'  decimal = '0' }
 // arg : { id = '1'  name = 'Min'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
 // arg : { id = '2'  name = 'Max'  value = '8'  range = '1 256'  step = '1'  decimal = '0' }
 // arg : { id = '3'  name = 'Depth'  value = '2'  range = '1 256'  step = '1'  decimal = '0' }
@@ -73,7 +73,7 @@ Cell greeble(vec2 v, float seed) {
 }
 
 float map(vec3 v) {
-	float count = 0;
+	float count = 0.0;
 
 	if (axis_mode.x) {
 		if (v.x <= depth) {
@@ -124,16 +124,18 @@ float map(vec3 v) {
 		}
 	}
 
-	if (count > 0.0) {
-		if (mode == 0) {
+	float min_count = (mode == 2) ? 1.0 : 0.0;
+
+	if (count > min_count) {
+		if (mode == 0 || mode == 2) {
 			return 0.0;
-		} else if (mode == 1) {
+		} else {
 			return i_color_index;
 		}
 	} else {
-		if (mode == 0) {
+		if (mode == 0 || mode == 2) {
 			return i_color_index;
-		} else if (mode == 1) {
+		} else {
 			return 0.0;
 		}
 	}
