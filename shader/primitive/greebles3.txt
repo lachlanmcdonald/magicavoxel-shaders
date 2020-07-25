@@ -130,7 +130,7 @@ float map(vec3 v) {
 		}
 	}
 
-	if (count > 0.0) {
+	if (count > 1.0) {
 		if (mode == 0) {
 			return 0.0;
 		} else if (mode == 1) {
