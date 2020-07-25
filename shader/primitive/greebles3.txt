@@ -77,16 +77,14 @@ float map(vec3 v) {
 
 	if (axis_mode.x) {
 		if (v.x <= depth) {
-			Cell g = greeble(v.yz,
-							 frac(1.0 / 6.0));
+			Cell g = greeble(v.yz, frac(1.0 / 6.0));
 
 			if (v.x < g.depth) {
 				count += 1.0;
 			}
 		}
 		if (v.x >= i_volume_size.x - depth) {
-			Cell g = greeble(i_volume_size.yz - v.yz,
-							 frac(2.0 / 6.0));
+			Cell g = greeble(i_volume_size.yz - v.yz, frac(2.0 / 6.0));
 
 			if (i_volume_size.x - v.x < g.depth) {
 				count += 1.0;
@@ -95,16 +93,14 @@ float map(vec3 v) {
 	}
 	if (axis_mode.y) {
 		if (v.y <= depth) {
-			Cell g = greeble(v.xz,
-							 frac(3.0 / 6.0));
+			Cell g = greeble(v.xz, frac(3.0 / 6.0));
 
 			if (v.y < g.depth) {
 				count += 1.0;
 			}
 		}
 		if (v.y >= i_volume_size.y - depth) {
-			Cell g = greeble(i_volume_size.xz - v.xz,
-							 frac(4.0 / 6.0));
+			Cell g = greeble(i_volume_size.xz - v.xz, frac(4.0 / 6.0));
 
 			if (i_volume_size.y - v.y < g.depth) {
 				count += 1.0;
@@ -113,16 +109,14 @@ float map(vec3 v) {
 	}
 	if (axis_mode.z) {
 		if (v.z <= depth) {
-			Cell g = greeble(v.xy,
-							 frac(5.0 / 6.0));
+			Cell g = greeble(v.xy, frac(5.0 / 6.0));
 
 			if (v.z < g.depth) {
 				count += 1.0;
 			}
 		}
 		if (v.z >= i_volume_size.z - depth) {
-			Cell g = greeble(i_volume_size.xy - v.xy,
-							 frac(6.0 / 6.0));
+			Cell g = greeble(i_volume_size.xy - v.xy, frac(6.0 / 6.0));
 
 			if (i_volume_size.z - v.z < g.depth) {
 				count += 1.0;
