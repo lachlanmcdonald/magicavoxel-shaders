@@ -10,7 +10,7 @@
 // arg : { id = '1'  name = 'Headroom'  value = '1'  range = '0 256'  step = '1'  decimal = '0' }
 // xs_end
 
-int headroom = max(int(i_args[1]), 1);
+int headroom = int(max(i_args[1], 1.0));
 
 float map(vec3 v) {
 	float index = voxel(v);
