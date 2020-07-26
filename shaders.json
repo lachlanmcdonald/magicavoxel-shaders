@@ -269,52 +269,6 @@
                 }
             ]
         },
-        "primitive/greebles1": {
-            "params": [
-                {
-                    "decimal": 0,
-                    "name": "Mode",
-                    "range": "0 1",
-                    "step": 1,
-                    "value": 0
-                },
-                {
-                    "decimal": 0,
-                    "name": "Count",
-                    "range": "1 256",
-                    "step": 8,
-                    "value": 32
-                },
-                {
-                    "decimal": 0,
-                    "name": "Width",
-                    "range": "1 256",
-                    "step": 1,
-                    "value": 4
-                },
-                {
-                    "decimal": 0,
-                    "name": "Height",
-                    "range": "1 256",
-                    "step": 1,
-                    "value": 4
-                },
-                {
-                    "decimal": 0,
-                    "name": "Depth",
-                    "range": "1 256",
-                    "step": 1,
-                    "value": 4
-                },
-                {
-                    "decimal": 0,
-                    "name": "Seed",
-                    "range": "1 100",
-                    "step": 1,
-                    "value": 1
-                }
-            ]
-        },
         "brush/grid": {
             "params": [
                 {
@@ -793,6 +747,91 @@
                     "range": "0 100",
                     "step": 5,
                     "value": 50
+                }
+            ]
+        },
+        "primitive/greebles1": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Mode",
+                    "range": "0 1",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "decimal": 0,
+                    "name": "Count",
+                    "range": "1 256",
+                    "step": 8,
+                    "value": 32
+                },
+                {
+                    "decimal": 0,
+                    "name": "Width",
+                    "range": "1 256",
+                    "step": 1,
+                    "value": 4
+                },
+                {
+                    "decimal": 0,
+                    "name": "Height",
+                    "range": "1 256",
+                    "step": 1,
+                    "value": 4
+                },
+                {
+                    "decimal": 0,
+                    "name": "Depth",
+                    "range": "1 256",
+                    "step": 1,
+                    "value": 4
+                },
+                {
+                    "decimal": 0,
+                    "name": "Seed",
+                    "range": "1 100",
+                    "step": 1,
+                    "value": 1
+                }
+            ]
+        },
+        "primitive/greebles2": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Mode",
+                    "range": "0 2",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "decimal": 0,
+                    "name": "Min",
+                    "range": "1 256",
+                    "step": 1,
+                    "value": 4
+                },
+                {
+                    "decimal": 0,
+                    "name": "Max",
+                    "range": "1 256",
+                    "step": 1,
+                    "value": 8
+                },
+                {
+                    "decimal": 0,
+                    "name": "Depth",
+                    "range": "1 256",
+                    "step": 1,
+                    "value": 2
+                },
+                {
+                    "decimal": 0,
+                    "name": "Seed",
+                    "range": "1 100",
+                    "step": 1,
+                    "value": 1
                 }
             ]
         },

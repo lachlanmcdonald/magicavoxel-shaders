@@ -2,7 +2,7 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2020 Lachlan McDonald
 //
-// xs brush/tiles_uneven [Mode] [Min] [Max] [Color A] [Color B] [Line Color] [Line Width] [Seed]
+// xs primitive/greebles2 [Mode] [Min] [Max] [Depth] [Seed]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
