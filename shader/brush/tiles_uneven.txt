@@ -1,0 +1,90 @@
+// MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+// Copyright (c) 2020 Lachlan McDonald
+//
+// xs brush/tiles_uneven [Mode] [Min] [Max] [Color A] [Color B] [Line Color] [Line Width] [Seed]
+//
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { id = '0'  name = 'Mode'  value = '0'  range = '0 4'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Min'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Max'  value = '8'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Color A'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Color B'  value = '8'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '5'  name = 'Line Color'  value = '16'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '6'  name = 'Line Width'  value = '1'  range = '0 256'  step = '1'  decimal = '0' }
+// arg : { id = '7'  name = 'Seed'  value = '1'  range = '1 100'  step = '1'  decimal = '0' }
+// xs_end
+
+int mode = int(i_args[0]);
+float thickness = max(i_args[6], 0.0);
+float size_min = min(i_args[1], i_args[2]) + thickness;
+float size_max = max(i_args[1], i_args[2]) + thickness;
+float pal_min = i_args[3];
+float pal_max = i_args[4];
+float line_color = i_args[5];
+float global_seed = mix(-437.5453, 437.5453, i_args[7] / 100.0);
+
+struct Series {
+	float index;
+	float size;
+	float local;
+};
+
+float random(vec2 co) {
+    return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + global_seed));
+}
+
+Series find_series(int limit, vec2 seed_multiplier) {
+	float cell_index = 0.0;
+	float cell_size = 0.0;
+	int last_index = 0;
+
+	for (int i = 0; i <= limit;) {
+		vec2 seed = vec2(float(i) * size_max) * seed_multiplier;
+
+		last_index = i;
+		cell_index += 1.0;
+		cell_size = floor(mix(size_min, size_max + 1.0, random(seed)));
+		i += int(cell_size);
+	}
+
+	float local_pos = (cell_index == 0.0) ? float(limit) : float(limit - last_index);
+	Series j = Series(cell_index, cell_size, local_pos);
+	return j;
+}
+
+float map(vec3 v) {
+	Series x = find_series(int(v.x), vec2(64.0,  0.0));
+
+	float offset = ceil(mix(size_min, size_max, random(vec2(x.index, 0.0))));
+	float k = mod(x.index, 2.0) == 0.0 ? v.y : v.y + offset;
+	Series y = find_series(int(k), vec2( 0.0, 64.0));
+
+	vec2 index = vec2(x.index, y.index);
+	vec2 local = vec2(x.local, y.local);
+	vec2 size = vec2(x.size, y.size);
+
+	if (all(lessThan(local.xy, size.xy - vec2(thickness)))) {
+		if (mode == 0) {
+			float f = random(index.xy);
+			return mix(pal_min, pal_max, f);
+		} else if (mode == 1) {
+			float f = smoothstep(size_min * size_min,
+								 size_max * size_max,
+								 size.x * size.y);
+			return mix(pal_min, pal_max, f);
+		} else if (mode == 2) {
+			float z = max(pal_max, pal_min) - min(pal_max, pal_min);
+			float f = smoothstep(0.0, pal_max, mod(index.y, z));
+			return mix(pal_min, pal_max, f);
+		} else if (mode == 3) {
+			float f = random(index.xy);
+			return f > 0.5 ? pal_min : pal_max;
+		} else if (mode == 4) {
+			return mod(index.y, 2.0) == 0.0 ? pal_min : pal_max;
+		}
+	} else {
+		return line_color;
+	}
+}

@@ -1,33 +1,5 @@
 {
     "shaders": {
-        "brush/arch": {
-            "params": [
-                {
-                    "decimal": 0,
-                    "name": "Mode",
-                    "range": "0 1",
-                    "step": 1,
-                    "value": 0
-                },
-                {
-                    "decimal": 0,
-                    "name": "Rotation",
-                    "range": "0 1",
-                    "step": 1,
-                    "value": 0
-                },
-                {
-                    "name": "Width",
-                    "type": "size",
-                    "value": 12
-                },
-                {
-                    "name": "Thickness",
-                    "type": "size",
-                    "value": 2
-                }
-            ]
-        },
         "brush/bricks": {
             "params": [
                 {
@@ -245,7 +217,7 @@
                 {
                     "decimal": 0,
                     "name": "Seed",
-                    "range": "0 100",
+                    "range": "1 100",
                     "step": 1,
                     "value": 1
                 },
@@ -282,7 +254,7 @@
                 {
                     "decimal": 0,
                     "name": "Seed",
-                    "range": "0 100",
+                    "range": "1 100",
                     "step": 1,
                     "value": 1
                 },
@@ -322,27 +294,6 @@
                 {
                     "name": "Size Z",
                     "type": "size"
-                }
-            ]
-        },
-        "brush/prism": {
-            "params": [
-                {
-                    "decimal": 0,
-                    "name": "Mode",
-                    "range": "0 1",
-                    "step": 1,
-                    "value": 0
-                },
-                {
-                    "name": "Width X",
-                    "type": "position",
-                    "value": 12
-                },
-                {
-                    "name": "Width Y",
-                    "type": "position",
-                    "value": 12
                 }
             ]
         },
@@ -521,7 +472,55 @@
                 {
                     "decimal": 0,
                     "name": "Seed",
-                    "range": "0 100",
+                    "range": "1 100",
+                    "step": 1,
+                    "value": 1
+                }
+            ]
+        },
+        "brush/tiles_uneven": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Mode",
+                    "range": "0 4",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "name": "Min",
+                    "type": "size",
+                    "value": 4
+                },
+                {
+                    "name": "Max",
+                    "type": "size",
+                    "value": 8
+                },
+                {
+                    "name": "Color A",
+                    "type": "color_a",
+                    "value": 1
+                },
+                {
+                    "name": "Color B",
+                    "type": "color_b",
+                    "value": 8
+                },
+                {
+                    "name": "Line Color",
+                    "type": "color_b",
+                    "value": 16
+                },
+                {
+                    "name": "Line Width",
+                    "type": "position",
+                    "value": 1
+                },
+                {
+                    "decimal": 0,
+                    "name": "Seed",
+                    "range": "1 100",
                     "step": 1,
                     "value": 1
                 }
@@ -733,11 +732,136 @@
                 }
             ]
         },
+        "primitive/cylinder": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Rotation",
+                    "range": "0 2",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "decimal": 0,
+                    "name": "Thickness",
+                    "range": "0 100",
+                    "step": 5,
+                    "value": 50
+                }
+            ]
+        },
+        "primitive/greebles1": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Mode",
+                    "range": "0 1",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "decimal": 0,
+                    "name": "Count",
+                    "range": "1 256",
+                    "step": 8,
+                    "value": 32
+                },
+                {
+                    "decimal": 0,
+                    "name": "Width",
+                    "range": "1 256",
+                    "step": 1,
+                    "value": 4
+                },
+                {
+                    "decimal": 0,
+                    "name": "Height",
+                    "range": "1 256",
+                    "step": 1,
+                    "value": 4
+                },
+                {
+                    "decimal": 0,
+                    "name": "Depth",
+                    "range": "1 256",
+                    "step": 1,
+                    "value": 4
+                },
+                {
+                    "decimal": 0,
+                    "name": "Seed",
+                    "range": "1 100",
+                    "step": 1,
+                    "value": 1
+                }
+            ]
+        },
+        "primitive/greebles2": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Mode",
+                    "range": "0 2",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "decimal": 0,
+                    "name": "Min",
+                    "range": "1 256",
+                    "step": 1,
+                    "value": 4
+                },
+                {
+                    "decimal": 0,
+                    "name": "Max",
+                    "range": "1 256",
+                    "step": 1,
+                    "value": 8
+                },
+                {
+                    "decimal": 0,
+                    "name": "Depth",
+                    "range": "1 256",
+                    "step": 1,
+                    "value": 2
+                },
+                {
+                    "decimal": 0,
+                    "name": "Seed",
+                    "range": "1 100",
+                    "step": 1,
+                    "value": 1
+                }
+            ]
+        },
+        "primitive/prism": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Mode",
+                    "range": "0 1",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "name": "Size X",
+                    "type": "position",
+                    "value": 12
+                },
+                {
+                    "name": "Size Y",
+                    "type": "position",
+                    "value": 12
+                }
+            ]
+        },
         "pyramid": {
             "params": [
                 {
                     "name": "Color",
-                    "type": "color_a"
+                    "type": "color_a",
+                    "value": 0
                 }
             ]
         },
@@ -745,7 +869,8 @@
             "params": [
                 {
                     "name": "Color",
-                    "type": "color_a"
+                    "type": "color_a",
+                    "value": 0
                 }
             ]
         },

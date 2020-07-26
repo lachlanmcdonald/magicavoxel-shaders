@@ -12,8 +12,8 @@
 // arg : { id = '3'  name = 'Height'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
 // xs_end
 
-float mode = i_args[0];
-float direction = i_args[1];
+int mode = int(i_args[0]);
+int direction = int(i_args[1]);
 float count = min(i_args[2], i_volume_size.z);
 float height = i_args[3];
 
@@ -21,23 +21,23 @@ float map(vec3 v) {
 	float volume_n;
 	float vector_n;
 
-	if (direction == 0.0) {
+	if (direction == 0) {
 		vector_n = v.x;
 		volume_n = i_volume_size.x;
-	} else if (direction == 1.0) {
+	} else if (direction == 1) {
 		vector_n = v.y;
 		volume_n = i_volume_size.y;
-	} else if (direction == 2.0) {
+	} else if (direction == 2) {
 		vector_n = i_volume_size.x - v.x;
 		volume_n = i_volume_size.x;
-	} else if (direction == 3.0) {
+	} else if (direction == 3) {
 		vector_n = i_volume_size.y - v.y;
 		volume_n = i_volume_size.y;
 	}
 
-	if (mode == 1.0) {
+	if (mode == 1) {
 		height = max(1.0, floor(i_volume_size.z / count));
-	} else if (mode == 2.0) {
+	} else if (mode == 2) {
 		count = max(2.0, floor(i_volume_size.z / height));
 	}
 

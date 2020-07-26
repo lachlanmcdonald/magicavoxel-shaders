@@ -16,7 +16,7 @@
 // arg : { id = '7'  name = 'Threshold'  value = '1'  range = '0 1'  step = '0.01'  decimal = '1' }
 // xs_end
 
-float direction = i_args[0];
+int direction = int(i_args[0]);
 float height = max(i_args[1], 1.0); // These are deliberately flipped
 float width = max(i_args[2], 1.0); // These are deliberately flipped
 float depth = max(i_args[3], 1.0);
@@ -26,7 +26,7 @@ float pal_max = i_args[6];
 float threshold = max(i_args[7], 0.0);
 
 float random(vec2 co, float seed) {
-    return fract(cos(dot(co.xy, vec2(23.14069263277926, pow(sqrt(2.0), 2.0)))) * (43758.5453 + seed));
+    return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + seed));
 }
 
 float random(vec3 co, float seed) {
@@ -37,13 +37,13 @@ float random(vec3 co, float seed) {
 float map(vec3 v) {
 	vec3 k;
 
-	if (direction == 0.0) {
+	if (direction == 0) {
 		k = v.zxy;
-	} else if (direction == 1.0) {
+	} else if (direction == 1) {
 		k = v.zyx;
-	} else if (direction == 2.0) {
+	} else if (direction == 2) {
 		k = v.xyz;
-	} else if (direction == 3.0) {
+	} else if (direction == 3) {
 		k = v.yxz;
 	}
 
