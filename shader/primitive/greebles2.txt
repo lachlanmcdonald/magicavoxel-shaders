@@ -16,7 +16,7 @@
 int mode = int(i_args[0]);
 float size_min = min(i_args[1], i_args[2]);
 float size_max = max(i_args[1], i_args[2]);
-float depth = i_args[3];
+float depth = max(i_args[3], 0.0);
 float global_seed = mix(-437.5453, 437.5453, i_args[4] / 100.0);
 
 bool no_axis_mode = all(equal(ivec3(i_axis), ivec3(0)));
@@ -77,14 +77,14 @@ float map(vec3 v) {
 
 	if (axis_mode.x) {
 		if (v.x <= depth) {
-			Cell g = greeble(v.yz, frac(1.0 / 6.0));
+			Cell g = greeble(v.yz, fract(1.0 / 6.0));
 
 			if (v.x < g.depth) {
 				count += 1.0;
 			}
 		}
 		if (v.x >= i_volume_size.x - depth) {
-			Cell g = greeble(i_volume_size.yz - v.yz, frac(2.0 / 6.0));
+			Cell g = greeble(i_volume_size.yz - v.yz, fract(2.0 / 6.0));
 
 			if (i_volume_size.x - v.x < g.depth) {
 				count += 1.0;
@@ -93,14 +93,14 @@ float map(vec3 v) {
 	}
 	if (axis_mode.y) {
 		if (v.y <= depth) {
-			Cell g = greeble(v.xz, frac(3.0 / 6.0));
+			Cell g = greeble(v.xz, fract(3.0 / 6.0));
 
 			if (v.y < g.depth) {
 				count += 1.0;
 			}
 		}
 		if (v.y >= i_volume_size.y - depth) {
-			Cell g = greeble(i_volume_size.xz - v.xz, frac(4.0 / 6.0));
+			Cell g = greeble(i_volume_size.xz - v.xz, fract(4.0 / 6.0));
 
 			if (i_volume_size.y - v.y < g.depth) {
 				count += 1.0;
@@ -109,14 +109,14 @@ float map(vec3 v) {
 	}
 	if (axis_mode.z) {
 		if (v.z <= depth) {
-			Cell g = greeble(v.xy, frac(5.0 / 6.0));
+			Cell g = greeble(v.xy, fract(5.0 / 6.0));
 
 			if (v.z < g.depth) {
 				count += 1.0;
 			}
 		}
 		if (v.z >= i_volume_size.z - depth) {
-			Cell g = greeble(i_volume_size.xy - v.xy, frac(6.0 / 6.0));
+			Cell g = greeble(i_volume_size.xy - v.xy, fract(6.0 / 6.0));
 
 			if (i_volume_size.z - v.z < g.depth) {
 				count += 1.0;
@@ -128,7 +128,7 @@ float map(vec3 v) {
 
 	if (count > min_count) {
 		if (mode == 0 || mode == 2) {
-			return 0.0;
+	return 0.0;
 		} else {
 			return i_color_index;
 		}
