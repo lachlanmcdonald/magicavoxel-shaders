@@ -14,7 +14,7 @@
 // arg : { id = '5'  name = 'Line Width'  value = '1'  range = '0 256'  step = '1'  decimal = '0' }
 // xs_end
 
-float mode = i_args[0];
+int mode = int(i_args[0]);
 float size = i_args[1];
 float pal_min = i_args[2];
 float pal_max = i_args[3];
@@ -22,7 +22,7 @@ float line_color = i_args[4];
 float line_width = i_args[5];
 
 float random(vec2 co) {
-    return fract(cos(dot(co.xy, vec2(23.14069263277926, pow(sqrt(2.0), 2.0)))) * 43758.5453);
+    return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * 43758.6980280632);
 }
 
 float map(vec3 v) {
@@ -41,7 +41,7 @@ float map(vec3 v) {
 		if (mod(row + col, 2.0) == 0.0) {
 			float inner_col = floor(k.x / (size / 2.0));
 
-			if (mode == 0.0) {
+			if (mode == 0) {
 				float color = random(vec2(d, inner_col));
 				return mix(pal_min, pal_max, color);
 			} else {
@@ -50,7 +50,7 @@ float map(vec3 v) {
 		} else {
 			float inner_row = floor(k.y / (size / 2.0));
 
-			if (mode == 0.0) {
+			if (mode == 0) {
 				float color = random(vec2(inner_row, d));
 				return mix(pal_min, pal_max, color);
 			} else {

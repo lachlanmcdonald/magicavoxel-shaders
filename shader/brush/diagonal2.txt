@@ -14,7 +14,7 @@
 // arg : { id = '5'  name = 'Offset'  value = '0'  range = '0 256'  step = '1'  decimal = '0' }
 // xs_end
 
-float direction = i_args[0];
+int direction = int(i_args[0]);
 float color_a = floor(i_args[1]);
 float color_b = floor(i_args[2]);
 float width_a = max(i_args[3], 1.0);
@@ -27,22 +27,22 @@ float map(vec3 v) {
 	float x;
 	float z;
 
-	if (direction == 0.0) {
+	if (direction == 0) {
 		x = v.x;
 		z = 0.0;
-	} else if (direction == 1.0) {
+	} else if (direction == 1) {
 		x = v.x;
 		z = v.z;
-	} else if (direction == 2.0) {
+	} else if (direction == 2) {
 		x = v.x;
 		z = -v.z;
-	} else if (direction == 3.0) {
+	} else if (direction == 3) {
 		x = -v.x;
 		z = 0.0;
-	} else if (direction == 4.0) {
+	} else if (direction == 4) {
 		x = -v.x;
 		z = v.z;
-	} else if (direction == 5.0) {
+	} else if (direction == 5) {
 		x = -v.x;
 		z = -v.z;
 	}

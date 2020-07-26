@@ -1,0 +1,126 @@
+// MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+// Copyright (c) 2020 Lachlan McDonald
+//
+// xs primitive/greebles1 [Mode] [Count] [Width] [Height] [Depth] [Seed]
+//
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { id = '0'  name = 'Mode'  value = '0'  range = '0 1'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Count'  value = '32'  range = '1 256'  step = '8'  decimal = '0' }
+// arg : { id = '2'  name = 'Width'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Height'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Depth'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '5'  name = 'Seed'  value = '1'  range = '1 100'  step = '1'  decimal = '0' }
+// xs_end
+
+int mode = int(i_args[0]);
+int count = int(i_args[1]);
+
+vec3 dim_min = vec3(1.0);
+vec3 dim_max = vec3(max(i_args[2], 1.0),
+					max(i_args[3], 1.0),
+					max(i_args[4], 1.0));
+float global_seed = mix(-437.5453, 437.5453, i_args[5] / 100.0);
+
+bool no_axis_mode = all(equal(ivec3(i_axis), ivec3(0)));
+bvec3 axis_mode = no_axis_mode ? bvec3(true) : equal(ivec3(i_axis), ivec3(1));
+
+struct Box {
+	ivec3 lower;
+	ivec3 upper;
+};
+
+float random(vec2 co) {
+    return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + global_seed));
+}
+
+float roundf(float f) {
+	return fract(f) > 0.5 ? ceil(f) : floor(f);
+}
+
+int imix(float a, float b, float f) {
+	return int(roundf(mix(a, b, f)));
+}
+
+float max3(vec3 a) {
+	return max(max(a.x, a.y), a.z);
+}
+
+Box region(vec3 dim_min, vec3 dim_max, float iter, float seed) {
+	float max_size = max3(i_volume_size);
+
+	float r[5];
+	r[0] = random(vec2(iter * seed));
+	r[1] = random(vec2(iter * seed + 16.0 * 1.0));
+	r[2] = random(vec2(iter * seed + 16.0 * 2.0));
+	r[3] = random(vec2(iter * seed + 16.0 * 3.0));
+	r[4] = random(vec2(iter * seed + 16.0 * 4.0));
+
+	int x = imix(0.0, max_size, r[0]);
+	int y = imix(0.0, max_size, r[1]);
+
+	ivec3 p = ivec3(x, y, 0);
+	ivec3 dim = ivec3(imix(dim_min.x, dim_max.x, r[2]),
+					  imix(dim_min.y, dim_max.y, r[3]),
+					  imix(dim_min.z, dim_max.z, r[4]));
+
+	ivec3 lower = p - ivec3(floor(vec3(dim) / 2.0));
+	ivec3 upper = p + ivec3(ceil(vec3(dim) / 2.0));
+
+	return Box(lower, upper);
+}
+
+bool lower_region(ivec3 iv, vec3 dim_min, vec3 dim_max, float seed) {
+	for (int i = 0; i < count; i += 1) {
+		Box j = region(dim_min, dim_max, float(i), seed);
+
+		if (all(greaterThanEqual(iv, j.lower)) && all(lessThan(iv, j.upper))) {
+			return true;
+		}
+    }
+	return false;
+}
+
+bool upper_region(ivec3 iv, vec3 dim_min, vec3 dim_max, float seed) {
+	for (int i = 0; i < count; i += 1) {
+		Box j = region(dim_min, dim_max, float(i), seed);
+
+		if (all(greaterThan(iv, j.lower)) && all(lessThanEqual(iv, j.upper))) {
+			return true;
+		}
+    }
+	return false;
+}
+
+float map(vec3 v) {
+	ivec3 iv = ivec3(v);
+	ivec3 ivs = ivec3(i_volume_size);
+
+	if (axis_mode.x) {
+		if (lower_region(iv.zyx, dim_min.yxz, dim_max.yxz, 64.0 * 1.0)) {
+			return (mode == 0) ? 0.0 : i_color_index;
+		}
+		if (upper_region((ivs - iv).zyx, dim_min.yxz, dim_max.yxz, 64.0 * 2.0)) {
+			return (mode == 0) ? 0.0 : i_color_index;
+		}
+	}
+	if (axis_mode.y) {
+		if (lower_region(iv.xzy, dim_min.xyz, dim_max.xyz, 64.0 * 3.0)) {
+			return (mode == 0) ? 0.0 : i_color_index;
+		}
+		if (upper_region((ivs - iv).xzy, dim_min.xyz, dim_max.xyz, 64.0 * 4.0)) {
+			return (mode == 0) ? 0.0 : i_color_index;
+		}
+	}
+	if (axis_mode.z) {
+		if (lower_region(iv, dim_min.yxz, dim_max.yxz, 64.0 * 5.0)) {
+			return (mode == 0) ? 0.0 : i_color_index;
+		}
+		if (upper_region(ivs - iv, dim_min.yxz, dim_max.yxz, 64.0 * 6.0)) {
+			return (mode == 0) ? 0.0 : i_color_index;
+		}
+	}
+
+	return (mode == 0) ? i_color_index : 0.0;
+}

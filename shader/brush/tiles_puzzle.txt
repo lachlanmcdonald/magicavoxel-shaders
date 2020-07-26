@@ -13,10 +13,10 @@
 // arg : { id = '4'  name = 'Size Y'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
 // arg : { id = '5'  name = 'Line Color'  value = '16'  range = '0 255'  step = '1'  decimal = '0' }
 // arg : { id = '6'  name = 'Line Width'  value = '1'  range = '0 256'  step = '1'  decimal = '0' }
-// arg : { id = '7'  name = 'Seed'  value = '1'  range = '0 100'  step = '1'  decimal = '0' }
+// arg : { id = '7'  name = 'Seed'  value = '1'  range = '1 100'  step = '1'  decimal = '0' }
 // xs_end
 
-int mode = i_args[0];
+int mode = int(i_args[0]);
 float color_a = floor(i_args[1]);
 float color_b = floor(i_args[2]);
 
@@ -26,10 +26,10 @@ float thickness = floor(i_args[6]);
 float width = max(i_args[3], 1.0) + thickness;
 float height = max(i_args[4], 1.0) + thickness;
 
-float global_seed = mix(-43758.5453, 43758.5453, i_args[7] / 100.0);
+float global_seed = mix(-43758.6980280632, 43758.6980280632, i_args[7] / 100.0);
 
 float random(vec2 co) {
-    return fract(cos(dot(co.xy, vec2(23.14069263277926, pow(sqrt(2.0), 2.0)))) * (43758.5453 + global_seed));
+    return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + global_seed));
 }
 
 float map(vec3 v) {
@@ -89,9 +89,9 @@ float map(vec3 v) {
 	if (mode == 1) {
 		return tile > 0.5 ? color_a : color_b;
 	} else if (mode == 2) {
-		return tile > 0.5 ? line_color : mix(color_a, color_b, next);;
+		return tile > 0.5 ? line_color : mix(color_a, color_b, next);
 	} else if (mode == 3) {
-		return tile <= 0.5 ? line_color : mix(color_a, color_b, next);;
+		return tile <= 0.5 ? line_color : mix(color_a, color_b, next);
 	} else {
 		return mix(color_a, color_b, next);
 	}
