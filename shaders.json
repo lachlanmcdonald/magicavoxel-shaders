@@ -560,6 +560,58 @@
                 }
             ]
         },
+        "brush/zigzag2": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Direction",
+                    "range": "0 3",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "name": "Width A",
+                    "type": "size",
+                    "var": "width_a",
+                    "value": 2
+                },
+                {
+                    "name": "Width B",
+                    "type": "size",
+                    "var": "width_b",
+                    "value": 2
+                }
+            ]
+        },
+        "brush/zigzag3": {
+            "params": [
+                {
+                    "decimal": 0,
+                    "name": "Direction",
+                    "range": "0 3",
+                    "step": 1,
+                    "value": 0
+                },
+                {
+                    "name": "Width A",
+                    "var": "width_a",
+                    "type": "size",
+                    "value": 2
+                },
+                {
+                    "name": "Width B",
+                    "var": "width_b",
+                    "type": "size",
+                    "value": 2
+                },
+                {
+                    "name": "Width C",
+                    "var": "width_c",
+                    "type": "size",
+                    "value": 2
+                }
+            ]
+        },
         "case": {
             "params": [
                 {

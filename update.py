@@ -42,10 +42,10 @@ for shader_name in params.keys():
 				ARG_FORMAT.format('name', param['name'])
 			]
 
-			for k in ['value', 'range', 'step', 'decimal']:
+			for k in ['value', 'var', 'range', 'step', 'decimal']:
 				if k in param:
 					shader_lines.append(ARG_FORMAT.format(k, param[k]))
-				elif k in TYPES[param['type']]:
+				elif 'type' in param and k in TYPES[param['type']]:
 					shader_lines.append(ARG_FORMAT.format(k, TYPES[param['type']][k]))
 
 			header.append('arg : {{ {} }}'.format('  '.join(shader_lines)))
