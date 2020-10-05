@@ -25,6 +25,15 @@
                     "value": 2
                 },
                 {
+                    "name": "Grout",
+                    "type": "size",
+                    "value": 1
+                },
+                {
+                    "name": "Grout Color",
+                    "type": "color_a"
+                },
+                {
                     "name": "Offset",
                     "type": "position"
                 },
@@ -58,6 +67,15 @@
                     "name": "Depth",
                     "type": "size",
                     "value": 2
+                },
+                {
+                    "name": "Grout",
+                    "type": "size",
+                    "value": 1
+                },
+                {
+                    "name": "Grout Color",
+                    "type": "color_a"
                 },
                 {
                     "name": "Offset",
