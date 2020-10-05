@@ -29,15 +29,6 @@
                     "type": "position"
                 },
                 {
-                    "name": "Color A",
-                    "type": "color_a"
-                },
-                {
-                    "name": "Color B",
-                    "type": "color_b",
-                    "value": 10
-                },
-                {
                     "name": "Threshold",
                     "type": "fraction",
                     "value": 1
@@ -71,15 +62,6 @@
                 {
                     "name": "Offset",
                     "type": "position"
-                },
-                {
-                    "name": "Color A",
-                    "type": "color_a"
-                },
-                {
-                    "name": "Color B",
-                    "type": "color_b",
-                    "value": 10
                 },
                 {
                     "name": "Threshold",
