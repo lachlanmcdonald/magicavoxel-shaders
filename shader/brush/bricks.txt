@@ -2,7 +2,7 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2020 Lachlan McDonald
 //
-// xs brush/bricks [Direction] [Width] [Height] [Depth] [Grout] [Grout Color] [Offset] [Threshold]
+// xs brush/bricks [Direction] [Width] [Height] [Depth] [Grout Size] [Grout Color] [Offset] [Threshold]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
@@ -10,7 +10,7 @@
 // arg : { id = '1'  name = 'Width'  value = '5'  range = '1 256'  step = '1'  decimal = '0' }
 // arg : { id = '2'  name = 'Height'  value = '2'  range = '1 256'  step = '1'  decimal = '0' }
 // arg : { id = '3'  name = 'Depth'  value = '2'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'Grout'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Grout Size'  value = '1'  range = '0 256'  step = '1'  decimal = '0' }
 // arg : { id = '5'  name = 'Grout Color'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
 // arg : { id = '6'  name = 'Offset'  value = '0'  range = '0 256'  step = '1'  decimal = '0' }
 // arg : { id = '7'  name = 'Threshold'  value = '1'  range = '0 1'  step = '0.01'  decimal = '1' }
@@ -20,8 +20,10 @@ int direction = int(i_args[0]);
 float width = max(i_args[1], 1.0);
 float height = max(i_args[2], 1.0);
 float depth = max(i_args[3], 1.0);
-float row_offset = (i_args[4] == 0.0 ? (width / 2.0) : i_args[4]);
-float threshold = max(i_args[5], 0.0);
+float grout = floor(i_args[4]);
+float grout_color = floor(i_args[5]);
+float row_offset = (i_args[6] == 0.0 ? (width / 2.0) : i_args[6]);
+float threshold = max(i_args[7], 0.0);
 
 float random(vec2 co, float seed) {
     return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + seed));
@@ -32,37 +34,50 @@ float random(vec3 co, float seed) {
 	return random(vec2(a, co.z), seed);
 }
 
-float roundf(float f) {
-	return f >= 0.5 ? ceil(f) : floor(f);
-}
-
 float pal_mix(float p) {
-	float f = roundf(mix(1.0, float(i_num_color_sels), p));
+	float f = floor(mix(0.0, float(i_num_color_sels), p));
 	return color_sel(f);
 }
 
-float map(vec3 v) {
-	vec3 k;
+float sum(vec3 a) {
+	return a.x + a.y + a.z;
+}
 
+float sum(vec2 a) {
+	return a.x + a.y;
+}
+
+vec3 mod3(vec3 a, vec3 b) {
+	return vec3(mod(a.x, b.x), mod(a.y, b.y), mod(a.z, b.z));
+}
+
+float map(vec3 v) {
 	if (direction == 0) {
-		k = v.xzy;
+		v = v.xyz;
 	} else if (direction == 1) {
-		k = v.yzx;
+		v = v.yzx;
 	} else if (direction == 2) {
-		k = v.xyz;
+		v = v.xzy;
 	} else if (direction == 3) {
-		k = v.yxz;
+		v = v.yxz;
 	}
 
-	float layer = floor(k.z / depth);
-	float row = floor(k.y / height);
-	float col = floor((k.x - row * row_offset) / width);
+	vec3 dim = vec3(width, depth, height) + grout;
+	vec3 c = floor(v / dim);
+	c.x = floor((v.x + c.z * (row_offset * (c.y + 1.0))) / dim.x);
 
-	float brick_randomness = random(vec3(row, col, layer), row * col);
+	vec3 iv = vec3(v.x + c.z * (row_offset * (c.y + 1.0)), v.yz);
+	vec3 ic = mod3(iv, dim);
+
+	float brick_randomness = random(c, c.x * c.y);
 
 	if (brick_randomness < threshold) {
-		float brick_color = random(vec3(row, col, layer), 0.0);
-		return pal_mix(brick_color);
+		if (any(greaterThanEqual(ic, floor(dim - grout)))) {
+			return grout_color;
+		} else {
+			float brick_color = random(c, 0.0);
+			return pal_mix(brick_color);
+		}
 	} else {
 		return 0.0;
 	}

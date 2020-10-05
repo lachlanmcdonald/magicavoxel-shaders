@@ -25,8 +25,8 @@
                     "value": 2
                 },
                 {
-                    "name": "Grout",
-                    "type": "size",
+                    "name": "Grout Size",
+                    "type": "position",
                     "value": 1
                 },
                 {
