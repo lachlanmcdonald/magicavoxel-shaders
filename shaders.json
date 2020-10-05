@@ -544,79 +544,7 @@
                 }
             ]
         },
-        "brush/zigzag2": {
-            "params": [
-                {
-                    "decimal": 0,
-                    "name": "Direction",
-                    "range": "0 3",
-                    "step": 1,
-                    "value": 0
-                },
-                {
-                    "name": "Width A",
-                    "type": "size",
-                    "value": 2
-                },
-                {
-                    "name": "Width B",
-                    "type": "size",
-                    "value": 2
-                },
-                {
-                    "name": "Color A",
-                    "type": "color_a",
-                    "value": 1
-                },
-                {
-                    "name": "Color B",
-                    "type": "color_b",
-                    "value": 9
-                }
-            ]
-        },
-        "brush/zigzag3": {
-            "params": [
-                {
-                    "decimal": 0,
-                    "name": "Direction",
-                    "range": "0 3",
-                    "step": 1,
-                    "value": 0
-                },
-                {
-                    "name": "Width A",
-                    "type": "size",
-                    "value": 2
-                },
-                {
-                    "name": "Width B",
-                    "type": "size",
-                    "value": 2
-                },
-                {
-                    "name": "Width C",
-                    "type": "size",
-                    "value": 2
-                },
-                {
-                    "name": "Color A",
-                    "type": "color_a",
-                    "value": 1
-                },
-                {
-                    "name": "Color B",
-                    "type": "color_b",
-                    "value": 9
-                },
-                {
-                    "name": "Color C",
-                    "type": "color_b",
-                    "value": 18
-                }
-            ]
-        },
-        "brush/zigzag_range": {
+        "brush/zigzag": {
             "params": [
                 {
                     "decimal": 0,
@@ -629,16 +557,6 @@
                     "name": "Width",
                     "type": "size",
                     "value": 2
-                },
-                {
-                    "name": "Color A",
-                    "type": "color_a",
-                    "value": 1
-                },
-                {
-                    "name": "Color B",
-                    "type": "color_b",
-                    "value": 9
                 }
             ]
         },
