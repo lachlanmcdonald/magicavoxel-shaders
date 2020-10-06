@@ -35,7 +35,7 @@ float roundf(float f) {
 }
 
 float pal_mix(float p) {
-	float f = roundf(mix(1.0, float(i_num_color_sels), p));
+	float f = roundf(mix(0.0, float(i_num_color_sels), p));
 	return color_sel(f);
 }
 
