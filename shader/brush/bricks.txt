@@ -30,7 +30,7 @@ float noise = max(i_args[8], 0.0);
 float threshold = max(i_args[9], 0.0);
 
 float random(vec2 co, float seed) {
-    return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + seed));
+	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + seed));
 }
 
 float random(vec3 co, float seed) {
