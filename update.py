@@ -1,12 +1,10 @@
 from os import path
 from datetime import datetime
-import json
+import yaml
 import re
 
 DIR = path.dirname(path.realpath(__file__))
-
 ARG_FORMAT = "{} = '{}'"
-
 FIX_GLOBAL_VARS = {
 	'i_args': 'i_args',
 	'i_volume_size': 'i_volume_size',
@@ -16,8 +14,8 @@ FIX_GLOBAL_VARS = {
 	'iIter': 'i_iter',
 }
 
-with open(path.join(DIR, 'shaders.json')) as f:
-	data = json.load(f)
+with open(path.join(DIR, 'shaders.yml')) as f:
+	data = yaml.safe_load(f)
 	params = { k: v['params'] for k, v in data['shaders'].items() }
 	TYPES = data['types']
 
