@@ -19,6 +19,7 @@ with open(path.join(DIR, 'shaders.yml')) as f:
 	params = { k: v['params'] for k, v in data['shaders'].items() }
 	TYPES = data['types']
 
+# Update shaders
 for shader_name in params.keys():
 	header = [
 		'MIT License (MIT)',
