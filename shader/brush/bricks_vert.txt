@@ -61,14 +61,14 @@ float map(vec3 v) {
 		v = v.xyz;
 		d = dim.x;
 	} else if (direction == 1) {
-		v = v.yzx;
-		d = dim.x;
+		v = v.yxz;
+		d = dim.y;
 	} else if (direction == 2) {
-		v = v.xzy;
+		v = v.yzx;
 		d = dim.y;
 	} else if (direction == 3) {
-		v = v.yxz;
-		d = dim.x;
+		v = v.xzy;
+		d = dim.y;
 	}
 
 	float offset = (row_offset == 0.0) ? floor(d / 2.0) : row_offset;
