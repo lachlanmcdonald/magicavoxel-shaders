@@ -68,68 +68,36 @@ shaders:
     - name: Threshold
       type: fraction
       value: 1
-  brush/diagonal2:
+  brush/diagonal:
     params:
     - decimal: 0
       name: Direction
       range: 0 5
       step: 1
       value: 0
-    - name: Color A
-      type: color_a
-    - name: Color B
-      type: color_b
-      'value:': 8
     - name: Width A
-      type: size
-      value: 2
-    - name: Width B
-      type: size
-      value: 2
-    - name: Offset
-      type: position
-  brush/diagonal3:
-    params:
-    - decimal: 0
-      name: Direction
-      range: 0 5
+      range: 0 32
       step: 1
-      value: 0
-    - name: Color A
-      type: color_a
-    - name: Color B
-      type: color_b
-      value: 8
-    - name: Color C
-      type: color_b
-      value: 16
-    - name: Width A
-      type: size
+      decimal: 0
       value: 2
     - name: Width B
-      type: size
-      value: 2
+      range: 0 32
+      step: 1
+      decimal: 0
+      value: 0
     - name: Width C
-      type: size
-      value: 2
+      range: 0 32
+      step: 1
+      decimal: 0
+      value: 0
+    - name: Width D
+      range: 0 32
+      step: 1
+      decimal: 0
+      value: 0
     - name: Offset
       type: position
-  brush/diagonal_range:
-    params:
-    - decimal: 0
-      name: Direction
-      range: 0 5
-      step: 1
-      value: 0
-    - name: Color A
-      type: color_a
-    - name: Color B
-      type: color_b
-      value: 8
-    - name: Width
-      type: size
-      value: 2
-    - name: Offset
+    - name: Shuffle
       type: position
   brush/grass:
     params:

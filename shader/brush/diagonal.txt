@@ -1,0 +1,88 @@
+// MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+// Copyright (c) 2020 Lachlan McDonald
+//
+// xs brush/diagonal [Direction] [Width A] [Width B] [Width C] [Width D] [Offset] [Shuffle]
+//
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { id = '0'  name = 'Direction'  value = '0'  range = '0 5'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Width A'  value = '2'  range = '0 32'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Width B'  value = '0'  range = '0 32'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Width C'  value = '0'  range = '0 32'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Width D'  value = '0'  range = '0 32'  step = '1'  decimal = '0' }
+// arg : { id = '5'  name = 'Offset'  value = '0'  range = '0 256'  step = '1'  decimal = '0' }
+// arg : { id = '6'  name = 'Shuffle'  value = '0'  range = '0 256'  step = '1'  decimal = '0' }
+// xs_end
+
+int direction = int(i_args[0]);
+float width_1 = floor(max(i_args[1], 1.0));
+float width_2 = floor(max(i_args[2], 0.0));
+float width_3 = floor(max(i_args[3], 0.0));
+float width_4 = floor(max(i_args[4], 0.0));
+float offset = floor(i_args[5]);
+float shuffle = floor(i_args[6]);
+
+int mod(int a, int b) {
+	return int(mod(float(a), float(b)));
+}
+
+float map(vec3 v) {
+	// Line widths
+	int width_count = 0;
+	float widths[3];
+
+	if (width_1 >= 1.0) {
+		widths[width_count] = width_1;
+		width_count += 1;
+	}
+	if (width_2 >= 1.0) {
+		widths[width_count] = width_2;
+		width_count += 1;
+	}
+	if (width_3 >= 1.0) {
+		widths[width_count] = width_3;
+		width_count += 1;
+	}
+	if (width_4 >= 1.0) {
+		widths[width_count] = width_4;
+		width_count += 1;
+	}
+
+	// Adjustments for direction
+	float x;
+	float z;
+
+	if (direction == 0) {
+		v.z = 0.0;
+	} else if (direction == 2) {
+		v.z = -v.z;
+	} else if (direction == 3) {
+		v.x = -v.x;
+		v.z = 0.0;
+	} else if (direction == 4) {
+		v.x = -v.x;
+	} else if (direction == 5) {
+		v.x = -v.x;
+		v.z = -v.z;
+	}
+
+	int iter = 0;
+	float p = abs(v.x + v.y + v.z + offset);
+	float f = 0.0;
+
+	while (f < p) {
+		int idx = mod(iter, width_count);
+		float w = widths[idx];
+		iter += 1;
+		f += w;
+	}
+
+	if (i_num_color_sels == 1) {
+		float i = mod(float(iter), 2.0);
+		return i == 0.0 ? color_sel(i) : 0.0;
+	} else {
+		float i = mod(float(iter) + shuffle, float(i_num_color_sels));
+		return color_sel(i);
+	}
+}
