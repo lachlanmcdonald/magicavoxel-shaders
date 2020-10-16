@@ -11,6 +11,6 @@ tab_width = 4
 [*.md]
 trim_trailing_whitespace = false
 
-[*.json]
+[*.yml]
 indent_style = space
-tab_width = 4
+tab_width = 2
