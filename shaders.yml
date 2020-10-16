@@ -25,7 +25,7 @@ shaders:
       type: position
       value: 1
     - name: Grout Color
-      type: color_a
+      type: colorA
     - name: Offset
       type: position
     - name: Noise
@@ -59,7 +59,7 @@ shaders:
       type: position
       value: 1
     - name: Grout Color
-      type: color_a
+      type: colorA
     - name: Offset
       type: position
     - name: Noise
@@ -102,23 +102,10 @@ shaders:
   brush/grass:
     params:
     - decimal: 0
-      name: Mode
-      range: 0 4
+      name: Direction
+      range: 0 3
       step: 1
       value: 0
-    - name: Density
-      type: size
-      value: 2
-    - name: Growth
-      type: fraction
-      value: 0.5
-    - decimal: 0
-      name: Seed
-      range: 1 100
-      step: 1
-      value: 1
-  brush/grass_inv:
-    params:
     - decimal: 0
       name: Mode
       range: 0 4
@@ -138,9 +125,9 @@ shaders:
   brush/grid:
     params:
     - name: Color A
-      type: color_a
+      type: colorA
     - name: Color B
-      type: color_b
+      type: colorB
     - name: Thickness
       type: size
     - name: Size X
@@ -210,9 +197,9 @@ shaders:
   brush/tiles:
     params:
     - name: Color A
-      type: color_a
+      type: colorA
     - name: Color B
-      type: color_b
+      type: colorB
     - name: Width
       type: size
       value: 2
@@ -236,10 +223,10 @@ shaders:
       step: 1
       value: 0
     - name: Color A
-      type: color_a
+      type: colorA
       value: 1
     - name: Color B
-      type: color_b
+      type: colorB
       value: 8
     - name: Size X
       type: size
@@ -248,7 +235,7 @@ shaders:
       type: size
       value: 4
     - name: Line Color
-      type: color_b
+      type: colorB
       value: 16
     - name: Line Width
       type: position
@@ -272,13 +259,13 @@ shaders:
       type: size
       value: 8
     - name: Color A
-      type: color_a
+      type: colorA
       value: 1
     - name: Color B
-      type: color_b
+      type: colorB
       value: 8
     - name: Line Color
-      type: color_b
+      type: colorB
       value: 16
     - name: Line Width
       type: position
@@ -299,13 +286,13 @@ shaders:
       type: size
       value: 4
     - name: Color A
-      type: color_a
+      type: colorA
       value: 1
     - name: Color B
-      type: color_b
+      type: colorB
       value: 9
     - name: Line Color
-      type: color_b
+      type: colorB
       value: 10
     - name: Line Width
       type: position
@@ -357,11 +344,11 @@ shaders:
   case:
     params:
     - name: Color
-      type: color_a
+      type: colorA
   cover:
     params:
     - name: Color
-      type: color_a
+      type: colorA
   flood:
     params:
     - name: Height
@@ -373,9 +360,9 @@ shaders:
   noise:
     params:
     - name: Color A
-      type: color_a
+      type: colorA
     - name: Color B
-      type: color_b
+      type: colorB
     - name: Size X
       type: size
     - name: Size Y
@@ -385,11 +372,11 @@ shaders:
   outline:
     params:
     - name: Color
-      type: color_a
+      type: colorA
   outline2:
     params:
     - name: Color
-      type: color_a
+      type: colorA
   primitive/cylinder:
     params:
     - decimal: 0
@@ -477,28 +464,28 @@ shaders:
   pyramid:
     params:
     - name: Color
-      type: color_a
+      type: colorA
       value: 0
   pyramid2:
     params:
     - name: Color
-      type: color_a
+      type: colorA
       value: 0
   random:
     params:
     - name: Threshold
       type: fraction
     - name: Color
-      type: color_a
+      type: colorA
   sand:
     params:
     - name: Color
-      type: color_a
+      type: colorA
       value: 0
   sand2:
     params:
     - name: Color
-      type: color_a
+      type: colorA
       value: 0
   slice_x:
     params:
@@ -521,24 +508,24 @@ shaders:
   soil:
     params:
     - name: Color
-      type: color_a
+      type: colorA
     - name: Headroom
       type: position
       value: 1
   soil_replace:
     params:
     - name: Color
-      type: color_a
+      type: colorA
     - name: Headroom
       type: position
       value: 1
 types:
-  color_a:
+  colorA:
     decimal: 0
     range: 0 255
     step: 1
     value: 1
-  color_b:
+  colorB:
     decimal: 0
     range: 0 255
     step: 1
