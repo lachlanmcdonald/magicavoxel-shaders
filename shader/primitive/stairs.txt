@@ -2,7 +2,7 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2021 Lachlan McDonald
 //
-// xs brush/stairs [Mode] [Direction] [Count] [Height]
+// xs primitive/stairs [Mode] [Direction] [Count] [Height]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
