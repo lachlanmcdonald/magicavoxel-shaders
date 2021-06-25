@@ -117,11 +117,8 @@ shaders:
     - name: Growth
       type: fraction
       value: 0.5
-    - decimal: 0
-      name: Seed
-      range: 1 100
-      step: 1
-      value: 1
+    - name: Seed
+      type: seed
   brush/grid:
     params:
     - name: Color A
@@ -240,11 +237,8 @@ shaders:
     - name: Line Width
       type: position
       value: 1
-    - decimal: 0
-      name: Seed
-      range: 1 100
-      step: 1
-      value: 1
+    - name: Seed
+      type: seed
   brush/tiles_uneven:
     params:
     - decimal: 0
@@ -270,11 +264,8 @@ shaders:
     - name: Line Width
       type: position
       value: 1
-    - decimal: 0
-      name: Seed
-      range: 1 100
-      step: 1
-      value: 1
+    - name: Seed
+      type: seed
   brush/weave:
     params:
     - decimal: 0
@@ -416,11 +407,8 @@ shaders:
       range: 1 256
       step: 1
       value: 4
-    - decimal: 0
-      name: Seed
-      range: 1 100
-      step: 1
-      value: 1
+    - name: Seed
+      type: seed
   primitive/greebles2:
     params:
     - decimal: 0
@@ -443,11 +431,8 @@ shaders:
       range: 1 256
       step: 1
       value: 2
-    - decimal: 0
-      name: Seed
-      range: 1 100
-      step: 1
-      value: 1
+    - name: Seed
+      type: seed
   primitive/prism:
     params:
     - decimal: 0
@@ -553,5 +538,11 @@ types:
   size:
     decimal: 0
     range: 1 256
+    step: 1
+    value: 1
+  seed:
+    decimal: 0
+    name: Seed
+    range: 1 100
     step: 1
     value: 1
