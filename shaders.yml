@@ -193,10 +193,6 @@ shaders:
       value: 0
   brush/tiles:
     params:
-    - name: Color A
-      type: colorA
-    - name: Color B
-      type: colorB
     - name: Width
       type: size
       value: 2
