@@ -2,12 +2,12 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2021 Lachlan McDonald
 //
-// xs sand [Mode] [Threshold]
+// xs sand2 [Mode] [Threshold]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
 // arg : { id = '0'  name = 'Mode'  value = '0'  range = '0 2'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Threshold'  value = '0.5'  range = '0 1'  step = '0.01'  decimal = '1' }
+// arg : { id = '1'  name = 'Threshold'  value = '0'  range = '0 1'  step = '0.01'  decimal = '1' }
 // xs_end
 
 int mode = int(i_args[0]);

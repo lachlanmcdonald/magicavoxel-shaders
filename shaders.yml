@@ -486,6 +486,7 @@ shaders:
       value: 0
     - name: Threshold
       type: fraction
+      value: 0
   sand2:
     params:
     - decimal: 0
@@ -495,6 +496,7 @@ shaders:
       value: 0
     - name: Threshold
       type: fraction
+      value: 0
   slice_x:
     params:
     - name: Offset
