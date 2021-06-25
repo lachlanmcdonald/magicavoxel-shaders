@@ -479,14 +479,22 @@ shaders:
       type: colorA
   sand:
     params:
-    - name: Color
-      type: colorA
+    - decimal: 0
+      name: Mode
+      range: 0 2
+      step: 1
       value: 0
+    - name: Threshold
+      type: fraction
   sand2:
     params:
-    - name: Color
-      type: colorA
+    - decimal: 0
+      name: Mode
+      range: 0 2
+      step: 1
       value: 0
+    - name: Threshold
+      type: fraction
   slice_x:
     params:
     - name: Offset
