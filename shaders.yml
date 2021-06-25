@@ -350,16 +350,16 @@ shaders:
       type: size
   noise:
     params:
-    - name: Color A
+    - name: Target Color
       type: colorA
-    - name: Color B
-      type: colorB
     - name: Size X
       type: size
     - name: Size Y
       type: size
     - name: Size Z
       type: size
+    - name: Seed
+      type: seed
   outline:
     params:
     - name: Color
