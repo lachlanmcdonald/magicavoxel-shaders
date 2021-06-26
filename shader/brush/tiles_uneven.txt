@@ -62,8 +62,12 @@ float pal_mix(float p) {
 }
 
 float pal_mix_noise(float p, vec3 v) {
-	float d = random(v.xy, global_seed * 2.0);
-	return d <= noise ? pal_mix(d) : pal_mix(p);
+	if (noise > 0.0) {
+		float d = random(v.xy, global_seed * 2.0);
+		return d <= noise ? pal_mix(d) : pal_mix(p);
+	} else {
+		return pal_mix(p);
+	}
 }
 
 float map(vec3 v) {
