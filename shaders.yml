@@ -239,7 +239,7 @@ shaders:
     params:
     - decimal: 0
       name: Mode
-      range: 0 4
+      range: 0 5
       step: 1
       value: 0
     - name: Min
@@ -248,18 +248,15 @@ shaders:
     - name: Max
       type: size
       value: 8
-    - name: Color A
-      type: colorA
-      value: 1
-    - name: Color B
-      type: colorB
-      value: 8
     - name: Line Color
       type: colorB
       value: 16
     - name: Line Width
       type: position
       value: 1
+    - name: Noise
+      type: fraction
+      value: 0
     - name: Seed
       type: seed
   brush/weave:
