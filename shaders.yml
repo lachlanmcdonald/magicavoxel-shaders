@@ -360,10 +360,12 @@ shaders:
   outline:
     params:
     - name: Color
+      var: m_color
       type: colorA
   outline2:
     params:
     - name: Color
+      var: m_color
       type: colorA
   primitive/cylinder:
     params:

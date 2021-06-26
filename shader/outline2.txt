@@ -6,13 +6,22 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Color'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '0'  name = 'Color'  value = '1'  var = 'm_color'  range = '0 255'  step = '1'  decimal = '0' }
 // xs_end
+
+bool is_sel_color(float p) {
+	for (int i = 0; i < i_num_color_sels; i += 1) {
+		if (p == color_sel(float(i))) {
+			return true;
+		}
+	}
+	return false;
+}
 
 float map(vec3 v) {
 	float index = voxel(v);
 
-	if (index == i_color_index) {
+	if (is_sel_color(index)) {
 		float n = voxel(vec3(v.x - 1.0, v.y, v.z));
 		float s = voxel(vec3(v.x + 1.0, v.y, v.z));
 		float e = voxel(vec3(v.x, v.y - 1.0, v.z));
@@ -20,13 +29,13 @@ float map(vec3 v) {
 		float a = voxel(vec3(v.x, v.y, v.z - 1.0));
 		float b = voxel(vec3(v.x, v.y, v.z + 1.0));
 
-		if ((n != index && n != 0.0) ||
-			(s != index && s != 0.0) ||
-			(e != index && e != 0.0) ||
-			(w != index && w != 0.0) ||
-			(a != index && a != 0.0) ||
-			(b != index && b != 0.0)) {
-			return i_args[0];
+		if ((is_sel_color(n) == false && n != 0.0) ||
+			(is_sel_color(s) == false && s != 0.0) ||
+			(is_sel_color(e) == false && e != 0.0) ||
+			(is_sel_color(w) == false && w != 0.0) ||
+			(is_sel_color(a) == false && a != 0.0) ||
+			(is_sel_color(b) == false && b != 0.0)) {
+			return m_color;
 		}
 	}
 	return index;
