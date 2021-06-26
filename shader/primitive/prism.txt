@@ -18,36 +18,36 @@ float width_x = min(i_args[1], i_volume_size.x / 2.0);
 float width_y = min(i_args[2], i_volume_size.y / 2.0);
 
 float random(vec2 co) {
-    return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * 43758.6980280632);
+	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * 43758.6980280632);
 }
 
 float random(vec3 co) {
-    return random(vec2(random(co.xy), co.z));
+	return random(vec2(random(co.xy), co.z));
 }
 
 float check(float pos, float width, float max_pos) {
-    if (pos <= width) {
-        if (mode == 0) {
-            return pos / width * i_volume_size.z;
-        } else if (mode == 1) {
-            float d1 = pos / width;
-            return sin(PI2 * (d1 / 4.0)) * i_volume_size.z;
-        }
-    } else if (pos >= max_pos - width) {
-        if (mode == 0) {
-            return (max_pos - pos) / width * i_volume_size.z;
-        } else if (mode == 1) {
-            float d1 = (max_pos - pos) / width;
-            return sin(PI2 * (d1 / 4.0)) * i_volume_size.z;
-        }
-    } else {
-        return max_pos;
-    }
+	if (pos <= width) {
+		if (mode == 0) {
+			return pos / width * i_volume_size.z;
+		} else if (mode == 1) {
+			float d1 = pos / width;
+			return sin(PI2 * (d1 / 4.0)) * i_volume_size.z;
+		}
+	} else if (pos >= max_pos - width) {
+		if (mode == 0) {
+			return (max_pos - pos) / width * i_volume_size.z;
+		} else if (mode == 1) {
+			float d1 = (max_pos - pos) / width;
+			return sin(PI2 * (d1 / 4.0)) * i_volume_size.z;
+		}
+	} else {
+		return max_pos;
+	}
 }
 
 vec2 check(vec2 pos, vec2 dim) {
 	float x = check(pos.x, dim.x, i_volume_size.x);
-    float y = check(pos.y, dim.y, i_volume_size.y);
+	float y = check(pos.y, dim.y, i_volume_size.y);
 	return vec2(x, y);
 }
 
