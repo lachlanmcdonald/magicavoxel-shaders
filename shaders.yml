@@ -524,7 +524,7 @@ types:
   fraction:
     decimal: 1
     range: 0 1
-    step: 0.01
+    step: 0.05
     value: 0.5
   position:
     decimal: 0
