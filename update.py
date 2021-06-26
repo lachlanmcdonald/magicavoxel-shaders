@@ -5,11 +5,11 @@ import yaml
 DIR = path.dirname(path.realpath(__file__))
 ARG_FORMAT = "{} = '{}'"
 FIX_GLOBAL_VARS = {
-	'i_args': 'i_args',
-	'i_volume_size': 'i_volume_size',
-	'i_color_index': 'i_color_index',
+	'iArgs': 'i_args',
+	'iVolumeSize': 'i_volume_size',
+	'iColorIndex': 'i_color_index',
 	'iMirror': 'i_mirror',
-	'i_axis': 'i_axis',
+	'iAxis': 'i_axis',
 	'iIter': 'i_iter',
 }
 
