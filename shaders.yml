@@ -237,7 +237,6 @@ shaders:
       type: fraction
       value: 0
     - name: Seed
-      var: m_seed
       type: seed
   brush/tiles_uneven:
     params:
@@ -550,5 +549,6 @@ types:
     decimal: 0
     name: Seed
     range: 1 100
+    var: m_seed
     step: 1
     value: 1

@@ -10,7 +10,7 @@
 // arg : { id = '1'  name = 'Size X'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
 // arg : { id = '2'  name = 'Size Y'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
 // arg : { id = '3'  name = 'Size Z'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'Seed'  value = '1'  range = '1 100'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Seed'  value = '1'  var = 'm_seed'  range = '1 100'  step = '1'  decimal = '0' }
 // xs_end
 
 float target_color = i_args[0];
