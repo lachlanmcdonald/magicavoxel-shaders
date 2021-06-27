@@ -6,16 +6,16 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Mode'  value = '0'  range = '0 1'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Size X'  value = '12'  range = '0 256'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Size Y'  value = '12'  range = '0 256'  step = '1'  decimal = '0' }
+// arg : { id = '0'  name = 'Mode'  value = '0'  var = 'm_mode'  range = '0 1'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Size X'  value = '12'  var = 'm_size_x'  range = '0 256'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Size Y'  value = '12'  var = 'm_size_y'  range = '0 256'  step = '1'  decimal = '0' }
 // xs_end
 
 const float PI2 = 3.141592653589793238 * 2.0;
 
-int mode = int(i_args[0]);
-float width_x = min(i_args[1], i_volume_size.x / 2.0);
-float width_y = min(i_args[2], i_volume_size.y / 2.0);
+int mode = int(m_mode);
+float width_x = min(m_size_x, i_volume_size.x / 2.0);
+float width_y = min(m_size_y, i_volume_size.y / 2.0);
 
 float random(vec2 co) {
 	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * 43758.6980280632);

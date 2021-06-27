@@ -6,22 +6,22 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Mode'  value = '0'  range = '0 5'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Min'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Max'  value = '8'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'Line Color'  value = '16'  range = '0 255'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'Line Width'  value = '1'  range = '0 256'  step = '1'  decimal = '0' }
-// arg : { id = '5'  name = 'Noise'  value = '0'  range = '0 1'  step = '0.05'  decimal = '1' }
+// arg : { id = '0'  name = 'Mode'  value = '0'  var = 'm_mode'  range = '0 5'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Min'  value = '4'  var = 'm_min'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Max'  value = '8'  var = 'm_max'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Line Color'  value = '16'  var = 'm_line_color'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Line Width'  value = '1'  var = 'm_line_width'  range = '0 256'  step = '1'  decimal = '0' }
+// arg : { id = '5'  name = 'Noise'  value = '0'  var = 'm_noise'  range = '0 1'  step = '0.05'  decimal = '1' }
 // arg : { id = '6'  name = 'Seed'  value = '1'  var = 'm_seed'  range = '1 100'  step = '1'  decimal = '0' }
 // xs_end
 
-int mode = int(i_args[0]);
-float thickness = max(i_args[4], 0.0);
-float size_min = min(i_args[1], i_args[2]) + thickness;
-float size_max = max(i_args[1], i_args[2]) + thickness;
-float line_color = i_args[3];
-float noise = clamp(0.0, 1.0, i_args[5]);
-float global_seed = mix(-437.5453, 437.5453, i_args[6] / 100.0);
+int mode = int(m_mode);
+float thickness = max(m_line_width, 0.0);
+float size_min = min(m_min, m_max) + thickness;
+float size_max = max(m_min, m_max) + thickness;
+float line_color = m_line_color;
+float noise = clamp(0.0, 1.0, m_noise);
+float global_seed = mix(-437.5453, 437.5453, m_seed / 100.0);
 
 struct Series {
 	float index;

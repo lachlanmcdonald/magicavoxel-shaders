@@ -6,22 +6,22 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Direction'  value = '0'  range = '0 5'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Width A'  value = '2'  range = '0 32'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Width B'  value = '0'  range = '0 32'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'Width C'  value = '0'  range = '0 32'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'Width D'  value = '0'  range = '0 32'  step = '1'  decimal = '0' }
-// arg : { id = '5'  name = 'Offset'  value = '0'  range = '0 256'  step = '1'  decimal = '0' }
-// arg : { id = '6'  name = 'Shuffle'  value = '0'  range = '0 256'  step = '1'  decimal = '0' }
+// arg : { id = '0'  name = 'Direction'  value = '0'  var = 'm_direction'  range = '0 5'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Width A'  value = '2'  var = 'm_width_a'  range = '0 32'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Width B'  value = '0'  var = 'm_width_b'  range = '0 32'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Width C'  value = '0'  var = 'm_width_c'  range = '0 32'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Width D'  value = '0'  var = 'm_width_d'  range = '0 32'  step = '1'  decimal = '0' }
+// arg : { id = '5'  name = 'Offset'  value = '0'  var = 'm_offset'  range = '0 256'  step = '1'  decimal = '0' }
+// arg : { id = '6'  name = 'Shuffle'  value = '0'  var = 'm_shuffle'  range = '0 256'  step = '1'  decimal = '0' }
 // xs_end
 
-int direction = int(i_args[0]);
-float width_1 = floor(max(i_args[1], 1.0));
-float width_2 = floor(max(i_args[2], 0.0));
-float width_3 = floor(max(i_args[3], 0.0));
-float width_4 = floor(max(i_args[4], 0.0));
-float offset = floor(i_args[5]);
-float shuffle = floor(i_args[6]);
+int direction = int(m_direction);
+float width_1 = floor(max(m_width_a, 1.0));
+float width_2 = floor(max(m_width_b, 0.0));
+float width_3 = floor(max(m_width_c, 0.0));
+float width_4 = floor(max(m_width_d, 0.0));
+float offset = floor(m_offset);
+float shuffle = floor(m_shuffle);
 
 int mod(int a, int b) {
 	return int(mod(float(a), float(b)));

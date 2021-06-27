@@ -6,12 +6,12 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Rotation'  value = '0'  range = '0 2'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Thickness'  value = '50'  range = '0 100'  step = '5'  decimal = '0' }
+// arg : { id = '0'  name = 'Rotation'  value = '0'  var = 'm_rotation'  range = '0 2'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Thickness'  value = '50'  var = 'm_thickness'  range = '0 100'  step = '5'  decimal = '0' }
 // xs_end
 
-int direction = int(i_args[0]);
-float thickness = 1.0 - (i_args[1] / 100.0);
+int direction = int(m_rotation);
+float thickness = 1.0 - (m_thickness / 100.0);
 
 vec3 pow3(vec3 v, float d) {
 	v.x = pow(v.x, d);

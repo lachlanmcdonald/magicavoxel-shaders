@@ -6,7 +6,7 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Color'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '0'  name = 'Color'  value = '1'  var = 'm_color'  range = '0 255'  step = '1'  decimal = '0' }
 // arg : { id = '1'  name = 'Headroom'  value = '1'  var = 'm_headroom'  range = '1 256'  step = '1'  decimal = '0' }
 // xs_end
 
@@ -33,7 +33,7 @@ float map(vec3 v) {
 			}
 		}
 
-		return i_args[0];
+		return m_color;
 	}
 
 	return index;

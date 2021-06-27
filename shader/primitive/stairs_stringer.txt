@@ -6,18 +6,18 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Mode'  value = '0'  range = '0 3'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Direction'  value = '0'  range = '0 3'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Count'  value = '5'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'Height'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'Stringer'  value = '0'  range = '0 256'  step = '1'  decimal = '0' }
+// arg : { id = '0'  name = 'Mode'  value = '0'  var = 'm_mode'  range = '0 3'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Direction'  value = '0'  var = 'm_direction'  range = '0 3'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Count'  value = '5'  var = 'm_count'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Height'  value = '1'  var = 'm_height'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Stringer'  value = '0'  var = 'm_stringer'  range = '0 256'  step = '1'  decimal = '0' }
 // xs_end
 
-int mode = int(i_args[0]);
-int direction = int(i_args[1]);
-float count = min(i_args[2], i_volume_size.z);
-float height = i_args[3];
-float stringer = max(i_args[4], 0.0);
+int mode = int(m_mode);
+int direction = int(m_direction);
+float count = min(m_count, i_volume_size.z);
+float height = m_height;
+float stringer = max(m_stringer, 0.0);
 
 float map(vec3 v) {
 	float volume_n;

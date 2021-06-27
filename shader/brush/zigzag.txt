@@ -6,12 +6,12 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Direction'  value = '0'  range = '0 3'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Width'  value = '2'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '0'  name = 'Direction'  value = '0'  var = 'm_direction'  range = '0 3'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Width'  value = '2'  var = 'm_width'  range = '1 256'  step = '1'  decimal = '0' }
 // xs_end
 
-int direction = int(i_args[0]);
-float width = i_args[1];
+int direction = int(m_direction);
+float width = m_width;
 
 float roundf(float f) {
 	return f >= 0.5 ? ceil(f) : floor(f);

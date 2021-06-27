@@ -2,208 +2,249 @@
 shaders:
   brush/bricks:
     params:
-    - name: Mode
+    - type: mode
       range: 0 2
-      type: mode
     - decimal: 0
       name: Direction
+      var: m_direction
       range: 0 3
       step: 1
       value: 0
     - name: Width
+      var: m_width
       type: size
       value: 5
     - name: Height
+      var: m_height
       type: size
       value: 2
     - name: Depth
+      var: m_depth
       type: size
       value: 2
     - name: Grout Size
+      var: m_grout_size
       type: position
       value: 1
     - name: Grout Color
+      var: m_grout_color
       type: colorA
     - name: Offset
+      var: m_offset
       type: position
     - name: Noise
+      var: m_noise
       type: fraction
       value: 0
     - name: Threshold
+      var: m_threshold
       type: fraction
       value: 1
   brush/bricks_vert:
     params:
-    - name: Mode
+    - type: mode
       range: 0 2
-      type: mode
     - decimal: 0
       name: Direction
+      var: m_direction
       range: 0 3
       step: 1
       value: 0
     - name: Height
+      var: m_height
       type: size
       value: 5
     - name: Depth
+      var: m_depth
       type: size
       value: 2
     - name: Width
+      var: m_width
       type: size
       value: 3
     - name: Grout Size
+      var: m_grout_size
       type: position
       value: 1
     - name: Grout Color
+      var: m_grout_color
       type: colorA
     - name: Offset
+      var: m_offset
       type: position
     - name: Noise
+      var: m_noise
       type: fraction
       value: 0
     - name: Threshold
+      var: m_threshold
       type: fraction
       value: 1
   brush/diagonal:
     params:
     - decimal: 0
       name: Direction
+      var: m_direction
       range: 0 5
       step: 1
       value: 0
     - name: Width A
+      var: m_width_a
       range: 0 32
       step: 1
       decimal: 0
       value: 2
     - name: Width B
+      var: m_width_b
       range: 0 32
       step: 1
       decimal: 0
       value: 0
     - name: Width C
+      var: m_width_c
       range: 0 32
       step: 1
       decimal: 0
       value: 0
     - name: Width D
+      var: m_width_d
       range: 0 32
       step: 1
       decimal: 0
       value: 0
     - name: Offset
+      var: m_offset
       type: position
     - name: Shuffle
+      var: m_shuffle
       type: position
   brush/grass:
     params:
     - decimal: 0
       name: Direction
+      var: m_direction
       range: 0 3
       step: 1
       value: 0
-    - name: Mode
+    - type: mode
       range: 0 4
-      type: mode
     - name: Density
+      var: m_density
       type: size
       value: 2
     - name: Growth
+      var: m_growth
       type: fraction
       value: 0.5
-    - name: Seed
-      type: seed
+    - type: seed
   brush/grid:
     params:
     - name: Color A
+      var: m_color_a
       type: colorA
     - name: Color B
+      var: m_color_b
       type: colorB
     - name: Thickness
+      var: m_thickness
       type: size
     - name: Size X
+      var: m_size_x
       type: size
     - name: Size Y
+      var: m_size_y
       type: size
     - name: Size Z
+      var: m_size_z
       type: size
   primitive/stairs:
     params:
-    - name: Mode
+    - type: mode
       range: 0 2
-      type: mode
     - decimal: 0
       name: Direction
+      var: m_direction
       range: 0 3
       step: 1
       value: 0
     - name: Count
+      var: m_count
       type: size
       value: 5
     - name: Height
+      var: m_height
       type: size
   primitive/stairs_runs:
     params:
-    - name: Mode
+    - type: mode
       range: 0 3
-      type: mode
     - decimal: 0
       name: Direction
+      var: m_direction
       range: 0 3
       step: 1
       value: 0
     - name: Count
+      var: m_count
       type: size
       value: 5
     - name: Height
+      var: m_height
       type: size
     - name: X/Y Gap
+      var: m_gap_xy
       type: position
     - name: Z Gap
+      var: m_gap_z
       type: position
   primitive/stairs_stringer:
     params:
-    - name: Mode
+    - type: mode
       range: 0 3
-      type: mode
     - decimal: 0
       name: Direction
+      var: m_direction
       range: 0 3
       step: 1
       value: 0
     - name: Count
+      var: m_count
       type: size
       value: 5
     - name: Height
+      var: m_height
       type: size
     - name: Stringer
+      var: m_stringer
       type: position
       value: 0
   brush/tiles:
     params:
     - name: Width
+      var: m_width
       type: size
       value: 2
     - name: Height
+      var: m_height
       type: size
       value: 2
     - name: Depth
+      var: m_depth
       type: size
       value: 2
     - name: Offset X
+      var: m_offset_x
       type: position
     - name: Offset Y
+      var: m_offset_y
       type: position
     - name: Offset Z
+      var: m_offset_z
       type: position
   brush/tiles_puzzle:
     params:
-    - decimal: 0
-      name: Mode
-      var: m_mode
+    - type: mode
       range: 0 4
-      step: 1
-      value: 0
     - name: Size X
       var: m_size_x
       type: size
@@ -224,38 +265,36 @@ shaders:
       var: m_noise
       type: fraction
       value: 0
-    - name: Seed
-      type: seed
+    - type: seed
   brush/tiles_uneven:
     params:
-    - name: Mode
+    - type: mode
       range: 0 5
-      type: mode
     - name: Min
+      var: m_min
       type: size
       value: 4
     - name: Max
+      var: m_max
       type: size
       value: 8
     - name: Line Color
+      var: m_line_color
       type: colorB
       value: 16
     - name: Line Width
+      var: m_line_width
       type: position
       value: 1
     - name: Noise
+      var: m_noise
       type: fraction
       value: 0
-    - name: Seed
-      type: seed
+    - type: seed
   brush/weave:
     params:
-    - decimal: 0
-      name: Mode
-      var: m_mode
+    - type: mode
       range: 0 2
-      step: 1
-      value: 0
     - name: Size
       var: m_size
       type: size
@@ -268,55 +307,59 @@ shaders:
       var: m_line_width
       type: position
       value: 1
-    - name: Seed
-      type: seed
+    - type: seed
   brush/zigzag:
     params:
     - decimal: 0
       name: Direction
+      var: m_direction
       range: 0 3
       step: 1
       value: 0
     - name: Width
+      var: m_width
       type: size
       value: 2
   brush/zigzag2:
     params:
     - decimal: 0
       name: Direction
+      var: m_direction
       range: 0 3
       step: 1
       value: 0
     - name: Width A
+      var: m_width_a
       type: size
-      var: width_a
       value: 2
     - name: Width B
+      var: m_width_b
       type: size
-      var: width_b
       value: 2
   brush/zigzag3:
     params:
     - decimal: 0
       name: Direction
+      var: m_direction
       range: 0 3
       step: 1
       value: 0
     - name: Width A
-      var: width_a
+      var: m_width_a
       type: size
       value: 2
     - name: Width B
-      var: width_b
+      var: m_width_b
       type: size
       value: 2
     - name: Width C
-      var: width_c
+      var: m_width_c
       type: size
       value: 2
   case:
     params:
     - name: Color
+      var: m_color
       type: colorA
   cover:
     params:
@@ -327,28 +370,32 @@ shaders:
       var: m_noise
       type: fraction
       value: 0
-    - name: Seed
-      type: seed
+    - type: seed
   flood:
     params:
     - name: Height
+      var: m_height
       type: size
   flood2:
     params:
     - name: Height
+      var: m_height
       type: size
   noise:
     params:
     - name: Target Color
+      var: m_target_color
       type: colorA
     - name: Size X
+      var: m_size_x
       type: size
     - name: Size Y
+      var: m_size_y
       type: size
     - name: Size Z
+      var: m_size_z
       type: size
-    - name: Seed
-      type: seed
+    - type: seed
   outline:
     params:
     - name: Color
@@ -363,72 +410,78 @@ shaders:
     params:
     - decimal: 0
       name: Rotation
+      var: m_rotation
       range: 0 2
       step: 1
       value: 0
     - decimal: 0
       name: Thickness
+      var: m_thickness
       range: 0 100
       step: 5
       value: 50
   primitive/greebles1:
     params:
-    - name: Mode
+    - type: mode
       range: 0 1
-      type: mode
     - decimal: 0
       name: Count
+      var: m_count
       range: 1 256
       step: 8
       value: 32
     - decimal: 0
       name: Width
+      var: m_width
       range: 1 256
       step: 1
       value: 4
     - decimal: 0
       name: Height
+      var: m_height
       range: 1 256
       step: 1
       value: 4
     - decimal: 0
       name: Depth
+      var: m_depth
       range: 1 256
       step: 1
       value: 4
-    - name: Seed
-      type: seed
+    - type: seed
   primitive/greebles2:
     params:
-    - name: Mode
+    - type: mode
       range: 0 2
-      type: mode
     - decimal: 0
       name: Min
+      var: m_min
       range: 1 256
       step: 1
       value: 4
     - decimal: 0
       name: Max
+      var: m_max
       range: 1 256
       step: 1
       value: 8
     - decimal: 0
       name: Depth
+      var: m_depth
       range: 1 256
       step: 1
       value: 2
-    - name: Seed
-      type: seed
+    - type: seed
   primitive/prism:
     params:
-    - name: Mode
+    - type: mode
       range: 0 1
-      type: mode
     - name: Size X
+      var: m_size_x
       type: position
       value: 12
     - name: Size Y
+      var: m_size_y
       type: position
       value: 12
   pyramid:
@@ -437,51 +490,59 @@ shaders:
       var: m_noise
       type: fraction
       value: 0
-    - name: Seed
-      type: seed
+    - type: seed
   random:
     params:
     - name: Threshold
+      var: m_threshold
       type: fraction
     - name: Color
+      var: m_color
       type: colorA
   sand:
     params:
-    - name: Mode
+    - type: mode
       range: 0 2
-      type: mode
     - name: Threshold
+      var: m_threshold
       type: fraction
       value: 0
   sand2:
     params:
-    - name: Mode
+    - type: mode
       range: 0 2
-      type: mode
     - name: Threshold
+      var: m_threshold
       type: fraction
       value: 0
   slice_x:
     params:
     - name: Offset
+      var: m_offset
       type: position
     - name: Count
+      var: m_count
       type: position
   slice_y:
     params:
     - name: Offset
+      var: m_offset
       type: position
     - name: Count
+      var: m_count
       type: position
   slice_z:
     params:
     - name: Offset
+      var: m_offset
       type: position
     - name: Count
+      var: m_count
       type: position
   soil:
     params:
     - name: Color
+      var: m_color
       type: colorA
     - name: Headroom
       var: m_headroom
@@ -490,6 +551,7 @@ shaders:
   soil_replace:
     params:
     - name: Color
+      var: m_color
       type: colorA
     - name: Headroom
       var: m_headroom
@@ -497,6 +559,8 @@ shaders:
       value: 1
 types:
   mode:
+    name: Mode
+    var: m_mode
     decimal: 0
     step: 1
     value: 0
@@ -526,9 +590,9 @@ types:
     step: 1
     value: 1
   seed:
-    decimal: 0
     name: Seed
-    range: 1 100
     var: m_seed
+    decimal: 0
+    range: 1 100
     step: 1
     value: 1

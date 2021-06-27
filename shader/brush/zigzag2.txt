@@ -6,12 +6,12 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Direction'  value = '0'  range = '0 3'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Width A'  value = '2'  var = 'width_a'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Width B'  value = '2'  var = 'width_b'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '0'  name = 'Direction'  value = '0'  var = 'm_direction'  range = '0 3'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Width A'  value = '2'  var = 'm_width_a'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Width B'  value = '2'  var = 'm_width_b'  range = '1 256'  step = '1'  decimal = '0' }
 // xs_end
 
-int direction = int(i_args[0]);
+int direction = int(m_direction);
 
 float map(vec3 v) {
 	if (direction == 1) {
@@ -23,18 +23,18 @@ float map(vec3 v) {
 		v.x = -v.x;
 	}
 
-	float size = width_a + width_b;
+	float size = m_width_a + m_width_b;
 	vec3 c = floor(v / size);
 	vec3 ic = floor(v - c * size);
 
 	if (mod(c.x + c.y, 2.0) == 0.0) {
-		if (any(lessThan(ic.xy, vec2(width_a)))) {
+		if (any(lessThan(ic.xy, vec2(m_width_a)))) {
 			return color_sel(0.0);
 		} else {
 			return i_num_color_sels < 2 ? 0.0 : color_sel(1.0);
 		}
 	} else {
-		if (all(lessThan(ic.xy, vec2(width_a)))) {
+		if (all(lessThan(ic.xy, vec2(m_width_a)))) {
 			return color_sel(0.0);
 		} else {
 			return i_num_color_sels < 2 ? 0.0 : color_sel(1.0);

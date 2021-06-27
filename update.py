@@ -19,7 +19,7 @@ with open(path.join(DIR, 'shaders.yml')) as f:
 	TYPES = data['types']
 
 # Update shaders
-for shader_name in params.keys():
+for shader_name, shader_params in params.items():
 	print("Updating {}".format(shader_name))
 
 	# Updated copyright header
@@ -29,6 +29,14 @@ for shader_name in params.keys():
 		'Copyright (c) {} Lachlan McDonald'.format(datetime.now().year).strip(),
 		'',
 	]
+
+	# Merge params on types
+	for param in shader_params:
+		if 'type' in param and param['type'] in TYPES:
+			param.update({
+				**TYPES[param['type']],
+				**param,
+			})
 
 	# Console command instructions
 	param_strings = ' '.join([ '[{}]'.format(x['name']) for x in params[shader_name] ])
@@ -40,18 +48,16 @@ for shader_name in params.keys():
 		header.append('xs_begin')
 		header.append('author : \'@lachlanmcdonald\'')
 		for index, param in enumerate(params[shader_name]):
-			shader_lines = [
+			arg = [
 				ARG_FORMAT.format('id', index),
 				ARG_FORMAT.format('name', param['name'])
 			]
 
 			for k in ['value', 'var', 'range', 'step', 'decimal']:
 				if k in param:
-					shader_lines.append(ARG_FORMAT.format(k, param[k]))
-				elif 'type' in param and k in TYPES[param['type']]:
-					shader_lines.append(ARG_FORMAT.format(k, TYPES[param['type']][k]))
+					arg.append(ARG_FORMAT.format(k, param[k]))
 
-			header.append('arg : {{ {} }}'.format('  '.join(shader_lines)))
+			header.append('arg : {{ {} }}'.format('  '.join(arg)))
 		header.append('xs_end')
 
 	header_text = '\n'.join([ '// {}'.format(x) for x in header ])
@@ -64,7 +70,7 @@ for shader_name in params.keys():
 	# Write updated shader file
 	with open(path.join(DIR, 'shader', "{}.txt".format(shader_path)), 'w', newline="\n") as f:
 		has_comment = shader[0].startswith('//')
-		shader_lines = []
+		shader_source = []
 
 		# Strip lines of whitespace
 		for line in shader:
@@ -72,13 +78,18 @@ for shader_name in params.keys():
 				continue
 			else:
 				has_comment = False
-				shader_lines.append(line.rstrip())
+				shader_source.append(line.rstrip())
 
-		shader_text = header_text + '\n' + '\n'.join(shader_lines)
+		shader_text = header_text + '\n' + '\n'.join(shader_source)
 		shader_text = '\n'.join([line.rstrip() for line in shader_text.splitlines()])
 
 		# Fix global variables which change between releases of MagicaVoxel
 		for old, new in FIX_GLOBAL_VARS.items():
 			shader_text = shader_text.replace(old, new)
+
+		# Replace i_args with the variable names
+		for index, param in enumerate(params[shader_path]):
+			if 'var' in param:
+				shader_text = shader_text.replace("i_args[{}]".format(index), param['var'])
 
 		f.write(shader_text + '\n')

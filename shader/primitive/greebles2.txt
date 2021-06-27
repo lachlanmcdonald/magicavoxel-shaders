@@ -6,18 +6,18 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Mode'  value = '0'  range = '0 2'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Min'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Max'  value = '8'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'Depth'  value = '2'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '0'  name = 'Mode'  value = '0'  var = 'm_mode'  range = '0 2'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Min'  value = '4'  var = 'm_min'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Max'  value = '8'  var = 'm_max'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Depth'  value = '2'  var = 'm_depth'  range = '1 256'  step = '1'  decimal = '0' }
 // arg : { id = '4'  name = 'Seed'  value = '1'  var = 'm_seed'  range = '1 100'  step = '1'  decimal = '0' }
 // xs_end
 
-int mode = int(i_args[0]);
-float size_min = min(i_args[1], i_args[2]);
-float size_max = max(i_args[1], i_args[2]);
-float depth = max(i_args[3], 0.0);
-float global_seed = mix(-437.5453, 437.5453, i_args[4] / 100.0);
+int mode = int(m_mode);
+float size_min = min(m_min, m_max);
+float size_max = max(m_min, m_max);
+float depth = max(m_depth, 0.0);
+float global_seed = mix(-437.5453, 437.5453, m_seed / 100.0);
 
 bool no_axis_mode = all(equal(ivec3(i_axis), ivec3(0)));
 bvec3 axis_mode = no_axis_mode ? bvec3(true) : equal(ivec3(i_axis), ivec3(1));
