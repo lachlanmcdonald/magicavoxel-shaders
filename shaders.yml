@@ -2,11 +2,9 @@
 shaders:
   brush/bricks:
     params:
-    - decimal: 0
-      name: Mode
+    - name: Mode
       range: 0 2
-      step: 1
-      value: 0
+      type: mode
     - decimal: 0
       name: Direction
       range: 0 3
@@ -36,11 +34,9 @@ shaders:
       value: 1
   brush/bricks_vert:
     params:
-    - decimal: 0
-      name: Mode
+    - name: Mode
       range: 0 2
-      step: 1
-      value: 0
+      type: mode
     - decimal: 0
       name: Direction
       range: 0 3
@@ -106,11 +102,9 @@ shaders:
       range: 0 3
       step: 1
       value: 0
-    - decimal: 0
-      name: Mode
+    - name: Mode
       range: 0 4
-      step: 1
-      value: 0
+      type: mode
     - name: Density
       type: size
       value: 2
@@ -135,11 +129,9 @@ shaders:
       type: size
   primitive/stairs:
     params:
-    - decimal: 0
-      name: Mode
+    - name: Mode
       range: 0 2
-      step: 1
-      value: 0
+      type: mode
     - decimal: 0
       name: Direction
       range: 0 3
@@ -152,11 +144,9 @@ shaders:
       type: size
   primitive/stairs_runs:
     params:
-    - decimal: 0
-      name: Mode
+    - name: Mode
       range: 0 3
-      step: 1
-      value: 0
+      type: mode
     - decimal: 0
       name: Direction
       range: 0 3
@@ -173,11 +163,9 @@ shaders:
       type: position
   primitive/stairs_stringer:
     params:
-    - decimal: 0
-      name: Mode
+    - name: Mode
       range: 0 3
-      step: 1
-      value: 0
+      type: mode
     - decimal: 0
       name: Direction
       range: 0 3
@@ -240,11 +228,9 @@ shaders:
       type: seed
   brush/tiles_uneven:
     params:
-    - decimal: 0
-      name: Mode
+    - name: Mode
       range: 0 5
-      step: 1
-      value: 0
+      type: mode
     - name: Min
       type: size
       value: 4
@@ -387,11 +373,9 @@ shaders:
       value: 50
   primitive/greebles1:
     params:
-    - decimal: 0
-      name: Mode
+    - name: Mode
       range: 0 1
-      step: 1
-      value: 0
+      type: mode
     - decimal: 0
       name: Count
       range: 1 256
@@ -416,11 +400,9 @@ shaders:
       type: seed
   primitive/greebles2:
     params:
-    - decimal: 0
-      name: Mode
+    - name: Mode
       range: 0 2
-      step: 1
-      value: 0
+      type: mode
     - decimal: 0
       name: Min
       range: 1 256
@@ -440,11 +422,9 @@ shaders:
       type: seed
   primitive/prism:
     params:
-    - decimal: 0
-      name: Mode
+    - name: Mode
       range: 0 1
-      step: 1
-      value: 0
+      type: mode
     - name: Size X
       type: position
       value: 12
@@ -467,21 +447,17 @@ shaders:
       type: colorA
   sand:
     params:
-    - decimal: 0
-      name: Mode
+    - name: Mode
       range: 0 2
-      step: 1
-      value: 0
+      type: mode
     - name: Threshold
       type: fraction
       value: 0
   sand2:
     params:
-    - decimal: 0
-      name: Mode
+    - name: Mode
       range: 0 2
-      step: 1
-      value: 0
+      type: mode
     - name: Threshold
       type: fraction
       value: 0
@@ -520,6 +496,10 @@ shaders:
       type: size
       value: 1
 types:
+  mode:
+    decimal: 0
+    step: 1
+    value: 0
   colorA:
     decimal: 0
     range: 0 255
