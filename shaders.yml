@@ -454,14 +454,12 @@ shaders:
       value: 12
   pyramid:
     params:
-    - name: Color
-      type: colorA
+    - name: Noise
+      var: m_noise
+      type: fraction
       value: 0
-  pyramid2:
-    params:
-    - name: Color
-      type: colorA
-      value: 0
+    - name: Seed
+      type: seed
   random:
     params:
     - name: Threshold
