@@ -12,10 +12,19 @@
 
 int headroom = int(max(i_args[1], 1.0));
 
+bool is_sel_color(float p) {
+	for (int i = 0; i < i_num_color_sels; i += 1) {
+		if (p == color_sel(float(i))) {
+			return true;
+		}
+	}
+	return false;
+}
+
 float map(vec3 v) {
 	float index = voxel(v);
 
-	if (index == i_color_index) {
+	if (is_sel_color(index)) {
 		for (int z = 1; z <= headroom; z += 1) {
 			float d = v.z + float(z);
 
@@ -23,7 +32,9 @@ float map(vec3 v) {
 				return index;
 			}
 		}
+
 		return i_args[0];
 	}
+
 	return index;
 }
