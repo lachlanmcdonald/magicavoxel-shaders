@@ -335,8 +335,15 @@ shaders:
       type: colorA
   cover:
     params:
-    - name: Color
-      type: colorA
+    - name: Headroom
+      var: m_headroom
+      type: size
+    - name: Noise
+      var: m_noise
+      type: fraction
+      value: 0
+    - name: Seed
+      type: seed
   flood:
     params:
     - name: Height
