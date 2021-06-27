@@ -20,14 +20,14 @@
 
 int mode = int(m_mode);
 int direction = int(m_direction);
-float width = max(m_width, 1.0);
-float height = max(m_height, 1.0);
-float depth = max(m_depth, 1.0);
-float grout = floor(m_grout_size);
-float grout_color = floor(m_grout_color);
+float width = m_width;
+float height = m_height;
+float depth = m_depth;
+float grout = m_grout_size;
+float grout_color = m_grout_color;
 float row_offset = m_offset;
-float noise = max(m_noise, 0.0);
-float threshold = max(m_threshold, 0.0);
+float noise = m_noise;
+float threshold = m_threshold;
 
 float random(vec2 co, float seed) {
 	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + seed));

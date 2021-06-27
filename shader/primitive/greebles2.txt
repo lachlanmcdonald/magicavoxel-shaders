@@ -16,7 +16,7 @@
 int mode = int(m_mode);
 float size_min = min(m_min, m_max);
 float size_max = max(m_min, m_max);
-float depth = max(m_depth, 0.0);
+float depth = m_depth;
 float global_seed = mix(-437.5453, 437.5453, m_seed / 100.0);
 
 bool no_axis_mode = all(equal(ivec3(i_axis), ivec3(0)));

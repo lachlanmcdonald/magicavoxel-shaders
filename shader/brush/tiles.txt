@@ -14,12 +14,8 @@
 // arg : { id = '5'  name = 'Offset Z'  value = '0'  var = 'm_offset_z'  range = '0 256'  step = '1'  decimal = '0' }
 // xs_end
 
-vec3 dim = vec3(max(m_width, 1.0),
-				  max(m_height, 1.0),
-				  max(m_depth, 1.0));
-vec3 offset = vec3(max(m_offset_x, 0.0),
-				   max(m_offset_y, 0.0),
-				   max(m_offset_z, 0.0));
+vec3 dim = vec3(m_width, m_height, m_depth);
+vec3 offset = vec3(m_offset_x, m_offset_y, m_offset_z);
 
 float pal_mix(float p) {
 	float f = floor(mix(0.0, float(i_num_color_sels), p));

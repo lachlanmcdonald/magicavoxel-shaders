@@ -10,7 +10,7 @@
 // arg : { id = '1'  name = 'Count'  value = '0'  var = 'm_count'  range = '0 256'  step = '1'  decimal = '0' }
 // xs_end
 
-float offset = max(m_count, 1.0);
+float offset = m_count;
 
 float map(vec3 v) {
 	float dy = v.y + offset;

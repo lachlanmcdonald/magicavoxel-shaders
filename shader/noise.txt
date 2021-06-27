@@ -14,9 +14,7 @@
 // xs_end
 
 float target_color = m_target_color;
-vec3 dim = vec3(max(m_size_x, 1.0),
-				max(m_size_y, 1.0),
-				max(m_size_z, 1.0));
+vec3 dim = vec3(m_size_x, m_size_y, m_size_z);
 float global_seed = mix(-437.5453, 437.5453, m_seed / 100.0);
 
 bool no_axis_mode = all(equal(ivec3(i_axis), ivec3(0)));

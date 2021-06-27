@@ -16,12 +16,12 @@
 // xs_end
 
 int direction = int(m_direction);
-float width_1 = floor(max(m_width_a, 1.0));
-float width_2 = floor(max(m_width_b, 0.0));
-float width_3 = floor(max(m_width_c, 0.0));
-float width_4 = floor(max(m_width_d, 0.0));
-float offset = floor(m_offset);
-float shuffle = floor(m_shuffle);
+float width_1 = m_width_a;
+float width_2 = m_width_b;
+float width_3 = m_width_c;
+float width_4 = m_width_d;
+float offset = m_offset;
+float shuffle = m_shuffle;
 
 int mod(int a, int b) {
 	return int(mod(float(a), float(b)));

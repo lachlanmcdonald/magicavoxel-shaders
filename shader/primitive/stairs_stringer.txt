@@ -17,7 +17,7 @@ int mode = int(m_mode);
 int direction = int(m_direction);
 float count = min(m_count, i_volume_size.z);
 float height = m_height;
-float stringer = max(m_stringer, 0.0);
+float stringer = m_stringer;
 
 float map(vec3 v) {
 	float volume_n;

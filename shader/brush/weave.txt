@@ -13,10 +13,10 @@
 // arg : { id = '4'  name = 'Seed'  value = '1'  var = 'm_seed'  range = '1 100'  step = '1'  decimal = '0' }
 // xs_end
 
-int mode = int(clamp(0.0, 2.0, m_mode));
-float size = clamp(1.0, 256.0, m_size);
-float line_color = clamp(0.0, 255.0, m_line_color);
-float line_width = clamp(0.0, 255.0, m_line_width);
+int mode = int(m_mode);
+float size = m_size;
+float line_color = m_line_color;
+float line_width = m_line_width;
 float global_seed = mix(-437.5453, 437.5453, m_seed / 100.0);
 
 float random(vec2 co, float seed) {

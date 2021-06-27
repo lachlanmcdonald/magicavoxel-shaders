@@ -10,7 +10,7 @@
 // arg : { id = '1'  name = 'Headroom'  value = '1'  var = 'm_headroom'  range = '1 256'  step = '1'  decimal = '0' }
 // xs_end
 
-int headroom = int(clamp(1.0, 255.0, m_headroom));
+int headroom = int(m_headroom);
 
 bool is_sel_color(float p) {
 	for (int i = 0; i < i_num_color_sels; i += 1) {

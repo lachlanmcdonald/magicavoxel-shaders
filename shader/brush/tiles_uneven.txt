@@ -16,11 +16,11 @@
 // xs_end
 
 int mode = int(m_mode);
-float thickness = max(m_line_width, 0.0);
+float thickness = m_line_width;
 float size_min = min(m_min, m_max) + thickness;
 float size_max = max(m_min, m_max) + thickness;
 float line_color = m_line_color;
-float noise = clamp(0.0, 1.0, m_noise);
+float noise = m_noise;
 float global_seed = mix(-437.5453, 437.5453, m_seed / 100.0);
 
 struct Series {

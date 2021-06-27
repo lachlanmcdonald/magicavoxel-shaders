@@ -9,7 +9,7 @@
 // arg : { id = '0'  name = 'Height'  value = '1'  var = 'm_height'  range = '1 256'  step = '1'  decimal = '0' }
 // xs_end
 
-float height = max(m_height, 1.0);
+float height = m_height;
 
 float map(vec3 v) {
 	float index = voxel(v);

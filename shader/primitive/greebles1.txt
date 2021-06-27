@@ -18,9 +18,7 @@ int mode = int(m_mode);
 int count = int(m_count);
 
 vec3 dim_min = vec3(1.0);
-vec3 dim_max = vec3(max(m_width, 1.0),
-					max(m_height, 1.0),
-					max(m_depth, 1.0));
+vec3 dim_max = vec3(m_width, m_height, m_depth);
 float global_seed = mix(-437.5453, 437.5453, m_seed / 100.0);
 
 bool no_axis_mode = all(equal(ivec3(i_axis), ivec3(0)));

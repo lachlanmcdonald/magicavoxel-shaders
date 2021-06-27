@@ -11,8 +11,8 @@
 // arg : { id = '2'  name = 'Seed'  value = '1'  var = 'm_seed'  range = '1 100'  step = '1'  decimal = '0' }
 // xs_end
 
-float headroom = clamp(1.0, 255.0, m_headroom);
-float noise = clamp(0.0, 1.0, m_noise);
+float headroom = m_headroom;
+float noise = m_noise;
 float global_seed = mix(-437.5453, 437.5453, m_seed / 100.0);
 
 float random(vec2 co, float seed) {
