@@ -1,6 +1,6 @@
 // MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
-// Copyright (c) 2020 Lachlan McDonald
+// Copyright (c) 2021 Lachlan McDonald
 //
 // xs primitive/greebles2 [Mode] [Min] [Max] [Depth] [Seed]
 //
@@ -10,7 +10,7 @@
 // arg : { id = '1'  name = 'Min'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
 // arg : { id = '2'  name = 'Max'  value = '8'  range = '1 256'  step = '1'  decimal = '0' }
 // arg : { id = '3'  name = 'Depth'  value = '2'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'Seed'  value = '1'  range = '1 100'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Seed'  value = '1'  var = 'm_seed'  range = '1 100'  step = '1'  decimal = '0' }
 // xs_end
 
 int mode = int(i_args[0]);
@@ -36,7 +36,7 @@ struct Cell {
 };
 
 float random(vec2 co, float seed) {
-    return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + global_seed + seed));
+	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + global_seed + seed));
 }
 
 Series find_series(int limit, float seed, vec2 seed_multiplier) {

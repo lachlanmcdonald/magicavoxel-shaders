@@ -1,18 +1,27 @@
 // MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
-// Copyright (c) 2020 Lachlan McDonald
+// Copyright (c) 2021 Lachlan McDonald
 //
 // xs outline [Color]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Color'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '0'  name = 'Color'  value = '1'  var = 'm_color'  range = '0 255'  step = '1'  decimal = '0' }
 // xs_end
+
+bool is_sel_color(float p) {
+	for (int i = 0; i < i_num_color_sels; i += 1) {
+		if (p == color_sel(float(i))) {
+			return true;
+		}
+	}
+	return false;
+}
 
 float map(vec3 v) {
 	float index = voxel(v);
 
-	if (index == i_color_index) {
+	if (is_sel_color(index)) {
 		for (float x = -1.0; x <= 1.0; x += 1.0) {
 			for (float y = -1.0; y <= 1.0; y += 1.0) {
 				for (float z = -1.0; z <= 1.0; z += 1.0) {
@@ -21,8 +30,8 @@ float map(vec3 v) {
 					if (p != v) {
 						float n = voxel(p);
 
-						if (n != index && n != 0.0) {
-							return i_args[0];
+						if (is_sel_color(n) == false && n != 0.0) {
+							return m_color;
 						}
 					}
 				}

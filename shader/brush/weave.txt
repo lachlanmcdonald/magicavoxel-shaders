@@ -1,28 +1,35 @@
 // MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
-// Copyright (c) 2020 Lachlan McDonald
+// Copyright (c) 2021 Lachlan McDonald
 //
-// xs brush/weave [Mode] [Size] [Color A] [Color B] [Line Color] [Line Width]
+// xs brush/weave [Mode] [Size] [Line Color] [Line Width] [Seed]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Mode'  value = '0'  range = '0 1'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Size'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Color A'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'Color B'  value = '9'  range = '0 255'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'Line Color'  value = '10'  range = '0 255'  step = '1'  decimal = '0' }
-// arg : { id = '5'  name = 'Line Width'  value = '1'  range = '0 256'  step = '1'  decimal = '0' }
+// arg : { id = '0'  name = 'Mode'  value = '0'  var = 'm_mode'  range = '0 2'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Size'  value = '4'  var = 'm_size'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Line Color'  value = '10'  var = 'm_line_color'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Line Width'  value = '1'  var = 'm_line_width'  range = '0 256'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Seed'  value = '1'  var = 'm_seed'  range = '1 100'  step = '1'  decimal = '0' }
 // xs_end
 
-int mode = int(i_args[0]);
-float size = i_args[1];
-float pal_min = i_args[2];
-float pal_max = i_args[3];
-float line_color = i_args[4];
-float line_width = i_args[5];
+int mode = int(clamp(0.0, 2.0, m_mode));
+float size = clamp(1.0, 256.0, m_size);
+float line_color = clamp(0.0, 255.0, m_line_color);
+float line_width = clamp(0.0, 255.0, m_line_width);
+float global_seed = mix(-437.5453, 437.5453, m_seed / 100.0);
+
+float random(vec2 co, float seed) {
+	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + global_seed + seed));
+}
 
 float random(vec2 co) {
-    return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * 43758.6980280632);
+	return random(co, 0.0);
+}
+
+float pal_mix(float p) {
+	float f = floor(mix(0.0, float(i_num_color_sels), p));
+	return color_sel(f);
 }
 
 float map(vec3 v) {
@@ -38,24 +45,27 @@ float map(vec3 v) {
 		float d = random(vec2(row, col));
 		vec2 k = v.xy - (vec2(col, row) * j);
 
+		float color;
+		float inner;
+		vec2 xy;
+
 		if (mod(row + col, 2.0) == 0.0) {
-			float inner_col = floor(k.x / (size / 2.0));
-
-			if (mode == 0) {
-				float color = random(vec2(d, inner_col));
-				return mix(pal_min, pal_max, color);
-			} else {
-				return mod(inner_col, 2.0) == 0.0 ? pal_min : pal_max;
-			}
+			inner = floor(k.x / (size / 2.0));
+			xy = vec2(inner, d);
 		} else {
-			float inner_row = floor(k.y / (size / 2.0));
-
-			if (mode == 0) {
-				float color = random(vec2(inner_row, d));
-				return mix(pal_min, pal_max, color);
-			} else {
-				return mod(inner_row, 2.0) == 0.0 ? pal_min : pal_max;
-			}
+			inner = floor(k.y / (size / 2.0));
+			xy = vec2(d, inner);
 		}
+
+		if (mode == 0) {
+			color = random(xy);
+		} else if (mode == 1) {
+			float d = row + col + inner;
+			color = (mod(d, float(i_num_color_sels)) / float(i_num_color_sels));
+		} else if (mode == 2) {
+			color = mod(inner, 2.0);
+		}
+
+		return pal_mix(color);
 	}
 }

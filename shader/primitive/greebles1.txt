@@ -1,6 +1,6 @@
 // MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
-// Copyright (c) 2020 Lachlan McDonald
+// Copyright (c) 2021 Lachlan McDonald
 //
 // xs primitive/greebles1 [Mode] [Count] [Width] [Height] [Depth] [Seed]
 //
@@ -11,7 +11,7 @@
 // arg : { id = '2'  name = 'Width'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
 // arg : { id = '3'  name = 'Height'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
 // arg : { id = '4'  name = 'Depth'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '5'  name = 'Seed'  value = '1'  range = '1 100'  step = '1'  decimal = '0' }
+// arg : { id = '5'  name = 'Seed'  value = '1'  var = 'm_seed'  range = '1 100'  step = '1'  decimal = '0' }
 // xs_end
 
 int mode = int(i_args[0]);
@@ -32,7 +32,7 @@ struct Box {
 };
 
 float random(vec2 co) {
-    return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + global_seed));
+	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + global_seed));
 }
 
 float roundf(float f) {
@@ -78,7 +78,7 @@ bool lower_region(ivec3 iv, vec3 dim_min, vec3 dim_max, float seed) {
 		if (all(greaterThanEqual(iv, j.lower)) && all(lessThan(iv, j.upper))) {
 			return true;
 		}
-    }
+	}
 	return false;
 }
 
@@ -89,7 +89,7 @@ bool upper_region(ivec3 iv, vec3 dim_min, vec3 dim_max, float seed) {
 		if (all(greaterThan(iv, j.lower)) && all(lessThanEqual(iv, j.upper))) {
 			return true;
 		}
-    }
+	}
 	return false;
 }
 
