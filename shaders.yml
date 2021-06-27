@@ -511,14 +511,16 @@ shaders:
     - name: Color
       type: colorA
     - name: Headroom
-      type: position
+      var: m_headroom
+      type: size
       value: 1
   soil_replace:
     params:
     - name: Color
       type: colorA
     - name: Headroom
-      type: position
+      var: m_headroom
+      type: size
       value: 1
 types:
   colorA:
