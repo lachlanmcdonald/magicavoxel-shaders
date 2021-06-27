@@ -267,24 +267,24 @@ shaders:
     params:
     - decimal: 0
       name: Mode
-      range: 0 1
+      var: m_mode
+      range: 0 2
       step: 1
       value: 0
     - name: Size
+      var: m_size
       type: size
       value: 4
-    - name: Color A
-      type: colorA
-      value: 1
-    - name: Color B
-      type: colorB
-      value: 9
     - name: Line Color
+      var: m_line_color
       type: colorB
       value: 10
     - name: Line Width
+      var: m_line_width
       type: position
       value: 1
+    - name: Seed
+      type: seed
   brush/zigzag:
     params:
     - decimal: 0
