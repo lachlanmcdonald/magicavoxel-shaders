@@ -38,15 +38,15 @@ for shader_path, args in SHADERS.items():
 	lines.append('```\n')
 
 	# Arg table
-	lines.append('ID | Argument | Type | Default | Range')
-	lines.append('-- | -------- | ---- | ------- | -----')
+	lines.append('Position | Argument | Type | Default | Range')
+	lines.append('-------- | -------- | ---- | ------- | -----')
 
 	for index, arg in enumerate(args):
 		arg_value = arg['value'] if 'value' in arg else '—'
 		arg_type = 'Integer' if arg['decimal'] == 0 else 'Float'
 		arg_range = '-'.join(arg['range'].split(' ')) if 'range' in arg else '—'
 
-		lines.append('`{}` | **{}** | {} | `{}` | {}'.format(index, arg['name'], arg_type, arg_value, arg_range))
+		lines.append('{} | **{}** | {} | `{}` | {}'.format(index, arg['name'], arg_type, arg_value, arg_range))
 
 	lines.append('\nExample:\n')
 	lines.append('```')
@@ -56,8 +56,8 @@ for shader_path, args in SHADERS.items():
 
 print('\n'.join([
 	'> The following page outlines the shader commands for use in MagicaVoxel\'s console.',
-	'> ',
-	'> Since the addition of the shader UI, default parameters and error-checking has been removed from the scripts. All arguments are required.',
+	'',
+	'Since the addition of the shader UI, default parameters and error-checking has been removed from the scripts. All arguments are required. This page is to be used in combination with the [shader documentation](https://github.com/lachlanmcdonald/magicavoxel-shaders/wiki).',
 	'',
 	*toc,
 	*lines,
