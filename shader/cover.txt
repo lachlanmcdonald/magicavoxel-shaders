@@ -41,7 +41,7 @@ float map(vec3 v) {
 		float d = random(v, 0.0);
 		float z = random(v, 128.0);
 
-		if (z > noise) {
+		if (noise == 0.0 || z > noise) {
 			return pal_mix(d);
 		} else {
 			return 0.0;
