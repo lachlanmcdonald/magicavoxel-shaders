@@ -8,13 +8,13 @@
 
 ## Installation
 
-Install these shaders by copying the files from the `shader` directory in this project into the `shader` directory of your MagicaVoxel installation. [See all releases](https://github.com/lachlanmcdonald/magicavoxel-shaders/releases/).
+[Download the latest release](https://github.com/lachlanmcdonald/magicavoxel-shaders/releases/) and copy the files from the `shader` directory into the `shader` directory of your MagicaVoxel installation.
 
-## [Shaders][wiki]
+## Shaders
 
 See a [complete list of shader, documentation and examples on the wiki][wiki].
 
-## Issues
+## Issues & Suggestions
 
 If you encounter an issue with these shaders, please review any [open issues][open-issues] and [create a new issue][new-issue] if one does not exist already.
 
