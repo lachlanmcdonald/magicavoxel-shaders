@@ -2,18 +2,26 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2021 Lachlan McDonald
 //
-// xs brush/zigzag2 [Direction] [Width A] [Width B]
+// xs brush/zigzag2 [Direction] [Width A] [Width B] [Color A] [Color B]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
 // arg : { id = '0'  name = 'Direction'  value = '0'  range = '0 3'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Width A'  value = '2'  var = 'width_a'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Width B'  value = '2'  var = 'width_b'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Width A'  value = '2'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Width B'  value = '2'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Color A'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Color B'  value = '9'  range = '0 255'  step = '1'  decimal = '0' }
 // xs_end
 
 int direction = int(i_args[0]);
+float width_a = i_args[1];
+float width_b = i_args[2];
+float color_a = i_args[3];
+float color_b = i_args[4];
 
 float map(vec3 v) {
+	v = floor(v);
+
 	if (direction == 1) {
 		v.y = -v.y;
 	} else if (direction == 2) {
@@ -24,20 +32,21 @@ float map(vec3 v) {
 	}
 
 	float size = width_a + width_b;
-	vec3 c = floor(v / size);
-	vec3 ic = floor(v - c * size);
+	float row = floor(v.y / size);
+	float col = floor(v.x / size);
+	vec2 k = v.xy - vec2(col, row) * size;
 
-	if (mod(c.x + c.y, 2.0) == 0.0) {
-		if (any(lessThan(ic.xy, vec2(width_a)))) {
-			return color_sel(0.0);
+	if (mod(row + col, 2.0) == 0.0) {
+		if (k.x < width_a && k.y < width_a) {
+			return color_a;
 		} else {
-			return i_num_color_sels < 2 ? 0.0 : color_sel(1.0);
+			return color_b;
 		}
 	} else {
-		if (all(lessThan(ic.xy, vec2(width_a)))) {
-			return color_sel(0.0);
+		if (k.x < width_a || k.y < width_a) {
+			return color_a;
 		} else {
-			return i_num_color_sels < 2 ? 0.0 : color_sel(1.0);
+			return color_b;
 		}
 	}
 }

@@ -284,16 +284,6 @@ shaders:
       value: 1
     - name: Seed
       type: seed
-  brush/zigzag:
-    params:
-    - decimal: 0
-      name: Direction
-      range: 0 3
-      step: 1
-      value: 0
-    - name: Width
-      type: size
-      value: 2
   brush/zigzag2:
     params:
     - decimal: 0
@@ -303,12 +293,16 @@ shaders:
       value: 0
     - name: Width A
       type: size
-      var: width_a
       value: 2
     - name: Width B
       type: size
-      var: width_b
       value: 2
+    - name: Color A
+      type: colorA
+      value: 1
+    - name: Color B
+      type: colorB
+      value: 9
   brush/zigzag3:
     params:
     - decimal: 0
@@ -317,17 +311,39 @@ shaders:
       step: 1
       value: 0
     - name: Width A
-      var: width_a
       type: size
       value: 2
     - name: Width B
-      var: width_b
       type: size
       value: 2
     - name: Width C
-      var: width_c
       type: size
       value: 2
+    - name: Color A
+      type: colorA
+      value: 1
+    - name: Color B
+      type: colorB
+      value: 9
+    - name: Color C
+      type: colorB
+      value: 18
+  brush/zigzag_range:
+    params:
+    - decimal: 0
+      name: Direction
+      range: 0 3
+      step: 1
+      value: 0
+    - name: Width
+      type: size
+      value: 2
+    - name: Color A
+      type: colorA
+      value: 1
+    - name: Color B
+      type: colorB
+      value: 9
   case:
     params:
     - name: Color
@@ -521,11 +537,13 @@ shaders:
       value: 1
 types:
   colorA:
+    name: Color A
     decimal: 0
     range: 0 255
     step: 1
     value: 1
   colorB:
+    name: Color B
     decimal: 0
     range: 0 255
     step: 1
