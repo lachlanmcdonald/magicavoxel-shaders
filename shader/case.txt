@@ -12,6 +12,15 @@
 bool no_axis_mode = all(equal(ivec3(i_axis), ivec3(0)));
 bvec3 axis_mode = no_axis_mode ? bvec3(true) : equal(ivec3(i_axis), ivec3(1));
 
+bool is_sel_color(float p) {
+	for (int i = 0; i < i_num_color_sels; i += 1) {
+		if (p == color_sel(float(i))) {
+			return true;
+		}
+	}
+	return false;
+}
+
 float map(vec3 v) {
 	float index = voxel(v);
 
@@ -24,12 +33,10 @@ float map(vec3 v) {
 			x_range.x = v.x - 1.0;
 			x_range.y = v.x + 1.0;
 		}
-
 		if (axis_mode.y) {
 			y_range.x = v.y - 1.0;
 			y_range.y = v.y + 1.0;
 		}
-
 		if (axis_mode.z) {
 			z_range.x = v.z - 1.0;
 			z_range.y = v.z + 1.0;
@@ -40,7 +47,7 @@ float map(vec3 v) {
 				for (float z = z_range.x; z <= z_range.y; z += 1.0) {
  					float j = voxel(vec3(x, y, z));
 
-					if (j == i_color_index) {
+					if (is_sel_color(j)) {
 						return i_args[0];
 					}
 				}
