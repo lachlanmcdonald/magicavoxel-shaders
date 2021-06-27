@@ -1,58 +1,67 @@
 // MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
-// Copyright (c) 2020 Lachlan McDonald
+// Copyright (c) 2021 Lachlan McDonald
 //
-// xs brush/grass [Mode] [Density] [Growth] [Seed] [Color A] [Color B]
+// xs brush/grass [Direction] [Mode] [Density] [Growth] [Seed]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Mode'  value = '0'  range = '0 3'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Density'  value = '2'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Growth'  value = '0.5'  range = '0 1'  step = '0.01'  decimal = '1' }
-// arg : { id = '3'  name = 'Seed'  value = '1'  range = '1 100'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'Color A'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
-// arg : { id = '5'  name = 'Color B'  value = '8'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '0'  name = 'Direction'  value = '0'  range = '0 3'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Mode'  value = '0'  range = '0 4'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Density'  value = '2'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Growth'  value = '0.5'  range = '0 1'  step = '0.05'  decimal = '1' }
+// arg : { id = '4'  name = 'Seed'  value = '1'  range = '1 100'  step = '1'  decimal = '0' }
 // xs_end
 
-int mode = int(i_args[0]);
-float size = i_args[1];
-float growth = mix(1.0, -1.0, i_args[2]);
-float seed = i_args[3];
-float pal_min = i_args[4];
-float pal_max = i_args[5];
+int direction = int(i_args[0]);
+int mode = int(i_args[1]);
+float size = i_args[2];
+float growth = mix(1.0, -1.0, i_args[3]);
+float seed = i_args[4];
 
 float random(vec2 co, float seed) {
-    return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + seed));
+	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + seed));
+}
+
+float pal_mix(float p) {
+	float f = floor(mix(0.0, float(i_num_color_sels), p));
+	return color_sel(f);
 }
 
 float map(vec3 v) {
-    vec2 d = floor(vec2(v.xy) / size);
-    vec3 k = mod(floor(v), size);
-    vec2 j = floor(vec2(random(d.xy, seed),
-                        random(d.xy, 170.3170 - seed)) * size);
+	if (direction == 1) {
+		v.z = i_volume_size.z - v.z;
+	}
 
-    if (k.x == j.x && k.y == j.y) {
-        float h = random(d.yx, -654.1182 + seed);
-        float z = v.z / i_volume_size.z;
-        float p = 1.0 - sqrt(1.0 - pow(h, 2.0));
-        float p2 = mix(h, p, growth);
+	vec2 d = floor(vec2(v.xy) / size);
+	vec3 k = mod(floor(v), size);
+	vec2 j = floor(vec2(random(d.xy, seed),
+						random(d.xy, 170.3170 - seed)) * size);
 
-        if (z < p2) {
-            float f;
+	if (k.x == j.x && k.y == j.y) {
+		float h = random(d.yx, -654.1182 + seed);
+		float z = v.z / i_volume_size.z;
+		float p = 1.0 - sqrt(1.0 - pow(h, 2.0));
+		float p2 = mix(h, p, growth);
 
-            if (mode == 0) {
-                f = p2;
-            } else if (mode == 1) {
-                f = random(vec2(z, p), seed);
-            } else if (mode == 2) {
-                f = random(v.xy, seed);
-            } else if (mode == 3) {
-                f = z / p2;
-            }
+		if (z < p2) {
+			float f;
 
-            return mix(pal_min, pal_max, max(min(f, 1.0), 0.0));
-        }
-    }
+			if (mode == 0) {
+				f = p2;
+			} else if (mode == 1) {
+				f = random(vec2(z, p), seed);
+			} else if (mode == 2) {
+				f = random(v.xy, seed);
+			} else if (mode == 3) {
+				f = z / p2;
+			} else if (mode == 4) {
+				f = 1.0 - (z / p2);
+			}
 
-    return 0.0;
+			return pal_mix(max(min(f, 1.0), 0.0));
+		}
+	}
+
+	return 0.0;
 }

@@ -1,29 +1,34 @@
 // MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
-// Copyright (c) 2020 Lachlan McDonald
+// Copyright (c) 2021 Lachlan McDonald
 //
-// xs noise [Color A] [Color B] [Size X] [Size Y] [Size Z]
+// xs noise [Target Color] [Size X] [Size Y] [Size Z] [Seed]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Color A'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Color B'  value = '2'  range = '0 255'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Size X'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'Size Y'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'Size Z'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '0'  name = 'Target Color'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Size X'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Size Y'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Size Z'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Seed'  value = '1'  range = '1 100'  step = '1'  decimal = '0' }
 // xs_end
 
-float pal_min = i_args[0];
-float pal_max = i_args[1];
-vec3 dim = vec3(max(i_args[2], 1.0),
-				max(i_args[3], 1.0),
-				max(i_args[4], 1.0));
+float target_color = i_args[0];
+vec3 dim = vec3(max(i_args[1], 1.0),
+				max(i_args[2], 1.0),
+				max(i_args[3], 1.0));
+float global_seed = mix(-437.5453, 437.5453, i_args[4] / 100.0);
 
 bool no_axis_mode = all(equal(ivec3(i_axis), ivec3(0)));
 bvec3 axis_mode = no_axis_mode ? bvec3(true) : equal(ivec3(i_axis), ivec3(1));
 
 float random(vec2 co, float seed) {
-    return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + seed));
+	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + seed));
+}
+
+float pal_mix(float p) {
+	float f = floor(mix(0.0, float(i_num_color_sels), p));
+	return color_sel(f);
 }
 
 float map(vec3 v) {
@@ -32,11 +37,11 @@ float map(vec3 v) {
 	float x = axis_mode.x ? floor(v.x / dim.x) : 1.0;
 	float y = axis_mode.y ? floor(v.y / dim.y) : 1.0;
 	float z = axis_mode.z ? floor(v.z / dim.z) : 1.0;
-	float j = random(vec2(x, y), i_iter + 1.0);
-	float k = random(vec2(j, z), i_iter + 1.0);
+	float j = random(vec2(x, y), i_iter + 1.0 + global_seed);
+	float k = random(vec2(j, z), i_iter + 1.0 + global_seed);
 
-	if (index == i_color_index) {
-		return mix(pal_min, pal_max, k);
+	if (index == target_color) {
+		return pal_mix(k);
 	} else {
 		return index;
 	}
