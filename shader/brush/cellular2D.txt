@@ -5,9 +5,9 @@
 // This script utlises or modifies portions of other open-source projects.
 // Please see the associated projects and licenses below:
 //
-// - Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
-//   MIT License (MIT)
-//   https://github.com/ashima/webgl-noise/blob/master/LICENSE
+// 1. Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
+//    MIT License (MIT)
+//    https://github.com/ashima/webgl-noise/blob/master/LICENSE
 //
 // xs brush/cellular2D [Mode] [Scale] [Jitter] [Noise] [Power] [Seed] [Tile X] [Tile Y]
 //

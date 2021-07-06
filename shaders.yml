@@ -5,9 +5,9 @@ shaders:
              This script utlises or modifies portions of other open-source projects.
              Please see the associated projects and licenses below:
 
-             - Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
-               MIT License (MIT)
-               https://github.com/ashima/webgl-noise/blob/master/LICENSE
+             1. Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
+                MIT License (MIT)
+                https://github.com/ashima/webgl-noise/blob/master/LICENSE
     params:
     - type: mode
       range: 0 5
@@ -38,6 +38,51 @@ shaders:
     - type: seed
     - type: tile_x
     - type: tile_y
+  brush/cellular3D:
+    license: |
+             This script utlises or modifies portions of other open-source projects.
+             Please see the associated projects and licenses below:
+
+             1. Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
+                MIT License (MIT)
+                https://github.com/ashima/webgl-noise/blob/master/LICENSE
+    params:
+    - type: mode
+      range: 0 5
+    - name: Scale
+      var: m_scale
+      value: 24
+      range: 1 100
+      step: 1
+      decimal: 0
+    - name: Jitter
+      var: m_jitter
+      value: 100
+      range: -100 100
+      step: 5
+      decimal: 0
+    - name: Noise
+      var: m_noise
+      value: 0
+      range: 0 100
+      step: 1
+      decimal: 0
+    - name: Power
+      var: m_power
+      value: 1
+      range: 0 10
+      step: 0.1
+      decimal: 1
+    - name: Cavity
+      var: m_cavity
+      value: 50
+      range: 0 100
+      step: 1
+      decimal: 0
+    - type: seed
+    - type: tile_x
+    - type: tile_y
+    - type: tile_z
   brush/bricks:
     params:
     - type: mode
@@ -644,6 +689,13 @@ types:
   tile_y:
     name: Tile Y
     var: tile_y
+    decimal: 0
+    range: 0 40
+    step: 1
+    value: 0
+  tile_z:
+    name: Tile Z
+    var: tile_z
     decimal: 0
     range: 0 40
     step: 1
