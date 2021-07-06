@@ -8,7 +8,6 @@ shaders:
              - Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
                MIT License (MIT)
                https://github.com/ashima/webgl-noise/blob/master/LICENSE
-
     params:
     - type: mode
       range: 0 5
