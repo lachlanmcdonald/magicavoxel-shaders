@@ -16,6 +16,7 @@ FIX_GLOBAL_VARS = {
 with open(path.join(DIR, 'shaders.yml')) as f:
 	data = yaml.safe_load(f)
 	params = { k: v['params'] for k, v in data['shaders'].items() }
+	licenses = { k: v['license'] for k, v in data['shaders'].items() if 'license' in v }
 	TYPES = data['types']
 
 # Update shaders
@@ -29,6 +30,12 @@ for shader_name, shader_params in params.items():
 		'Copyright (c) {} Lachlan McDonald'.format(datetime.now().year).strip(),
 		'',
 	]
+
+	# Additional copyright header
+	if (shader_name in licenses):
+		r = licenses[shader_name].strip().splitlines()
+		header.extend(r)
+		header.append('')
 
 	# Merge params on types
 	for param in shader_params:

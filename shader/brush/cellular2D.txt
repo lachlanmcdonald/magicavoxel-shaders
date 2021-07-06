@@ -2,6 +2,13 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2021 Lachlan McDonald
 //
+// This script utlises or modifies portions of other open-source projects.
+// Please see the associated projects and licenses below:
+//
+// - Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
+//   MIT License (MIT)
+//   https://github.com/ashima/webgl-noise/blob/master/LICENSE
+//
 // xs brush/cellular2D [Mode] [Scale] [Jitter] [Noise] [Power] [Seed] [Tile X] [Tile Y]
 //
 // xs_begin
@@ -83,7 +90,6 @@ vec2 cellular(vec2 P, float jitter) {
 
 float map(vec3 v) {
 	vec2 offset = m_seed * i_volume_size.xy + tile;
-
 	vec3 k = floor(v) / i_volume_size;
 	vec2 p = cellular((v.xy + offset) / m_scale, jitter);
 	vec2 q = cellular((v.xy + offset), 1.0);
@@ -95,6 +101,7 @@ float map(vec3 v) {
 	} else if (mode == 2 || mode == 3 || mode == 5) {
 		r = clamp(0.0, 1.0, pow(p.y + q.y * noise, m_power));
 	}
+
 	if (mode == 1 || mode == 3) {
 		z = r;
 	} else if (mode == 4 || mode == 5) {
@@ -103,9 +110,5 @@ float map(vec3 v) {
 		z = 1.0 - r;
 	}
 
-	if (k.z <= z) {
-		return pal_mix(r);
-	} else {
-		return 0.0;
-	}
+	return (k.z <= z) ? pal_mix(r) : 0.0;
 }
