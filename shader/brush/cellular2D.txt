@@ -1,0 +1,111 @@
+// MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+// Copyright (c) 2021 Lachlan McDonald
+//
+// xs brush/cellular2D [Mode] [Scale] [Jitter] [Noise] [Power] [Seed] [Tile X] [Tile Y]
+//
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { id = '0'  name = 'Mode'  value = '0'  var = 'm_mode'  range = '0 5'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Scale'  value = '24'  var = 'm_scale'  range = '1 100'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Jitter'  value = '100'  var = 'm_jitter'  range = '-100 100'  step = '5'  decimal = '0' }
+// arg : { id = '3'  name = 'Noise'  value = '0'  var = 'm_noise'  range = '0 100'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Power'  value = '1'  var = 'm_power'  range = '0 10'  step = '0.1'  decimal = '1' }
+// arg : { id = '5'  name = 'Seed'  value = '1'  var = 'm_seed'  range = '1 100'  step = '1'  decimal = '0' }
+// arg : { id = '6'  name = 'Tile X'  value = '0'  var = 'tile_x'  range = '0 40'  step = '1'  decimal = '0' }
+// arg : { id = '7'  name = 'Tile Y'  value = '0'  var = 'tile_y'  range = '0 40'  step = '1'  decimal = '0' }
+// xs_end
+
+int mode = int(m_mode);
+float noise = clamp(0.0, 1.0, m_noise / 100.0);
+float jitter = clamp(0.0, 1.0, m_jitter / 100.0);
+vec2 tile = vec2(tile_x, tile_y) * i_volume_size.xy;
+
+float pal_mix(float p) {
+	float f = floor(mix(0.0, float(i_num_color_sels), p));
+	return color_sel(f);
+}
+
+vec3 mod289(vec3 x) {
+	return x - floor(x * (1.0 / 289.0)) * 289.0;
+}
+
+vec2 mod289(vec2 x) {
+	return x - floor(x * (1.0 / 289.0)) * 289.0;
+}
+
+vec3 mod7(vec3 x) {
+	return x - floor(x * (1.0 / 7.0)) * 7.0;
+}
+
+vec3 permute(vec3 x) {
+	return mod289((34.0 * x + 10.0) * x);
+}
+
+vec2 cellular(vec2 P, float jitter) {
+	float K = 0.142857142857;
+	float Ko = 0.428571428571;
+	vec2 Pi = mod289(floor(P));
+ 	vec2 Pf = fract(P);
+	vec3 oi = vec3(-1.0, 0.0, 1.0);
+	vec3 of = vec3(-0.5, 0.5, 1.5);
+	vec3 px = permute(Pi.x + oi);
+	vec3 p = permute(px.x + Pi.y + oi);
+	vec3 ox = fract(p * K) - Ko;
+	vec3 oy = mod7(floor(p * K)) * K - Ko;
+	vec3 dx = Pf.x + 0.5 + jitter * ox;
+	vec3 dy = Pf.y - of + jitter * oy;
+	vec3 d1 = dx * dx + dy * dy;
+	p = permute(px.y + Pi.y + oi);
+	ox = fract(p * K) - Ko;
+	oy = mod7(floor(p * K)) * K - Ko;
+	dx = Pf.x - 0.5 + jitter * ox;
+	dy = Pf.y - of + jitter * oy;
+	vec3 d2 = dx * dx + dy * dy;
+	p = permute(px.z + Pi.y + oi);
+	ox = fract(p * K) - Ko;
+	oy = mod7(floor(p * K)) * K - Ko;
+	dx = Pf.x - 1.5 + jitter * ox;
+	dy = Pf.y - of + jitter * oy;
+	vec3 d3 = dx * dx + dy * dy;
+	vec3 d1a = min(d1, d2);
+	d2 = max(d1, d2);
+	d2 = min(d2, d3);
+	d1 = min(d1a, d2);
+	d2 = max(d1a, d2);
+	d1.xy = (d1.x < d1.y) ? d1.xy : d1.yx;
+	d1.xz = (d1.x < d1.z) ? d1.xz : d1.zx;
+	d1.yz = min(d1.yz, d2.yz);
+	d1.y = min(d1.y, d1.z);
+	d1.y = min(d1.y, d2.x);
+	return sqrt(d1.xy);
+}
+
+float map(vec3 v) {
+	vec2 offset = m_seed * i_volume_size.xy + tile;
+
+	vec3 k = floor(v) / i_volume_size;
+	vec2 p = cellular((v.xy + offset) / m_scale, jitter);
+	vec2 q = cellular((v.xy + offset), 1.0);
+	float r;
+	float z;
+
+	if (mode == 0 || mode == 1 || mode == 4) {
+		r = clamp(0.0, 1.0, pow(p.x + q.x * noise, m_power));
+	} else if (mode == 2 || mode == 3 || mode == 5) {
+		r = clamp(0.0, 1.0, pow(p.y + q.y * noise, m_power));
+	}
+	if (mode == 1 || mode == 3) {
+		z = r;
+	} else if (mode == 4 || mode == 5) {
+		z = 1.0;
+	} else {
+		z = 1.0 - r;
+	}
+
+	if (k.z <= z) {
+		return pal_mix(r);
+	} else {
+		return 0.0;
+	}
+}
