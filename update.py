@@ -72,21 +72,22 @@ for shader_name, shader_params in params.items():
 
 	# Read shader file
 	with open(path.join(DIR, 'shader', "{}.txt".format(shader_path)), 'r') as f:
-		shader = f.readlines()
+		old_shader_lines = f.readlines()
 
 	# Write updated shader file
 	with open(path.join(DIR, 'shader', "{}.txt".format(shader_path)), 'w', newline="\n") as f:
-		has_comment = shader[0].startswith('//')
+		has_comment = old_shader_lines[0].startswith('//')
 		shader_source = []
 
 		# Strip lines of whitespace
-		for line in shader:
+		for line in old_shader_lines:
 			if has_comment and line.startswith('//'):
 				continue
 			else:
 				has_comment = False
 				shader_source.append(line.rstrip())
 
+		# Header lines
 		shader_text = header_text + '\n' + '\n'.join(shader_source)
 		shader_text = '\n'.join([line.rstrip() for line in shader_text.splitlines()])
 
@@ -99,4 +100,5 @@ for shader_name, shader_params in params.items():
 			if 'var' in param:
 				shader_text = shader_text.replace("i_args[{}]".format(index), param['var'])
 
+		# Write output
 		f.write(shader_text + '\n')

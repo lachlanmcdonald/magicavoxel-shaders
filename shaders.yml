@@ -1,9 +1,33 @@
 ---
 shaders:
+  brush/gradient:
+    license: |
+            This script utlises or modifies code from other projects or documentation.
+            Please see the attributions below for more information:
+
+            1. Interweaved gradient noise adapted from "Next Generation Post Processing in Call of Duty Advanced Warfare"
+               by Jorge Jimenez (Graphics R&D Technical Director - Activision Blizzard)
+               http://advances.realtimerendering.com/s2014/index.html
+    params:
+    - type: mode
+      range: 0 5
+    - decimal: 0
+      name: Direction
+      var: m_direction
+      range: 0 5
+      step: 1
+      value: 0
+    - name: Noise
+      var: m_noise
+      value: 0
+      range: 0 50
+      step: 1
+      decimal: 0
+    - type: seed
   brush/cellular2D:
     license: |
-             This script utlises or modifies portions of other open-source projects.
-             Please see the associated projects and licenses below:
+             This script utlises or modifies code from other projects or documentation.
+             Please see the attributions below for more information:
 
              1. Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
                 MIT License (MIT)
@@ -40,8 +64,8 @@ shaders:
     - type: tile_y
   brush/cellular3D:
     license: |
-             This script utlises or modifies portions of other open-source projects.
-             Please see the associated projects and licenses below:
+             This script utlises or modifies code from other projects or documentation.
+             Please see the attributions below for more information:
 
              1. Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
                 MIT License (MIT)
