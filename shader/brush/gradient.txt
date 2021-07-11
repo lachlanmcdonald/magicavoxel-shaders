@@ -25,7 +25,7 @@ float noise = clamp(0.0, 1.0, m_noise / 100.0);
 float global_seed = m_seed / 100.0;
 
 float pal_mix(float p) {
-	float f = floor(mix(0.0, float(i_num_color_sels), clamp(0.0, 1.0, p)));
+	float f = floor(mix(0.0, float(i_num_color_sels), p));
 	return color_sel(f);
 }
 
