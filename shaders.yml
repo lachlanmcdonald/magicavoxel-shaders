@@ -168,7 +168,7 @@ shaders:
     - name: Threshold
       var: m_threshold
       type: fraction
-      value: 1
+      value: 100
   brush/bricks_vert:
     params:
     - type: mode
@@ -208,7 +208,7 @@ shaders:
     - name: Threshold
       var: m_threshold
       type: fraction
-      value: 1
+      value: 100
   brush/diagonal:
     params:
     - decimal: 0
@@ -707,9 +707,9 @@ types:
     value: 2
   fraction:
     decimal: 1
-    range: 0 1
-    step: 0.05
-    value: 0.5
+    range: 0 100
+    step: 1
+    value: 50
   position:
     decimal: 0
     range: 0 256

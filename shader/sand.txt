@@ -7,11 +7,11 @@
 // xs_begin
 // author : '@lachlanmcdonald'
 // arg : { id = '0'  name = 'Mode'  value = '0'  var = 'm_mode'  range = '0 2'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Threshold'  value = '0'  var = 'm_threshold'  range = '0 1'  step = '0.05'  decimal = '1' }
+// arg : { id = '1'  name = 'Threshold'  value = '0'  var = 'm_threshold'  range = '0 100'  step = '1'  decimal = '1' }
 // xs_end
 
 int mode = int(m_mode);
-float threshold = mix(0.125, 0.175, m_threshold);
+float threshold = mix(0.125, 0.175, m_threshold / 100.0);
 
 float random(vec2 co) {
 	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * 43758.6980280632);
