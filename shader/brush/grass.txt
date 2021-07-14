@@ -6,21 +6,25 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Direction'  value = '0'  var = 'm_direction'  range = '0 3'  step = '1'  decimal = '0' }
+// arg : { id = '0'  name = 'Direction'  value = '0'  var = 'm_direction'  range = '0 1'  step = '1'  decimal = '0' }
 // arg : { id = '1'  name = 'Mode'  value = '0'  var = 'm_mode'  range = '0 4'  step = '1'  decimal = '0' }
 // arg : { id = '2'  name = 'Density'  value = '2'  var = 'm_density'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'Growth'  value = '0.5'  var = 'm_growth'  range = '0 1'  step = '0.05'  decimal = '1' }
+// arg : { id = '3'  name = 'Growth'  value = '0.5'  var = 'm_growth'  range = '-1 1'  step = '0.1'  decimal = '1' }
 // arg : { id = '4'  name = 'Seed'  value = '1'  var = 'm_seed'  range = '1 100'  step = '1'  decimal = '0' }
 // xs_end
 
 int direction = int(m_direction);
 int mode = int(m_mode);
-float size = m_density;
+float density = m_density;
 float growth = mix(1.0, -1.0, m_growth);
-float seed = m_seed;
+float global_seed = mix(-43758.6980280632, 43758.6980280632, m_seed / 100.0);
 
 float random(vec2 co, float seed) {
-	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + seed));
+	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + global_seed + seed));
+}
+
+float random(vec2 co) {
+	return random(co, 0.0);
 }
 
 float pal_mix(float p) {
@@ -33,16 +37,15 @@ float map(vec3 v) {
 		v.z = i_volume_size.z - v.z;
 	}
 
-	vec2 d = floor(vec2(v.xy) / size);
-	vec3 k = mod(floor(v), size);
-	vec2 j = floor(vec2(random(d.xy, seed),
-						random(d.xy, 170.3170 - seed)) * size);
+	vec2 cell = floor(vec2(v.xy) / density);
+	vec3 local = floor(mod(v, density));
+	vec2 placement = floor(vec2(random(cell.xy), random(cell.xy, 170.3170)) * density);
 
-	if (k.x == j.x && k.y == j.y) {
-		float h = random(d.yx, -654.1182 + seed);
+	if (local.x == placement.x && local.y == placement.y) {
+		float height = random(cell.yx, -170.3170);
 		float z = v.z / i_volume_size.z;
-		float p = 1.0 - sqrt(1.0 - pow(h, 2.0));
-		float p2 = mix(h, p, growth);
+		float p = 1.0 - sqrt(1.0 - pow(height, 2.0));
+		float p2 = mix(height, p, growth);
 
 		if (z < p2) {
 			float f;
@@ -50,16 +53,16 @@ float map(vec3 v) {
 			if (mode == 0) {
 				f = p2;
 			} else if (mode == 1) {
-				f = random(vec2(z, p), seed);
+				f = random(vec2(z, p));
 			} else if (mode == 2) {
-				f = random(v.xy, seed);
+				f = random(v.xy);
 			} else if (mode == 3) {
 				f = z / p2;
 			} else if (mode == 4) {
 				f = 1.0 - (z / p2);
 			}
 
-			return pal_mix(max(min(f, 1.0), 0.0));
+			return pal_mix(f);
 		}
 	}
 
