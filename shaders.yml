@@ -107,6 +107,28 @@ shaders:
     - type: tile_x
     - type: tile_y
     - type: tile_z
+  brush/truchet:
+    license: |
+             This script utlises or modifies code from other projects or documentation.
+             Please see the attributions below for more information:
+
+             1. Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
+                MIT License (MIT)
+                https://github.com/ashima/webgl-noise/blob/master/LICENSE
+    params:
+    - type: mode
+      range: 0 2
+    - name: Size
+      var: m_size
+      step: 1
+      range: 3 40
+      decimal: 0
+      value: 8
+    - name: Noise
+      var: m_noise
+      type: fraction
+      value: 0
+    - type: seed
   brush/bricks:
     params:
     - type: mode
