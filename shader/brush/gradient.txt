@@ -99,10 +99,13 @@ float map(vec3 v) {
 	} else if (mode == 1) {
 		r = random(v, 0.0);
 	} else if (mode == 2) {
+		// BUG: Scanlines don't change direction
 		r = scan_lines_random(v);
 	} else if (mode == 3) {
+		// BUG: Scanlines don't change direction
 		r = scan_lines(v);
 	} else if (mode == 4) {
+		// BUG: Scanlines don't change direction
 		r = scan_lines_random2(v);
 	} else if (mode == 5) {
 		r = bayer_matrix(v);
