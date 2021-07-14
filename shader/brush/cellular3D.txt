@@ -48,15 +48,15 @@ vec3 permute(vec3 x) {
 	return mod289((34.0 * x + 10.0) * x);
 }
 
-vec2 cellular(vec3 P, float jitter) {
+vec2 cellular(vec3 co, float jitter) {
 	float K = 0.142857142857;
 	float Ko = 0.428571428571;
 	float K2 = 0.020408163265306;
 	float Kz = 0.166666666667;
 	float Kzo = 0.416666666667;
 
-	vec3 Pi = mod289(floor(P));
- 	vec3 Pf = fract(P) - 0.5;
+	vec3 Pi = mod289(floor(co));
+ 	vec3 Pf = fract(co) - 0.5;
 
 	vec3 Pfx = Pf.x + vec3(1.0, 0.0, -1.0);
 	vec3 Pfy = Pf.y + vec3(1.0, 0.0, -1.0);
