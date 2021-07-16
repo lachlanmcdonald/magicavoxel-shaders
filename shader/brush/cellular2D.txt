@@ -9,7 +9,7 @@
 //    MIT License (MIT)
 //    https://github.com/ashima/webgl-noise/blob/master/LICENSE
 //
-// xs brush/cellular2D [Mode] [Scale] [Jitter] [Noise] [Power] [Seed] [Tile X] [Tile Y]
+// xs brush/cellular2D [Mode] [Scale] [Jitter] [Noise] [Power] [Steps] [Seed] [Tile X] [Tile Y]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
@@ -18,14 +18,16 @@
 // arg : { id = '2'  name = 'Jitter'  value = '100'  var = 'm_jitter'  range = '-100 100'  step = '5'  decimal = '0' }
 // arg : { id = '3'  name = 'Noise'  value = '0'  var = 'm_noise'  range = '0 100'  step = '1'  decimal = '0' }
 // arg : { id = '4'  name = 'Power'  value = '1'  var = 'm_power'  range = '0 10'  step = '0.1'  decimal = '1' }
-// arg : { id = '5'  name = 'Seed'  value = '1'  var = 'm_seed'  range = '1 100'  step = '1'  decimal = '0' }
-// arg : { id = '6'  name = 'Tile X'  value = '0'  var = 'tile_x'  range = '0 40'  step = '1'  decimal = '0' }
-// arg : { id = '7'  name = 'Tile Y'  value = '0'  var = 'tile_y'  range = '0 40'  step = '1'  decimal = '0' }
+// arg : { id = '5'  name = 'Steps'  value = '0'  var = 'm_steps'  range = '0 40'  step = '1'  decimal = '0' }
+// arg : { id = '6'  name = 'Seed'  value = '1'  var = 'm_seed'  range = '1 100'  step = '1'  decimal = '0' }
+// arg : { id = '7'  name = 'Tile X'  value = '0'  var = 'tile_x'  range = '0 40'  step = '1'  decimal = '0' }
+// arg : { id = '8'  name = 'Tile Y'  value = '0'  var = 'tile_y'  range = '0 40'  step = '1'  decimal = '0' }
 // xs_end
 
 int mode = int(m_mode);
 float noise = clamp(0.0, 1.0, m_noise / 100.0);
 float jitter = clamp(0.0, 1.0, m_jitter / 100.0);
+float steps = floor(m_steps);
 vec2 tile = vec2(tile_x, tile_y) * i_volume_size.xy;
 
 float pal_mix(float p) {
@@ -88,6 +90,10 @@ vec2 cellular(vec2 co, float jitter) {
 	return sqrt(d1.xy);
 }
 
+float roundf(float f) {
+	return f > 0.5 ? ceil(f) : floor(f);
+}
+
 float map(vec3 v) {
 	vec2 offset = m_seed * i_volume_size.xy + tile;
 	vec3 k = floor(v) / i_volume_size;
@@ -108,6 +114,10 @@ float map(vec3 v) {
 		z = 1.0;
 	} else {
 		z = 1.0 - r;
+	}
+
+	if (steps > 0.0) {
+		z = roundf(z * steps) / steps;
 	}
 
 	return (k.z <= z) ? pal_mix(r) : 0.0;

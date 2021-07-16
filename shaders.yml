@@ -59,6 +59,12 @@ shaders:
       range: 0 10
       step: 0.1
       decimal: 1
+    - name: Steps
+      var: m_steps
+      value: 0
+      range: 0 40
+      step: 1
+      decimal: 0
     - type: seed
     - type: tile_x
     - type: tile_y
