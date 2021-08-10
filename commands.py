@@ -38,15 +38,15 @@ for shader_path, args in SHADERS.items():
 	lines.append('```\n')
 
 	# Arg table
-	lines.append('ID | Argument | Type | Default | Range')
-	lines.append('-- | -------- | ---- | ------- | -----')
+	lines.append('ID | Argument | Type | Range')
+	lines.append('-- | -------- | ---- | -----')
 
 	for index, arg in enumerate(args):
 		arg_value = arg['value'] if 'value' in arg else '—'
 		arg_type = 'Integer' if arg['decimal'] == 0 else 'Float'
 		arg_range = '-'.join(arg['range'].split(' ')) if 'range' in arg else '—'
 
-		lines.append('`{}` | **{}** | {} | `{}` | {}'.format(index, arg['name'], arg_type, arg_value, arg_range))
+		lines.append('`{}` | **{}** | {} | {}'.format(index, arg['name'], arg_type, arg_range))
 
 	lines.append('\nExample:\n')
 	lines.append('```')
