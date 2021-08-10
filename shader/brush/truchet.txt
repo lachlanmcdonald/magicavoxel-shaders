@@ -98,7 +98,7 @@ float map(vec3 v) {
 	vec2 j = cellular(cell + vec2(global_seed), 1.0);
 	int r = int(j.x * 4.0);
 
-	float noise_d = noise > 0.0 ? clamp(-0.5, 0.5, random(v.xy, 256.0) * noise) : 0.0;
+	float noise_d = noise > 0.0 ? clamp(random(v.xy, 256.0) * noise, -0.5, 0.5) : 0.0;
 	float a;
 	float b;
 
