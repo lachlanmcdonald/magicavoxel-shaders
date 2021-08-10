@@ -103,9 +103,9 @@ float map(vec3 v) {
 	float z;
 
 	if (mode == 0 || mode == 1 || mode == 4) {
-		r = clamp(0.0, 1.0, pow(p.x + q.x * noise, m_power));
+		r = clamp(pow(p.x + q.x * noise, m_power), 0.0, 1.0);
 	} else if (mode == 2 || mode == 3 || mode == 5) {
-		r = clamp(0.0, 1.0, pow(p.y + q.y * noise, m_power));
+		r = clamp(pow(p.y + q.y * noise, m_power), 0.0, 1.0);
 	}
 
 	if (mode == 1 || mode == 3) {
