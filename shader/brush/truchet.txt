@@ -21,7 +21,7 @@
 
 int mode = int(m_mode);
 vec2 dim = vec2(m_size);
-float noise = clamp(0.0, 1.0, m_noise / 100.0);
+float noise = clamp(m_noise / 100.0, 0.0, 1.0);
 float global_seed = mix(-43758.6980280632, 43758.6980280632, m_seed / 100.0);
 
 float random(vec2 co, float seed) {

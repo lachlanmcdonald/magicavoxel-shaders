@@ -21,7 +21,7 @@
 
 int mode = int(m_mode);
 int direction = int(m_direction);
-float noise = clamp(0.0, 1.0, m_noise / 100.0);
+float noise = clamp(m_noise / 100.0, 0.0, 1.0);
 float global_seed = m_seed / 100.0;
 
 float pal_mix(float p) {

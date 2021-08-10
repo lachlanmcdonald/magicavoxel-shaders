@@ -12,7 +12,7 @@
 // xs_end
 
 float headroom = m_headroom;
-float noise = clamp(0.0, 1.0, m_noise / 100.0);
+float noise = clamp(m_noise / 100.0, 0.0, 1.0);
 float global_seed = mix(-437.5453, 437.5453, m_seed / 100.0);
 
 float random(vec2 co, float seed) {

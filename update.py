@@ -96,7 +96,7 @@ for shader_name, shader_params in params.items():
 			shader_text = shader_text.replace(old, new)
 
 		# Replace i_args with the variable names
-		for index, param in enumerate(params[shader_path]):
+		for index, param in enumerate(params[shader_name]):
 			if 'var' in param:
 				shader_text = shader_text.replace("i_args[{}]".format(index), param['var'])
 
