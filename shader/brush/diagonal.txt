@@ -23,14 +23,14 @@ float width_4 = m_width_d;
 float offset = m_offset;
 float shuffle = m_shuffle;
 
-int mod(int a, int b) {
+int imod(int a, int b) {
 	return int(mod(float(a), float(b)));
 }
 
 float map(vec3 v) {
 	// Line widths
 	int width_count = 0;
-	float widths[3];
+	float widths[4];
 
 	if (width_1 >= 1.0) {
 		widths[width_count] = width_1;
@@ -72,7 +72,7 @@ float map(vec3 v) {
 	float f = 0.0;
 
 	while (f < p) {
-		int idx = mod(iter, width_count);
+		int idx = imod(iter, width_count);
 		float w = widths[idx];
 		iter += 1;
 		f += w;
