@@ -2,7 +2,7 @@
 // This work is licensed under the MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 //
-// This script utilises or modifies code from other projects or documentation.
+// This script utilises or modifies code from other projects or publications.
 // Please see the attributions below for more information:
 //
 // 1. Interweaved gradient noise adapted from "Next Generation Post Processing in Call of Duty Advanced Warfare"

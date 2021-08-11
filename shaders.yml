@@ -13,7 +13,7 @@ shaders:
     license: by-nc-sa-3.0
   brush/gradient:
     cites: |
-            This script utilises or modifies code from other projects or documentation.
+            This script utilises or modifies code from other projects or publications.
             Please see the attributions below for more information:
 
             1. Interweaved gradient noise adapted from "Next Generation Post Processing in Call of Duty Advanced Warfare"
@@ -37,7 +37,7 @@ shaders:
     - type: seed
   brush/cellular2D:
     cites: |
-             This script utilises or modifies code from other projects or documentation.
+             This script utilises or modifies code from other projects or publications.
              Please see the attributions below for more information:
 
              1. Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
@@ -81,7 +81,7 @@ shaders:
     - type: tile_y
   brush/cellular3D:
     cites: |
-             This script utilises or modifies code from other projects or documentation.
+             This script utilises or modifies code from other projects or publications.
              Please see the attributions below for more information:
 
              1. Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
@@ -126,7 +126,7 @@ shaders:
     - type: tile_z
   brush/truchet:
     cites: |
-             This script utilises or modifies code from other projects or documentation.
+             This script utilises or modifies code from other projects or publications.
              Please see the attributions below for more information:
 
              1. Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
