@@ -27,9 +27,10 @@ float global_seed = mix(-43758.6980280632, 43758.6980280632, m_seed / 100.0);
 float random(vec2 co, float seed) {
 	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + global_seed + seed));
 }
+
 float random(vec2 co) {
 	return random(co, 0.0);
-}\
+}
 
 float pal_mix(float cell) {
 	float f = floor(mix(0.0, float(i_num_color_sels), cell));
