@@ -27,7 +27,7 @@
 
 int mode = int(m_mode);
 float noise = clamp(m_noise / 100.0, 0.0, 1.0);
-float jitter = clamp(m_jitter / 100.0, 0.0, 1.0);
+float jitter = clamp(m_jitter / 100.0, -1.0, 1.0);
 float cavity = clamp(m_cavity / 100.0, 0.0, 1.0);
 vec3 tile = vec3(tile_x, tile_y, tile_z) * i_volume_size;
 
