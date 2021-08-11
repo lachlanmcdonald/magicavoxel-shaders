@@ -1,8 +1,19 @@
 ---
+licenses:
+  mit: |
+    Copyright (c) {} Lachlan McDonald
+    This work is licensed under the MIT License (MIT)
+    https://github.com/lachlanmcdonald/magicavoxel-shaders
+  by-nc-sa-3.0: |
+    Copyright (c) {} Lachlan McDonald
+    This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License (CC BY-NC-SA 3.0)
+    https://github.com/lachlanmcdonald/magicavoxel-shaders
 shaders:
+  brush/greebles3:
+    license: by-nc-sa-3.0
   brush/gradient:
-    license: |
-            This script utlises or modifies code from other projects or documentation.
+    cites: |
+            This script utilises or modifies code from other projects or documentation.
             Please see the attributions below for more information:
 
             1. Interweaved gradient noise adapted from "Next Generation Post Processing in Call of Duty Advanced Warfare"
@@ -25,8 +36,8 @@ shaders:
       decimal: 0
     - type: seed
   brush/cellular2D:
-    license: |
-             This script utlises or modifies code from other projects or documentation.
+    cites: |
+             This script utilises or modifies code from other projects or documentation.
              Please see the attributions below for more information:
 
              1. Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
@@ -69,8 +80,8 @@ shaders:
     - type: tile_x
     - type: tile_y
   brush/cellular3D:
-    license: |
-             This script utlises or modifies code from other projects or documentation.
+    cites: |
+             This script utilises or modifies code from other projects or documentation.
              Please see the attributions below for more information:
 
              1. Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
@@ -114,8 +125,8 @@ shaders:
     - type: tile_y
     - type: tile_z
   brush/truchet:
-    license: |
-             This script utlises or modifies code from other projects or documentation.
+    cites: |
+             This script utilises or modifies code from other projects or documentation.
              Please see the attributions below for more information:
 
              1. Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
