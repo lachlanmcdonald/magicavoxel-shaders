@@ -1,6 +1,6 @@
-// MIT License (MIT)
-// https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2021 Lachlan McDonald
+// This work is licensed under the MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
 //
 // xs slice_x [Offset] [Count]
 //
