@@ -28,6 +28,7 @@
 // xs_end
 
 int mode = int(m_mode);
+int direction = int(m_direction);
 int max_iters = int(m_max_iters);
 int min_iters = int(min(m_max_iters, m_min_iters));
 float min_size = clamp(m_min_size / 100.0, 0.0, 1.0);
@@ -93,13 +94,28 @@ float range(float value, float inMin, float inMax) {
 float map(vec3 v) {
 	vec3 uv = floor(v) / i_volume_size;
 
+	if (direction == 1) {
+		uv.z = 1.0 - uv.z;
+	} else if (direction == 2) {
+		uv.yz = uv.zy;
+	} else if (direction == 3) {
+		uv.yz = uv.zy;
+		uv.z = 1.0 - uv.z;
+	} else if (direction == 4) {
+		uv.xz = uv.zx;
+	} else if (direction == 5) {
+		uv.xz = uv.zx;
+		uv.z = 1.0 - uv.z;
+	}
+
     Box b = Box(vec2(0.0), vec2(1.0), true, 1);
     vec2 p = vec2(seed);
 
+	// Iterate
 	for (int iter = 0; iter < max_iters; iter++) {
 		float m = clover_noise(p);
 
-		// Min. iterations
+		// Ensure min iterations
 		float chance_of_drop = range(float(iter), float(min_iters), float(max_iters));
 		if (m < chance_of_drop) {
 			break;
@@ -109,7 +125,7 @@ float map(vec3 v) {
 		bool horz = clover_noise(vec2(f, iter)) <= bias;
         Box b2 = reshapeBox(b, horz, f, uv.xy);
 
-		// Min. size
+		// Enforce min size
         if (all(greaterThanEqual(abs(b2.from - b2.to), vec2(min_size)))) {
             b = b2;
         }
