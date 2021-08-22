@@ -108,7 +108,7 @@ float map(vec3 v) {
 		uv.z = 1.0 - uv.z;
 	}
 
-    Box b = Box(vec2(0.0), vec2(1.0), true, 1);
+    Box b = Box(vec2(0.0), vec2(1.0), true, 0);
     vec2 p = vec2(seed);
 
 	// Iterate
@@ -135,9 +135,11 @@ float map(vec3 v) {
     }
 
 	// Edge
-	vec2 local = range(uv.xy, b.from, b.to);
-	if (any(lessThanEqual(local, vec2(edge))) || any(greaterThanEqual(local, 1.0 - vec2(edge)))) {
-		return 0.0;
+	if (edge > 0.0) {
+		vec2 local = range(uv.xy, b.from, b.to);
+		if (any(lessThanEqual(local, vec2(edge))) || any(greaterThanEqual(local, 1.0 - vec2(edge)))) {
+			return 0.0;
+		}
 	}
 
 	if (mode == 0) {
