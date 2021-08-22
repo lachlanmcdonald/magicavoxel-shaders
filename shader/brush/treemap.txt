@@ -36,7 +36,7 @@ float bias = clamp(m_bias / 100.0, 0.0, 1.0);
 float edge = clamp(m_edge / 100.0, 0.0, 1.0);
 float seed = clamp(m_seed / 100.0, 0.0, 1.0);
 
-float clover_noise(vec2 p) {
+float cloverNoise(vec2 p) {
     return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x))));
 }
 
@@ -70,8 +70,8 @@ Box reshapeBox(Box k, bool horz, float f, vec2 p) {
     }
 }
 
-float pal_mix(float cell) {
-	float f = floor(mix(0.0, float(i_num_color_sels), cell));
+float pal(float i) {
+	float f = floor(mix(0.0, float(i_num_color_sels), i));
 	return color_sel(f);
 }
 
@@ -113,7 +113,7 @@ float map(vec3 v) {
 
 	// Iterate
 	for (int iter = 0; iter < max_iters; iter++) {
-		float m = clover_noise(p);
+		float m = cloverNoise(p);
 
 		// Ensure min iterations
 		float chance_of_drop = range(float(iter), float(min_iters), float(max_iters));
@@ -122,7 +122,7 @@ float map(vec3 v) {
 		}
 
         float f = mix(min_size, 1.0 - min_size, m);
-		bool horz = clover_noise(vec2(f, iter)) <= bias;
+		bool horz = cloverNoise(vec2(f, iter)) <= bias;
         Box b2 = reshapeBox(b, horz, f, uv.xy);
 
 		// Enforce min size
@@ -144,14 +144,14 @@ float map(vec3 v) {
 
 	if (mode == 0) {
 		float k = pow(2.0, float(max_iters));
-		float h1 = clover_noise(p.xy / k);
-		float h2 = clover_noise(p.yx / k);
-		return h1 >= uv.z ? pal_mix(h2) : 0.0;
+		float h1 = cloverNoise(p.xy / k);
+		float h2 = cloverNoise(p.yx / k);
+		return h1 >= uv.z ? pal(h2) : 0.0;
 	} else if (mode == 1) {
 		float area = 1.0 - ((b.to.x - b.from.x) * (b.to.y - b.from.y) * max_iters);
-		return area >= uv.z ? pal_mix(area) : 0.0;
+		return area >= uv.z ? pal(area) : 0.0;
 	} else if (mode == 2) {
 		float area = (b.to.x - b.from.x) * (b.to.y - b.from.y) * max_iters;
-		return area >= uv.z ? pal_mix(area) : 0.0;
+		return area >= uv.z ? pal(area) : 0.0;
 	}
 }
