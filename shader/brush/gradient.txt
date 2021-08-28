@@ -39,30 +39,30 @@ float random(vec3 co, float seed) {
 	return random(vec2(r, co.z), seed);
 }
 
-float interleaved_gradient_noise(vec2 co) {
+float interleavedGradientNoise(vec2 co) {
 	return fract(52.9829189 * fract(dot(co + global_seed, vec2(0.06711056, 0.00583715))));
 }
 
-float interleaved_gradient_noise(vec3 co) {
-	float r = interleaved_gradient_noise(co.xy);
-	return interleaved_gradient_noise(vec2(r, co.z));
+float interleavedGradientNoise(vec3 co) {
+	float r = interleavedGradientNoise(co.xy);
+	return interleavedGradientNoise(vec2(r, co.z));
 }
 
-float scan_lines(vec3 co) {
+float scanLines(vec3 co) {
 	return mod(co.z, 2.0) / 2.0;
 }
 
-float scan_lines_random(vec3 co) {
+float scanLinesRandom(vec3 co) {
 	float r = random(co.zz, 0.0);
 	return mod(co.z, 2.0) / 2.0 + r - 0.5;
 }
 
-float scan_lines_random2(vec3 co) {
+float scanLinesRandom2(vec3 co) {
 	float r = random(co.xy, 0.0);
 	return mod(co.z, 2.0) / 2.0 + r - 0.5;
 }
 
-float bayer_matrix(vec3 co) {
+float orderedDither(vec3 co) {
 	co = co - 0.5;
 	float k = co.x + co.y / 2.0;
 
@@ -95,20 +95,20 @@ float map(vec3 v) {
 	}
 
 	if (mode == 0) {
-		r = interleaved_gradient_noise(v);
+		r = interleavedGradientNoise(v);
 	} else if (mode == 1) {
 		r = random(v, 0.0);
 	} else if (mode == 2) {
 		// BUG: Scanlines don't change direction
-		r = scan_lines_random(v);
+		r = scanLinesRandom(v);
 	} else if (mode == 3) {
 		// BUG: Scanlines don't change direction
-		r = scan_lines(v);
+		r = scanLines(v);
 	} else if (mode == 4) {
 		// BUG: Scanlines don't change direction
-		r = scan_lines_random2(v);
+		r = scanLinesRandom2(v);
 	} else if (mode == 5) {
-		r = bayer_matrix(v);
+		r = orderedDither(v);
 	}
 
 	vec3 k = p + (r * noise - 0.5 * noise);
