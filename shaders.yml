@@ -30,19 +30,13 @@ shaders:
       range: 0 5
       step: 1
       value: 0
-    - name: Min Iterations
-      var: m_min_iters
-      range: 1 32
-      value: 16
-      decimal: 0
-      step: 1
-    - name: Max Iterations
-      var: m_max_iters
+    - name: Iterations
+      var: m_iters
       range: 2 32
-      value: 16
+      value: 8
       decimal: 0
       step: 1
-    - name: Min. Size
+    - name: Min Size
       var: m_min_size
       range: 0 100
       value: 10
