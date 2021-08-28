@@ -29,10 +29,10 @@
 int mode = int(m_mode);
 int direction = int(m_direction);
 int iter_limit = int(m_iters);
-float min_size = clamp(m_min_size / 100.0, 0.0, 1.0);
-float bias = clamp(m_bias / 100.0, 0.0, 1.0);
-float edge = clamp(m_edge / 100.0, 0.0, 1.0);
-float seed = clamp(m_seed / 100.0, 0.0, 1.0);
+float min_size = m_min_size / 100.0;
+float bias = m_bias / 100.0;
+float edge = m_edge / 100.0;
+float seed = m_seed / 100.0;
 
 float cloverNoise(vec2 p) {
     return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x))));

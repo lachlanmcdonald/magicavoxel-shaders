@@ -26,8 +26,8 @@ float width = m_width;
 float grout = m_grout_size;
 float grout_color = m_grout_color;
 float row_offset = m_offset;
-float noise = clamp(m_noise / 100.0, 0.0, 1.0);
-float threshold = clamp(m_threshold / 100.0, 0.0, 1.0);
+float noise = m_noise / 100.0;
+float threshold = m_threshold / 100.0;
 
 float random(vec2 co, float seed) {
 	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + seed));

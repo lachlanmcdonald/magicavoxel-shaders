@@ -25,8 +25,8 @@
 // xs_end
 
 int mode = int(m_mode);
-float noise = clamp(m_noise / 100.0, 0.0, 1.0);
-float jitter = clamp(m_jitter / 100.0, -1.0, 1.0);
+float noise = m_noise / 100.0;
+float jitter = m_jitter / 100.0;
 float steps = floor(m_steps);
 vec2 tile = vec2(tile_x, tile_y) * i_volume_size.xy;
 
