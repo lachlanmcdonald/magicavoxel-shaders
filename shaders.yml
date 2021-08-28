@@ -11,7 +11,7 @@ licenses:
 shaders:
   brush/treemap:
     cites: |
-      This script utilises or modifies code from other projects or documentation.
+      This script utilises or modifies code from other projects or publications.
       Please see the attributions below for more information:
 
       1. Copyright (c) 2020 ValgoBoi <https://github.com/ValgoBoi/clover-noise>
