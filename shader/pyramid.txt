@@ -24,7 +24,7 @@ float random(vec3 co, float seed) {
 	return random(vec2(random(co.xy, seed), co.z), seed);
 }
 
-bool is_sel_color(float p) {
+bool isSelectedPal(float p) {
 	for (int i = 0; i < i_num_color_sels; i += 1) {
 		if (p == color_sel(float(i))) {
 			return true;
@@ -33,8 +33,8 @@ bool is_sel_color(float p) {
 	return false;
 }
 
-bool is_sel_color(vec3 v) {
-	return is_sel_color(voxel(v));
+bool isSelectedPal(vec3 v) {
+	return isSelectedPal(voxel(v));
 }
 
 float pal(float p) {
@@ -48,19 +48,19 @@ float map(vec3 v) {
 	if (index == 0.0) {
 		float index_beneath = voxel(v - vec3(0.0, 0.0, 1.0));
 
-		if (is_sel_color(index_beneath)) {
+		if (isSelectedPal(index_beneath)) {
 			float t = 0.0;
 			float a = 0.0;
 
 			if (axis_mode.x) {
 				t += 2.0;
-				a += (is_sel_color(vec3(v.x - 1.0, v.y, v.z - 1.0)) ? 1.0 : 0.0) +
-					 (is_sel_color(vec3(v.x + 1.0, v.y, v.z - 1.0)) ? 1.0 : 0.0);
+				a += (isSelectedPal(vec3(v.x - 1.0, v.y, v.z - 1.0)) ? 1.0 : 0.0) +
+					 (isSelectedPal(vec3(v.x + 1.0, v.y, v.z - 1.0)) ? 1.0 : 0.0);
 			}
 			if (axis_mode.y) {
 				t += 2.0;
-				a += (is_sel_color(vec3(v.x, v.y - 1.0, v.z - 1.0)) ? 1.0 : 0.0) +
-					 (is_sel_color(vec3(v.x, v.y + 1.0, v.z - 1.0)) ? 1.0 : 0.0);
+				a += (isSelectedPal(vec3(v.x, v.y - 1.0, v.z - 1.0)) ? 1.0 : 0.0) +
+					 (isSelectedPal(vec3(v.x, v.y + 1.0, v.z - 1.0)) ? 1.0 : 0.0);
 			}
 
 			if (a == t) {

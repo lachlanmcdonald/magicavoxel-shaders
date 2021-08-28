@@ -12,7 +12,7 @@
 bool no_axis_mode = all(equal(ivec3(i_axis), ivec3(0)));
 bvec3 axis_mode = no_axis_mode ? bvec3(true) : equal(ivec3(i_axis), ivec3(1));
 
-bool is_sel_color(float p) {
+bool isSelectedPal(float p) {
 	for (int i = 0; i < i_num_color_sels; i += 1) {
 		if (p == color_sel(float(i))) {
 			return true;
@@ -47,7 +47,7 @@ float map(vec3 v) {
 				for (float z = z_range.x; z <= z_range.y; z += 1.0) {
  					float j = voxel(vec3(x, y, z));
 
-					if (is_sel_color(j)) {
+					if (isSelectedPal(j)) {
 						return m_color;
 					}
 				}

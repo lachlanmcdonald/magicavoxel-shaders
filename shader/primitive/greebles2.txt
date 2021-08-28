@@ -39,7 +39,7 @@ float random(vec2 co, float seed) {
 	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + global_seed + seed));
 }
 
-Series find_series(int limit, float seed, vec2 seed_multiplier) {
+Series findSeries(int limit, float seed, vec2 seed_multiplier) {
 	float cell_index = 0.0;
 	float cell_size = 0.0;
 	int last_index = 0;
@@ -59,8 +59,8 @@ Series find_series(int limit, float seed, vec2 seed_multiplier) {
 }
 
 Cell greeble(vec2 v, float seed) {
-	Series x = find_series(int(v.x), seed, vec2(64.0,  0.0));
-	Series y = find_series(int(v.y), seed, vec2( 0.0, 64.0));
+	Series x = findSeries(int(v.x), seed, vec2(64.0,  0.0));
+	Series y = findSeries(int(v.y), seed, vec2( 0.0, 64.0));
 
 	vec2 index = vec2(x.index, y.index);
 	vec2 local = vec2(x.local, y.local);

@@ -69,7 +69,7 @@ Box region(vec3 dim_min, vec3 dim_max, float iter, float seed) {
 	return Box(lower, upper);
 }
 
-bool lower_region(ivec3 iv, vec3 dim_min, vec3 dim_max, float seed) {
+bool lowerRegion(ivec3 iv, vec3 dim_min, vec3 dim_max, float seed) {
 	for (int i = 0; i < count; i += 1) {
 		Box j = region(dim_min, dim_max, float(i), seed);
 
@@ -80,7 +80,7 @@ bool lower_region(ivec3 iv, vec3 dim_min, vec3 dim_max, float seed) {
 	return false;
 }
 
-bool upper_region(ivec3 iv, vec3 dim_min, vec3 dim_max, float seed) {
+bool upperRegion(ivec3 iv, vec3 dim_min, vec3 dim_max, float seed) {
 	for (int i = 0; i < count; i += 1) {
 		Box j = region(dim_min, dim_max, float(i), seed);
 
@@ -96,26 +96,26 @@ float map(vec3 v) {
 	ivec3 ivs = ivec3(i_volume_size);
 
 	if (axis_mode.x) {
-		if (lower_region(iv.zyx, dim_min.yxz, dim_max.yxz, 64.0 * 1.0)) {
+		if (lowerRegion(iv.zyx, dim_min.yxz, dim_max.yxz, 64.0 * 1.0)) {
 			return (mode == 0) ? 0.0 : i_color_index;
 		}
-		if (upper_region((ivs - iv).zyx, dim_min.yxz, dim_max.yxz, 64.0 * 2.0)) {
+		if (upperRegion((ivs - iv).zyx, dim_min.yxz, dim_max.yxz, 64.0 * 2.0)) {
 			return (mode == 0) ? 0.0 : i_color_index;
 		}
 	}
 	if (axis_mode.y) {
-		if (lower_region(iv.xzy, dim_min.xyz, dim_max.xyz, 64.0 * 3.0)) {
+		if (lowerRegion(iv.xzy, dim_min.xyz, dim_max.xyz, 64.0 * 3.0)) {
 			return (mode == 0) ? 0.0 : i_color_index;
 		}
-		if (upper_region((ivs - iv).xzy, dim_min.xyz, dim_max.xyz, 64.0 * 4.0)) {
+		if (upperRegion((ivs - iv).xzy, dim_min.xyz, dim_max.xyz, 64.0 * 4.0)) {
 			return (mode == 0) ? 0.0 : i_color_index;
 		}
 	}
 	if (axis_mode.z) {
-		if (lower_region(iv, dim_min.yxz, dim_max.yxz, 64.0 * 5.0)) {
+		if (lowerRegion(iv, dim_min.yxz, dim_max.yxz, 64.0 * 5.0)) {
 			return (mode == 0) ? 0.0 : i_color_index;
 		}
-		if (upper_region(ivs - iv, dim_min.yxz, dim_max.yxz, 64.0 * 6.0)) {
+		if (upperRegion(ivs - iv, dim_min.yxz, dim_max.yxz, 64.0 * 6.0)) {
 			return (mode == 0) ? 0.0 : i_color_index;
 		}
 	}

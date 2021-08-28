@@ -19,7 +19,7 @@ float random(vec2 co, float seed) {
 	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + seed));
 }
 
-bool is_sel_color(float p) {
+bool isSelectedPal(float p) {
 	for (int i = 0; i < i_num_color_sels; i += 1) {
 		if (p == color_sel(float(i))) {
 			return true;
@@ -37,7 +37,7 @@ float map(vec3 v) {
 	float j = random(vec2(x, y), threshold + i_iter + 1.0);
 	float k = random(vec2(j, z), threshold + i_iter + 1.0);
 
-	if (is_sel_color(index)) {
+	if (isSelectedPal(index)) {
 		if (k < threshold) {
 			return m_color;
 		}

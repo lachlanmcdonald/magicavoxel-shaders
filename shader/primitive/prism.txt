@@ -51,13 +51,13 @@ vec2 check(vec2 pos, vec2 dim) {
 	return vec2(x, y);
 }
 
-vec2 round_towards(vec2 v, float d) {
+vec2 roundTowards(vec2 v, float d) {
 	v.x = v.x < d ? d : v.x;
 	v.y = v.y < d ? d : v.y;
 	return v;
 }
 
 float map(vec3 v) {
-	vec2 j = round_towards(check(v.xy, vec2(width_x, width_y)), 1.0);
+	vec2 j = roundTowards(check(v.xy, vec2(width_x, width_y)), 1.0);
 	return all(lessThanEqual(v.zz, j)) ? i_color_index : 0.0;
 }

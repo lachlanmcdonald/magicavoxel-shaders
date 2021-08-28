@@ -37,7 +37,7 @@ float random(vec2 co) {
 	return random(co, 0.0);
 }
 
-Series find_series(int limit, vec2 seed_multiplier) {
+Series findSeries(int limit, vec2 seed_multiplier) {
 	float cell_index = 0.0;
 	float cell_size = 0.0;
 	int last_index = 0;
@@ -61,7 +61,7 @@ float pal(float p) {
 	return color_sel(f);
 }
 
-float pal_noise(float p, vec3 v) {
+float noisePal(float p, vec3 v) {
 	if (noise > 0.0) {
 		float d = random(v.xy, global_seed * 2.0);
 		return d <= noise ? pal(d) : pal(p);
@@ -71,11 +71,11 @@ float pal_noise(float p, vec3 v) {
 }
 
 float map(vec3 v) {
-	Series x = find_series(int(v.x), vec2(64.0,  0.0));
+	Series x = findSeries(int(v.x), vec2(64.0,  0.0));
 
 	float offset = ceil(mix(size_min, size_max, random(vec2(x.index, 0.0))));
 	float k = mod(x.index, 2.0) == 0.0 ? v.y : v.y + offset;
-	Series y = find_series(int(k), vec2( 0.0, 64.0));
+	Series y = findSeries(int(k), vec2( 0.0, 64.0));
 
 	vec2 index = vec2(x.index, y.index);
 	vec2 local = vec2(x.local, y.local);
@@ -84,23 +84,23 @@ float map(vec3 v) {
 	if (all(lessThan(local.xy, size.xy - vec2(thickness)))) {
 		if (mode == 0) {
 			float f = random(index.xy);
-			return pal_noise(f, v);
+			return noisePal(f, v);
 		} else if (mode == 1) {
 			float f = smoothstep(size_min * size_min,
 								 size_max * size_max,
 								 size.x * size.y);
-			return pal_noise(f, v);
+			return noisePal(f, v);
 		} else if (mode == 2) {
 			float f = mod(index.x, float(i_num_color_sels)) / float(i_num_color_sels);
-			return pal_noise(f, v);
+			return noisePal(f, v);
 		} else if (mode == 3) {
 			float f = mod(index.y, float(i_num_color_sels)) / float(i_num_color_sels);
-			return pal_noise(f, v);
+			return noisePal(f, v);
 		} else if (mode == 4) {
 			float f = random(index.xy);
-			return f > 0.5 ? pal_noise(0.0, v) : pal_noise(1.0, v);
+			return f > 0.5 ? noisePal(0.0, v) : noisePal(1.0, v);
 		} else if (mode == 5) {
-			return mod(index.y, 2.0) == 0.0 ? pal_noise(0.0, v) : pal_noise(1.0, v);
+			return mod(index.y, 2.0) == 0.0 ? noisePal(0.0, v) : noisePal(1.0, v);
 		}
 	} else {
 		return line_color;

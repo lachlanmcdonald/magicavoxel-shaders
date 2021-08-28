@@ -26,7 +26,7 @@ float pal(float p) {
 	return color_sel(f);
 }
 
-bool is_sel_color(float p) {
+bool isSelectedPal(float p) {
 	for (int i = 0; i < i_num_color_sels; i += 1) {
 		if (p == color_sel(float(i))) {
 			return true;
@@ -41,7 +41,7 @@ float map(vec3 v) {
 	if (index == 0.0) {
 		float color_beneath = voxel(vec3(v.x, v.y, v.z - 1.0));
 
-		if (is_sel_color(color_beneath)) {
+		if (isSelectedPal(color_beneath)) {
 			bool a = (floor(v.x) == 0.0);
 			bool b = (floor(v.x) == i_volume_size.x - 1.0);
 			bool c = (floor(v.y) == 0.0);

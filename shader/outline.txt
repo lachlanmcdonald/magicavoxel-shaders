@@ -9,7 +9,7 @@
 // arg : { id = '0'  name = 'Color'  value = '1'  var = 'm_color'  range = '0 255'  step = '1'  decimal = '0' }
 // xs_end
 
-bool is_sel_color(float p) {
+bool isSelectedPal(float p) {
 	for (int i = 0; i < i_num_color_sels; i += 1) {
 		if (p == color_sel(float(i))) {
 			return true;
@@ -21,7 +21,7 @@ bool is_sel_color(float p) {
 float map(vec3 v) {
 	float index = voxel(v);
 
-	if (is_sel_color(index)) {
+	if (isSelectedPal(index)) {
 		for (float x = -1.0; x <= 1.0; x += 1.0) {
 			for (float y = -1.0; y <= 1.0; y += 1.0) {
 				for (float z = -1.0; z <= 1.0; z += 1.0) {
@@ -30,7 +30,7 @@ float map(vec3 v) {
 					if (p != v) {
 						float n = voxel(p);
 
-						if (is_sel_color(n) == false && n != 0.0) {
+						if (isSelectedPal(n) == false && n != 0.0) {
 							return m_color;
 						}
 					}

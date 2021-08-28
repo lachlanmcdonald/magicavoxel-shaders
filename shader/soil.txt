@@ -12,7 +12,7 @@
 
 int headroom = int(m_headroom);
 
-bool is_sel_color(float p) {
+bool isSelectedPal(float p) {
 	for (int i = 0; i < i_num_color_sels; i += 1) {
 		if (p == color_sel(float(i))) {
 			return true;
@@ -25,7 +25,7 @@ float map(vec3 v) {
 	float index = voxel(v);
 	float index_beneath = voxel(v - vec3(0.0, 0.0, 1.0));
 
-	if (is_sel_color(index_beneath) && index == 0.0) {
+	if (isSelectedPal(index_beneath) && index == 0.0) {
 		for (int z = 1; z <= headroom; z += 1) {
 			float d = v.z + float(z);
 
