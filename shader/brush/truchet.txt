@@ -32,7 +32,7 @@ float random(vec2 co) {
 	return random(co, 0.0);
 }
 
-float pal_mix(float cell) {
+float pal(float cell) {
 	float f = floor(mix(0.0, float(i_num_color_sels), cell));
 	return color_sel(f);
 }
@@ -115,8 +115,8 @@ float map(vec3 v) {
 		b = fract(mix(0.5, 1.0, f) + noise_d);
 	}
 
-	a = pal_mix(a);
-	b = pal_mix(b);
+	a = pal(a);
+	b = pal(b);
 
 	if (r == 0) {
 		return local.x > local.y ? a : b;

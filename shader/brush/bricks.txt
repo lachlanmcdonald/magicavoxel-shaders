@@ -38,7 +38,7 @@ float random(vec3 co, float seed) {
 	return random(vec2(a, co.z), seed);
 }
 
-float pal_mix(float p) {
+float pal(float p) {
 	float f = floor(mix(0.0, float(i_num_color_sels), p));
 	return color_sel(f);
 }
@@ -115,9 +115,9 @@ float map(vec3 v) {
 			}
 
 			if (random(v, 0.0) < noise) {
-				return pal_mix(random(v, 64.0));
+				return pal(random(v, 64.0));
 			} else {
-				return pal_mix(bk_color);
+				return pal(bk_color);
 			}
 		}
 	} else {

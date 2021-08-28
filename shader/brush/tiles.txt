@@ -17,7 +17,7 @@
 vec3 dim = vec3(m_width, m_height, m_depth);
 vec3 offset = vec3(m_offset_x, m_offset_y, m_offset_z);
 
-float pal_mix(float p) {
+float pal(float p) {
 	float f = floor(mix(0.0, float(i_num_color_sels), p));
 	return color_sel(f);
 }
@@ -26,29 +26,29 @@ float map(vec3 v) {
 	if (mod(v.x + offset.x, dim.x * 2.0) < dim.x) {
 		if (mod(v.y + offset.y, dim.y * 2.0) < dim.y) {
 			if (mod(v.z + offset.z, dim.z * 2.0) < dim.z) {
-				return pal_mix(0.0);
+				return pal(0.0);
 			} else {
-				return pal_mix(1.0);
+				return pal(1.0);
 			}
 		} else {
 			if (mod(v.z + offset.z, dim.z * 2.0) < dim.z) {
-				return pal_mix(1.0);
+				return pal(1.0);
 			} else {
-				return pal_mix(0.0);
+				return pal(0.0);
 			}
 		}
 	} else {
 		if (mod(v.y + offset.y, dim.y * 2.0) < dim.y) {
 			if (mod(v.z + offset.z, dim.z * 2.0) < dim.z) {
-				return pal_mix(1.0);
+				return pal(1.0);
 			} else {
-				return pal_mix(0.0);
+				return pal(0.0);
 			}
 		} else {
 			if (mod(v.z + offset.z, dim.z * 2.0) < dim.z) {
-				return pal_mix(0.0);
+				return pal(0.0);
 			} else {
-				return pal_mix(1.0);
+				return pal(1.0);
 			}
 		}
 	}

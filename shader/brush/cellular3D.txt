@@ -31,7 +31,7 @@ float jitter = clamp(m_jitter / 100.0, -1.0, 1.0);
 float cavity = clamp(m_cavity / 100.0, 0.0, 1.0);
 vec3 tile = vec3(tile_x, tile_y, tile_z) * i_volume_size;
 
-float pal_mix(float p) {
+float pal(float p) {
 	float f = floor(mix(0.0, float(i_num_color_sels), p));
 	return color_sel(f);
 }
@@ -216,8 +216,8 @@ float map(vec3 v) {
 	}
 
 	if (mode == 0 || mode == 3) {
-		return (r > cavity) ? pal_mix((r - cavity) / (1.0 - cavity)) : 0.0;
+		return (r > cavity) ? pal((r - cavity) / (1.0 - cavity)) : 0.0;
 	} else {
-		return (k.z <= z) ? pal_mix(r) : 0.0;
+		return (k.z <= z) ? pal(r) : 0.0;
 	}
 }

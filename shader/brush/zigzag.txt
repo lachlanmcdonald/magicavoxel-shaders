@@ -17,7 +17,7 @@ float roundf(float f) {
 	return f >= 0.5 ? ceil(f) : floor(f);
 }
 
-float pal_mix(float p) {
+float pal(float p) {
 	float f = roundf(mix(0.0, float(i_num_color_sels), p));
 	return color_sel(f);
 }

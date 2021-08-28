@@ -27,7 +27,7 @@ float random(vec2 co) {
 	return random(co, 0.0);
 }
 
-float pal_mix(float p) {
+float pal(float p) {
 	float f = floor(mix(0.0, float(i_num_color_sels), p));
 	return color_sel(f);
 }
@@ -62,7 +62,7 @@ float map(vec3 v) {
 				f = 1.0 - (z / p2);
 			}
 
-			return pal_mix(f);
+			return pal(f);
 		}
 	}
 

@@ -24,7 +24,7 @@ int direction = int(m_direction);
 float noise = clamp(m_noise / 100.0, 0.0, 1.0);
 float global_seed = m_seed / 100.0;
 
-float pal_mix(float p) {
+float pal(float p) {
 	float f = floor(mix(0.0, float(i_num_color_sels), p));
 	return color_sel(f);
 }
@@ -112,5 +112,5 @@ float map(vec3 v) {
 	}
 
 	vec3 k = p + (r * noise - 0.5 * noise);
-	return pal_mix(k.z);
+	return pal(k.z);
 }

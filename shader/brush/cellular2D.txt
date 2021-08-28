@@ -30,7 +30,7 @@ float jitter = clamp(m_jitter / 100.0, -1.0, 1.0);
 float steps = floor(m_steps);
 vec2 tile = vec2(tile_x, tile_y) * i_volume_size.xy;
 
-float pal_mix(float p) {
+float pal(float p) {
 	float f = floor(mix(0.0, float(i_num_color_sels), p));
 	return color_sel(f);
 }
@@ -120,5 +120,5 @@ float map(vec3 v) {
 		z = roundf(z * steps) / steps;
 	}
 
-	return (k.z <= z) ? pal_mix(r) : 0.0;
+	return (k.z <= z) ? pal(r) : 0.0;
 }

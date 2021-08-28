@@ -33,17 +33,17 @@ float random(vec2 co) {
 	return random(co, 0.0);
 }
 
-float pal_mix(float p) {
+float pal(float p) {
 	float f = floor(mix(0.0, float(i_num_color_sels), p));
 	return color_sel(f);
 }
 
-float pal_mix_noise(float p, vec3 v) {
+float pal_noise(float p, vec3 v) {
 	if (noise > 0.0) {
 		float d = random(v.xy, global_seed * 2.0);
-		return d <= noise ? pal_mix(d) : pal_mix(p);
+		return d <= noise ? pal(d) : pal(p);
 	} else {
-		return pal_mix(p);
+		return pal(p);
 	}
 }
 
@@ -101,12 +101,12 @@ float map(vec3 v) {
 	}
 
 	if (mode == 1) {
-		return tile > 0.5 ? pal_mix_noise(0.0, v) : pal_mix_noise(1.0, v);
+		return tile > 0.5 ? pal_noise(0.0, v) : pal_noise(1.0, v);
 	} else if (mode == 2) {
-		return tile > 0.5 ? line_color : pal_mix_noise(next, v);
+		return tile > 0.5 ? line_color : pal_noise(next, v);
 	} else if (mode == 3) {
-		return tile <= 0.5 ? line_color : pal_mix_noise(next, v);
+		return tile <= 0.5 ? line_color : pal_noise(next, v);
 	} else {
-		return pal_mix_noise(next, v);
+		return pal_noise(next, v);
 	}
 }

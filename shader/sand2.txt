@@ -21,7 +21,7 @@ float random(vec3 co) {
 	return random(vec2(random(co.xy), co.z));
 }
 
-float pal_mix(float p) {
+float pal(float p) {
 	float f = floor(mix(0.0, float(i_num_color_sels), p));
 	return color_sel(f);
 }
@@ -60,11 +60,11 @@ float map(vec3 v) {
 
 			if (p <= (threshold * z)) {
 				if (mode == 0 ) {
-					return pal_mix(p);
+					return pal(p);
 				} else if (mode == 1) {
-					return pal_mix(z / 8.0);
+					return pal(z / 8.0);
 				} else if (mode == 2) {
-					return pal_mix(1.0 - z / 8.0);
+					return pal(1.0 - z / 8.0);
 				}
 			}
 		}

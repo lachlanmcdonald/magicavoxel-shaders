@@ -37,7 +37,7 @@ bool is_sel_color(vec3 v) {
 	return is_sel_color(voxel(v));
 }
 
-float pal_mix(float p) {
+float pal(float p) {
 	float f = floor(mix(0.0, float(i_num_color_sels), p));
 	return color_sel(f);
 }
@@ -69,7 +69,7 @@ float map(vec3 v) {
 				if (noise == 0.0 || z > noise) {
 					return index_beneath;
 				} else {
-					return pal_mix(z);
+					return pal(z);
 				}
 			}
 		}
