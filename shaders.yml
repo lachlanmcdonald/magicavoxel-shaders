@@ -500,7 +500,7 @@ shaders:
       type: position
       value: 1
     - type: seed
-  brush/zigzag:
+  brush/zigzag_range:
     params:
     - decimal: 0
       name: Direction

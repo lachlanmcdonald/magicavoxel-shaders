@@ -2,7 +2,7 @@
 // This work is licensed under the MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 //
-// xs brush/zigzag [Direction] [Width]
+// xs brush/zigzag_range [Direction] [Width]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
