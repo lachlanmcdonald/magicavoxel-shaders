@@ -324,10 +324,10 @@ shaders:
       value: 2
     - name: Growth
       var: m_growth
-      range: -1 1
-      decimal: 1
-      step: 0.1
-      value: 0.5
+      range: 0 100
+      decimal: 0
+      step: 1
+      value: 50
     - type: seed
   brush/grid:
     params:

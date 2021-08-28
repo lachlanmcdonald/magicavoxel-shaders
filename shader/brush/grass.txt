@@ -9,14 +9,14 @@
 // arg : { id = '0'  name = 'Direction'  value = '0'  var = 'm_direction'  range = '0 1'  step = '1'  decimal = '0' }
 // arg : { id = '1'  name = 'Mode'  value = '0'  var = 'm_mode'  range = '0 4'  step = '1'  decimal = '0' }
 // arg : { id = '2'  name = 'Density'  value = '2'  var = 'm_density'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'Growth'  value = '0.5'  var = 'm_growth'  range = '-1 1'  step = '0.1'  decimal = '1' }
+// arg : { id = '3'  name = 'Growth'  value = '50'  var = 'm_growth'  range = '0 100'  step = '1'  decimal = '0' }
 // arg : { id = '4'  name = 'Seed'  value = '1'  var = 'm_seed'  range = '1 100'  step = '1'  decimal = '0' }
 // xs_end
 
 int direction = int(m_direction);
 int mode = int(m_mode);
 float density = m_density;
-float growth = mix(1.0, -1.0, m_growth);
+float growth = mix(1.0, -1.0, m_growth / 100.0);
 float global_seed = mix(-43758.6980280632, 43758.6980280632, m_seed / 100.0);
 
 float random(vec2 co, float seed) {
