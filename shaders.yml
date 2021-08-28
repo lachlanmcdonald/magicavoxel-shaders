@@ -9,8 +9,52 @@ licenses:
     This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License (CC BY-NC-SA 3.0)
     https://github.com/lachlanmcdonald/magicavoxel-shaders
 shaders:
-  brush/greebles3:
-    license: by-nc-sa-3.0
+  brush/treemap:
+    cites: |
+      This script utilises or modifies code from other projects or documentation.
+      Please see the attributions below for more information:
+
+      1. Copyright (c) 2020 ValgoBoi <https://github.com/ValgoBoi/clover-noise>
+          MIT License (MIT)
+          https://github.com/ValgoBoi/clover-noise/blob/master/LICENSE
+
+      2. Copyright (c) 2015 Michael Feldstein <https://github.com/msfeldstein/glsl-map>
+          MIT License (MIT)
+          https://github.com/msfeldstein/glsl-map/blob/master/LICENSE.md
+    params:
+    - type: mode
+      range: 0 2
+    - decimal: 0
+      name: Direction
+      var: m_direction
+      range: 0 5
+      step: 1
+      value: 0
+    - name: Iterations
+      var: m_iters
+      range: 2 32
+      value: 8
+      decimal: 0
+      step: 1
+    - name: Min Size
+      var: m_min_size
+      range: 0 100
+      value: 10
+      decimal: 0
+      step: 1
+    - name: Bias
+      var: m_bias
+      range: 0 100
+      value: 50
+      decimal: 0
+      step: 1
+    - name: Edge
+      var: m_edge
+      range: 0 100
+      value: 0
+      decimal: 0
+      step: 1
+    - type: seed
   brush/gradient:
     cites: |
             This script utilises or modifies code from other projects or publications.
