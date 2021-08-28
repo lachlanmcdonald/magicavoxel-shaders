@@ -1,27 +1,27 @@
-// MIT License (MIT)
-// https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2021 Lachlan McDonald
+// This work is licensed under the MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
 //
 // xs brush/tiles_uneven [Mode] [Min] [Max] [Line Color] [Line Width] [Noise] [Seed]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Mode'  value = '0'  range = '0 5'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Min'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Max'  value = '8'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'Line Color'  value = '16'  range = '0 255'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'Line Width'  value = '1'  range = '0 256'  step = '1'  decimal = '0' }
-// arg : { id = '5'  name = 'Noise'  value = '0'  range = '0 1'  step = '0.05'  decimal = '1' }
+// arg : { id = '0'  name = 'Mode'  value = '0'  var = 'm_mode'  range = '0 5'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Min'  value = '4'  var = 'm_min'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Max'  value = '8'  var = 'm_max'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Line Color'  value = '16'  var = 'm_line_color'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Line Width'  value = '1'  var = 'm_line_width'  range = '0 256'  step = '1'  decimal = '0' }
+// arg : { id = '5'  name = 'Noise'  value = '0'  var = 'm_noise'  range = '0 100'  step = '1'  decimal = '1' }
 // arg : { id = '6'  name = 'Seed'  value = '1'  var = 'm_seed'  range = '1 100'  step = '1'  decimal = '0' }
 // xs_end
 
-int mode = int(i_args[0]);
-float thickness = max(i_args[4], 0.0);
-float size_min = min(i_args[1], i_args[2]) + thickness;
-float size_max = max(i_args[1], i_args[2]) + thickness;
-float line_color = i_args[3];
-float noise = clamp(0.0, 1.0, i_args[5]);
-float global_seed = mix(-437.5453, 437.5453, i_args[6] / 100.0);
+int mode = int(m_mode);
+float thickness = m_line_width;
+float size_min = min(m_min, m_max) + thickness;
+float size_max = max(m_min, m_max) + thickness;
+float line_color = m_line_color;
+float noise = m_noise / 100.0;
+float global_seed = mix(-437.5453, 437.5453, m_seed / 100.0);
 
 struct Series {
 	float index;
@@ -37,7 +37,7 @@ float random(vec2 co) {
 	return random(co, 0.0);
 }
 
-Series find_series(int limit, vec2 seed_multiplier) {
+Series findSeries(int limit, vec2 seed_multiplier) {
 	float cell_index = 0.0;
 	float cell_size = 0.0;
 	int last_index = 0;
@@ -56,26 +56,26 @@ Series find_series(int limit, vec2 seed_multiplier) {
 	return j;
 }
 
-float pal_mix(float p) {
+float pal(float p) {
 	float f = floor(mix(0.0, float(i_num_color_sels), p));
 	return color_sel(f);
 }
 
-float pal_mix_noise(float p, vec3 v) {
+float noisePal(float p, vec3 v) {
 	if (noise > 0.0) {
 		float d = random(v.xy, global_seed * 2.0);
-		return d <= noise ? pal_mix(d) : pal_mix(p);
+		return d <= noise ? pal(d) : pal(p);
 	} else {
-		return pal_mix(p);
+		return pal(p);
 	}
 }
 
 float map(vec3 v) {
-	Series x = find_series(int(v.x), vec2(64.0,  0.0));
+	Series x = findSeries(int(v.x), vec2(64.0,  0.0));
 
 	float offset = ceil(mix(size_min, size_max, random(vec2(x.index, 0.0))));
 	float k = mod(x.index, 2.0) == 0.0 ? v.y : v.y + offset;
-	Series y = find_series(int(k), vec2( 0.0, 64.0));
+	Series y = findSeries(int(k), vec2( 0.0, 64.0));
 
 	vec2 index = vec2(x.index, y.index);
 	vec2 local = vec2(x.local, y.local);
@@ -84,23 +84,23 @@ float map(vec3 v) {
 	if (all(lessThan(local.xy, size.xy - vec2(thickness)))) {
 		if (mode == 0) {
 			float f = random(index.xy);
-			return pal_mix_noise(f, v);
+			return noisePal(f, v);
 		} else if (mode == 1) {
 			float f = smoothstep(size_min * size_min,
 								 size_max * size_max,
 								 size.x * size.y);
-			return pal_mix_noise(f, v);
+			return noisePal(f, v);
 		} else if (mode == 2) {
 			float f = mod(index.x, float(i_num_color_sels)) / float(i_num_color_sels);
-			return pal_mix_noise(f, v);
+			return noisePal(f, v);
 		} else if (mode == 3) {
 			float f = mod(index.y, float(i_num_color_sels)) / float(i_num_color_sels);
-			return pal_mix_noise(f, v);
+			return noisePal(f, v);
 		} else if (mode == 4) {
 			float f = random(index.xy);
-			return f > 0.5 ? pal_mix_noise(0.0, v) : pal_mix_noise(1.0, v);
+			return f > 0.5 ? noisePal(0.0, v) : noisePal(1.0, v);
 		} else if (mode == 5) {
-			return mod(index.y, 2.0) == 0.0 ? pal_mix_noise(0.0, v) : pal_mix_noise(1.0, v);
+			return mod(index.y, 2.0) == 0.0 ? noisePal(0.0, v) : noisePal(1.0, v);
 		}
 	} else {
 		return line_color;

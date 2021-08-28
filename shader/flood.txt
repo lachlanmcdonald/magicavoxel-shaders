@@ -1,15 +1,15 @@
-// MIT License (MIT)
-// https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2021 Lachlan McDonald
+// This work is licensed under the MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
 //
 // xs flood [Height]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Height'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '0'  name = 'Height'  value = '1'  var = 'm_height'  range = '1 256'  step = '1'  decimal = '0' }
 // xs_end
 
-float height = max(i_args[0], 1.0);
+float height = m_height;
 
 float map(vec3 v) {
 	float index = voxel(v);

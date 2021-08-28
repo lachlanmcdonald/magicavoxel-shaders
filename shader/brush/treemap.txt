@@ -1,0 +1,148 @@
+// Copyright (c) 2021 Lachlan McDonald
+// This work is licensed under the MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+//
+// This script utilises or modifies code from other projects or publications.
+// Please see the attributions below for more information:
+//
+// 1. Copyright (c) 2020 ValgoBoi <https://github.com/ValgoBoi/clover-noise>
+//     MIT License (MIT)
+//     https://github.com/ValgoBoi/clover-noise/blob/master/LICENSE
+//
+// 2. Copyright (c) 2015 Michael Feldstein <https://github.com/msfeldstein/glsl-map>
+//     MIT License (MIT)
+//     https://github.com/msfeldstein/glsl-map/blob/master/LICENSE.md
+//
+// xs brush/treemap [Mode] [Direction] [Iterations] [Min Size] [Bias] [Edge] [Seed]
+//
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { id = '0'  name = 'Mode'  value = '0'  var = 'm_mode'  range = '0 2'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Direction'  value = '0'  var = 'm_direction'  range = '0 5'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Iterations'  value = '8'  var = 'm_iters'  range = '2 32'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Min Size'  value = '10'  var = 'm_min_size'  range = '0 100'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Bias'  value = '50'  var = 'm_bias'  range = '0 100'  step = '1'  decimal = '0' }
+// arg : { id = '5'  name = 'Edge'  value = '0'  var = 'm_edge'  range = '0 100'  step = '1'  decimal = '0' }
+// arg : { id = '6'  name = 'Seed'  value = '1'  var = 'm_seed'  range = '1 100'  step = '1'  decimal = '0' }
+// xs_end
+
+int mode = int(m_mode);
+int direction = int(m_direction);
+int iter_limit = int(m_iters);
+float min_size = m_min_size / 100.0;
+float bias = m_bias / 100.0;
+float edge = m_edge / 100.0;
+float seed = m_seed / 100.0;
+
+float cloverNoise(vec2 p) {
+    return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x))));
+}
+
+struct Box {
+    vec2 from;
+    vec2 to;
+    bool upper;
+    int iter;
+};
+
+bool pointInBox(vec2 p, Box b) {
+    return all(bvec4(greaterThanEqual(p, b.from), lessThanEqual(p, b.to)));
+}
+
+Box reshapeBox(Box k, bool horz, float f, vec2 p) {
+    Box a = Box(k.from, k.to, false, k.iter + 1);
+    Box b = Box(k.from, k.to, true, k.iter + 1);
+
+    if (horz) {
+        a.to.x = mix(a.from.x, a.to.x, f);
+        b.from.x = mix(a.from.x, a.to.x, f);
+    } else {
+        a.to.y = mix(a.from.y, a.to.y, f);
+        b.from.y = mix(a.from.y, a.to.y, f);
+    }
+
+    if (pointInBox(p, a)) {
+        return a;
+    } else {
+        return b;
+    }
+}
+
+float pal(float i) {
+	float f = floor(mix(0.0, float(i_num_color_sels), i));
+	return color_sel(f);
+}
+
+vec2 range(vec2 value, vec2 inMin, vec2 inMax, vec2 outMin, vec2 outMax) {
+	return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);
+}
+
+vec2 range(vec2 value, vec2 inMin, vec2 inMax) {
+	return range(value, inMin, inMax, vec2(0.0), vec2(1.0));
+}
+
+float range(float value, float inMin, float inMax, float outMin, float outMax) {
+  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);
+}
+
+float range(float value, float inMin, float inMax) {
+	return range(value, inMin, inMax, 0.0, 1.0);
+}
+
+float map(vec3 v) {
+	vec3 uv = floor(v) / i_volume_size;
+
+	if (direction == 1) {
+		uv.z = 1.0 - uv.z;
+	} else if (direction == 2) {
+		uv.yz = uv.zy;
+	} else if (direction == 3) {
+		uv.yz = uv.zy;
+		uv.z = 1.0 - uv.z;
+	} else if (direction == 4) {
+		uv.xz = uv.zx;
+	} else if (direction == 5) {
+		uv.xz = uv.zx;
+		uv.z = 1.0 - uv.z;
+	}
+
+    Box b = Box(vec2(0.0), vec2(1.0), true, 0);
+    vec2 p = vec2(seed);
+
+	// Iterate
+	for (int iter = 0; iter < iter_limit; iter++) {
+		float m = cloverNoise(p);
+        bool horz = cloverNoise(vec2(m, iter)) <= bias;
+        Box new_box = reshapeBox(b, horz, m, uv.xy);
+
+		// Enforce min size
+		vec2 dim = b.to - b.from;
+		if (dim.x > min_size && dim.y > min_size) {
+			b = new_box;
+		}
+
+        float w = pow(2.0, float(iter));
+        p += vec2(b.upper ? w : 0.0, horz ? w : 0.0);
+    }
+
+	// Edge
+	if (edge > 0.0) {
+		vec2 local = range(uv.xy, b.from, b.to);
+		if (any(lessThanEqual(local, vec2(edge))) || any(greaterThanEqual(local, 1.0 - vec2(edge)))) {
+			return 0.0;
+		}
+	}
+
+	if (mode == 0) {
+		float k = pow(2.0, float(iter_limit));
+		float h1 = cloverNoise(p.xy / k);
+		float h2 = cloverNoise(p.yx / k);
+		return h1 >= uv.z ? pal(h2) : 0.0;
+	} else if (mode == 1) {
+		float area = 1.0 - ((b.to.x - b.from.x) * (b.to.y - b.from.y) * iter_limit);
+		return area >= uv.z ? pal(area) : 0.0;
+	} else if (mode == 2) {
+		float area = (b.to.x - b.from.x) * (b.to.y - b.from.y) * iter_limit;
+		return area >= uv.z ? pal(area) : 0.0;
+	}
+}

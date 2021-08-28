@@ -1,18 +1,18 @@
-// MIT License (MIT)
-// https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2021 Lachlan McDonald
+// This work is licensed under the MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
 //
 // xs case [Color]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Color'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '0'  name = 'Color'  value = '1'  var = 'm_color'  range = '0 255'  step = '1'  decimal = '0' }
 // xs_end
 
 bool no_axis_mode = all(equal(ivec3(i_axis), ivec3(0)));
 bvec3 axis_mode = no_axis_mode ? bvec3(true) : equal(ivec3(i_axis), ivec3(1));
 
-bool is_sel_color(float p) {
+bool isSelectedPal(float p) {
 	for (int i = 0; i < i_num_color_sels; i += 1) {
 		if (p == color_sel(float(i))) {
 			return true;
@@ -47,8 +47,8 @@ float map(vec3 v) {
 				for (float z = z_range.x; z <= z_range.y; z += 1.0) {
  					float j = voxel(vec3(x, y, z));
 
-					if (is_sel_color(j)) {
-						return i_args[0];
+					if (isSelectedPal(j)) {
+						return m_color;
 					}
 				}
 			}

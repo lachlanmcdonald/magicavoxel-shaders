@@ -1,17 +1,17 @@
-// MIT License (MIT)
-// https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2021 Lachlan McDonald
+// This work is licensed under the MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
 //
 // xs sand2 [Mode] [Threshold]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Mode'  value = '0'  range = '0 2'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Threshold'  value = '0'  range = '0 1'  step = '0.05'  decimal = '1' }
+// arg : { id = '0'  name = 'Mode'  value = '0'  var = 'm_mode'  range = '0 2'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Threshold'  value = '0'  var = 'm_threshold'  range = '0 100'  step = '1'  decimal = '1' }
 // xs_end
 
-int mode = int(i_args[0]);
-float threshold = mix(0.125, 0.175, i_args[1]);
+int mode = int(m_mode);
+float threshold = mix(0.125, 0.175, m_threshold / 100.0);
 
 float random(vec2 co) {
 	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * 43758.6980280632);
@@ -21,12 +21,12 @@ float random(vec3 co) {
 	return random(vec2(random(co.xy), co.z));
 }
 
-float pal_mix(float p) {
+float pal(float p) {
 	float f = floor(mix(0.0, float(i_num_color_sels), p));
 	return color_sel(f);
 }
 
-bool is_sel_color(float p) {
+bool isSelectedPal(float p) {
 	for (int i = 0; i < i_num_color_sels; i += 1) {
 		if (p == color_sel(float(i))) {
 			return true;
@@ -41,30 +41,30 @@ float map(vec3 v) {
 	if (index == 0.0) {
 		float color_beneath = voxel(vec3(v.x, v.y, v.z - 1.0));
 
-		if (is_sel_color(color_beneath)) {
+		if (isSelectedPal(color_beneath)) {
 			bool a = (floor(v.x) == 0.0);
 			bool b = (floor(v.x) == i_volume_size.x - 1.0);
 			bool c = (floor(v.y) == 0.0);
 			bool d = (floor(v.y) == i_volume_size.y - 1.0);
 
-			float z = float(is_sel_color(a ? 0.0 : voxel(vec3(v.x - 1.0, v.y, v.z - 1.0)))) +
-					  float(is_sel_color(b ? 0.0 : voxel(vec3(v.x + 1.0, v.y, v.z - 1.0)))) +
-					  float(is_sel_color(c ? 0.0 : voxel(vec3(v.x, v.y - 1.0, v.z - 1.0)))) +
-					  float(is_sel_color(d ? 0.0 : voxel(vec3(v.x, v.y + 1.0, v.z - 1.0)))) +
-					  float(is_sel_color(a && c ? 0.0 : voxel(vec3(v.x - 1.0, v.y - 1.0, v.z - 1.0)))) +
-					  float(is_sel_color(b && c ? 0.0 : voxel(vec3(v.x + 1.0, v.y - 1.0, v.z - 1.0)))) +
-					  float(is_sel_color(a && d ? 0.0 : voxel(vec3(v.x - 1.0, v.y + 1.0, v.z - 1.0)))) +
-					  float(is_sel_color(b && d ? 0.0 : voxel(vec3(v.x + 1.0, v.y + 1.0, v.z - 1.0))));
+			float z = float(isSelectedPal(a ? 0.0 : voxel(vec3(v.x - 1.0, v.y, v.z - 1.0)))) +
+					  float(isSelectedPal(b ? 0.0 : voxel(vec3(v.x + 1.0, v.y, v.z - 1.0)))) +
+					  float(isSelectedPal(c ? 0.0 : voxel(vec3(v.x, v.y - 1.0, v.z - 1.0)))) +
+					  float(isSelectedPal(d ? 0.0 : voxel(vec3(v.x, v.y + 1.0, v.z - 1.0)))) +
+					  float(isSelectedPal(a && c ? 0.0 : voxel(vec3(v.x - 1.0, v.y - 1.0, v.z - 1.0)))) +
+					  float(isSelectedPal(b && c ? 0.0 : voxel(vec3(v.x + 1.0, v.y - 1.0, v.z - 1.0)))) +
+					  float(isSelectedPal(a && d ? 0.0 : voxel(vec3(v.x - 1.0, v.y + 1.0, v.z - 1.0)))) +
+					  float(isSelectedPal(b && d ? 0.0 : voxel(vec3(v.x + 1.0, v.y + 1.0, v.z - 1.0))));
 
 			float p = random(v);
 
 			if (p <= (threshold * z)) {
 				if (mode == 0 ) {
-					return pal_mix(p);
+					return pal(p);
 				} else if (mode == 1) {
-					return pal_mix(z / 8.0);
+					return pal(z / 8.0);
 				} else if (mode == 2) {
-					return pal_mix(1.0 - z / 8.0);
+					return pal(1.0 - z / 8.0);
 				}
 			}
 		}

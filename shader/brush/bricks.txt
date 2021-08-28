@@ -1,33 +1,33 @@
-// MIT License (MIT)
-// https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2021 Lachlan McDonald
+// This work is licensed under the MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
 //
 // xs brush/bricks [Mode] [Direction] [Width] [Height] [Depth] [Grout Size] [Grout Color] [Offset] [Noise] [Threshold]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Mode'  value = '0'  range = '0 2'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Direction'  value = '0'  range = '0 3'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Width'  value = '5'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'Height'  value = '2'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'Depth'  value = '2'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '5'  name = 'Grout Size'  value = '1'  range = '0 256'  step = '1'  decimal = '0' }
-// arg : { id = '6'  name = 'Grout Color'  value = '1'  range = '0 255'  step = '1'  decimal = '0' }
-// arg : { id = '7'  name = 'Offset'  value = '0'  range = '0 256'  step = '1'  decimal = '0' }
-// arg : { id = '8'  name = 'Noise'  value = '0'  range = '0 1'  step = '0.05'  decimal = '1' }
-// arg : { id = '9'  name = 'Threshold'  value = '1'  range = '0 1'  step = '0.05'  decimal = '1' }
+// arg : { id = '0'  name = 'Mode'  value = '0'  var = 'm_mode'  range = '0 2'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Direction'  value = '0'  var = 'm_direction'  range = '0 3'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Width'  value = '5'  var = 'm_width'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Height'  value = '2'  var = 'm_height'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'Depth'  value = '2'  var = 'm_depth'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '5'  name = 'Grout Size'  value = '1'  var = 'm_grout_size'  range = '0 256'  step = '1'  decimal = '0' }
+// arg : { id = '6'  name = 'Grout Color'  value = '1'  var = 'm_grout_color'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { id = '7'  name = 'Offset'  value = '0'  var = 'm_offset'  range = '0 256'  step = '1'  decimal = '0' }
+// arg : { id = '8'  name = 'Noise'  value = '0'  var = 'm_noise'  range = '0 100'  step = '1'  decimal = '1' }
+// arg : { id = '9'  name = 'Threshold'  value = '100'  var = 'm_threshold'  range = '0 100'  step = '1'  decimal = '1' }
 // xs_end
 
-int mode = int(i_args[0]);
-int direction = int(i_args[1]);
-float width = max(i_args[2], 1.0);
-float height = max(i_args[3], 1.0);
-float depth = max(i_args[4], 1.0);
-float grout = floor(i_args[5]);
-float grout_color = floor(i_args[6]);
-float row_offset = i_args[7];
-float noise = max(i_args[8], 0.0);
-float threshold = max(i_args[9], 0.0);
+int mode = int(m_mode);
+int direction = int(m_direction);
+float width = m_width;
+float height = m_height;
+float depth = m_depth;
+float grout = m_grout_size;
+float grout_color = m_grout_color;
+float row_offset = m_offset;
+float noise = m_noise / 100.0;
+float threshold = m_threshold / 100.0;
 
 float random(vec2 co, float seed) {
 	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + seed));
@@ -38,7 +38,7 @@ float random(vec3 co, float seed) {
 	return random(vec2(a, co.z), seed);
 }
 
-float pal_mix(float p) {
+float pal(float p) {
 	float f = floor(mix(0.0, float(i_num_color_sels), p));
 	return color_sel(f);
 }
@@ -115,9 +115,9 @@ float map(vec3 v) {
 			}
 
 			if (random(v, 0.0) < noise) {
-				return pal_mix(random(v, 64.0));
+				return pal(random(v, 64.0));
 			} else {
-				return pal_mix(bk_color);
+				return pal(bk_color);
 			}
 		}
 	} else {

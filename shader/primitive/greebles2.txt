@@ -1,23 +1,23 @@
-// MIT License (MIT)
-// https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2021 Lachlan McDonald
+// This work is licensed under the MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
 //
 // xs primitive/greebles2 [Mode] [Min] [Max] [Depth] [Seed]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Mode'  value = '0'  range = '0 2'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Min'  value = '4'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Max'  value = '8'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'Depth'  value = '2'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '0'  name = 'Mode'  value = '0'  var = 'm_mode'  range = '0 2'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Min'  value = '4'  var = 'm_min'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Max'  value = '8'  var = 'm_max'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Depth'  value = '2'  var = 'm_depth'  range = '1 256'  step = '1'  decimal = '0' }
 // arg : { id = '4'  name = 'Seed'  value = '1'  var = 'm_seed'  range = '1 100'  step = '1'  decimal = '0' }
 // xs_end
 
-int mode = int(i_args[0]);
-float size_min = min(i_args[1], i_args[2]);
-float size_max = max(i_args[1], i_args[2]);
-float depth = max(i_args[3], 0.0);
-float global_seed = mix(-437.5453, 437.5453, i_args[4] / 100.0);
+int mode = int(m_mode);
+float size_min = min(m_min, m_max);
+float size_max = max(m_min, m_max);
+float depth = m_depth;
+float global_seed = mix(-437.5453, 437.5453, m_seed / 100.0);
 
 bool no_axis_mode = all(equal(ivec3(i_axis), ivec3(0)));
 bvec3 axis_mode = no_axis_mode ? bvec3(true) : equal(ivec3(i_axis), ivec3(1));
@@ -39,7 +39,7 @@ float random(vec2 co, float seed) {
 	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + global_seed + seed));
 }
 
-Series find_series(int limit, float seed, vec2 seed_multiplier) {
+Series findSeries(int limit, float seed, vec2 seed_multiplier) {
 	float cell_index = 0.0;
 	float cell_size = 0.0;
 	int last_index = 0;
@@ -59,8 +59,8 @@ Series find_series(int limit, float seed, vec2 seed_multiplier) {
 }
 
 Cell greeble(vec2 v, float seed) {
-	Series x = find_series(int(v.x), seed, vec2(64.0,  0.0));
-	Series y = find_series(int(v.y), seed, vec2( 0.0, 64.0));
+	Series x = findSeries(int(v.x), seed, vec2(64.0,  0.0));
+	Series y = findSeries(int(v.y), seed, vec2( 0.0, 64.0));
 
 	vec2 index = vec2(x.index, y.index);
 	vec2 local = vec2(x.local, y.local);

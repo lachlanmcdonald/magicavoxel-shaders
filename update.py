@@ -3,6 +3,7 @@ from datetime import datetime
 import yaml
 
 DIR = path.dirname(path.realpath(__file__))
+AUTHOR = '@lachlanmcdonald'
 ARG_FORMAT = "{} = '{}'"
 FIX_GLOBAL_VARS = {
 	'iArgs': 'i_args',
@@ -15,70 +16,99 @@ FIX_GLOBAL_VARS = {
 
 with open(path.join(DIR, 'shaders.yml')) as f:
 	data = yaml.safe_load(f)
-	params = { k: v['params'] for k, v in data['shaders'].items() }
+	LICENSES = data['licenses']
+	SHADERS = data['shaders']
 	TYPES = data['types']
 
-# Update shaders
-for shader_name in params.keys():
-	print("Updating {}".format(shader_name))
+for shader_key, props in SHADERS.items():
+	shader_path = path.join(DIR,
+							'shader',
+							*"{}.txt".format(shader_key).split('/'))
 
-	# Updated copyright header
-	header = [
-		'MIT License (MIT)',
-		'https://github.com/lachlanmcdonald/magicavoxel-shaders',
-		'Copyright (c) {} Lachlan McDonald'.format(datetime.now().year).strip(),
-		'',
-	]
+	if path.exists(shader_path) is False:
+		print("Could not update shader {}, path does not exist: {}".format(shader_key, shader_path))
+		continue
+
+	print("Updating: {}".format(shader_key))
+
+	# Shader header
+	has_params = 'params' in props and len(props['params']) > 0
+	header = []
+
+	# License header
+	license_key = props['license'] if 'license' in props else 'mit'
+	if license_key not in LICENSES:
+		print("Could not update shader {}, license does not exist: {}".format(shader_key, license_key))
+		continue
+	header.extend(LICENSES[license_key].format(datetime.now().year).strip().splitlines())
+	header.append('')
+
+	# Additional cites
+	if 'cites' in props:
+		cite_lines = props['cites'].strip().splitlines()
+		header.extend(cite_lines)
+		header.append('')
+
+	# Merge params on types
+	if has_params:
+		for param in props['params']:
+			if 'type' in param and param['type'] in TYPES:
+				param.update({
+					**TYPES[param['type']],
+					**param,
+				})
 
 	# Console command instructions
-	param_strings = ' '.join([ '[{}]'.format(x['name']) for x in params[shader_name] ])
-	header.append('xs {} {}'.format(shader_name, param_strings))
+	param_strings = ' '.join([ '[{}]'.format(x['name']) for x in props['params'] ])
+	header.append('xs {} {}'.format(shader_key, param_strings))
 
-	# Append headers
-	if len(params[shader_name]) > 0:
-		header.append('')
-		header.append('xs_begin')
-		header.append('author : \'@lachlanmcdonald\'')
-		for index, param in enumerate(params[shader_name]):
-			shader_lines = [
+	# MagicaVoxel configuration
+	header.append('')
+	header.append('xs_begin')
+	header.append('author : \'{}\''.format(AUTHOR))
+
+	if has_params:
+		for index, param in enumerate(props['params']):
+			arg = [
 				ARG_FORMAT.format('id', index),
 				ARG_FORMAT.format('name', param['name'])
 			]
 
 			for k in ['value', 'var', 'range', 'step', 'decimal']:
 				if k in param:
-					shader_lines.append(ARG_FORMAT.format(k, param[k]))
-				elif 'type' in param and k in TYPES[param['type']]:
-					shader_lines.append(ARG_FORMAT.format(k, TYPES[param['type']][k]))
+					arg.append(ARG_FORMAT.format(k, param[k]))
+			header.append('arg : {{ {} }}'.format('  '.join(arg)))
 
-			header.append('arg : {{ {} }}'.format('  '.join(shader_lines)))
-		header.append('xs_end')
+	header.append('xs_end')
+	header_text = '\n'.join([ '// {}'.format(x).rstrip() for x in header ])
 
-	header_text = '\n'.join([ '// {}'.format(x) for x in header ])
-	shader_path = shader_name.replace('/', path.sep)
+	# Read shader file and strip existing header
+	with open(shader_path, 'r') as f:
+		lines = f.readlines()
+		shader_source =	[]
+		has_header_comment = lines[0].startswith('//')
 
-	# Read shader file
-	with open(path.join(DIR, 'shader', "{}.txt".format(shader_path)), 'r') as f:
-		shader = f.readlines()
-
-	# Write updated shader file
-	with open(path.join(DIR, 'shader', "{}.txt".format(shader_path)), 'w', newline="\n") as f:
-		has_comment = shader[0].startswith('//')
-		shader_lines = []
-
-		# Strip lines of whitespace
-		for line in shader:
-			if has_comment and line.startswith('//'):
+		for line in lines:
+			if has_header_comment and line.startswith('//'):
 				continue
 			else:
-				has_comment = False
-				shader_lines.append(line.rstrip())
+				has_header_comment = False
+				shader_source.append(line.rstrip())
 
-		shader_text = header_text + '\n' + '\n'.join(shader_lines)
-		shader_text = '\n'.join([line.rstrip() for line in shader_text.splitlines()])
+	# Shader text
+	shader_text = header_text + '\n' + '\n'.join(shader_source)
 
-		# Fix global variables which change between releases of MagicaVoxel
-		for old, new in FIX_GLOBAL_VARS.items():
-			shader_text = shader_text.replace(old, new)
+	# Fix global variables which change between releases of MagicaVoxel
+	for old, new in FIX_GLOBAL_VARS.items():
+		shader_text = shader_text.replace(old, new)
 
-		f.write(shader_text + '\n')
+	# Replace i_args with the variable names
+	if has_params:
+		for index, param in enumerate(props['params']):
+			if 'var' in param:
+				shader_text = shader_text.replace("i_args[{}]".format(index), param['var'])
+
+	# Write shader to file
+	if len(shader_text) > 0:
+		with open(shader_path, 'w', newline="\n") as f:
+			f.write(shader_text + '\n')

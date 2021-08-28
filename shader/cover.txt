@@ -1,18 +1,18 @@
-// MIT License (MIT)
-// https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2021 Lachlan McDonald
+// This work is licensed under the MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
 //
 // xs cover [Headroom] [Noise] [Seed]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
 // arg : { id = '0'  name = 'Headroom'  value = '1'  var = 'm_headroom'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Noise'  value = '0'  var = 'm_noise'  range = '0 1'  step = '0.05'  decimal = '1' }
+// arg : { id = '1'  name = 'Noise'  value = '0'  var = 'm_noise'  range = '0 100'  step = '1'  decimal = '1' }
 // arg : { id = '2'  name = 'Seed'  value = '1'  var = 'm_seed'  range = '1 100'  step = '1'  decimal = '0' }
 // xs_end
 
-float headroom = clamp(1.0, 255.0, m_headroom);
-float noise = clamp(0.0, 1.0, m_noise);
+float headroom = m_headroom;
+float noise = m_noise / 100.0;
 float global_seed = mix(-437.5453, 437.5453, m_seed / 100.0);
 
 float random(vec2 co, float seed) {
@@ -23,7 +23,7 @@ float random(vec3 co, float seed) {
 	return random(vec2(random(co.xy, seed), co.z), seed);
 }
 
-float pal_mix(float p) {
+float pal(float p) {
 	float f = floor(mix(0.0, float(i_num_color_sels), p));
 	return color_sel(f);
 }
@@ -42,7 +42,7 @@ float map(vec3 v) {
 		float z = random(v, 128.0);
 
 		if (noise == 0.0 || z > noise) {
-			return pal_mix(d);
+			return pal(d);
 		} else {
 			return 0.0;
 		}

@@ -1,21 +1,21 @@
-// MIT License (MIT)
-// https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2021 Lachlan McDonald
+// This work is licensed under the MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
 //
 // xs slice_z [Offset] [Count]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Offset'  value = '0'  range = '0 256'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Count'  value = '0'  range = '0 256'  step = '1'  decimal = '0' }
+// arg : { id = '0'  name = 'Offset'  value = '0'  var = 'm_offset'  range = '0 256'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Count'  value = '0'  var = 'm_count'  range = '0 256'  step = '1'  decimal = '0' }
 // xs_end
 
-float offset = max(i_args[1], 1.0);
+float offset = m_count;
 
 float map(vec3 v) {
 	float dz = v.z + offset;
 
-	if (v.z >= i_args[0]) {
+	if (v.z >= m_offset) {
 		if (dz >= i_volume_size.z) {
 			return 0.0;
 		} else {

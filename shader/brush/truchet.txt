@@ -1,0 +1,130 @@
+// Copyright (c) 2021 Lachlan McDonald
+// This work is licensed under the MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+//
+// This script utilises or modifies code from other projects or publications.
+// Please see the attributions below for more information:
+//
+// 1. Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
+//    MIT License (MIT)
+//    https://github.com/ashima/webgl-noise/blob/master/LICENSE
+//
+// xs brush/truchet [Mode] [Size] [Noise] [Seed]
+//
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { id = '0'  name = 'Mode'  value = '0'  var = 'm_mode'  range = '0 2'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Size'  value = '8'  var = 'm_size'  range = '3 40'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Noise'  value = '0'  var = 'm_noise'  range = '0 100'  step = '1'  decimal = '1' }
+// arg : { id = '3'  name = 'Seed'  value = '1'  var = 'm_seed'  range = '1 100'  step = '1'  decimal = '0' }
+// xs_end
+
+int mode = int(m_mode);
+vec2 dim = vec2(m_size);
+float noise = m_noise / 100.0;
+float global_seed = mix(-43758.6980280632, 43758.6980280632, m_seed / 100.0);
+
+float random(vec2 co, float seed) {
+	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + global_seed + seed));
+}
+
+float random(vec2 co) {
+	return random(co, 0.0);
+}
+
+float pal(float cell) {
+	float f = floor(mix(0.0, float(i_num_color_sels), cell));
+	return color_sel(f);
+}
+
+vec3 mod289(vec3 x) {
+	return x - floor(x * (1.0 / 289.0)) * 289.0;
+}
+
+vec2 mod289(vec2 x) {
+	return x - floor(x * (1.0 / 289.0)) * 289.0;
+}
+
+vec3 mod7(vec3 x) {
+	return x - floor(x * (1.0 / 7.0)) * 7.0;
+}
+
+vec3 permute(vec3 x) {
+	return mod289((34.0 * x + 10.0) * x);
+}
+
+vec2 cellular(vec2 P, float jitter) {
+	float K = 0.142857142857;
+	float Ko = 0.428571428571;
+	vec2 Pi = mod289(floor(P));
+ 	vec2 Pf = fract(P);
+	vec3 oi = vec3(-1.0, 0.0, 1.0);
+	vec3 of = vec3(-0.5, 0.5, 1.5);
+	vec3 px = permute(Pi.x + oi);
+	vec3 cell = permute(px.x + Pi.y + oi);
+	vec3 ox = fract(cell * K) - Ko;
+	vec3 oy = mod7(floor(cell * K)) * K - Ko;
+	vec3 dx = Pf.x + 0.5 + jitter * ox;
+	vec3 dy = Pf.y - of + jitter * oy;
+	vec3 d1 = dx * dx + dy * dy;
+	cell = permute(px.y + Pi.y + oi);
+	ox = fract(cell * K) - Ko;
+	oy = mod7(floor(cell * K)) * K - Ko;
+	dx = Pf.x - 0.5 + jitter * ox;
+	dy = Pf.y - of + jitter * oy;
+	vec3 d2 = dx * dx + dy * dy;
+	cell = permute(px.z + Pi.y + oi);
+	ox = fract(cell * K) - Ko;
+	oy = mod7(floor(cell * K)) * K - Ko;
+	dx = Pf.x - 1.5 + jitter * ox;
+	dy = Pf.y - of + jitter * oy;
+	vec3 d3 = dx * dx + dy * dy;
+	vec3 d1a = min(d1, d2);
+	d2 = max(d1, d2);
+	d2 = min(d2, d3);
+	d1 = min(d1a, d2);
+	d2 = max(d1a, d2);
+	d1.xy = (d1.x < d1.y) ? d1.xy : d1.yx;
+	d1.xz = (d1.x < d1.z) ? d1.xz : d1.zx;
+	d1.yz = min(d1.yz, d2.yz);
+	d1.y = min(d1.y, d1.z);
+	d1.y = min(d1.y, d2.x);
+	return sqrt(d1.xy);
+}
+
+float map(vec3 v) {
+	v = floor(v);
+	vec2 cell = floor(v.xy / dim);
+	vec2 local = floor(mod(v.xy, dim));
+	vec2 j = cellular(cell + vec2(global_seed), 1.0);
+	int r = int(j.x * 4.0);
+
+	float noise_d = noise > 0.0 ? clamp(random(v.xy, 256.0) * noise, -0.5, 0.5) : 0.0;
+	float a;
+	float b;
+
+	if (mode == 0) {
+		a = fract(mix(0.5, 1.0, j.x) + noise_d);
+		b = fract(mix(0.0, 0.5, j.x) + noise_d);
+	} else if (mode == 1) {
+		a = fract(mix(0.0, 0.5, j.x) + noise_d);
+		b = fract(mix(0.5, 1.0, j.x) + noise_d);
+	} else if (mode == 2) {
+		float f = random(cell.xy);
+		a = fract(mix(0.0, 0.5, f) + noise_d);
+		b = fract(mix(0.5, 1.0, f) + noise_d);
+	}
+
+	a = pal(a);
+	b = pal(b);
+
+	if (r == 0) {
+		return local.x > local.y ? a : b;
+	} else if (r == 1) {
+		return local.x <= local.y ? a : b;
+	} else if (r == 2) {
+		return (dim.x - local.x) <= local.y ? a : b;
+	} else if (r == 3) {
+		return (dim.x - local.x) > local.y ? a : b;
+	}
+}

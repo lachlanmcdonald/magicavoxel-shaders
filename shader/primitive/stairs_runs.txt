@@ -1,25 +1,25 @@
-// MIT License (MIT)
-// https://github.com/lachlanmcdonald/magicavoxel-shaders
 // Copyright (c) 2021 Lachlan McDonald
+// This work is licensed under the MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
 //
 // xs primitive/stairs_runs [Mode] [Direction] [Count] [Height] [X/Y Gap] [Z Gap]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Mode'  value = '0'  range = '0 3'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Direction'  value = '0'  range = '0 3'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Count'  value = '5'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'Height'  value = '1'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'X/Y Gap'  value = '0'  range = '0 256'  step = '1'  decimal = '0' }
-// arg : { id = '5'  name = 'Z Gap'  value = '0'  range = '0 256'  step = '1'  decimal = '0' }
+// arg : { id = '0'  name = 'Mode'  value = '0'  var = 'm_mode'  range = '0 3'  step = '1'  decimal = '0' }
+// arg : { id = '1'  name = 'Direction'  value = '0'  var = 'm_direction'  range = '0 3'  step = '1'  decimal = '0' }
+// arg : { id = '2'  name = 'Count'  value = '5'  var = 'm_count'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '3'  name = 'Height'  value = '1'  var = 'm_height'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { id = '4'  name = 'X/Y Gap'  value = '0'  var = 'm_gap_xy'  range = '0 256'  step = '1'  decimal = '0' }
+// arg : { id = '5'  name = 'Z Gap'  value = '0'  var = 'm_gap_z'  range = '0 256'  step = '1'  decimal = '0' }
 // xs_end
 
-int mode = int(i_args[0]);
-int direction = int(i_args[1]);
-float count = min(i_args[2], i_volume_size.z);
-float height = i_args[3];
-float xy_gap = i_args[4];
-float z_gap = i_args[5];
+int mode = int(m_mode);
+int direction = int(m_direction);
+float count = min(m_count, i_volume_size.z);
+float height = m_height;
+float xy_gap = m_gap_xy;
+float z_gap = m_gap_z;
 
 float map(vec3 v) {
 	float volume_n;
