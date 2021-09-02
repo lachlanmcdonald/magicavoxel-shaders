@@ -11,7 +11,7 @@
 // arg : { id = '2'  name = 'Width'  value = '4'  var = 'm_width'  range = '1 256'  step = '1'  decimal = '0' }
 // arg : { id = '3'  name = 'Height'  value = '4'  var = 'm_height'  range = '1 256'  step = '1'  decimal = '0' }
 // arg : { id = '4'  name = 'Depth'  value = '4'  var = 'm_depth'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '5'  name = 'Seed'  value = '1'  var = 'm_seed'  range = '1 100'  step = '1'  decimal = '0' }
+// arg : { id = '5'  name = 'Seed'  value = '0'  var = 'm_seed'  range = '0 100'  step = '1'  decimal = '0' }
 // xs_end
 
 int mode = int(m_mode);
