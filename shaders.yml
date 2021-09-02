@@ -1,4 +1,8 @@
 ---
+base_param:
+  step: 1
+  value: 0
+  decimal: 0
 licenses:
   mit: |
     Copyright (c) {} Lachlan McDonald

@@ -19,6 +19,7 @@ with open(path.join(DIR, 'shaders.yml')) as f:
 	LICENSES = data['licenses']
 	SHADERS = data['shaders']
 	TYPES = data['types']
+	BASE_PARAM = data['base_param']
 
 for shader_key, props in SHADERS.items():
 	shader_path = path.join(DIR,
@@ -53,10 +54,23 @@ for shader_key, props in SHADERS.items():
 	if has_params:
 		for param in props['params']:
 			if 'type' in param and param['type'] in TYPES:
+				if 'range' in param and 'value' not in param:
+					a = param['range'].split(' ')[0]
+					param['value'] = a
+
 				param.update({
+					**BASE_PARAM,
 					**TYPES[param['type']],
 					**param,
 				})
+			else:
+				param.update({
+					**BASE_PARAM,
+					**param,
+				})
+
+			if 'name' not in param:
+				print('Missing name attribute: ', param)
 
 	# Console command instructions
 	param_strings = ' '.join([ '[{}]'.format(x['name']) for x in props['params'] ])
