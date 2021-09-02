@@ -22,11 +22,14 @@ shaders:
         MIT License (MIT)
         https://github.com/ashima/webgl-noise/blob/master/LICENSE
     params:
+      - type: mode
+        range: 0 1
       - type: direction
         range: 0 1
       - name: Scale
         var: m_scale
         range: 5 200
+        value: 50
       - name: Iterations
         var: m_iterations
         range: 1 3
@@ -34,7 +37,7 @@ shaders:
       - name: Octaves
         var: m_octaves
         range: 1 6
-        value: 6
+        value: 5
       - name: Contrast
         var: m_contrast
         range: 0 100
@@ -51,6 +54,49 @@ shaders:
         var: m_lacunarity
         range: 0 300
         value: 201
+      - type: noise
+        value: 5
+      - type: tile_x
+      - type: tile_y
+  noise/terrain_tiles:
+    cites: |
+      This script utilises or modifies code from other projects or publications.
+      Please see the attributions below for more information:
+
+      1. Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
+        MIT License (MIT)
+        https://github.com/ashima/webgl-noise/blob/master/LICENSE
+    params:
+      - type: mode
+        range: 0 1
+      - name: Scale
+        var: m_scale
+        range: 5 200
+        value: 50
+      - name: Octaves
+        var: m_octaves
+        range: 1 6
+        value: 5
+      - name: Contrast
+        var: m_contrast
+        range: 0 100
+        value: 50
+      - name: Shift
+        var: m_shift
+        range: 0 100
+        value: 50
+      - name: Gain
+        var: m_gain
+        range: 0 100
+        value: 65
+      - name: Lacunarity
+        var: m_lacunarity
+        range: 0 300
+        value: 201
+      - type: noise
+        value: 5
+      - type: tile_x
+      - type: tile_y
   brush/treemap:
     cites: |
       This script utilises or modifies code from other projects or publications.
