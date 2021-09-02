@@ -7,7 +7,7 @@
 // xs_begin
 // author : '@lachlanmcdonald'
 // arg : { id = '0'  name = 'Mode'  value = '0'  var = 'm_mode'  range = '0 2'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Threshold'  value = '0'  var = 'm_threshold'  range = '0 100'  step = '1'  decimal = '1' }
+// arg : { id = '1'  name = 'Threshold'  value = '0'  var = 'm_threshold'  range = '0 100'  step = '1'  decimal = '0' }
 // xs_end
 
 int mode = int(m_mode);

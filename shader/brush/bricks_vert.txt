@@ -14,8 +14,8 @@
 // arg : { id = '5'  name = 'Grout Size'  value = '1'  var = 'm_grout_size'  range = '0 256'  step = '1'  decimal = '0' }
 // arg : { id = '6'  name = 'Grout Color'  value = '1'  var = 'm_grout_color'  range = '0 255'  step = '1'  decimal = '0' }
 // arg : { id = '7'  name = 'Offset'  value = '0'  var = 'm_offset'  range = '0 256'  step = '1'  decimal = '0' }
-// arg : { id = '8'  name = 'Noise'  value = '0'  var = 'm_noise'  range = '0 100'  step = '1'  decimal = '1' }
-// arg : { id = '9'  name = 'Threshold'  value = '100'  var = 'm_threshold'  range = '0 100'  step = '1'  decimal = '1' }
+// arg : { id = '8'  name = 'Noise'  value = '0'  var = 'm_noise'  range = '0 100'  step = '1'  decimal = '0' }
+// arg : { id = '9'  name = 'Threshold'  value = '100'  var = 'm_threshold'  range = '0 100'  step = '1'  decimal = '0' }
 // xs_end
 
 int mode = int(m_mode);

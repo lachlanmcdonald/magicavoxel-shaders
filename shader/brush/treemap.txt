@@ -23,7 +23,7 @@
 // arg : { id = '3'  name = 'Min Size'  value = '10'  var = 'm_min_size'  range = '0 100'  step = '1'  decimal = '0' }
 // arg : { id = '4'  name = 'Bias'  value = '50'  var = 'm_bias'  range = '0 100'  step = '1'  decimal = '0' }
 // arg : { id = '5'  name = 'Edge'  value = '0'  var = 'm_edge'  range = '0 100'  step = '1'  decimal = '0' }
-// arg : { id = '6'  name = 'Seed'  value = '1'  var = 'm_seed'  range = '1 100'  step = '1'  decimal = '0' }
+// arg : { id = '6'  name = 'Seed'  value = '0'  var = 'm_seed'  range = '0 100'  step = '1'  decimal = '0' }
 // xs_end
 
 int mode = int(m_mode);
