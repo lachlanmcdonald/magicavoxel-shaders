@@ -50,24 +50,25 @@ for shader_key, props in SHADERS.items():
 		header.extend(cite_lines)
 		header.append('')
 
-	# Merge params on types
+	# Process params
 	if has_params:
 		for param in props['params']:
+			# Merge params on types
 			if 'type' in param and param['type'] in TYPES:
-				if 'range' in param and 'value' not in param:
-					a = param['range'].split(' ')[0]
-					param['value'] = a
-
 				param.update({
-					**BASE_PARAM,
 					**TYPES[param['type']],
 					**param,
 				})
-			else:
-				param.update({
-					**BASE_PARAM,
-					**param,
-				})
+
+			# Default "value" using "range" if one does not exist
+			if 'value' not in param and 'range' in param:
+				param['value'] = param['range'].split(' ')[0]
+
+			# Update with base params
+			param.update({
+				**BASE_PARAM,
+				**param,
+			})
 
 			if 'name' not in param:
 				print('Missing name attribute: ', param)

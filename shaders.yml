@@ -22,8 +22,7 @@ shaders:
         MIT License (MIT)
         https://github.com/ashima/webgl-noise/blob/master/LICENSE
     params:
-      - name: Direction
-        var: m_direction
+      - type: direction
         range: 0 1
       - name: Scale
         var: m_scale
@@ -67,8 +66,7 @@ shaders:
     params:
     - type: mode
       range: 0 2
-    - name: Direction
-      var: m_direction
+    - type: direction
       range: 0 5
     - name: Iterations
       var: m_iters
@@ -97,11 +95,9 @@ shaders:
     params:
     - type: mode
       range: 0 5
-    - name: Direction
-      var: m_direction
+    - type: direction
       range: 0 5
-    - name: Noise
-      var: m_noise
+    - type: noise
       range: 0 50
     - type: seed
   brush/cellular2D:
@@ -125,12 +121,7 @@ shaders:
       range: -100 100
       step: 5
     - type: noise
-    - name: Power
-      var: m_power
-      value: 1
-      range: 0 10
-      step: 0.1
-      decimal: 1
+    - type: power
     - name: Steps
       var: m_steps
       range: 0 40
@@ -158,12 +149,7 @@ shaders:
       range: -100 100
       step: 5
     - type: noise
-    - name: Power
-      var: m_power
-      value: 1
-      range: 0 10
-      step: 0.1
-      decimal: 1
+    - type: power
     - name: Cavity
       var: m_cavity
       value: 50
@@ -193,8 +179,7 @@ shaders:
     params:
     - type: mode
       range: 0 2
-    - name: Direction
-      var: m_direction
+    - type: direction
       range: 0 3
     - name: Width
       var: m_width
@@ -214,7 +199,7 @@ shaders:
       value: 1
     - name: Grout Color
       var: m_grout_color
-      type: colorA
+      type: color1
     - name: Offset
       var: m_offset
       type: position
@@ -225,8 +210,7 @@ shaders:
     params:
     - type: mode
       range: 0 2
-    - name: Direction
-      var: m_direction
+    - type: direction
       range: 0 3
     - name: Height
       var: m_height
@@ -246,7 +230,7 @@ shaders:
       value: 1
     - name: Grout Color
       var: m_grout_color
-      type: colorA
+      type: color1
     - name: Offset
       var: m_offset
       type: position
@@ -255,8 +239,7 @@ shaders:
       value: 100
   brush/diagonal:
     params:
-    - name: Direction
-      var: m_direction
+    - type: direction
       range: 0 5
     - name: Width A
       var: m_width_a
@@ -279,8 +262,7 @@ shaders:
       type: position
   brush/grass:
     params:
-    - name: Direction
-      var: m_direction
+    - type: direction
       range: 0 1
     - type: mode
       range: 0 4
@@ -297,10 +279,10 @@ shaders:
     params:
     - name: Color A
       var: m_color_a
-      type: colorA
+      type: color1
     - name: Color B
       var: m_color_b
-      type: colorB
+      type: color2
     - name: Thickness
       var: m_thickness
       type: size
@@ -317,8 +299,7 @@ shaders:
     params:
     - type: mode
       range: 0 2
-    - name: Direction
-      var: m_direction
+    - type: direction
       range: 0 3
     - name: Count
       var: m_count
@@ -331,8 +312,7 @@ shaders:
     params:
     - type: mode
       range: 0 3
-    - name: Direction
-      var: m_direction
+    - type: direction
       range: 0 3
     - name: Count
       var: m_count
@@ -351,8 +331,7 @@ shaders:
     params:
     - type: mode
       range: 0 3
-    - name: Direction
-      var: m_direction
+    - type: direction
       range: 0 3
     - name: Count
       var: m_count
@@ -401,7 +380,7 @@ shaders:
       value: 4
     - name: Line Color
       var: m_line_color
-      type: colorB
+      type: color2
       value: 16
     - name: Line Width
       var: m_line_width
@@ -423,7 +402,7 @@ shaders:
       value: 8
     - name: Line Color
       var: m_line_color
-      type: colorB
+      type: color2
       value: 16
     - name: Line Width
       var: m_line_width
@@ -441,7 +420,7 @@ shaders:
       value: 4
     - name: Line Color
       var: m_line_color
-      type: colorB
+      type: color2
       value: 10
     - name: Line Width
       var: m_line_width
@@ -450,8 +429,7 @@ shaders:
     - type: seed
   brush/zigzag_range:
     params:
-    - name: Direction
-      var: m_direction
+    - type: direction
       range: 0 3
     - name: Width
       var: m_width
@@ -459,8 +437,7 @@ shaders:
       value: 2
   brush/zigzag2:
     params:
-    - name: Direction
-      var: m_direction
+    - type: direction
       range: 0 3
     - name: Width A
       var: m_width_a
@@ -472,8 +449,7 @@ shaders:
       value: 2
   brush/zigzag3:
     params:
-    - name: Direction
-      var: m_direction
+    - type: direction
       range: 0 3
     - name: Width A
       var: m_width_a
@@ -491,7 +467,7 @@ shaders:
     params:
     - name: Color
       var: m_color
-      type: colorA
+      type: color1
   cover:
     params:
     - name: Headroom
@@ -513,7 +489,7 @@ shaders:
     params:
     - name: Target Color
       var: m_target_color
-      type: colorA
+      type: color1
     - name: Size X
       var: m_size_x
       type: size
@@ -528,12 +504,12 @@ shaders:
     params:
     - name: Color
       var: m_color
-      type: colorA
+      type: color1
   outline2:
     params:
     - name: Color
       var: m_color
-      type: colorA
+      type: color1
   primitive/cylinder:
     params:
     - name: Rotation
@@ -605,7 +581,7 @@ shaders:
       value: 50
     - name: Color
       var: m_color
-      type: colorA
+      type: color1
   sand:
     params:
     - type: mode
@@ -644,49 +620,39 @@ shaders:
     params:
     - name: Color
       var: m_color
-      type: colorA
+      type: color1
     - name: Headroom
       var: m_headroom
       type: size
-      value: 1
   soil_replace:
     params:
     - name: Color
       var: m_color
-      type: colorA
+      type: color1
     - name: Headroom
       var: m_headroom
       type: size
-      value: 1
 types:
   mode:
     name: Mode
     var: m_mode
-    step: 1
-  colorA:
+  color1:
     range: 0 255
-    step: 1
     value: 1
-  colorB:
+  color2:
     range: 0 255
-    step: 1
     value: 2
-  fraction:
-    decimal: 1
-    range: 0 100
-    step: 1
-    value: 50
   position:
     range: 0 256
-    step: 1
   size:
     range: 1 256
-    step: 1
-    value: 1
   noise:
     name: Noise
     var: m_noise
     range: 0 100
+  direction:
+    name: Direction
+    var: m_direction
   seed:
     name: Seed
     var: m_seed
@@ -707,3 +673,10 @@ types:
     name: Threshold
     var: m_threshold
     range: 0 100
+  power:
+    name: Power
+    var: m_power
+    value: 1
+    range: 0 10
+    step: 0.1
+    decimal: 1
