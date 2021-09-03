@@ -656,7 +656,7 @@ types:
   seed:
     name: Seed
     var: m_seed
-    range: 0 100
+    range: 1 100
   tile_x:
     name: Tile X
     var: tile_x
