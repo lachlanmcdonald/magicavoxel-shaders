@@ -23,7 +23,7 @@
 // arg : { name = 'Min Size'  var = 'm_min_size'  range = '0 100'  value = '10'  step = '1'  precision = '0' }
 // arg : { name = 'Bias'  var = 'm_bias'  range = '0 100'  value = '50'  step = '1'  precision = '0' }
 // arg : { name = 'Edge'  var = 'm_edge'  range = '0 100'  value = '0'  step = '1'  precision = '0' }
-// arg : { name = 'Seed'  var = 'm_seed'  range = '0 100'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Seed'  var = 'm_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
 // xs_end
 
 int mode = int(m_mode);

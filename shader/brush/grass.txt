@@ -10,7 +10,7 @@
 // arg : { name = 'Mode'  var = 'm_mode'  range = '0 4'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Density'  var = 'm_density'  range = '1 256'  value = '2'  step = '1'  precision = '0' }
 // arg : { name = 'Growth'  var = 'm_growth'  range = '0 100'  value = '50'  step = '1'  precision = '0' }
-// arg : { name = 'Seed'  var = 'm_seed'  range = '0 100'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Seed'  var = 'm_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
 // xs_end
 
 int direction = int(m_direction);
