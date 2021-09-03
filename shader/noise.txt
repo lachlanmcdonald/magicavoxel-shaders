@@ -6,11 +6,11 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Target Color'  value = '1'  var = 'm_target_color'  range = '0 255'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Size X'  value = '1'  var = 'm_size_x'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Size Y'  value = '1'  var = 'm_size_y'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'Size Z'  value = '1'  var = 'm_size_z'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'Seed'  value = '0'  var = 'm_seed'  range = '0 100'  step = '1'  decimal = '0' }
+// arg : { name = 'Target Color'  var = 'm_target_color'  range = '0 255'  value = '1'  step = '1'  precision = '0' }
+// arg : { name = 'Size X'  var = 'm_size_x'  range = '1 256'  value = '1'  step = '1'  precision = '0' }
+// arg : { name = 'Size Y'  var = 'm_size_y'  range = '1 256'  value = '1'  step = '1'  precision = '0' }
+// arg : { name = 'Size Z'  var = 'm_size_z'  range = '1 256'  value = '1'  step = '1'  precision = '0' }
+// arg : { name = 'Seed'  var = 'm_seed'  range = '0 100'  value = '0'  step = '1'  precision = '0' }
 // xs_end
 
 float target_color = m_target_color;

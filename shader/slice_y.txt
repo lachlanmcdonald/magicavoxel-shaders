@@ -6,8 +6,8 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Offset'  value = '0'  var = 'm_offset'  range = '0 256'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Count'  value = '0'  var = 'm_count'  range = '0 256'  step = '1'  decimal = '0' }
+// arg : { name = 'Offset'  var = 'm_offset'  range = '0 256'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Count'  var = 'm_count'  range = '0 256'  value = '0'  step = '1'  precision = '0' }
 // xs_end
 
 float offset = m_count;

@@ -6,8 +6,8 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Color'  value = '1'  var = 'm_color'  range = '0 255'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Headroom'  value = '1'  var = 'm_headroom'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { name = 'Color'  var = 'm_color'  range = '0 255'  value = '1'  step = '1'  precision = '0' }
+// arg : { name = 'Headroom'  var = 'm_headroom'  range = '1 256'  value = '1'  step = '1'  precision = '0' }
 // xs_end
 
 int headroom = int(m_headroom);

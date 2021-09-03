@@ -6,8 +6,8 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Noise'  value = '0'  var = 'm_noise'  range = '0 100'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Seed'  value = '0'  var = 'm_seed'  range = '0 100'  step = '1'  decimal = '0' }
+// arg : { name = 'Noise'  var = 'm_noise'  range = '0 100'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Seed'  var = 'm_seed'  range = '0 100'  value = '0'  step = '1'  precision = '0' }
 // xs_end
 
 float noise = m_noise / 100.0;
