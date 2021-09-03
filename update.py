@@ -19,6 +19,7 @@ with open(path.join(DIR, 'shaders.yml')) as f:
 	LICENSES = data['licenses']
 	SHADERS = data['shaders']
 	TYPES = data['types']
+	BASE_PARAM = data['base_param']
 
 for shader_key, props in SHADERS.items():
 	shader_path = path.join(DIR,
@@ -49,14 +50,28 @@ for shader_key, props in SHADERS.items():
 		header.extend(cite_lines)
 		header.append('')
 
-	# Merge params on types
+	# Process params
 	if has_params:
 		for param in props['params']:
+			# Merge params on types
 			if 'type' in param and param['type'] in TYPES:
 				param.update({
 					**TYPES[param['type']],
 					**param,
 				})
+
+			# Default "value" using "range" if one does not exist
+			if 'value' not in param and 'range' in param:
+				param['value'] = param['range'].split(' ')[0]
+
+			# Update with base params
+			param.update({
+				**BASE_PARAM,
+				**param,
+			})
+
+			if 'name' not in param:
+				print('Missing name attribute: ', param)
 
 	# Console command instructions
 	param_strings = ' '.join([ '[{}]'.format(x['name']) for x in props['params'] ])
@@ -68,13 +83,12 @@ for shader_key, props in SHADERS.items():
 	header.append('author : \'{}\''.format(AUTHOR))
 
 	if has_params:
-		for index, param in enumerate(props['params']):
+		for param in props['params']:
 			arg = [
-				ARG_FORMAT.format('id', index),
 				ARG_FORMAT.format('name', param['name'])
 			]
 
-			for k in ['value', 'var', 'range', 'step', 'decimal']:
+			for k in ['var', 'range', 'value', 'step', 'precision']:
 				if k in param:
 					arg.append(ARG_FORMAT.format(k, param[k]))
 			header.append('arg : {{ {} }}'.format('  '.join(arg)))

@@ -6,12 +6,12 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Mode'  value = '0'  var = 'm_mode'  range = '0 3'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Direction'  value = '0'  var = 'm_direction'  range = '0 3'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Count'  value = '5'  var = 'm_count'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'Height'  value = '1'  var = 'm_height'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'X/Y Gap'  value = '0'  var = 'm_gap_xy'  range = '0 256'  step = '1'  decimal = '0' }
-// arg : { id = '5'  name = 'Z Gap'  value = '0'  var = 'm_gap_z'  range = '0 256'  step = '1'  decimal = '0' }
+// arg : { name = 'Mode'  var = 'm_mode'  range = '0 3'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Direction'  var = 'm_direction'  range = '0 3'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Count'  var = 'm_count'  range = '1 256'  value = '5'  step = '1'  precision = '0' }
+// arg : { name = 'Height'  var = 'm_height'  range = '1 256'  value = '1'  step = '1'  precision = '0' }
+// arg : { name = 'X/Y Gap'  var = 'm_gap_xy'  range = '0 256'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Z Gap'  var = 'm_gap_z'  range = '0 256'  value = '0'  step = '1'  precision = '0' }
 // xs_end
 
 int mode = int(m_mode);

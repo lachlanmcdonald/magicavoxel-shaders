@@ -6,8 +6,8 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Threshold'  value = '50'  var = 'm_threshold'  range = '0 100'  step = '1'  decimal = '1' }
-// arg : { id = '1'  name = 'Color'  value = '1'  var = 'm_color'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { name = 'Threshold'  var = 'm_threshold'  range = '0 100'  value = '50'  step = '1'  precision = '0' }
+// arg : { name = 'Color'  var = 'm_color'  range = '0 255'  value = '1'  step = '1'  precision = '0' }
 // xs_end
 
 float threshold = m_threshold / 100.0;

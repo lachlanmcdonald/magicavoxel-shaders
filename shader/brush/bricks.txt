@@ -6,16 +6,16 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Mode'  value = '0'  var = 'm_mode'  range = '0 2'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Direction'  value = '0'  var = 'm_direction'  range = '0 3'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Width'  value = '5'  var = 'm_width'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'Height'  value = '2'  var = 'm_height'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'Depth'  value = '2'  var = 'm_depth'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '5'  name = 'Grout Size'  value = '1'  var = 'm_grout_size'  range = '0 256'  step = '1'  decimal = '0' }
-// arg : { id = '6'  name = 'Grout Color'  value = '1'  var = 'm_grout_color'  range = '0 255'  step = '1'  decimal = '0' }
-// arg : { id = '7'  name = 'Offset'  value = '0'  var = 'm_offset'  range = '0 256'  step = '1'  decimal = '0' }
-// arg : { id = '8'  name = 'Noise'  value = '0'  var = 'm_noise'  range = '0 100'  step = '1'  decimal = '1' }
-// arg : { id = '9'  name = 'Threshold'  value = '100'  var = 'm_threshold'  range = '0 100'  step = '1'  decimal = '1' }
+// arg : { name = 'Mode'  var = 'm_mode'  range = '0 2'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Direction'  var = 'm_direction'  range = '0 3'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Width'  var = 'm_width'  range = '1 256'  value = '5'  step = '1'  precision = '0' }
+// arg : { name = 'Height'  var = 'm_height'  range = '1 256'  value = '2'  step = '1'  precision = '0' }
+// arg : { name = 'Depth'  var = 'm_depth'  range = '1 256'  value = '2'  step = '1'  precision = '0' }
+// arg : { name = 'Grout Size'  var = 'm_grout_size'  range = '0 256'  value = '1'  step = '1'  precision = '0' }
+// arg : { name = 'Grout Color'  var = 'm_grout_color'  range = '0 255'  value = '1'  step = '1'  precision = '0' }
+// arg : { name = 'Offset'  var = 'm_offset'  range = '0 256'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Noise'  var = 'm_noise'  range = '0 100'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Threshold'  var = 'm_threshold'  range = '0 100'  value = '100'  step = '1'  precision = '0' }
 // xs_end
 
 int mode = int(m_mode);

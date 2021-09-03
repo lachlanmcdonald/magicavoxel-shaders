@@ -6,11 +6,11 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Mode'  value = '0'  var = 'm_mode'  range = '0 2'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Min'  value = '4'  var = 'm_min'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Max'  value = '8'  var = 'm_max'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'Depth'  value = '2'  var = 'm_depth'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'Seed'  value = '1'  var = 'm_seed'  range = '1 100'  step = '1'  decimal = '0' }
+// arg : { name = 'Mode'  var = 'm_mode'  range = '0 2'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Min'  var = 'm_min'  range = '1 256'  value = '4'  step = '1'  precision = '0' }
+// arg : { name = 'Max'  var = 'm_max'  range = '1 256'  value = '8'  step = '1'  precision = '0' }
+// arg : { name = 'Depth'  var = 'm_depth'  range = '1 256'  value = '2'  step = '1'  precision = '0' }
+// arg : { name = 'Seed'  var = 'm_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
 // xs_end
 
 int mode = int(m_mode);

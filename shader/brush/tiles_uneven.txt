@@ -6,13 +6,13 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Mode'  value = '0'  var = 'm_mode'  range = '0 5'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Min'  value = '4'  var = 'm_min'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Max'  value = '8'  var = 'm_max'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'Line Color'  value = '16'  var = 'm_line_color'  range = '0 255'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'Line Width'  value = '1'  var = 'm_line_width'  range = '0 256'  step = '1'  decimal = '0' }
-// arg : { id = '5'  name = 'Noise'  value = '0'  var = 'm_noise'  range = '0 100'  step = '1'  decimal = '1' }
-// arg : { id = '6'  name = 'Seed'  value = '1'  var = 'm_seed'  range = '1 100'  step = '1'  decimal = '0' }
+// arg : { name = 'Mode'  var = 'm_mode'  range = '0 5'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Min'  var = 'm_min'  range = '1 256'  value = '4'  step = '1'  precision = '0' }
+// arg : { name = 'Max'  var = 'm_max'  range = '1 256'  value = '8'  step = '1'  precision = '0' }
+// arg : { name = 'Line Color'  var = 'm_line_color'  range = '0 255'  value = '16'  step = '1'  precision = '0' }
+// arg : { name = 'Line Width'  var = 'm_line_width'  range = '0 256'  value = '1'  step = '1'  precision = '0' }
+// arg : { name = 'Noise'  var = 'm_noise'  range = '0 100'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Seed'  var = 'm_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
 // xs_end
 
 int mode = int(m_mode);
