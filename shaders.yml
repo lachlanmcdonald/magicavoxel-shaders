@@ -2,7 +2,7 @@
 base_param:
   step: 1
   value: 0
-  decimal: 0
+  precision: 0
 licenses:
   mit: |
     Copyright (c) {} Lachlan McDonald
@@ -678,5 +678,5 @@ types:
     var: m_power
     value: 1
     range: 0 10
-    step: 0.1
-    decimal: 1
+    step: 0.05
+    precision: 2
