@@ -6,9 +6,9 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Mode'  value = '0'  var = 'm_mode'  range = '0 1'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Size X'  value = '12'  var = 'm_size_x'  range = '0 256'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Size Y'  value = '12'  var = 'm_size_y'  range = '0 256'  step = '1'  decimal = '0' }
+// arg : { name = 'Mode'  var = 'm_mode'  range = '0 1'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Size X'  var = 'm_size_x'  range = '0 256'  value = '12'  step = '1'  precision = '0' }
+// arg : { name = 'Size Y'  var = 'm_size_y'  range = '0 256'  value = '12'  step = '1'  precision = '0' }
 // xs_end
 
 const float PI2 = 3.141592653589793238 * 2.0;

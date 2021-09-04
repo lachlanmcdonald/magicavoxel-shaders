@@ -6,13 +6,13 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Direction'  value = '0'  var = 'm_direction'  range = '0 5'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Width A'  value = '2'  var = 'm_width_a'  range = '0 32'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Width B'  value = '0'  var = 'm_width_b'  range = '0 32'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'Width C'  value = '0'  var = 'm_width_c'  range = '0 32'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'Width D'  value = '0'  var = 'm_width_d'  range = '0 32'  step = '1'  decimal = '0' }
-// arg : { id = '5'  name = 'Offset'  value = '0'  var = 'm_offset'  range = '0 256'  step = '1'  decimal = '0' }
-// arg : { id = '6'  name = 'Shuffle'  value = '0'  var = 'm_shuffle'  range = '0 256'  step = '1'  decimal = '0' }
+// arg : { name = 'Direction'  var = 'm_direction'  range = '0 5'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Width A'  var = 'm_width_a'  range = '0 32'  value = '2'  step = '1'  precision = '0' }
+// arg : { name = 'Width B'  var = 'm_width_b'  range = '0 32'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Width C'  var = 'm_width_c'  range = '0 32'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Width D'  var = 'm_width_d'  range = '0 32'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Offset'  var = 'm_offset'  range = '0 256'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Shuffle'  var = 'm_shuffle'  range = '0 256'  value = '0'  step = '1'  precision = '0' }
 // xs_end
 
 int direction = int(m_direction);

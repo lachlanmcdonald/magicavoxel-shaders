@@ -6,7 +6,7 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Color'  value = '1'  var = 'm_color'  range = '0 255'  step = '1'  decimal = '0' }
+// arg : { name = 'Color'  var = 'm_color'  range = '0 255'  value = '1'  step = '1'  precision = '0' }
 // xs_end
 
 bool no_axis_mode = all(equal(ivec3(i_axis), ivec3(0)));

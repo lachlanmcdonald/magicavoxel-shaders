@@ -17,13 +17,13 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Mode'  value = '0'  var = 'm_mode'  range = '0 2'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Direction'  value = '0'  var = 'm_direction'  range = '0 5'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Iterations'  value = '8'  var = 'm_iters'  range = '2 32'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'Min Size'  value = '10'  var = 'm_min_size'  range = '0 100'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'Bias'  value = '50'  var = 'm_bias'  range = '0 100'  step = '1'  decimal = '0' }
-// arg : { id = '5'  name = 'Edge'  value = '0'  var = 'm_edge'  range = '0 100'  step = '1'  decimal = '0' }
-// arg : { id = '6'  name = 'Seed'  value = '0'  var = 'm_seed'  range = '0 100'  step = '1'  decimal = '0' }
+// arg : { name = 'Mode'  var = 'm_mode'  range = '0 2'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Direction'  var = 'm_direction'  range = '0 5'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Iterations'  var = 'm_iters'  range = '2 32'  value = '8'  step = '1'  precision = '0' }
+// arg : { name = 'Min Size'  var = 'm_min_size'  range = '0 100'  value = '10'  step = '1'  precision = '0' }
+// arg : { name = 'Bias'  var = 'm_bias'  range = '0 100'  value = '50'  step = '1'  precision = '0' }
+// arg : { name = 'Edge'  var = 'm_edge'  range = '0 100'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Seed'  var = 'm_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
 // xs_end
 
 int mode = int(m_mode);

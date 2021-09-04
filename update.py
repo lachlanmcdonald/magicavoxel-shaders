@@ -83,13 +83,12 @@ for shader_key, props in SHADERS.items():
 	header.append('author : \'{}\''.format(AUTHOR))
 
 	if has_params:
-		for index, param in enumerate(props['params']):
+		for param in props['params']:
 			arg = [
-				ARG_FORMAT.format('id', index),
 				ARG_FORMAT.format('name', param['name'])
 			]
 
-			for k in ['value', 'var', 'range', 'step', 'decimal']:
+			for k in ['var', 'range', 'value', 'step', 'precision']:
 				if k in param:
 					arg.append(ARG_FORMAT.format(k, param[k]))
 			header.append('arg : {{ {} }}'.format('  '.join(arg)))

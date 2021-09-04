@@ -6,12 +6,12 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Width'  value = '2'  var = 'm_width'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '1'  name = 'Height'  value = '2'  var = 'm_height'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '2'  name = 'Depth'  value = '2'  var = 'm_depth'  range = '1 256'  step = '1'  decimal = '0' }
-// arg : { id = '3'  name = 'Offset X'  value = '0'  var = 'm_offset_x'  range = '0 256'  step = '1'  decimal = '0' }
-// arg : { id = '4'  name = 'Offset Y'  value = '0'  var = 'm_offset_y'  range = '0 256'  step = '1'  decimal = '0' }
-// arg : { id = '5'  name = 'Offset Z'  value = '0'  var = 'm_offset_z'  range = '0 256'  step = '1'  decimal = '0' }
+// arg : { name = 'Width'  var = 'm_width'  range = '1 256'  value = '2'  step = '1'  precision = '0' }
+// arg : { name = 'Height'  var = 'm_height'  range = '1 256'  value = '2'  step = '1'  precision = '0' }
+// arg : { name = 'Depth'  var = 'm_depth'  range = '1 256'  value = '2'  step = '1'  precision = '0' }
+// arg : { name = 'Offset X'  var = 'm_offset_x'  range = '0 256'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Offset Y'  var = 'm_offset_y'  range = '0 256'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Offset Z'  var = 'm_offset_z'  range = '0 256'  value = '0'  step = '1'  precision = '0' }
 // xs_end
 
 vec3 dim = vec3(m_width, m_height, m_depth);

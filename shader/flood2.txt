@@ -6,7 +6,7 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { id = '0'  name = 'Height'  value = '1'  var = 'm_height'  range = '1 256'  step = '1'  decimal = '0' }
+// arg : { name = 'Height'  var = 'm_height'  range = '1 256'  value = '1'  step = '1'  precision = '0' }
 // xs_end
 
 float height = m_height;
