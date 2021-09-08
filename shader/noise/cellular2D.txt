@@ -9,7 +9,7 @@
 //    MIT License (MIT)
 //    https://github.com/ashima/webgl-noise/blob/master/LICENSE
 //
-// xs brush/cellular2D [Mode] [Scale] [Jitter] [Noise] [Power] [Steps] [Seed] [Tile X] [Tile Y]
+// xs noise/cellular2D [Mode] [Scale] [Jitter] [Noise] [Power] [Steps] [Seed] [Tile X] [Tile Y]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
