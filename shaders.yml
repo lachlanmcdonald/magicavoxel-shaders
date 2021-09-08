@@ -146,7 +146,7 @@ shaders:
     - type: noise
       range: 0 50
     - type: seed
-  brush/cellular2D:
+  noise/cellular2D:
     cites: |
              This script utilises or modifies code from other projects or publications.
              Please see the attributions below for more information:
@@ -174,7 +174,7 @@ shaders:
     - type: seed
     - type: tile_x
     - type: tile_y
-  brush/cellular3D:
+  noise/cellular3D:
     cites: |
              This script utilises or modifies code from other projects or publications.
              Please see the attributions below for more information:
