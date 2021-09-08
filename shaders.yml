@@ -13,6 +13,27 @@ licenses:
     This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License (CC BY-NC-SA 3.0)
     https://github.com/lachlanmcdonald/magicavoxel-shaders
 shaders:
+  heightmap:
+    cites: |
+      This script utilises or modifies code from other projects or publications.
+      Please see the attributions below for more information:
+
+      1. Copyright (c) 2015 Michael Feldstein <https://github.com/msfeldstein/glsl-map>
+          MIT License (MIT)
+          https://github.com/msfeldstein/glsl-map/blob/master/LICENSE.md
+    params:
+      - name: Blur
+        range: 0 10
+        value: 0
+        var: m_blur
+      - name: Auto Balance
+        range: 0 1
+        value: 1
+        var: m_auto
+      - name: Reverse
+        range: 0 1
+        value: 0
+        var: m_reverse
   noise/terrain:
     cites: |
       This script utilises or modifies code from other projects or publications.
