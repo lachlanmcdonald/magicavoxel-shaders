@@ -260,8 +260,6 @@ shaders:
     - type: seed
   grass_fit:
     params:
-    - type: direction
-      range: 0 1
     - type: mode
       range: 0 4
     - name: Density
