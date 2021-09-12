@@ -12,15 +12,27 @@ licenses:
     Copyright (c) {} Lachlan McDonald
     This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License (CC BY-NC-SA 3.0)
     https://github.com/lachlanmcdonald/magicavoxel-shaders
+cites:
+  glsl-map: |
+    Copyright (c) 2015 Michael Feldstein <https://github.com/msfeldstein/glsl-map>
+    MIT License (MIT)
+    https://github.com/msfeldstein/glsl-map/blob/master/LICENSE.md
+  clover-noise: |
+    Copyright (c) 2020 ValgoBoi <https://github.com/ValgoBoi/clover-noise>
+    MIT License (MIT)
+    https://github.com/ValgoBoi/clover-noise/blob/master/LICENSE
+  interweaved-gradient-noise: |
+    Interweaved gradient noise adapted from "Next Generation Post Processing in Call of Duty Advanced Warfare"
+    by Jorge Jimenez (Graphics R&D Technical Director - Activision Blizzard)
+    http://advances.realtimerendering.com/s2014/index.html
+  webgl-noise: |
+    Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
+    MIT License (MIT)
+    https://github.com/ashima/webgl-noise/blob/master/LICENSE
 shaders:
   heightmap:
-    cites: |
-      This script utilises or modifies code from other projects or publications.
-      Please see the attributions below for more information:
-
-      1. Copyright (c) 2015 Michael Feldstein <https://github.com/msfeldstein/glsl-map>
-          MIT License (MIT)
-          https://github.com/msfeldstein/glsl-map/blob/master/LICENSE.md
+    cites:
+      - glsl-map
     params:
       - name: Blur
         range: 0 10
@@ -35,17 +47,9 @@ shaders:
         value: 0
         var: m_reverse
   brush/treemap:
-    cites: |
-      This script utilises or modifies code from other projects or publications.
-      Please see the attributions below for more information:
-
-      1. Copyright (c) 2020 ValgoBoi <https://github.com/ValgoBoi/clover-noise>
-          MIT License (MIT)
-          https://github.com/ValgoBoi/clover-noise/blob/master/LICENSE
-
-      2. Copyright (c) 2015 Michael Feldstein <https://github.com/msfeldstein/glsl-map>
-          MIT License (MIT)
-          https://github.com/msfeldstein/glsl-map/blob/master/LICENSE.md
+    cites:
+      - clover-noise
+      - glsl-map
     params:
     - type: mode
       range: 0 2
@@ -68,13 +72,8 @@ shaders:
       range: 0 100
     - type: seed
   brush/gradient:
-    cites: |
-            This script utilises or modifies code from other projects or publications.
-            Please see the attributions below for more information:
-
-            1. Interweaved gradient noise adapted from "Next Generation Post Processing in Call of Duty Advanced Warfare"
-               by Jorge Jimenez (Graphics R&D Technical Director - Activision Blizzard)
-               http://advances.realtimerendering.com/s2014/index.html
+    cites:
+      - interweaved-gradient-noise
     params:
     - type: mode
       range: 0 5
@@ -84,13 +83,8 @@ shaders:
       range: 0 50
     - type: seed
   noise/cellular2D:
-    cites: |
-             This script utilises or modifies code from other projects or publications.
-             Please see the attributions below for more information:
-
-             1. Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
-                MIT License (MIT)
-                https://github.com/ashima/webgl-noise/blob/master/LICENSE
+    cites:
+      - webgl-noise
     params:
     - type: mode
       range: 0 5
@@ -112,13 +106,8 @@ shaders:
     - type: tile_x
     - type: tile_y
   noise/cellular3D:
-    cites: |
-             This script utilises or modifies code from other projects or publications.
-             Please see the attributions below for more information:
-
-             1. Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
-                MIT License (MIT)
-                https://github.com/ashima/webgl-noise/blob/master/LICENSE
+    cites:
+      - webgl-noise
     params:
     - type: mode
       range: 0 5
@@ -142,13 +131,8 @@ shaders:
     - type: tile_y
     - type: tile_z
   brush/truchet:
-    cites: |
-             This script utilises or modifies code from other projects or publications.
-             Please see the attributions below for more information:
-
-             1. Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
-                MIT License (MIT)
-                https://github.com/ashima/webgl-noise/blob/master/LICENSE
+    cites:
+      - webgl-noise
     params:
     - type: mode
       range: 0 2
