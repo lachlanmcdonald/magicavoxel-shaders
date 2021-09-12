@@ -29,6 +29,10 @@ cites:
     Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
     MIT License (MIT)
     https://github.com/ashima/webgl-noise/blob/master/LICENSE
+  cubicpulse: |
+    Cubic Pulse noise adapted from "Useful Little Functions" by Inigo Quilez
+    MIT License (MIT)
+    https://www.iquilezles.org/www/articles/functions/functions.htm
 shaders:
   heightmap:
     cites:
