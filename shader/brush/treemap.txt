@@ -6,12 +6,12 @@
 // Please see the attributions below for more information:
 //
 // 1. Copyright (c) 2020 ValgoBoi <https://github.com/ValgoBoi/clover-noise>
-//     MIT License (MIT)
-//     https://github.com/ValgoBoi/clover-noise/blob/master/LICENSE
+//    MIT License (MIT)
+//    https://github.com/ValgoBoi/clover-noise/blob/master/LICENSE
 //
 // 2. Copyright (c) 2015 Michael Feldstein <https://github.com/msfeldstein/glsl-map>
-//     MIT License (MIT)
-//     https://github.com/msfeldstein/glsl-map/blob/master/LICENSE.md
+//    MIT License (MIT)
+//    https://github.com/msfeldstein/glsl-map/blob/master/LICENSE.md
 //
 // xs brush/treemap [Mode] [Direction] [Iterations] [Min Size] [Bias] [Edge] [Seed]
 //

@@ -2,6 +2,13 @@
 // This work is licensed under the MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 //
+// This script utilises or modifies code from other projects or publications.
+// Please see the attributions below for more information:
+//
+// 1. Copyright (c) 2015 Michael Feldstein <https://github.com/msfeldstein/glsl-map>
+//    MIT License (MIT)
+//    https://github.com/msfeldstein/glsl-map/blob/master/LICENSE.md
+//
 // xs grass_fit [Mode] [Density] [Height] [Seed]
 //
 // xs_begin

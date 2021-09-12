@@ -6,8 +6,12 @@
 // Please see the attributions below for more information:
 //
 // 1. Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
-//   MIT License (MIT)
-//   https://github.com/ashima/webgl-noise/blob/master/LICENSE
+//    MIT License (MIT)
+//    https://github.com/ashima/webgl-noise/blob/master/LICENSE
+//
+// 2. Cubic Pulse noise adapted from "Useful Little Functions" by Inigo Quilez
+//    MIT License (MIT)
+//    https://www.iquilezles.org/www/articles/functions/functions.htm
 //
 // xs noise/terrain [Mode] [Direction] [Scale] [Iterations] [Octaves] [Contrast] [Shift] [Gain] [Lacunarity] [Noise] [Tile X] [Tile Y]
 //

@@ -1,22 +1,38 @@
-
 // Copyright (c) 2021 Lachlan McDonald
 // This work is licensed under the MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 //
+// This script utilises or modifies code from other projects or publications.
+// Please see the attributions below for more information:
+//
+// 1. Copyright (c) 2020 ValgoBoi <https://github.com/ValgoBoi/clover-noise>
+//    MIT License (MIT)
+//    https://github.com/ValgoBoi/clover-noise/blob/master/LICENSE
+//
+// 2. Copyright (c) 2015 Michael Feldstein <https://github.com/msfeldstein/glsl-map>
+//    MIT License (MIT)
+//    https://github.com/msfeldstein/glsl-map/blob/master/LICENSE.md
+//
+// 3. Cubic Pulse noise adapted from "Useful Little Functions" by Inigo Quilez
+//    MIT License (MIT)
+//    https://www.iquilezles.org/www/articles/functions/functions.htm
+//
+// xs noise/clover2D [Mode] [Direction] [Scale] [Contrast] [Shift] [Noise] [Tile X] [Tile Y]
+//
 // xs_begin
 // author : '@lachlanmcdonald'
 // arg : { name = 'Mode'  var = 'm_mode'  range = '0 1'  value = '0'  step = '1'  precision = '0' }
-// arg : { name = 'Size'  value = '20'  var = 'm_size'  range = '1 200'  step = '1'  precision = '0' }
-// arg : { name = 'Power'   value = '1'  var = 'm_power'  range = '0 10'  step = '0.1'  decimal = '1' }
-// arg : { name = 'Shift'  var = 'm_shift'  range = '0 100'  value = '50'  step = '1'  precision = '0' }
+// arg : { name = 'Direction'  var = 'm_direction'  range = '0 1'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Scale'  var = 'm_scale'  range = '1 20'  value = '5'  step = '0.05'  precision = '2' }
 // arg : { name = 'Contrast'  var = 'm_contrast'  range = '0 100'  value = '50'  step = '1'  precision = '0' }
-// arg : { name = 'Noise'  var = 'm_noise'  range = '0 100'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Shift'  var = 'm_shift'  range = '0 100'  value = '50'  step = '1'  precision = '0' }
+// arg : { name = 'Noise'  var = 'm_noise'  range = '0 100'  value = '5'  step = '1'  precision = '0' }
 // arg : { name = 'Tile X'  var = 'tile_x'  range = '0 40'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Tile Y'  var = 'tile_y'  range = '0 40'  value = '0'  step = '1'  precision = '0' }
 // xs_end
 
 int mode = int(m_mode);
-float size = m_size / 10.0;
+int direction = int(m_direction);
 float noise = m_noise / 200.0;
 float shift = m_shift / 100.0;
 float contrast = m_contrast / 100.0;
@@ -150,7 +166,12 @@ float cubicPulse(float c, float w, float x) {
 
 float map(vec3 v) {
 	vec3 uv = floor(v) / i_volume_size + tile;
-	float p1 = clover_noise_2d(uv.xy * size);
+
+	if (direction == 1) {
+		uv.z = 1.0 - uv.z;
+	}
+
+	float p1 = clover_noise_2d(uv.xy * m_scale);
 	float f;
 
 	if (mode == 0) {
@@ -159,7 +180,6 @@ float map(vec3 v) {
 		f = hash(vec2(hash(uv.zz), uv.z));
 	}
 
-	p1 = pow(p1, m_power);
 	p1 = cubicPulse(p1, contrast, shift);
 	float p2 = p1 + range(f, 0.0, 1.0, -1.0, 1.0) * noise;
 

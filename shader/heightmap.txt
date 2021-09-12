@@ -6,8 +6,8 @@
 // Please see the attributions below for more information:
 //
 // 1. Copyright (c) 2015 Michael Feldstein <https://github.com/msfeldstein/glsl-map>
-//     MIT License (MIT)
-//     https://github.com/msfeldstein/glsl-map/blob/master/LICENSE.md
+//    MIT License (MIT)
+//    https://github.com/msfeldstein/glsl-map/blob/master/LICENSE.md
 //
 // xs heightmap [Blur] [Auto Balance] [Reverse]
 //
