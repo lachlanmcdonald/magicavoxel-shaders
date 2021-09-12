@@ -291,6 +291,19 @@ shaders:
       range: 0 100
       value: 50
     - type: seed
+  grass_fit:
+    params:
+    - type: mode
+      range: 0 4
+    - name: Density
+      var: m_density
+      type: size
+      value: 2
+    - name: Height
+      var: m_strand_height
+      type: size
+      value: 10
+    - type: seed
   brush/grid:
     params:
     - name: Color A

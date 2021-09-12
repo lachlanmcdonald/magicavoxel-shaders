@@ -41,7 +41,7 @@ float map(vec3 v) {
 	vec3 local = floor(mod(v, density));
 	vec2 placement = floor(vec2(random(cell.xy), random(cell.xy, 170.3170)) * density);
 
-	if (local.x == placement.x && local.y == placement.y) {
+	if (all(equal(local.xy, placement))) {
 		float height = random(cell.yx, -170.3170);
 		float z = v.z / i_volume_size.z;
 		float p = 1.0 - sqrt(1.0 - pow(height, 2.0));
