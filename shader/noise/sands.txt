@@ -1,0 +1,90 @@
+// Copyright (c) 2021 Lachlan McDonald
+// This work is licensed under the MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+//
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { name = 'Scale'  var = 'm_scale'  range = '1 100'  value = '16'  step = '1'  precision = '0' }
+// arg : { name = 'Octaves'  var = 'm_octaves'  range = '1 6'  value = '3'  step = '1'  precision = '0' }
+// arg : { name = 'Gain'  var = 'm_gain'  range = '0 200'  value = '65'  step = '5'  precision = '0' }
+// arg : { name = 'Power'   value = '1'  var = 'm_power'  range = '0 10'  step = '0.05'  precision = '2' }
+// xs_end
+
+float gain = m_gain / 100.0;
+int octaves = int(m_octaves);
+
+float hash(vec2 p) {
+    return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x))));
+}
+
+float hash(vec3 p) {
+	return hash(vec2(hash(p.xy), p.z));
+}
+
+float sph(ivec3 i, vec3 f, ivec3 c) {
+	float radius = 0.5 * hash(vec3(i + c));  // random radius at grid vertex i+c
+	return length(f - vec3(c)) - radius; // distance to sphere at grid vertex i+c
+}
+
+float sdBase(vec3 p) {
+	ivec3 i = ivec3(floor(p));
+	vec3 f = fract(p);
+	float d = 1.0;
+
+	for (int x = 0; x <= 1; x += 1) {
+		for (int y = 0; y <= 1; y += 1) {
+			for (int z = 0; z <= 1; z += 1) {
+				ivec3 k = ivec3(x, y, z);
+				d = min(d, sph(i, f, k));
+			}
+		}
+	}
+
+	return d;
+}
+
+float smin(float a, float b, float k) {
+    float res = exp2(-k * a) + exp2(-k * b);
+    return -log2(res) / k;
+}
+
+float smax(float a, float b, float k) {
+    float h = max(k - abs(a - b), 0.0);
+    return max(a, b) + h * h * 0.25 / k;
+}
+
+float sdFbm(vec3 p, float d) {
+	float s = 1.0;
+
+	for (int i = 0; i < 5; i++) {
+		float n = s * sdBase(p); // evaluate new octave
+
+		// add
+		n = smax(n, d - 0.1 * s, 0.3 * s);
+		d = smin(n, d, 0.3 * s);
+
+		// prepare next octave
+		p = mat3( 0.00, 1.60, 1.20,
+				 -1.60, 0.72,-0.96,
+				 -1.20,-0.96, 1.28 ) * p;
+		s = 0.5 * s;
+	}
+
+	return d;
+}
+
+float range(float value, float inMin, float inMax, float outMin, float outMax) {
+	return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);
+}
+
+float pal(float p) {
+	float f = floor(mix(0.0, float(i_num_color_sels), p));
+	return color_sel(f);
+}
+
+float map(vec3 v) {
+	vec3 uv = floor(v) / i_volume_size;
+	float f = sdFbm(uv * m_scale, 1.0);
+	return f * 20.0;
+	// return pal(clamp(pow(f, m_power), 0.0, 1.0));
+}

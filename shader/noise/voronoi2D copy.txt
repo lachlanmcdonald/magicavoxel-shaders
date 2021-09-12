@@ -1,0 +1,101 @@
+// Copyright (c) 2021 Lachlan McDonald
+// This work is licensed under the MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+//
+// This script utilises or modifies code from other projects or publications.
+// Please see the attributions below for more information:
+//
+// 1. Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
+//    MIT License (MIT)
+//    https://github.com/ashima/webgl-noise/blob/master/LICENSE
+//
+// xs noise/cellular3D [Mode] [Scale] [Jitter] [Noise] [Power] [Cavity] [Seed] [Tile X] [Tile Y] [Tile Z]
+//
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { name = 'Mode'  var = 'm_mode'  range = '0 5'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Scale'  var = 'm_scale'  range = '1 100'  value = '24'  step = '1'  precision = '0' }
+// arg : { name = 'Jitter'  var = 'm_jitter'  range = '-100 100'  value = '100'  step = '5'  precision = '0' }
+// arg : { name = 'Noise'  var = 'm_noise'  range = '0 100'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Power'  var = 'm_power'  range = '0 10'  value = '1'  step = '0.05'  precision = '2' }
+// arg : { name = 'Cavity'  var = 'm_cavity'  range = '0 100'  value = '50'  step = '1'  precision = '0' }
+// arg : { name = 'Seed'  var = 'm_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
+// arg : { name = 'Tile X'  var = 'tile_x'  range = '0 40'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Tile Y'  var = 'tile_y'  range = '0 40'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Tile Z'  var = 'tile_z'  range = '0 40'  value = '0'  step = '1'  precision = '0' }
+// xs_end
+
+int mode = int(m_mode);
+float noise = m_noise / 100.0;
+float jitter = m_jitter / 100.0;
+float cavity = m_cavity / 100.0;
+vec3 tile = vec3(tile_x, tile_y, tile_z) * i_volume_size;
+
+float hash(float x) {
+	return fract(x + 1.3215 * 1.8152);
+}
+
+float hash3(vec3 a) {
+	return fract((hash(a.z * 42.8883) + hash(a.y * 36.9125) + hash(a.x * 65.4321)) * 291.1257);
+}
+
+vec3 rehash3(float x) {
+	return vec3(hash(((x + 0.5283) * 59.3829) * 274.3487), hash(((x + 0.8192) * 83.6621) * 345.3871), hash(((x + 0.2157) * 36.6521) * 458.3971));
+}
+
+float sqr(float x) {
+	return x * x;
+}
+
+float fastdist(vec3 a, vec3 b) {
+	return sqr(b.x - a.x) + sqr(b.y - a.y) + sqr(b.z - a.z);
+}
+
+vec2 voronoi(vec3 co) {
+    vec4 p[27];
+
+    for (int x = -1; x < 2; x++) {
+		for (int y = -1; y < 2; y++) {
+			for (int z = -1; z < 2; z++) {
+				vec3 p = floor(co) + vec3(ivec3(x, y, z));
+				float h = hash3(p);
+				int i  = (x + 1) + ((y + 1) * 3) + ((z + 1) * 3 * 3);
+				p[i] = vec4((rehash3(h) + p).xyz, h);
+			}
+		}
+    }
+
+   	float m = 9999.9999;
+	float w = 0.0;
+
+	for (int i = 0; i < 27; i++) {
+        float d = fastdist(co, p[i].xyz);
+
+        if (d < m) {
+			m = d;
+			w = p[i].w;
+		}
+    }
+
+	return vec2(m, w);
+}
+
+// void mainImage( out vec4 fragColor, in vec2 fragCoord )
+// {
+//     vec2 uv = fragCoord / iResolution.y * 5.0f;
+//     vec2 n = voronoi(uv.x, uv.y, iTime);
+//     vec3 col = (1.0 - sqrt(n.x)) * rehash3(n.y);
+//     fragColor = vec4(col,1.0);
+// }
+
+float pal(float p) {
+	float f = floor(mix(0.0, float(i_num_color_sels), p));
+	return color_sel(f);
+}
+
+float map(vec3 v) {
+	vec3 uv = floor(v) / i_volume_size + tile;
+	vec2 d = voronoi(v * m_scale);
+
+	return pal(d.y);
+}
