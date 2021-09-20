@@ -4,7 +4,7 @@
 [![Supports](https://img.shields.io/badge/MagicaVoxel-0.99.6.4-green.svg)][mv-link]
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)][license-link]
 
-> A collection of shaders for [MagicaVoxel](https://ephtracy.github.io/) to simplify common and repetitive tasks.
+> A collection of shaders for [MagicaVoxel](https://ephtracy.github.io/) to generate geometry, noise, patterns, and simplify common and repetitive tasks.
 
 ## Installation
 
