@@ -16,7 +16,7 @@ See a [complete list of shader, documentation and examples on the wiki][wiki].
 
 ## Issues & Suggestions
 
-If you encounter an issue with these shaders, please review any [open issues][open-issues] and [create a new issue][new-issue] if one does not exist already.
+If you encounter an issue with these shaders or would like to suggest your own, please review any [open issues][open-issues] and [create a new issue][new-issue] if one does not exist already.
 
 ## Licenses
 
