@@ -22,7 +22,7 @@ If you encounter an issue with these shaders or would like to suggest your own, 
 >
 > Recent versions of MagicaVoxel are GPU-accelerated and different GPU manufacturers have unique quirks in their handling of shaders. 
 > - If some shaders work but not others, please [create a new issue][new-issue] or post to `#help` in the [MagicaVoxel Community Discord][discord-invite].
-> - If no shaders are working, your GPU may be unsupported. Older, integrated, or Intel GPU's may not support shaders.
+> - If no shaders are working, including shaders that are included with MagicaVoxel, it is likely that your GPU is unsupported. Older, integrated, or Intel GPU's often do not support shaders.
 
 ## Licenses
 
