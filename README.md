@@ -18,6 +18,12 @@ See a [complete list of shader, documentation and examples on the wiki][wiki].
 
 If you encounter an issue with these shaders or would like to suggest your own, please review any [open issues][open-issues] and [create a new issue][new-issue] if one does not exist already.
 
+> **No arguments are shown when selecting a shader**
+>
+> Recent versions of MagicaVoxel are GPU-accelerated and different GPU manufacturers have unique quirks in their handling of shaders. 
+> - If some shaders work but not others, please [create a new issue][new-issue] or post to `#help` in the [MagicaVoxel Community Discord][discord-invite].
+> - If no shaders are working, your GPU may be unsupported. Older, integrated, or Intel GPU's may not support shaders.
+
 ## Licenses
 
 This repository is licensed under the [MIT license][license-link]. Some shaders have individual licensing terms or utilises or modifies code from other projects or publications. Please check the header of each file to view the license and any attributions.
@@ -28,3 +34,4 @@ This repository is licensed under the [MIT license][license-link]. Some shaders 
 [open-issues]: https://github.com/lachlanmcdonald/magicavoxel-shaders/issues?q=is%3Aopen+is%3Aissue
 [new-issue]: https://github.com/lachlanmcdonald/magicavoxel-shaders/issues/new
 [wiki]: https://github.com/lachlanmcdonald/magicavoxel-shaders/wiki
+[discord-invite]: https://discord.gg/czxt2BRmTK
