@@ -102,7 +102,7 @@ float fbm(vec2 uv, int octaves) {
 	return (total + 2.0) / 4.0;
 }
 
-float pattern(in vec2 p, int iterations, int octaves) {
+float pattern(vec2 p, int iterations, int octaves) {
 	float f = fbm(p, octaves);
 
 	for (int i = 1; i < iterations; i++) {
@@ -134,7 +134,7 @@ float map(vec3 v) {
 		uv.z = 1.0 - uv.z;
 	}
 
-	float f = pattern(uv * scale, iterations, octaves);
+	float f = pattern(uv.xy * scale, iterations, octaves);
 	f = cubicPulse(f, contrast, shift);
 
 	if (mode == 0) {
