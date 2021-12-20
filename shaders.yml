@@ -573,7 +573,6 @@ shaders:
       - name: Thickness
         var: m_thickness
         range: 0 100
-        step: 5
         value: 50
   primitive/greebles1:
     params:

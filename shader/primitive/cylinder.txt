@@ -7,7 +7,7 @@
 // xs_begin
 // author : '@lachlanmcdonald'
 // arg : { name = 'Rotation'  var = 'm_rotation'  range = '0 2'  value = '0'  step = '1'  precision = '0' }
-// arg : { name = 'Thickness'  var = 'm_thickness'  range = '0 100'  value = '50'  step = '5'  precision = '0' }
+// arg : { name = 'Thickness'  var = 'm_thickness'  range = '0 100'  value = '50'  step = '1'  precision = '0' }
 // xs_end
 
 int rotation = int(m_rotation);
