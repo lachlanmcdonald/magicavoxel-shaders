@@ -139,10 +139,10 @@ float map(vec3 v) {
 		float h2 = cloverNoise(p.yx / k);
 		return h1 >= uv.z ? pal(h2) : 0.0;
 	} else if (mode == 1) {
-		float area = 1.0 - ((b.to.x - b.from.x) * (b.to.y - b.from.y) * iter_limit);
+		float area = 1.0 - ((b.to.x - b.from.x) * (b.to.y - b.from.y) * float(iter_limit));
 		return area >= uv.z ? pal(area) : 0.0;
 	} else if (mode == 2) {
-		float area = (b.to.x - b.from.x) * (b.to.y - b.from.y) * iter_limit;
+		float area = (b.to.x - b.from.x) * (b.to.y - b.from.y) * float(iter_limit);
 		return area >= uv.z ? pal(area) : 0.0;
 	}
 }
