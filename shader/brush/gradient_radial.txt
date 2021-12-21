@@ -1,0 +1,115 @@
+// Copyright (c) 2021 Lachlan McDonald
+// This work is licensed under the MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+//
+// This script utilises or modifies code from other projects or publications.
+// Please see the attributions below for more information:
+//
+// 1. Interweaved gradient noise adapted from "Next Generation Post Processing in Call of Duty Advanced Warfare"
+//    by Jorge Jimenez (Graphics R&D Technical Director - Activision Blizzard)
+//    http://advances.realtimerendering.com/s2014/index.html
+//
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { name = 'Mode'  var = 'm_mode'  range = '0 5'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Direction'  var = 'm_direction'  range = '0 2'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'X Position'  var = 'm_pos_x'  range = '0 100'  value = '50'  step = '1'  precision = '0' }
+// arg : { name = 'Y Position'  var = 'm_pos_y'  range = '0 100'  value = '50'  step = '1'  precision = '0' }
+// arg : { name = 'Scale'  var = 'm_scale'  range = '50 400'  value = '200'  step = '5'  precision = '0' }
+// arg : { name = 'Noise'  var = 'm_noise'  range = '0 50'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Power'  var = 'm_power'  range = '0 10'  value = '1'  step = '0.05'  precision = '2' }
+// arg : { name = 'Seed'  var = 'm_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
+// xs_end
+
+int mode = int(m_mode);
+int direction = int(m_direction);
+vec2 position = vec2(m_pos_x, m_pos_y) / 100.0;
+float scale = m_scale / 100.0;
+float noise = m_noise / 100.0;
+float global_seed = m_seed / 100.0;
+
+float pal(float p) {
+	float f = floor(mix(0.0, float(i_num_color_sels), p));
+	return color_sel(f);
+}
+
+float random(vec2 co, float seed) {
+	float g = mix(-43758.6980280632, 43758.6980280632, global_seed);
+	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + g + seed));
+}
+
+float random(vec3 co, float seed) {
+	float r = random(co.xy, seed);
+	return random(vec2(r, co.z), seed);
+}
+
+float interleavedGradientNoise(vec2 co) {
+	return fract(52.9829189 * fract(dot(co + global_seed, vec2(0.06711056, 0.00583715))));
+}
+
+float interleavedGradientNoise(vec3 co) {
+	float r = interleavedGradientNoise(co.xy);
+	return interleavedGradientNoise(vec2(r, co.z));
+}
+
+float scanLines(vec3 co) {
+	return mod(co.z, 2.0) / 2.0;
+}
+
+float scanLinesRandom(vec3 co) {
+	float r = random(co.zz, 0.0);
+	return mod(co.z, 2.0) / 2.0 + r - 0.5;
+}
+
+float scanLinesRandom2(vec3 co) {
+	float r = random(co.xy, 0.0);
+	return mod(co.z, 2.0) / 2.0 + r - 0.5;
+}
+
+float orderedDither(vec3 co) {
+	co = co - 0.5;
+	float k = co.x + co.y / 2.0;
+
+	mat4 m = mat4(0.0,    0.5,    0.125,  0.625,
+				  0.75,   0.25,   0.875,  0.375,
+				  0.1875, 0.6875, 0.0625, 0.5625,
+				  0.9375, 0.4375, 0.8125, 0.3125);
+	int x = int(mod(co.x + co.y, 4.0));
+	int z = int(mod(co.z, 4.0));
+
+	return m[x][z];
+}
+
+float map(vec3 v) {
+	float d;
+	float r;
+
+	if (direction == 0) {
+		d = distance(position, v.zy / i_volume_size.zy) * scale;
+	} else if (direction == 1) {
+		d = distance(position, v.zx / i_volume_size.zx) * scale;
+	} else if (direction == 2) {
+		d = distance(position, v.xy / i_volume_size.xy) * scale;
+	}
+
+	if (m_power != 1.0) {
+		d = pow(d, m_power);
+	}
+
+	if (mode == 0) {
+		r = interleavedGradientNoise(v);
+	} else if (mode == 1) {
+		r = random(v, 0.0);
+	} else if (mode == 2) {
+		r = scanLinesRandom(v);
+	} else if (mode == 3) {
+		r = scanLines(v);
+	} else if (mode == 4) {
+		r = scanLinesRandom2(v);
+	} else if (mode == 5) {
+		r = orderedDither(v);
+	}
+
+	vec3 k = vec3(d) + (r * noise - 0.5 * noise);
+	return pal(k.z);
+}
