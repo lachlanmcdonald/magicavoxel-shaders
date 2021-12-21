@@ -32,7 +32,7 @@ float range(float value, float inMin, float inMax, float outMin, float outMax) {
 
 float map(vec3 v) {
 	vec3 uv = floor(v) / i_volume_size;
-	float i = voxel(vec3(v.xy, 0.5));
+	float i = voxel(floor(vec3(v.xy, 0.5)));
 	float l = luminance(palette(i).rgb);
 
 	if (blur > 0.0) {
@@ -71,5 +71,6 @@ float map(vec3 v) {
 		l = 1.0 - l;
 	}
 
+	l = ceil(l * i_volume_size.z) / i_volume_size.z;
 	return l < uv.z ? 0.0 : i;
 }
