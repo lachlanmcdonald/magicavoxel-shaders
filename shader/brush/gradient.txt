@@ -57,60 +57,55 @@ float scanLinesRandom(vec3 co) {
 	return mod(co.z, 2.0) / 2.0 + r - 0.5;
 }
 
-float scanLinesRandom2(vec3 co) {
+float waveRandom(vec3 co) {
 	float r = random(co.xy, 0.0);
 	return mod(co.z, 2.0) / 2.0 + r - 0.5;
 }
 
 float orderedDither(vec3 co) {
 	co = co - 0.5;
-	float k = co.x + co.y / 2.0;
-
 	mat4 m = mat4(0.0,    0.5,    0.125,  0.625,
 				  0.75,   0.25,   0.875,  0.375,
 				  0.1875, 0.6875, 0.0625, 0.5625,
 				  0.9375, 0.4375, 0.8125, 0.3125);
+
 	int x = int(mod(co.x + co.y, 4.0));
 	int z = int(mod(co.z, 4.0));
-
 	return m[x][z];
 }
 
 float map(vec3 v) {
+	if (direction == 1) {
+		v.z = i_volume_size.z - v.z;
+	} else if (direction == 2) {
+		v.xz = v.zx;
+	} else if (direction == 3) {
+		v.x = i_volume_size.x - v.x;
+		v.xz = v.zx;
+	} else if (direction == 4) {
+		v.yz = v.zy;
+	} else if (direction == 5) {
+		v.y = i_volume_size.y - v.y;
+		v.yz = v.zy;
+	}
+
 	vec3 p = floor(v) / i_volume_size;
 	float r;
-
-	if (direction == 1) {
-		p.z = 1.0 - p.z;
-	} else if (direction == 2) {
-		p.xz = p.zx;
-	} else if (direction == 3) {
-		p.x = 1.0 - p.x;
-		p.xz = p.zx;
-	} else if (direction == 4) {
-		p.yz = p.zy;
-	} else if (direction == 5) {
-		p.y = 1.0 - p.y;
-		p.yz = p.zy;
-	}
 
 	if (mode == 0) {
 		r = interleavedGradientNoise(v);
 	} else if (mode == 1) {
 		r = random(v, 0.0);
 	} else if (mode == 2) {
-		// BUG: Scanlines don't change direction
 		r = scanLinesRandom(v);
 	} else if (mode == 3) {
-		// BUG: Scanlines don't change direction
 		r = scanLines(v);
 	} else if (mode == 4) {
-		// BUG: Scanlines don't change direction
-		r = scanLinesRandom2(v);
+		r = waveRandom(v);
 	} else if (mode == 5) {
 		r = orderedDither(v);
 	}
 
-	vec3 k = p + (r * noise - 0.5 * noise);
+	vec3 k = p + ((r - 0.5) * noise - 0.5 * noise);
 	return pal(k.z);
 }

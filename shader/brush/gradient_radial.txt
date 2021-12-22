@@ -65,22 +65,20 @@ float scanLinesRandom(vec3 co) {
 	return mod(co.z, 2.0) / 2.0 + r - 0.5;
 }
 
-float scanLinesRandom2(vec3 co) {
+float waveRandom(vec3 co) {
 	float r = random(co.xy, 0.0);
 	return mod(co.z, 2.0) / 2.0 + r - 0.5;
 }
 
 float orderedDither(vec3 co) {
 	co = co - 0.5;
-	float k = co.x + co.y / 2.0;
-
 	mat4 m = mat4(0.0,    0.5,    0.125,  0.625,
 				  0.75,   0.25,   0.875,  0.375,
 				  0.1875, 0.6875, 0.0625, 0.5625,
 				  0.9375, 0.4375, 0.8125, 0.3125);
+
 	int x = int(mod(co.x + co.y, 4.0));
 	int z = int(mod(co.z, 4.0));
-
 	return m[x][z];
 }
 
@@ -122,7 +120,7 @@ float map(vec3 v) {
 	} else if (mode == 3) {
 		r = scanLines(v);
 	} else if (mode == 4) {
-		r = scanLinesRandom2(v);
+		r = waveRandom(v);
 	} else if (mode == 5) {
 		r = orderedDither(v);
 	}
