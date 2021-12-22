@@ -15,6 +15,7 @@
 // author : '@lachlanmcdonald'
 // arg : { name = 'Mode'  var = 'm_mode'  range = '0 5'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Direction'  var = 'm_direction'  range = '0 2'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Flip'  var = 'm_flip'  range = '0 1'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'X Position'  var = 'm_pos_x'  range = '0 100'  value = '50'  step = '1'  precision = '0' }
 // arg : { name = 'Y Position'  var = 'm_pos_y'  range = '0 100'  value = '50'  step = '1'  precision = '0' }
 // arg : { name = 'Scale'  var = 'm_scale'  range = '50 400'  value = '200'  step = '5'  precision = '0' }
@@ -24,6 +25,7 @@
 // xs_end
 
 int mode = int(m_mode);
+bool flip = m_flip > 0.0;
 int direction = int(m_direction);
 vec2 position = vec2(m_pos_x, m_pos_y) / 100.0;
 float scale = m_scale / 100.0;
@@ -88,10 +90,23 @@ float map(vec3 v) {
 
 	if (direction == 0) {
 		d = distance(position, v.zy / i_volume_size.zy) * scale;
+
+		if (flip) {
+			v = v.xzy;
+		}
 	} else if (direction == 1) {
 		d = distance(position, v.zx / i_volume_size.zx) * scale;
+
+		if (flip) {
+			v = v.yzx;
+		}
 	} else if (direction == 2) {
 		d = distance(position, v.xy / i_volume_size.xy) * scale;
+		v = v.xzy;
+
+		if (flip) {
+			v = v.yzx;
+		}
 	}
 
 	if (m_power != 1.0) {
