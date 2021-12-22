@@ -9,13 +9,13 @@
 //    by Jorge Jimenez (Graphics R&D Technical Director - Activision Blizzard)
 //    http://advances.realtimerendering.com/s2014/index.html
 //
-// xs brush/gradient [Mode] [Direction] [Noise] [Seed]
+// xs brush/gradient [Mode] [Direction] [Dither] [Seed]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
 // arg : { name = 'Mode'  var = 'm_mode'  range = '0 5'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Direction'  var = 'm_direction'  range = '0 5'  value = '0'  step = '1'  precision = '0' }
-// arg : { name = 'Noise'  var = 'm_noise'  range = '0 50'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Dither'  var = 'm_noise'  range = '0 50'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Seed'  var = 'm_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
 // xs_end
 

@@ -125,6 +125,7 @@ shaders:
       - type: direction
         range: 0 5
       - type: noise
+        name: Dither
         range: 0 50
       - type: seed
   brush/gradient_radial:
@@ -135,6 +136,10 @@ shaders:
         range: 0 5
       - type: direction
         range: 0 2
+      - type: direction
+        name: Flip
+        var: m_flip
+        range: 0 1
       - name: X Position
         var: m_pos_x
         range: 0 100
@@ -150,6 +155,7 @@ shaders:
         step: 5
       - type: power
       - type: noise
+        name: Dither
         range: 0 50
       - type: seed
   noise/clover2D:
