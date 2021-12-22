@@ -127,6 +127,31 @@ shaders:
       - type: noise
         range: 0 50
       - type: seed
+  brush/gradient_radial:
+    cites:
+      - interweaved-gradient-noise
+    params:
+      - type: mode
+        range: 0 5
+      - type: direction
+        range: 0 2
+      - name: X Position
+        var: m_pos_x
+        range: 0 100
+        value: 50
+      - name: Y Position
+        var: m_pos_y
+        range: 0 100
+        value: 50
+      - name: Scale
+        var: m_scale
+        range: 50 400
+        value: 200
+        step: 5
+      - type: power
+      - type: noise
+        range: 0 50
+      - type: seed
   noise/clover2D:
     cites:
       - clover-noise
