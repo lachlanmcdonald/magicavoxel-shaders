@@ -125,6 +125,6 @@ float map(vec3 v) {
 		r = orderedDither(v);
 	}
 
-	vec3 k = vec3(d) + (r * noise - 0.5 * noise);
+	vec3 k = vec3(d) + ((r - 0.5) * noise);
 	return pal(k.z);
 }
