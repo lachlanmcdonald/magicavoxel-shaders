@@ -42,7 +42,7 @@ float pal(float p) {
 
 float hash(vec2 p, float seed) {
 	p += seed + global_seed;
-    return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x))));
+	return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x))));
 }
 
 float hash(vec3 co, float seed) {
