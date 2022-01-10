@@ -35,37 +35,37 @@ float edge = m_edge / 100.0;
 float seed = m_seed / 100.0;
 
 float cloverNoise(vec2 p) {
-    return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x))));
+	return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x))));
 }
 
 struct Box {
-    vec2 from;
-    vec2 to;
-    bool upper;
-    int iter;
+	vec2 from;
+	vec2 to;
+	bool upper;
+	int iter;
 };
 
 bool pointInBox(vec2 p, Box b) {
-    return all(bvec4(greaterThanEqual(p, b.from), lessThanEqual(p, b.to)));
+	return all(bvec4(greaterThanEqual(p, b.from), lessThanEqual(p, b.to)));
 }
 
 Box reshapeBox(Box k, bool horz, float f, vec2 p) {
-    Box a = Box(k.from, k.to, false, k.iter + 1);
-    Box b = Box(k.from, k.to, true, k.iter + 1);
+	Box a = Box(k.from, k.to, false, k.iter + 1);
+	Box b = Box(k.from, k.to, true, k.iter + 1);
 
-    if (horz) {
-        a.to.x = mix(a.from.x, a.to.x, f);
-        b.from.x = mix(a.from.x, a.to.x, f);
-    } else {
-        a.to.y = mix(a.from.y, a.to.y, f);
-        b.from.y = mix(a.from.y, a.to.y, f);
-    }
+	if (horz) {
+		a.to.x = mix(a.from.x, a.to.x, f);
+		b.from.x = mix(a.from.x, a.to.x, f);
+	} else {
+		a.to.y = mix(a.from.y, a.to.y, f);
+		b.from.y = mix(a.from.y, a.to.y, f);
+	}
 
-    if (pointInBox(p, a)) {
-        return a;
-    } else {
-        return b;
-    }
+	if (pointInBox(p, a)) {
+		return a;
+	} else {
+		return b;
+	}
 }
 
 float pal(float i) {
@@ -106,14 +106,14 @@ float map(vec3 v) {
 		uv.z = 1.0 - uv.z;
 	}
 
-    Box b = Box(vec2(0.0), vec2(1.0), true, 0);
-    vec2 p = vec2(seed);
+	Box b = Box(vec2(0.0), vec2(1.0), true, 0);
+	vec2 p = vec2(seed);
 
 	// Iterate
 	for (int iter = 0; iter < iter_limit; iter++) {
 		float m = cloverNoise(p);
-        bool horz = cloverNoise(vec2(m, iter)) <= bias;
-        Box new_box = reshapeBox(b, horz, m, uv.xy);
+		bool horz = cloverNoise(vec2(m, iter)) <= bias;
+		Box new_box = reshapeBox(b, horz, m, uv.xy);
 
 		// Enforce min size
 		vec2 dim = b.to - b.from;
@@ -121,9 +121,9 @@ float map(vec3 v) {
 			b = new_box;
 		}
 
-        float w = pow(2.0, float(iter));
-        p += vec2(b.upper ? w : 0.0, horz ? w : 0.0);
-    }
+		float w = pow(2.0, float(iter));
+		p += vec2(b.upper ? w : 0.0, horz ? w : 0.0);
+	}
 
 	// Edge
 	if (edge > 0.0) {
