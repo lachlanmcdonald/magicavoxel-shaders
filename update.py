@@ -1,8 +1,10 @@
 from os import path
 from datetime import datetime
 import yaml
+import re
 
 DIR = path.dirname(path.realpath(__file__))
+TAB_EXPR = re.compile('^( {4})+', re.MULTILINE)
 AUTHOR = '@lachlanmcdonald'
 ARG_FORMAT = "{} = '{}'"
 FIX_GLOBAL_VARS = {
@@ -133,6 +135,11 @@ for shader_key, props in SHADERS.items():
 		for index, param in enumerate(props['params']):
 			if 'var' in param:
 				shader_text = shader_text.replace("i_args[{}]".format(index), param['var'])
+
+	# Change indentation to tabs
+	def tab_replace(m):
+		return "\t" * int(len(m.group(0)) / 4)
+	shader_text = TAB_EXPR.sub(tab_replace, shader_text)
 
 	# Write shader to file
 	if len(shader_text) > 0:
