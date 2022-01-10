@@ -8,7 +8,7 @@
 // author : '@lachlanmcdonald'
 // arg : { name = 'Threshold'  var = 'm_threshold'  range = '1 25'  value = '9'  step = '1'  precision = '0' }
 // arg : { name = 'Scale'  var = 'm_scale'  range = '1 20'  value = '6'  step = '1'  precision = '0' }
-// arg : { name = 'Seed'  var = 'm_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
+// arg : { name = 'Seed'  var = 'global_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
 // xs_end
 
 float scale = m_scale / 4.0;
@@ -83,7 +83,7 @@ float map(vec3 v) {
 
 		if (adjacent >= threshold) {
 			vec3 uv = v / i_volume_size;
-			float r = turbulence(uv + vec3(m_seed + i_iter), scale);
+			float r = turbulence(uv + vec3(global_seed + i_iter), scale);
 			return r > 0.25 ? index : 0.0;
 		}
 	}

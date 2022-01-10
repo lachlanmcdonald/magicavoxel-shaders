@@ -9,6 +9,10 @@
 //    MIT License (MIT)
 //    https://github.com/ashima/webgl-noise/blob/master/LICENSE
 //
+// 2. Copyright (c) 2020 ValgoBoi <https://github.com/ValgoBoi/clover-noise>
+//    MIT License (MIT)
+//    https://github.com/ValgoBoi/clover-noise/blob/master/LICENSE
+//
 // xs brush/truchet [Mode] [Size] [Noise] [Seed]
 //
 // xs_begin
@@ -16,20 +20,20 @@
 // arg : { name = 'Mode'  var = 'm_mode'  range = '0 2'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Size'  var = 'm_size'  range = '3 40'  value = '8'  step = '1'  precision = '0' }
 // arg : { name = 'Noise'  var = 'm_noise'  range = '0 100'  value = '0'  step = '1'  precision = '0' }
-// arg : { name = 'Seed'  var = 'm_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
+// arg : { name = 'Seed'  var = 'global_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
 // xs_end
 
 int mode = int(m_mode);
 vec2 dim = vec2(m_size);
 float noise = m_noise / 100.0;
-float global_seed = mix(-43758.6980280632, 43758.6980280632, m_seed / 100.0);
 
-float random(vec2 co, float seed) {
-	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + global_seed + seed));
+float hash(vec2 p, float seed) {
+	p += global_seed + seed;
+    return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x))));
 }
 
-float random(vec2 co) {
-	return random(co, 0.0);
+float hash(vec2 co) {
+	return hash(co, 0.0);
 }
 
 float pal(float cell) {
@@ -99,7 +103,7 @@ float map(vec3 v) {
 	vec2 j = cellular(cell + vec2(global_seed), 1.0);
 	int r = int(j.x * 4.0);
 
-	float noise_d = noise > 0.0 ? clamp(random(v.xy, 256.0) * noise, -0.5, 0.5) : 0.0;
+	float noise_d = noise > 0.0 ? clamp(hash(v.xy, 256.0) * noise, -0.5, 0.5) : 0.0;
 	float a;
 	float b;
 
@@ -110,7 +114,7 @@ float map(vec3 v) {
 		a = fract(mix(0.0, 0.5, j.x) + noise_d);
 		b = fract(mix(0.5, 1.0, j.x) + noise_d);
 	} else if (mode == 2) {
-		float f = random(cell.xy);
+		float f = hash(cell.xy);
 		a = fract(mix(0.0, 0.5, f) + noise_d);
 		b = fract(mix(0.5, 1.0, f) + noise_d);
 	}

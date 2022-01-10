@@ -23,7 +23,7 @@
 // arg : { name = 'Min Size'  var = 'm_min_size'  range = '0 100'  value = '10'  step = '1'  precision = '0' }
 // arg : { name = 'Bias'  var = 'm_bias'  range = '0 100'  value = '50'  step = '1'  precision = '0' }
 // arg : { name = 'Edge'  var = 'm_edge'  range = '0 100'  value = '0'  step = '1'  precision = '0' }
-// arg : { name = 'Seed'  var = 'm_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
+// arg : { name = 'Seed'  var = 'global_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
 // xs_end
 
 int mode = int(m_mode);
@@ -32,9 +32,8 @@ int iter_limit = int(m_iters);
 float min_size = m_min_size / 100.0;
 float bias = m_bias / 100.0;
 float edge = m_edge / 100.0;
-float seed = m_seed / 100.0;
 
-float cloverNoise(vec2 p) {
+float hash(vec2 p) {
     return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x))));
 }
 
@@ -107,12 +106,12 @@ float map(vec3 v) {
 	}
 
     Box b = Box(vec2(0.0), vec2(1.0), true, 0);
-    vec2 p = vec2(seed);
+    vec2 p = vec2(global_seed);
 
 	// Iterate
 	for (int iter = 0; iter < iter_limit; iter++) {
-		float m = cloverNoise(p);
-        bool horz = cloverNoise(vec2(m, iter)) <= bias;
+		float m = hash(p);
+        bool horz = hash(vec2(m, iter)) <= bias;
         Box new_box = reshapeBox(b, horz, m, uv.xy);
 
 		// Enforce min size
@@ -135,8 +134,8 @@ float map(vec3 v) {
 
 	if (mode == 0) {
 		float k = pow(2.0, float(iter_limit));
-		float h1 = cloverNoise(p.xy / k);
-		float h2 = cloverNoise(p.yx / k);
+		float h1 = hash(p.xy / k);
+		float h2 = hash(p.yx / k);
 		return h1 >= uv.z ? pal(h2) : 0.0;
 	} else if (mode == 1) {
 		float area = 1.0 - ((b.to.x - b.from.x) * (b.to.y - b.from.y) * float(iter_limit));

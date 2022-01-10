@@ -2,6 +2,13 @@
 // This work is licensed under the MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 //
+// This script utilises or modifies code from other projects or publications.
+// Please see the attributions below for more information:
+//
+// 1. Copyright (c) 2020 ValgoBoi <https://github.com/ValgoBoi/clover-noise>
+//    MIT License (MIT)
+//    https://github.com/ValgoBoi/clover-noise/blob/master/LICENSE
+//
 // xs brush/bricks_vert [Mode] [Direction] [Height] [Depth] [Width] [Grout Size] [Grout Color] [Offset] [Noise] [Threshold]
 //
 // xs_begin
@@ -29,13 +36,14 @@ float row_offset = m_offset;
 float noise = m_noise / 100.0;
 float threshold = m_threshold / 100.0;
 
-float random(vec2 co, float seed) {
-	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + seed));
+float hash(vec2 p, float seed) {
+	p += seed;
+    return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x))));
 }
 
-float random(vec3 co, float seed) {
-	float a = random(co.xy, seed);
-	return random(vec2(a, co.z), seed);
+float hash(vec3 co, float seed) {
+	float a = hash(co.xy, seed);
+	return hash(vec2(a, co.z), seed);
 }
 
 float pal(float p) {
@@ -77,7 +85,7 @@ float map(vec3 v) {
 	vec3 iv = vec3(v.x + bk.z * (offset * (bk.y + 1.0)), v.yz);
 	vec3 ic = mod3(iv, dim);
 
-	float bk_randomness = random(bk, bk.x * bk.y);
+	float bk_randomness = hash(bk, bk.x * bk.y);
 
 	if (bk_randomness < threshold) {
 		if (any(greaterThanEqual(ic, floor(dim - grout)))) {
@@ -86,7 +94,7 @@ float map(vec3 v) {
 			float bk_color;
 
 			if (mode == 0) {
-				float r = random(bk, 0.0);
+				float r = hash(bk, 0.0);
 				bk_color = r;
 			} else if (mode == 1) {
 				float m = ceil(i_volume_size.z / dim.z);
@@ -114,8 +122,8 @@ float map(vec3 v) {
 				}
 			}
 
-			if (random(v, 0.0) < noise) {
-				return pal(random(v, 64.0));
+			if (hash(v, 0.0) < noise) {
+				return pal(hash(v, 64.0));
 			} else {
 				return pal(bk_color);
 			}

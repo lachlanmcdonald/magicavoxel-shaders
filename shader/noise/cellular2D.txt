@@ -19,7 +19,7 @@
 // arg : { name = 'Noise'  var = 'm_noise'  range = '0 100'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Power'  var = 'm_power'  range = '0 10'  value = '1'  step = '0.05'  precision = '2' }
 // arg : { name = 'Steps'  var = 'm_steps'  range = '0 40'  value = '0'  step = '1'  precision = '0' }
-// arg : { name = 'Seed'  var = 'm_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
+// arg : { name = 'Seed'  var = 'global_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
 // arg : { name = 'Tile X'  var = 'tile_x'  range = '0 40'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Tile Y'  var = 'tile_y'  range = '0 40'  value = '0'  step = '1'  precision = '0' }
 // xs_end
@@ -95,7 +95,7 @@ float roundf(float f) {
 }
 
 float map(vec3 v) {
-	vec2 offset = m_seed * i_volume_size.xy + tile;
+	vec2 offset = global_seed * i_volume_size.xy + tile;
 	vec3 k = floor(v) / i_volume_size;
 	vec2 p = cellular((v.xy + offset) / m_scale, jitter);
 	vec2 q = cellular((v.xy + offset), 1.0);

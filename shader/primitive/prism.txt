@@ -17,14 +17,6 @@ int mode = int(m_mode);
 vec2 width = vec2(min(m_size_x, i_volume_size.x / 2.0),
 				  min(m_size_y, i_volume_size.y / 2.0));
 
-float random(vec2 co) {
-	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * 43758.6980280632);
-}
-
-float random(vec3 co) {
-	return random(vec2(random(co.xy), co.z));
-}
-
 float check(float pos, float width, float max_pos) {
 	if (pos <= width) {
 		if (mode == 0) {

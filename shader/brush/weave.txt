@@ -2,6 +2,13 @@
 // This work is licensed under the MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 //
+// This script utilises or modifies code from other projects or publications.
+// Please see the attributions below for more information:
+//
+// 1. Copyright (c) 2020 ValgoBoi <https://github.com/ValgoBoi/clover-noise>
+//    MIT License (MIT)
+//    https://github.com/ValgoBoi/clover-noise/blob/master/LICENSE
+//
 // xs brush/weave [Mode] [Size] [Line Color] [Line Width] [Seed]
 //
 // xs_begin
@@ -10,21 +17,21 @@
 // arg : { name = 'Size'  var = 'm_size'  range = '1 256'  value = '4'  step = '1'  precision = '0' }
 // arg : { name = 'Line Color'  var = 'm_line_color'  range = '0 255'  value = '10'  step = '1'  precision = '0' }
 // arg : { name = 'Line Width'  var = 'm_line_width'  range = '0 256'  value = '1'  step = '1'  precision = '0' }
-// arg : { name = 'Seed'  var = 'm_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
+// arg : { name = 'Seed'  var = 'global_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
 // xs_end
 
 int mode = int(m_mode);
 float size = m_size;
 float line_color = m_line_color;
 float line_width = m_line_width;
-float global_seed = mix(-437.5453, 437.5453, m_seed / 100.0);
 
-float random(vec2 co, float seed) {
-	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + global_seed + seed));
+float hash(vec2 p, float seed) {
+	p += seed + global_seed;
+    return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x))));
 }
 
-float random(vec2 co) {
-	return random(co, 0.0);
+float hash(vec2 co) {
+	return hash(co, 0.0);
 }
 
 float pal(float p) {
@@ -42,7 +49,7 @@ float map(vec3 v) {
 	} else {
 		float row = floor(v.y / j);
 		float col = floor(v.x / j);
-		float d = random(vec2(row, col));
+		float d = hash(vec2(row, col));
 		vec2 k = v.xy - (vec2(col, row) * j);
 
 		float color;
@@ -58,7 +65,7 @@ float map(vec3 v) {
 		}
 
 		if (mode == 0) {
-			color = random(xy);
+			color = hash(xy);
 		} else if (mode == 1) {
 			float d = row + col + inner;
 			color = (mod(d, float(i_num_color_sels)) / float(i_num_color_sels));

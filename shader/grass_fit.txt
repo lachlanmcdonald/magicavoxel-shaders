@@ -9,6 +9,10 @@
 //    MIT License (MIT)
 //    https://github.com/msfeldstein/glsl-map/blob/master/LICENSE.md
 //
+// 2. Copyright (c) 2020 ValgoBoi <https://github.com/ValgoBoi/clover-noise>
+//    MIT License (MIT)
+//    https://github.com/ValgoBoi/clover-noise/blob/master/LICENSE
+//
 // xs grass_fit [Mode] [Density] [Height] [Seed]
 //
 // xs_begin
@@ -16,19 +20,19 @@
 // arg : { name = 'Mode'  var = 'm_mode'  range = '0 4'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Density'  var = 'm_density'  range = '1 256'  value = '2'  step = '1'  precision = '0' }
 // arg : { name = 'Height'  var = 'm_strand_height'  range = '1 256'  value = '10'  step = '1'  precision = '0' }
-// arg : { name = 'Seed'  var = 'm_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
+// arg : { name = 'Seed'  var = 'global_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
 // xs_end
 
 int mode = int(m_mode);
 float density = m_density;
-float global_seed = mix(-43758.6980280632, 43758.6980280632, m_seed / 100.0);
 
-float random(vec2 co, float seed) {
-	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + global_seed + seed));
+float hash(vec2 p, float seed) {
+	p += seed + global_seed;
+    return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x))));
 }
 
-float random(vec2 co) {
-	return random(co, 0.0);
+float hash(vec2 p) {
+	return hash(p, 0.0);
 }
 
 float pal(float p) {
@@ -53,7 +57,7 @@ float map(vec3 v) {
 	v = floor(v);
 	vec2 cell = floor(vec2(v.xy) / density);
 	vec3 local = floor(mod(v, density));
-	vec2 placement = floor(vec2(random(cell.xy), random(cell.xy, 170.3170)) * density);
+	vec2 placement = floor(vec2(hash(cell.xy), hash(cell.xy, 170.3170)) * density);
 
 	float base_height = -1.0;
 	bool is_gap = false;
@@ -74,7 +78,7 @@ float map(vec3 v) {
 
 	if (base_height > -1.0) {
 		if (all(equal(local.xy, placement))) {
-			float d = random(cell.yx, -170.3170);
+			float d = hash(cell.yx, -170.3170);
 			float h = m_strand_height * d;
 
 			if (v.z >= base_height && v.z <= h + base_height) {
@@ -83,9 +87,9 @@ float map(vec3 v) {
 				if (mode == 0) {
 					f = d;
 				} else if (mode == 1) {
-					f = random(vec2(v.z, h));
+					f = hash(vec2(v.z, h));
 				} else if (mode == 2) {
-					f = random(v.xy);
+					f = hash(v.xy);
 				} else if (mode == 3) {
 					f = range(v.z, base_height, h + base_height, 0.0, 1.0);
 				} else if (mode == 4) {

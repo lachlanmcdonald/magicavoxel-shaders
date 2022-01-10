@@ -130,6 +130,7 @@ shaders:
   brush/gradient:
     cites:
       - interweaved-gradient-noise
+      - clover-noise
     params:
       - type: mode
         range: 0 5
@@ -141,6 +142,7 @@ shaders:
       - type: seed
   brush/gradient_radial:
     cites:
+      - clover-noise
       - interweaved-gradient-noise
     params:
       - type: mode
@@ -248,6 +250,7 @@ shaders:
   brush/truchet:
     cites:
       - webgl-noise
+      - clover-noise
     params:
       - type: mode
         range: 0 2
@@ -258,6 +261,8 @@ shaders:
       - type: noise
       - type: seed
   brush/bricks:
+    cites:
+      - clover-noise
     params:
       - type: mode
         range: 0 2
@@ -289,6 +294,8 @@ shaders:
       - type: threshold
         value: 100
   brush/bricks_vert:
+    cites:
+      - clover-noise
     params:
       - type: mode
         range: 0 2
@@ -343,6 +350,8 @@ shaders:
         var: m_shuffle
         type: position
   brush/grass:
+    cites:
+      - clover-noise
     params:
       - type: direction
         range: 0 1
@@ -360,6 +369,7 @@ shaders:
   grass_fit:
     cites:
       - glsl-map
+      - clover-noise
     params:
       - type: mode
         range: 0 4
@@ -464,6 +474,8 @@ shaders:
         var: m_offset_z
         type: position
   brush/tiles_puzzle:
+    cites:
+      - clover-noise
     params:
       - type: mode
         range: 0 4
@@ -486,6 +498,8 @@ shaders:
       - type: noise
       - type: seed
   brush/tiles_uneven:
+    cites:
+      - clover-noise
     params:
       - type: mode
         range: 0 5
@@ -508,6 +522,8 @@ shaders:
       - type: noise
       - type: seed
   brush/weave:
+    cites:
+      - clover-noise
     params:
       - type: mode
         range: 0 2
@@ -566,6 +582,8 @@ shaders:
         var: m_color
         type: color1
   cover:
+    cites:
+      - clover-noise
     params:
       - name: Headroom
         var: m_headroom
@@ -583,6 +601,8 @@ shaders:
         var: m_height
         type: size
   noise:
+    cites:
+      - clover-noise
     params:
       - name: Target Color
         var: m_target_color
@@ -668,10 +688,14 @@ shaders:
         type: position
         value: 12
   pyramid:
+    cites:
+      - clover-noise
     params:
       - type: noise
       - type: seed
   random:
+    cites:
+      - clover-noise
     params:
       - type: threshold
         value: 50
@@ -679,11 +703,15 @@ shaders:
         var: m_color
         type: color1
   sand:
+    cites:
+      - clover-noise
     params:
       - type: mode
         range: 0 2
       - type: threshold
   sand2:
+    cites:
+      - clover-noise
     params:
       - type: mode
         range: 0 2
@@ -751,7 +779,7 @@ types:
     var: m_direction
   seed:
     name: Seed
-    var: m_seed
+    var: global_seed
     range: 1 100
   tile_x:
     name: Tile X

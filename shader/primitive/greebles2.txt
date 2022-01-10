@@ -10,14 +10,13 @@
 // arg : { name = 'Min'  var = 'm_min'  range = '1 256'  value = '4'  step = '1'  precision = '0' }
 // arg : { name = 'Max'  var = 'm_max'  range = '1 256'  value = '8'  step = '1'  precision = '0' }
 // arg : { name = 'Depth'  var = 'm_depth'  range = '1 256'  value = '2'  step = '1'  precision = '0' }
-// arg : { name = 'Seed'  var = 'm_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
+// arg : { name = 'Seed'  var = 'global_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
 // xs_end
 
 int mode = int(m_mode);
 float size_min = min(m_min, m_max);
 float size_max = max(m_min, m_max);
 float depth = m_depth;
-float global_seed = mix(-437.5453, 437.5453, m_seed / 100.0);
 
 bool no_axis_mode = all(equal(ivec3(i_axis), ivec3(0)));
 bvec3 axis_mode = no_axis_mode ? bvec3(true) : equal(ivec3(i_axis), ivec3(1));
@@ -35,8 +34,9 @@ struct Cell {
 	float depth;
 };
 
-float random(vec2 co, float seed) {
-	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + global_seed + seed));
+float hash(vec2 p, float seed) {
+	p += seed + global_seed;
+    return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x))));
 }
 
 Series findSeries(int limit, float seed, vec2 seed_multiplier) {
@@ -49,7 +49,7 @@ Series findSeries(int limit, float seed, vec2 seed_multiplier) {
 
 		last_index = i;
 		cell_index += 1.0;
-		cell_size = floor(mix(size_min, size_max + 1.0, random(pos, seed)));
+		cell_size = floor(mix(size_min, size_max + 1.0, hash(pos, seed)));
 		i += int(cell_size);
 	}
 
@@ -66,7 +66,7 @@ Cell greeble(vec2 v, float seed) {
 	vec2 local = vec2(x.local, y.local);
 	vec2 size = vec2(x.size, y.size);
 
-	float f = random(index.xy, seed);
+	float f = hash(index.xy, seed);
 	float d = mix(0.0, depth, f);
 
 	return Cell(index, local, size, d);

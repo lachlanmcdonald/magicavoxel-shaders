@@ -5,7 +5,11 @@
 // This script utilises or modifies code from other projects or publications.
 // Please see the attributions below for more information:
 //
-// 1. Interweaved gradient noise adapted from "Next Generation Post Processing in Call of Duty Advanced Warfare"
+// 1. Copyright (c) 2020 ValgoBoi <https://github.com/ValgoBoi/clover-noise>
+//    MIT License (MIT)
+//    https://github.com/ValgoBoi/clover-noise/blob/master/LICENSE
+//
+// 2. Interweaved gradient noise adapted from "Next Generation Post Processing in Call of Duty Advanced Warfare"
 //    by Jorge Jimenez (Graphics R&D Technical Director - Activision Blizzard)
 //    http://advances.realtimerendering.com/s2014/index.html
 //
@@ -21,7 +25,7 @@
 // arg : { name = 'Scale'  var = 'm_scale'  range = '50 400'  value = '200'  step = '5'  precision = '0' }
 // arg : { name = 'Power'  var = 'm_power'  range = '0 10'  value = '1'  step = '0.05'  precision = '2' }
 // arg : { name = 'Dither'  var = 'm_noise'  range = '0 50'  value = '0'  step = '1'  precision = '0' }
-// arg : { name = 'Seed'  var = 'm_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
+// arg : { name = 'Seed'  var = 'global_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
 // xs_end
 
 int mode = int(m_mode);
@@ -30,21 +34,20 @@ int direction = int(m_direction);
 vec2 position = vec2(m_pos_x, m_pos_y) / 100.0;
 float scale = m_scale / 100.0;
 float noise = m_noise / 100.0;
-float global_seed = m_seed / 100.0;
 
 float pal(float p) {
 	float f = floor(mix(0.0, float(i_num_color_sels), p));
 	return color_sel(f);
 }
 
-float random(vec2 co, float seed) {
-	float g = mix(-43758.6980280632, 43758.6980280632, global_seed);
-	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + g + seed));
+float hash(vec2 p, float seed) {
+	p += seed + global_seed;
+    return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x))));
 }
 
-float random(vec3 co, float seed) {
-	float r = random(co.xy, seed);
-	return random(vec2(r, co.z), seed);
+float hash(vec3 co, float seed) {
+	float r = hash(co.xy, seed);
+	return hash(vec2(r, co.z), seed);
 }
 
 float interleavedGradientNoise(vec2 co) {
@@ -60,13 +63,13 @@ float scanLines(vec3 co) {
 	return mod(co.z, 2.0) / 2.0;
 }
 
-float scanLinesRandom(vec3 co) {
-	float r = random(co.zz, 0.0);
+float scanLineshash(vec3 co) {
+	float r = hash(co.zz, 0.0);
 	return mod(co.z, 2.0) / 2.0 + r - 0.5;
 }
 
-float waveRandom(vec3 co) {
-	float r = random(co.xy, 0.0);
+float wavehash(vec3 co) {
+	float r = hash(co.xy, 0.0);
 	return mod(co.z, 2.0) / 2.0 + r - 0.5;
 }
 
@@ -114,13 +117,13 @@ float map(vec3 v) {
 	if (mode == 0) {
 		r = interleavedGradientNoise(v);
 	} else if (mode == 1) {
-		r = random(v, 0.0);
+		r = hash(v, 0.0);
 	} else if (mode == 2) {
-		r = scanLinesRandom(v);
+		r = scanLineshash(v);
 	} else if (mode == 3) {
 		r = scanLines(v);
 	} else if (mode == 4) {
-		r = waveRandom(v);
+		r = wavehash(v);
 	} else if (mode == 5) {
 		r = orderedDither(v);
 	}
