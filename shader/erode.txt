@@ -1,0 +1,92 @@
+// Copyright (c) 2022 Lachlan McDonald
+// This work is licensed under the MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+//
+// xs erode [Threshold] [Scale] [Seed]
+//
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { name = 'Threshold'  var = 'm_threshold'  range = '1 25'  value = '9'  step = '1'  precision = '0' }
+// arg : { name = 'Scale'  var = 'm_scale'  range = '1 20'  value = '6'  step = '1'  precision = '0' }
+// arg : { name = 'Seed'  var = 'm_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
+// xs_end
+
+float scale = m_scale / 4.0;
+int threshold = int(m_threshold);
+
+bool isSelectedPal(float p) {
+	for (int i = 0; i < i_num_color_sels; i += 1) {
+		if (p == color_sel(float(i))) {
+			return true;
+		}
+	}
+	return false;
+}
+
+vec3 hash(vec3 p) {
+	p = vec3(dot(p,vec3(127.1, 311.7, 69.5)),
+			 dot(p,vec3(269.5, 183.3, 132.7)),
+			 dot(p,vec3(247.3, 108.5, 96.5)));
+
+	return -1.0 + 2.0 * fract(sin(p) * 43758.5453123);
+}
+
+float perlin(vec3 p) {
+	vec3 i = floor(p);
+	vec3 s = fract(p);
+
+	float a = dot(hash(i), s);
+	float b = dot(hash(i + vec3(1.0, 0.0, 0.0)), s - vec3(1.0, 0.0, 0.0));
+	float c = dot(hash(i + vec3(0.0, 1.0, 0.0)), s - vec3(0.0, 1.0, 0.0));
+	float d = dot(hash(i + vec3(0.0, 0.0, 1.0)), s - vec3(0.0, 0.0, 1.0));
+	float e = dot(hash(i + vec3(1.0, 1.0, 0.0)), s - vec3(1.0, 1.0, 0.0));
+	float f = dot(hash(i + vec3(1.0, 0.0, 1.0)), s - vec3(1.0, 0.0, 1.0));
+	float g = dot(hash(i + vec3(0.0, 1.0, 1.0)), s - vec3(0.0, 1.0, 1.0));
+	float h = dot(hash(i + vec3(1.0, 1.0, 1.0)), s - vec3(1.0, 1.0, 1.0));
+
+	vec3 u = smoothstep(0.0,1.0, s);
+
+	return mix(mix(mix(a, b, u.x), mix(c, e, u.x), u.y),
+			   mix(mix(d, f, u.x), mix(g, h, u.x), u.y), u.z);
+}
+
+float turbulence(vec3 p, float scale) {
+	float f = 0.0;
+	float a = 1.0;
+	p = scale * p;
+
+	for (int i = 0; i < 4; i++) {
+		f += a * abs(perlin(p));
+		p = 2.0 * p;
+		a /= 2.0;
+	}
+
+	return f;
+}
+
+float map(vec3 v) {
+	float index = voxel(v);
+	int adjacent = 0;
+
+	if (isSelectedPal(index)) {
+		for (float x = -1.0; x <= 1.0; x += 1.0) {
+			for (float y = -1.0; y <= 1.0; y += 1.0) {
+				for (float z = -1.0; z <= 1.0; z += 1.0) {
+					vec3 p = v + vec3(x, y, z);
+
+					if (p != v && voxel(p) == 0.0) {
+						adjacent += 1;
+					}
+				}
+			}
+		}
+
+		if (adjacent >= threshold) {
+			vec3 uv = v / i_volume_size;
+			float r = turbulence(uv + vec3(m_seed + i_iter), scale);
+			return r > 0.25 ? index : 0.0;
+		}
+	}
+
+	return index;
+}

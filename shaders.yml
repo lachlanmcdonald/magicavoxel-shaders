@@ -34,6 +34,17 @@ cites:
     MIT License (MIT)
     https://www.iquilezles.org/www/articles/functions/functions.htm
 shaders:
+  erode:
+    params:
+      - name: Threshold
+        range: 1 25
+        value: 9
+        var: m_threshold
+      - name: Scale
+        range: 1 20
+        value: 6
+        var: m_scale
+      - type: seed
   heightmap:
     cites:
       - glsl-map
