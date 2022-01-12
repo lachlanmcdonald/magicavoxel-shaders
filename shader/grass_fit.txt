@@ -1,0 +1,105 @@
+// Copyright (c) 2022 Lachlan McDonald
+// This work is licensed under the MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+//
+// This script utilises or modifies code from other projects or publications.
+// Please see the attributions below for more information:
+//
+// 1. Copyright (c) 2015 Michael Feldstein <https://github.com/msfeldstein/glsl-map>
+//    MIT License (MIT)
+//    https://github.com/msfeldstein/glsl-map/blob/master/LICENSE.md
+//
+// 2. Copyright (c) 2020 ValgoBoi <https://github.com/ValgoBoi/clover-noise>
+//    MIT License (MIT)
+//    https://github.com/ValgoBoi/clover-noise/blob/master/LICENSE
+//
+// xs grass_fit [Mode] [Density] [Height] [Seed]
+//
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { name = 'Mode'  var = 'm_mode'  range = '0 4'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Density'  var = 'm_density'  range = '1 256'  value = '2'  step = '1'  precision = '0' }
+// arg : { name = 'Height'  var = 'm_strand_height'  range = '1 256'  value = '10'  step = '1'  precision = '0' }
+// arg : { name = 'Seed'  var = 'global_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
+// xs_end
+
+int mode = int(m_mode);
+float density = m_density;
+
+float hash(vec2 p, float seed) {
+	p += seed + global_seed;
+	return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x))));
+}
+
+float hash(vec2 p) {
+	return hash(p, 0.0);
+}
+
+float pal(float p) {
+	float f = floor(mix(0.0, float(i_num_color_sels), p));
+	return color_sel(f);
+}
+
+float range(float value, float inMin, float inMax, float outMin, float outMax) {
+  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);
+}
+
+bool isSelectedColor(float p) {
+	for (int i = 0; i < i_num_color_sels; i += 1) {
+		if (p == color_sel(float(i))) {
+			return true;
+		}
+	}
+	return false;
+}
+
+float map(vec3 v) {
+	v = floor(v);
+	vec2 cell = floor(vec2(v.xy) / density);
+	vec3 local = floor(mod(v, density));
+	vec2 placement = floor(vec2(hash(cell.xy), hash(cell.xy, 170.3170)) * density);
+
+	float base_height = -1.0;
+	bool is_gap = false;
+
+	for (float z = 0.0; z <= v.z; z += 1.0) {
+		vec3 p = floor(vec3(v.xy, z));
+		float i = voxel(p);
+
+		if (i == 0.0 || isSelectedColor(i)) {
+			if (is_gap == false) {
+				base_height = z;
+				is_gap = true;
+			}
+		} else {
+			is_gap = false;
+		}
+	}
+
+	if (base_height > -1.0) {
+		if (all(equal(local.xy, placement))) {
+			float d = hash(cell.yx, -170.3170);
+			float h = m_strand_height * d;
+
+			if (v.z >= base_height && v.z <= h + base_height) {
+				float f;
+
+				if (mode == 0) {
+					f = d;
+				} else if (mode == 1) {
+					f = hash(vec2(v.z, h));
+				} else if (mode == 2) {
+					f = hash(v.xy);
+				} else if (mode == 3) {
+					f = range(v.z, base_height, h + base_height, 0.0, 1.0);
+				} else if (mode == 4) {
+					f = range(v.z, base_height, h + base_height, 1.0, 0.0);
+				}
+
+				return pal(f);
+			}
+		}
+	}
+
+	return voxel(v);
+}

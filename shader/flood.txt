@@ -9,13 +9,11 @@
 // arg : { name = 'Height'  var = 'm_height'  range = '1 256'  value = '1'  step = '1'  precision = '0' }
 // xs_end
 
-float height = m_height;
-
 float map(vec3 v) {
 	float index = voxel(v);
 
 	if (index == 0.0) {
-		if (v.z < height) {
+		if (v.z < m_height) {
 			return i_color_index;
 		}
 	}

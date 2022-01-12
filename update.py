@@ -21,6 +21,7 @@ with open(path.join(DIR, 'shaders.yml')) as f:
 	LICENSES = data['licenses']
 	SHADERS = data['shaders']
 	TYPES = data['types']
+	CITES = data['cites']
 	BASE_PARAM = data['base_param']
 
 for shader_key, props in SHADERS.items():
@@ -48,9 +49,20 @@ for shader_key, props in SHADERS.items():
 
 	# Additional cites
 	if 'cites' in props:
-		cite_lines = props['cites'].strip().splitlines()
-		header.extend(cite_lines)
+		header.append('This script utilises or modifies code from other projects or publications.')
+		header.append('Please see the attributions below for more information:')
 		header.append('')
+
+		for i, k in enumerate(props['cites']):
+			if k not in CITES:
+				print("Citation does not exist: ", k)
+			else:
+				c = CITES[k].strip().splitlines()
+				c[0] = '{}. {}'.format(i + 1, c[0])
+				c[1:] = map(lambda a : '   {}'.format(a), c[1:])
+
+				header.extend(c)
+				header.append('')
 
 	# Process params
 	if has_params:

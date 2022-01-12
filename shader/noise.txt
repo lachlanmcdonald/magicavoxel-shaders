@@ -2,6 +2,13 @@
 // This work is licensed under the MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 //
+// This script utilises or modifies code from other projects or publications.
+// Please see the attributions below for more information:
+//
+// 1. Copyright (c) 2020 ValgoBoi <https://github.com/ValgoBoi/clover-noise>
+//    MIT License (MIT)
+//    https://github.com/ValgoBoi/clover-noise/blob/master/LICENSE
+//
 // xs noise [Target Color] [Size X] [Size Y] [Size Z] [Seed]
 //
 // xs_begin
@@ -10,18 +17,18 @@
 // arg : { name = 'Size X'  var = 'm_size_x'  range = '1 256'  value = '1'  step = '1'  precision = '0' }
 // arg : { name = 'Size Y'  var = 'm_size_y'  range = '1 256'  value = '1'  step = '1'  precision = '0' }
 // arg : { name = 'Size Z'  var = 'm_size_z'  range = '1 256'  value = '1'  step = '1'  precision = '0' }
-// arg : { name = 'Seed'  var = 'm_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
+// arg : { name = 'Seed'  var = 'global_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
 // xs_end
 
 float target_color = m_target_color;
 vec3 dim = vec3(m_size_x, m_size_y, m_size_z);
-float global_seed = mix(-437.5453, 437.5453, m_seed / 100.0);
 
 bool no_axis_mode = all(equal(ivec3(i_axis), ivec3(0)));
 bvec3 axis_mode = no_axis_mode ? bvec3(true) : equal(ivec3(i_axis), ivec3(1));
 
-float random(vec2 co, float seed) {
-	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * (43758.6980280632 + seed));
+float hash(vec2 p, float seed) {
+	p += seed + global_seed;
+	return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x))));
 }
 
 float pal(float p) {
@@ -35,8 +42,8 @@ float map(vec3 v) {
 	float x = axis_mode.x ? floor(v.x / dim.x) : 1.0;
 	float y = axis_mode.y ? floor(v.y / dim.y) : 1.0;
 	float z = axis_mode.z ? floor(v.z / dim.z) : 1.0;
-	float j = random(vec2(x, y), i_iter + 1.0 + global_seed);
-	float k = random(vec2(j, z), i_iter + 1.0 + global_seed);
+	float j = hash(vec2(x, y), i_iter + 1.0 + global_seed);
+	float k = hash(vec2(j, z), i_iter + 1.0 + global_seed);
 
 	if (index == target_color) {
 		return pal(k);

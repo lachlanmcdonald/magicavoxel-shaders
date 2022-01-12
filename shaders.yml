@@ -1,4 +1,3 @@
----
 base_param:
   step: 1
   value: 0
@@ -10,23 +9,71 @@ licenses:
     https://github.com/lachlanmcdonald/magicavoxel-shaders
   by-nc-sa-3.0: |
     Copyright (c) {} Lachlan McDonald
-    This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License (CC BY-NC-SA 3.0)
+    This work is licensed under a Creative Commons
+    Attribution-NonCommercial-ShareAlike 3.0 Unported License (CC BY-NC-SA 3.0)
     https://github.com/lachlanmcdonald/magicavoxel-shaders
+cites:
+  glsl-map: |
+    Copyright (c) 2015 Michael Feldstein <https://github.com/msfeldstein/glsl-map>
+    MIT License (MIT)
+    https://github.com/msfeldstein/glsl-map/blob/master/LICENSE.md
+  clover-noise: |
+    Copyright (c) 2020 ValgoBoi <https://github.com/ValgoBoi/clover-noise>
+    MIT License (MIT)
+    https://github.com/ValgoBoi/clover-noise/blob/master/LICENSE
+  interweaved-gradient-noise: |
+    Interweaved gradient noise adapted from "Next Generation Post Processing in Call of Duty Advanced Warfare"
+    by Jorge Jimenez (Graphics R&D Technical Director - Activision Blizzard)
+    http://advances.realtimerendering.com/s2014/index.html
+  webgl-noise: |
+    Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
+    MIT License (MIT)
+    https://github.com/ashima/webgl-noise/blob/master/LICENSE
+  cubicpulse: |
+    Cubic Pulse noise adapted from "Useful Little Functions" by Inigo Quilez
+    MIT License (MIT)
+    https://www.iquilezles.org/www/articles/functions/functions.htm
 shaders:
-  noise/terrain:
-    cites: |
-      This script utilises or modifies code from other projects or publications.
-      Please see the attributions below for more information:
-
-      1. Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
-        MIT License (MIT)
-        https://github.com/ashima/webgl-noise/blob/master/LICENSE
+  erode:
     params:
+      - name: Threshold
+        range: 1 25
+        value: 9
+        var: m_threshold
+      - name: Scale
+        range: 1 20
+        value: 6
+        var: m_scale
+      - type: seed
+  heightmap:
+    cites:
+      - glsl-map
+    params:
+      - name: Blur
+        range: 0 10
+        value: 0
+        var: m_blur
+      - name: Auto Balance
+        range: 0 1
+        value: 1
+        var: m_auto
+      - name: Reverse
+        range: 0 1
+        value: 0
+        var: m_reverse
+  noise/terrain:
+    cites:
+      - webgl-noise
+      - cubicpulse
+    params:
+      - type: mode
+        range: 0 1
       - type: direction
         range: 0 1
       - name: Scale
         var: m_scale
         range: 5 200
+        value: 50
       - name: Iterations
         var: m_iterations
         range: 1 3
@@ -34,7 +81,7 @@ shaders:
       - name: Octaves
         var: m_octaves
         range: 1 6
-        value: 6
+        value: 5
       - name: Contrast
         var: m_contrast
         range: 0 100
@@ -51,587 +98,664 @@ shaders:
         var: m_lacunarity
         range: 0 300
         value: 201
+      - type: noise
+        value: 5
+      - type: tile_x
+      - type: tile_y
   brush/treemap:
-    cites: |
-      This script utilises or modifies code from other projects or publications.
-      Please see the attributions below for more information:
-
-      1. Copyright (c) 2020 ValgoBoi <https://github.com/ValgoBoi/clover-noise>
-          MIT License (MIT)
-          https://github.com/ValgoBoi/clover-noise/blob/master/LICENSE
-
-      2. Copyright (c) 2015 Michael Feldstein <https://github.com/msfeldstein/glsl-map>
-          MIT License (MIT)
-          https://github.com/msfeldstein/glsl-map/blob/master/LICENSE.md
+    cites:
+      - clover-noise
+      - glsl-map
     params:
-    - type: mode
-      range: 0 2
-    - type: direction
-      range: 0 5
-    - name: Iterations
-      var: m_iters
-      range: 2 32
-      value: 8
-    - name: Min Size
-      var: m_min_size
-      range: 0 100
-      value: 10
-    - name: Bias
-      var: m_bias
-      range: 0 100
-      value: 50
-    - name: Edge
-      var: m_edge
-      range: 0 100
-    - type: seed
+      - type: mode
+        range: 0 2
+      - type: direction
+        range: 0 5
+      - name: Iterations
+        var: m_iters
+        range: 2 32
+        value: 8
+      - name: Min Size
+        var: m_min_size
+        range: 0 100
+        value: 10
+      - name: Bias
+        var: m_bias
+        range: 0 100
+        value: 50
+      - name: Edge
+        var: m_edge
+        range: 0 100
+      - type: seed
   brush/gradient:
-    cites: |
-            This script utilises or modifies code from other projects or publications.
-            Please see the attributions below for more information:
-
-            1. Interweaved gradient noise adapted from "Next Generation Post Processing in Call of Duty Advanced Warfare"
-               by Jorge Jimenez (Graphics R&D Technical Director - Activision Blizzard)
-               http://advances.realtimerendering.com/s2014/index.html
+    cites:
+      - interweaved-gradient-noise
+      - clover-noise
     params:
-    - type: mode
-      range: 0 5
-    - type: direction
-      range: 0 5
-    - type: noise
-      range: 0 50
-    - type: seed
-  brush/cellular2D:
-    cites: |
-             This script utilises or modifies code from other projects or publications.
-             Please see the attributions below for more information:
-
-             1. Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
-                MIT License (MIT)
-                https://github.com/ashima/webgl-noise/blob/master/LICENSE
+      - type: mode
+        range: 0 5
+      - type: direction
+        range: 0 5
+      - type: noise
+        name: Dither
+        range: 0 50
+      - type: seed
+  brush/gradient_radial:
+    cites:
+      - clover-noise
+      - interweaved-gradient-noise
     params:
-    - type: mode
-      range: 0 5
-    - name: Scale
-      var: m_scale
-      value: 24
-      range: 1 100
-    - name: Jitter
-      var: m_jitter
-      value: 100
-      range: -100 100
-      step: 5
-    - type: noise
-    - type: power
-    - name: Steps
-      var: m_steps
-      range: 0 40
-    - type: seed
-    - type: tile_x
-    - type: tile_y
-  brush/cellular3D:
-    cites: |
-             This script utilises or modifies code from other projects or publications.
-             Please see the attributions below for more information:
-
-             1. Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
-                MIT License (MIT)
-                https://github.com/ashima/webgl-noise/blob/master/LICENSE
+      - type: mode
+        range: 0 5
+      - type: direction
+        range: 0 2
+      - type: direction
+        name: Flip
+        var: m_flip
+        range: 0 1
+      - name: X Position
+        var: m_pos_x
+        range: 0 100
+        value: 50
+      - name: Y Position
+        var: m_pos_y
+        range: 0 100
+        value: 50
+      - name: Scale
+        var: m_scale
+        range: 50 400
+        value: 200
+        step: 5
+      - type: power
+      - type: noise
+        name: Dither
+        range: 0 50
+      - type: seed
+  noise/clover2D:
+    cites:
+      - clover-noise
+      - glsl-map
+      - cubicpulse
     params:
-    - type: mode
-      range: 0 5
-    - name: Scale
-      var: m_scale
-      value: 24
-      range: 1 100
-    - name: Jitter
-      var: m_jitter
-      value: 100
-      range: -100 100
-      step: 5
-    - type: noise
-    - type: power
-    - name: Cavity
-      var: m_cavity
-      value: 50
-      range: 0 100
-    - type: seed
-    - type: tile_x
-    - type: tile_y
-    - type: tile_z
+      - type: mode
+        range: 0 1
+      - type: direction
+        range: 0 1
+      - name: Scale
+        var: m_scale
+        range: 1 20
+        value: 5
+        step: 0.05
+        precision: 2
+      - name: Contrast
+        var: m_contrast
+        range: 0 100
+        value: 50
+      - name: Shift
+        var: m_shift
+        range: 0 100
+        value: 50
+      - type: noise
+        value: 5
+      - type: tile_x
+      - type: tile_y
+  noise/cellular2D:
+    cites:
+      - webgl-noise
+    params:
+      - type: mode
+        range: 0 5
+      - name: Scale
+        var: m_scale
+        value: 24
+        range: 1 100
+      - name: Jitter
+        var: m_jitter
+        value: 100
+        range: '-100 100'
+        step: 5
+      - type: noise
+      - type: power
+      - name: Steps
+        var: m_steps
+        range: 0 40
+      - type: seed
+      - type: tile_x
+      - type: tile_y
+  noise/cellular3D:
+    cites:
+      - webgl-noise
+    params:
+      - type: mode
+        range: 0 5
+      - name: Scale
+        var: m_scale
+        value: 24
+        range: 1 100
+      - name: Jitter
+        var: m_jitter
+        value: 100
+        range: '-100 100'
+        step: 5
+      - type: noise
+      - type: power
+      - name: Cavity
+        var: m_cavity
+        value: 50
+        range: 0 100
+      - type: seed
+      - type: tile_x
+      - type: tile_y
+      - type: tile_z
   brush/truchet:
-    cites: |
-             This script utilises or modifies code from other projects or publications.
-             Please see the attributions below for more information:
-
-             1. Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
-                MIT License (MIT)
-                https://github.com/ashima/webgl-noise/blob/master/LICENSE
+    cites:
+      - webgl-noise
+      - clover-noise
     params:
-    - type: mode
-      range: 0 2
-    - name: Size
-      var: m_size
-      range: 3 40
-      value: 8
-    - type: noise
-    - type: seed
+      - type: mode
+        range: 0 2
+      - name: Size
+        var: m_size
+        range: 3 40
+        value: 8
+      - type: noise
+      - type: seed
   brush/bricks:
+    cites:
+      - clover-noise
     params:
-    - type: mode
-      range: 0 2
-    - type: direction
-      range: 0 3
-    - name: Width
-      var: m_width
-      type: size
-      value: 5
-    - name: Height
-      var: m_height
-      type: size
-      value: 2
-    - name: Depth
-      var: m_depth
-      type: size
-      value: 2
-    - name: Grout Size
-      var: m_grout_size
-      type: position
-      value: 1
-    - name: Grout Color
-      var: m_grout_color
-      type: color1
-    - name: Offset
-      var: m_offset
-      type: position
-    - type: noise
-    - type: threshold
-      value: 100
+      - type: mode
+        range: 0 2
+      - type: direction
+        range: 0 3
+      - name: Width
+        var: m_width
+        type: size
+        value: 5
+      - name: Height
+        var: m_height
+        type: size
+        value: 2
+      - name: Depth
+        var: m_depth
+        type: size
+        value: 2
+      - name: Grout Size
+        var: m_grout_size
+        type: position
+        value: 1
+      - name: Grout Color
+        var: m_grout_color
+        type: color1
+      - name: Offset
+        var: m_offset
+        type: position
+      - type: noise
+      - type: threshold
+        value: 100
   brush/bricks_vert:
+    cites:
+      - clover-noise
     params:
-    - type: mode
-      range: 0 2
-    - type: direction
-      range: 0 3
-    - name: Height
-      var: m_height
-      type: size
-      value: 5
-    - name: Depth
-      var: m_depth
-      type: size
-      value: 2
-    - name: Width
-      var: m_width
-      type: size
-      value: 3
-    - name: Grout Size
-      var: m_grout_size
-      type: position
-      value: 1
-    - name: Grout Color
-      var: m_grout_color
-      type: color1
-    - name: Offset
-      var: m_offset
-      type: position
-    - type: noise
-    - type: threshold
-      value: 100
+      - type: mode
+        range: 0 2
+      - type: direction
+        range: 0 3
+      - name: Height
+        var: m_height
+        type: size
+        value: 5
+      - name: Depth
+        var: m_depth
+        type: size
+        value: 2
+      - name: Width
+        var: m_width
+        type: size
+        value: 3
+      - name: Grout Size
+        var: m_grout_size
+        type: position
+        value: 1
+      - name: Grout Color
+        var: m_grout_color
+        type: color1
+      - name: Offset
+        var: m_offset
+        type: position
+      - type: noise
+      - type: threshold
+        value: 100
   brush/diagonal:
     params:
-    - type: direction
-      range: 0 5
-    - name: Width A
-      var: m_width_a
-      range: 0 32
-      value: 2
-    - name: Width B
-      var: m_width_b
-      range: 0 32
-    - name: Width C
-      var: m_width_c
-      range: 0 32
-    - name: Width D
-      var: m_width_d
-      range: 0 32
-    - name: Offset
-      var: m_offset
-      type: position
-    - name: Shuffle
-      var: m_shuffle
-      type: position
+      - type: direction
+        range: 0 5
+      - name: Width A
+        var: m_width_a
+        range: 0 32
+        value: 2
+      - name: Width B
+        var: m_width_b
+        range: 0 32
+      - name: Width C
+        var: m_width_c
+        range: 0 32
+      - name: Width D
+        var: m_width_d
+        range: 0 32
+      - name: Offset
+        var: m_offset
+        type: position
+      - name: Shuffle
+        var: m_shuffle
+        type: position
   brush/grass:
+    cites:
+      - clover-noise
     params:
-    - type: direction
-      range: 0 1
-    - type: mode
-      range: 0 4
-    - name: Density
-      var: m_density
-      type: size
-      value: 2
-    - name: Growth
-      var: m_growth
-      range: 0 100
-      value: 50
-    - type: seed
+      - type: direction
+        range: 0 1
+      - type: mode
+        range: 0 4
+      - name: Density
+        var: m_density
+        type: size
+        value: 2
+      - name: Growth
+        var: m_growth
+        range: 0 100
+        value: 50
+      - type: seed
+  grass_fit:
+    cites:
+      - glsl-map
+      - clover-noise
+    params:
+      - type: mode
+        range: 0 4
+      - name: Density
+        var: m_density
+        type: size
+        value: 2
+      - name: Height
+        var: m_strand_height
+        type: size
+        value: 10
+      - type: seed
   brush/grid:
     params:
-    - name: Color A
-      var: m_color_a
-      type: color1
-    - name: Color B
-      var: m_color_b
-      type: color2
-    - name: Thickness
-      var: m_thickness
-      type: size
-    - name: Size X
-      var: m_size_x
-      type: size
-    - name: Size Y
-      var: m_size_y
-      type: size
-    - name: Size Z
-      var: m_size_z
-      type: size
+      - name: Color A
+        var: m_color_a
+        type: color1
+      - name: Color B
+        var: m_color_b
+        type: color2
+      - name: Thickness
+        var: m_thickness
+        type: size
+      - name: Size X
+        var: m_size_x
+        type: size
+      - name: Size Y
+        var: m_size_y
+        type: size
+      - name: Size Z
+        var: m_size_z
+        type: size
   primitive/stairs:
     params:
-    - type: mode
-      range: 0 2
-    - type: direction
-      range: 0 3
-    - name: Count
-      var: m_count
-      type: size
-      value: 5
-    - name: Height
-      var: m_height
-      type: size
+      - type: mode
+        range: 0 2
+      - type: direction
+        range: 0 3
+      - name: Count
+        var: m_count
+        type: size
+        value: 5
+      - name: Height
+        var: m_height
+        type: size
   primitive/stairs_runs:
     params:
-    - type: mode
-      range: 0 3
-    - type: direction
-      range: 0 3
-    - name: Count
-      var: m_count
-      type: size
-      value: 5
-    - name: Height
-      var: m_height
-      type: size
-    - name: X/Y Gap
-      var: m_gap_xy
-      type: position
-    - name: Z Gap
-      var: m_gap_z
-      type: position
+      - type: mode
+        range: 0 3
+      - type: direction
+        range: 0 3
+      - name: Count
+        var: m_count
+        type: size
+        value: 5
+      - name: Height
+        var: m_height
+        type: size
+      - name: X/Y Gap
+        var: m_gap_xy
+        type: position
+      - name: Z Gap
+        var: m_gap_z
+        type: position
   primitive/stairs_stringer:
     params:
-    - type: mode
-      range: 0 3
-    - type: direction
-      range: 0 3
-    - name: Count
-      var: m_count
-      type: size
-      value: 5
-    - name: Height
-      var: m_height
-      type: size
-    - name: Stringer
-      var: m_stringer
-      type: position
+      - type: mode
+        range: 0 3
+      - type: direction
+        range: 0 3
+      - name: Count
+        var: m_count
+        type: size
+        value: 5
+      - name: Height
+        var: m_height
+        type: size
+      - name: Stringer
+        var: m_stringer
+        type: position
   brush/tiles:
     params:
-    - name: Width
-      var: m_width
-      type: size
-      value: 2
-    - name: Height
-      var: m_height
-      type: size
-      value: 2
-    - name: Depth
-      var: m_depth
-      type: size
-      value: 2
-    - name: Offset X
-      var: m_offset_x
-      type: position
-    - name: Offset Y
-      var: m_offset_y
-      type: position
-    - name: Offset Z
-      var: m_offset_z
-      type: position
+      - name: Width
+        var: m_width
+        type: size
+        value: 2
+      - name: Height
+        var: m_height
+        type: size
+        value: 2
+      - name: Depth
+        var: m_depth
+        type: size
+        value: 2
+      - name: Offset X
+        var: m_offset_x
+        type: position
+      - name: Offset Y
+        var: m_offset_y
+        type: position
+      - name: Offset Z
+        var: m_offset_z
+        type: position
   brush/tiles_puzzle:
+    cites:
+      - clover-noise
     params:
-    - type: mode
-      range: 0 4
-    - name: Size X
-      var: m_size_x
-      type: size
-      value: 4
-    - name: Size Y
-      var: m_size_y
-      type: size
-      value: 4
-    - name: Line Color
-      var: m_line_color
-      type: color2
-      value: 16
-    - name: Line Width
-      var: m_line_width
-      type: position
-      value: 1
-    - type: noise
-    - type: seed
+      - type: mode
+        range: 0 4
+      - name: Size X
+        var: m_size_x
+        type: size
+        value: 4
+      - name: Size Y
+        var: m_size_y
+        type: size
+        value: 4
+      - name: Line Color
+        var: m_line_color
+        type: color2
+        value: 16
+      - name: Line Width
+        var: m_line_width
+        type: position
+        value: 1
+      - type: noise
+      - type: seed
   brush/tiles_uneven:
+    cites:
+      - clover-noise
     params:
-    - type: mode
-      range: 0 5
-    - name: Min
-      var: m_min
-      type: size
-      value: 4
-    - name: Max
-      var: m_max
-      type: size
-      value: 8
-    - name: Line Color
-      var: m_line_color
-      type: color2
-      value: 16
-    - name: Line Width
-      var: m_line_width
-      type: position
-      value: 1
-    - type: noise
-    - type: seed
+      - type: mode
+        range: 0 5
+      - name: Min
+        var: m_min
+        type: size
+        value: 4
+      - name: Max
+        var: m_max
+        type: size
+        value: 8
+      - name: Line Color
+        var: m_line_color
+        type: color2
+        value: 16
+      - name: Line Width
+        var: m_line_width
+        type: position
+        value: 1
+      - type: noise
+      - type: seed
   brush/weave:
+    cites:
+      - clover-noise
     params:
-    - type: mode
-      range: 0 2
-    - name: Size
-      var: m_size
-      type: size
-      value: 4
-    - name: Line Color
-      var: m_line_color
-      type: color2
-      value: 10
-    - name: Line Width
-      var: m_line_width
-      type: position
-      value: 1
-    - type: seed
+      - type: mode
+        range: 0 2
+      - name: Size
+        var: m_size
+        type: size
+        value: 4
+      - name: Line Color
+        var: m_line_color
+        type: color2
+        value: 10
+      - name: Line Width
+        var: m_line_width
+        type: position
+        value: 1
+      - type: seed
   brush/zigzag_range:
     params:
-    - type: direction
-      range: 0 3
-    - name: Width
-      var: m_width
-      type: size
-      value: 2
+      - type: direction
+        range: 0 3
+      - name: Width
+        var: m_width
+        type: size
+        value: 2
   brush/zigzag2:
     params:
-    - type: direction
-      range: 0 3
-    - name: Width A
-      var: m_width_a
-      type: size
-      value: 2
-    - name: Width B
-      var: m_width_b
-      type: size
-      value: 2
+      - type: direction
+        range: 0 3
+      - name: Width A
+        var: m_width_a
+        type: size
+        value: 2
+      - name: Width B
+        var: m_width_b
+        type: size
+        value: 2
   brush/zigzag3:
     params:
-    - type: direction
-      range: 0 3
-    - name: Width A
-      var: m_width_a
-      type: size
-      value: 2
-    - name: Width B
-      var: m_width_b
-      type: size
-      value: 2
-    - name: Width C
-      var: m_width_c
-      type: size
-      value: 2
+      - type: direction
+        range: 0 3
+      - name: Width A
+        var: m_width_a
+        type: size
+        value: 2
+      - name: Width B
+        var: m_width_b
+        type: size
+        value: 2
+      - name: Width C
+        var: m_width_c
+        type: size
+        value: 2
   case:
     params:
-    - name: Color
-      var: m_color
-      type: color1
+      - name: Color
+        var: m_color
+        type: color1
   cover:
+    cites:
+      - clover-noise
     params:
-    - name: Headroom
-      var: m_headroom
-      type: size
-    - type: noise
-    - type: seed
+      - name: Headroom
+        var: m_headroom
+        type: size
+      - type: noise
+      - type: seed
   flood:
     params:
-    - name: Height
-      var: m_height
-      type: size
+      - name: Height
+        var: m_height
+        type: size
   flood2:
     params:
-    - name: Height
-      var: m_height
-      type: size
+      - name: Height
+        var: m_height
+        type: size
   noise:
+    cites:
+      - clover-noise
     params:
-    - name: Target Color
-      var: m_target_color
-      type: color1
-    - name: Size X
-      var: m_size_x
-      type: size
-    - name: Size Y
-      var: m_size_y
-      type: size
-    - name: Size Z
-      var: m_size_z
-      type: size
-    - type: seed
+      - name: Target Color
+        var: m_target_color
+        type: color1
+      - name: Size X
+        var: m_size_x
+        type: size
+      - name: Size Y
+        var: m_size_y
+        type: size
+      - name: Size Z
+        var: m_size_z
+        type: size
+      - type: seed
   outline:
     params:
-    - name: Color
-      var: m_color
-      type: color1
+      - name: Color
+        var: m_color
+        type: color1
   outline2:
     params:
-    - name: Color
-      var: m_color
-      type: color1
+      - name: Color
+        var: m_color
+        type: color1
   primitive/cylinder:
     params:
-    - name: Rotation
-      var: m_rotation
-      range: 0 2
-    - name: Thickness
-      var: m_thickness
-      range: 0 100
-      step: 5
-      value: 50
+      - name: Rotation
+        var: m_rotation
+        range: 0 2
+      - name: Thickness
+        var: m_thickness
+        range: 0 100
+        value: 50
   primitive/greebles1:
     params:
-    - type: mode
-      range: 0 1
-    - name: Count
-      var: m_count
-      range: 1 256
-      step: 8
-      value: 32
-    - name: Width
-      var: m_width
-      range: 1 256
-      value: 4
-    - name: Height
-      var: m_height
-      range: 1 256
-      value: 4
-    - name: Depth
-      var: m_depth
-      range: 1 256
-      value: 4
-    - type: seed
+      - type: mode
+        range: 0 1
+      - name: Count
+        var: m_count
+        range: 1 256
+        step: 8
+        value: 32
+      - name: Width
+        var: m_width
+        range: 1 256
+        value: 4
+      - name: Height
+        var: m_height
+        range: 1 256
+        value: 4
+      - name: Depth
+        var: m_depth
+        range: 1 256
+        value: 4
+      - type: seed
   primitive/greebles2:
     params:
-    - type: mode
-      range: 0 2
-    - name: Min
-      var: m_min
-      range: 1 256
-      value: 4
-    - name: Max
-      var: m_max
-      range: 1 256
-      value: 8
-    - name: Depth
-      var: m_depth
-      range: 1 256
-      value: 2
-    - type: seed
+      - type: mode
+        range: 0 2
+      - name: Min
+        var: m_min
+        range: 1 256
+        value: 4
+      - name: Max
+        var: m_max
+        range: 1 256
+        value: 8
+      - name: Depth
+        var: m_depth
+        range: 1 256
+        value: 2
+      - type: seed
   primitive/prism:
     params:
-    - type: mode
-      range: 0 1
-    - name: Size X
-      var: m_size_x
-      type: position
-      value: 12
-    - name: Size Y
-      var: m_size_y
-      type: position
-      value: 12
+      - type: mode
+        range: 0 1
+      - name: Size X
+        var: m_size_x
+        type: position
+        value: 12
+      - name: Size Y
+        var: m_size_y
+        type: position
+        value: 12
   pyramid:
+    cites:
+      - clover-noise
     params:
-    - type: noise
-    - type: seed
+      - type: noise
+      - type: seed
   random:
+    cites:
+      - clover-noise
     params:
-    - type: threshold
-      value: 50
-    - name: Color
-      var: m_color
-      type: color1
+      - type: threshold
+        value: 50
+      - name: Color
+        var: m_color
+        type: color1
   sand:
+    cites:
+      - clover-noise
     params:
-    - type: mode
-      range: 0 2
-    - type: threshold
+      - type: mode
+        range: 0 2
+      - type: threshold
   sand2:
+    cites:
+      - clover-noise
     params:
-    - type: mode
-      range: 0 2
-    - type: threshold
+      - type: mode
+        range: 0 2
+      - type: threshold
   slice_x:
     params:
-    - name: Offset
-      var: m_offset
-      type: position
-    - name: Count
-      var: m_count
-      type: position
+      - name: Offset
+        var: m_offset
+        type: position
+      - name: Count
+        var: m_count
+        type: position
   slice_y:
     params:
-    - name: Offset
-      var: m_offset
-      type: position
-    - name: Count
-      var: m_count
-      type: position
+      - name: Offset
+        var: m_offset
+        type: position
+      - name: Count
+        var: m_count
+        type: position
   slice_z:
     params:
-    - name: Offset
-      var: m_offset
-      type: position
-    - name: Count
-      var: m_count
-      type: position
+      - name: Offset
+        var: m_offset
+        type: position
+      - name: Count
+        var: m_count
+        type: position
   soil:
     params:
-    - name: Color
-      var: m_color
-      type: color1
-    - name: Headroom
-      var: m_headroom
-      type: size
+      - name: Color
+        var: m_color
+        type: color1
+      - name: Headroom
+        var: m_headroom
+        type: size
   soil_replace:
     params:
-    - name: Color
-      var: m_color
-      type: color1
-    - name: Headroom
-      var: m_headroom
-      type: size
+      - name: Color
+        var: m_color
+        type: color1
+      - name: Headroom
+        var: m_headroom
+        type: size
 types:
   mode:
     name: Mode
@@ -655,7 +779,7 @@ types:
     var: m_direction
   seed:
     name: Seed
-    var: m_seed
+    var: global_seed
     range: 1 100
   tile_x:
     name: Tile X

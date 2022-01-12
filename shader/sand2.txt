@@ -2,6 +2,13 @@
 // This work is licensed under the MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 //
+// This script utilises or modifies code from other projects or publications.
+// Please see the attributions below for more information:
+//
+// 1. Copyright (c) 2020 ValgoBoi <https://github.com/ValgoBoi/clover-noise>
+//    MIT License (MIT)
+//    https://github.com/ValgoBoi/clover-noise/blob/master/LICENSE
+//
 // xs sand2 [Mode] [Threshold]
 //
 // xs_begin
@@ -13,12 +20,12 @@
 int mode = int(m_mode);
 float threshold = mix(0.125, 0.175, m_threshold / 100.0);
 
-float random(vec2 co) {
-	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * 43758.6980280632);
+float hash(vec2 p) {
+	return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x))));
 }
 
-float random(vec3 co) {
-	return random(vec2(random(co.xy), co.z));
+float hash(vec3 co) {
+	return hash(vec2(hash(co.xy), co.z));
 }
 
 float pal(float p) {
@@ -56,7 +63,7 @@ float map(vec3 v) {
 					  float(isSelectedPal(a && d ? 0.0 : voxel(vec3(v.x - 1.0, v.y + 1.0, v.z - 1.0)))) +
 					  float(isSelectedPal(b && d ? 0.0 : voxel(vec3(v.x + 1.0, v.y + 1.0, v.z - 1.0))));
 
-			float p = random(v);
+			float p = hash(v);
 
 			if (p <= (threshold * z)) {
 				if (mode == 0 ) {

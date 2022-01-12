@@ -1,0 +1,76 @@
+// Copyright (c) 2022 Lachlan McDonald
+// This work is licensed under the MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+//
+// This script utilises or modifies code from other projects or publications.
+// Please see the attributions below for more information:
+//
+// 1. Copyright (c) 2015 Michael Feldstein <https://github.com/msfeldstein/glsl-map>
+//    MIT License (MIT)
+//    https://github.com/msfeldstein/glsl-map/blob/master/LICENSE.md
+//
+// xs heightmap [Blur] [Auto Balance] [Reverse]
+//
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { name = 'Blur'  var = 'm_blur'  range = '0 10'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Auto Balance'  var = 'm_auto'  range = '0 1'  value = '1'  step = '1'  precision = '0' }
+// arg : { name = 'Reverse'  var = 'm_reverse'  range = '0 1'  value = '0'  step = '1'  precision = '0' }
+// xs_end
+
+float blur = float(m_blur);
+bool auto_balance = m_auto > 0.0;
+bool reverse = m_reverse > 0.0;
+
+float luminance(vec3 c) {
+	return dot(c, vec3(0.2125, 0.7154, 0.0721));
+}
+
+float range(float value, float inMin, float inMax, float outMin, float outMax) {
+	return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);
+}
+
+float map(vec3 v) {
+	vec3 uv = floor(v) / i_volume_size;
+	float i = voxel(floor(vec3(v.xy, 0.5)));
+	float l = luminance(palette(i).rgb);
+
+	if (blur > 0.0) {
+		float c = 1.0;
+
+		for (float x = max(0.0, v.x - blur), xm = min(i_volume_size.x, v.x + blur); x <= xm; x += 1.0) {
+			for (float y = max(0.0, v.y - blur), ym = min(i_volume_size.y, v.y + blur); y <= ym; y += 1.0) {
+				vec3 p = vec3(x, y, 0.0);
+
+				if (all(equal(v, p)) == false) {
+					float j = voxel(p);
+					l += luminance(palette(j).rgb);
+					c += 1.0;
+				}
+			}
+		}
+
+		l /= c;
+	}
+
+	if (float(i_num_color_sels) > 1.0 && auto_balance) {
+		float lower = 1.0;
+		float upper = 0.0;
+
+		for (int i = 0; i < i_num_color_sels; i += 1) {
+			vec4 c = palette(color_sel(float(i)));
+			float v = luminance(c.rgb);
+			lower = min(lower, v);
+			upper = max(upper, v);
+		}
+
+		l = range(l, lower, upper, 0.0, 1.0);
+	}
+
+	if (reverse) {
+		l = 1.0 - l;
+	}
+
+	l = ceil(l * i_volume_size.z) / i_volume_size.z;
+	return l < uv.z ? 0.0 : i;
+}

@@ -11,19 +11,11 @@
 // arg : { name = 'Size Y'  var = 'm_size_y'  range = '0 256'  value = '12'  step = '1'  precision = '0' }
 // xs_end
 
-const float PI2 = 3.141592653589793238 * 2.0;
+float PI2 = acos(-1.0) * 2.0;
 
 int mode = int(m_mode);
-float width_x = min(m_size_x, i_volume_size.x / 2.0);
-float width_y = min(m_size_y, i_volume_size.y / 2.0);
-
-float random(vec2 co) {
-	return fract(cos(dot(co.xy, vec2(23.14069266477926, pow(sqrt(2.0), 2.0)))) * 43758.6980280632);
-}
-
-float random(vec3 co) {
-	return random(vec2(random(co.xy), co.z));
-}
+vec2 width = vec2(min(m_size_x, i_volume_size.x / 2.0),
+				  min(m_size_y, i_volume_size.y / 2.0));
 
 float check(float pos, float width, float max_pos) {
 	if (pos <= width) {
@@ -41,7 +33,7 @@ float check(float pos, float width, float max_pos) {
 			return sin(PI2 * (d1 / 4.0)) * i_volume_size.z;
 		}
 	} else {
-		return max_pos;
+		return i_volume_size.z;
 	}
 }
 
@@ -58,6 +50,6 @@ vec2 roundTowards(vec2 v, float d) {
 }
 
 float map(vec3 v) {
-	vec2 j = roundTowards(check(v.xy, vec2(width_x, width_y)), 1.0);
+	vec2 j = roundTowards(check(v.xy, width), 1.0);
 	return all(lessThanEqual(v.zz, j)) ? i_color_index : 0.0;
 }

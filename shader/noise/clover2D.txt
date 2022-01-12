@@ -1,0 +1,187 @@
+// Copyright (c) 2022 Lachlan McDonald
+// This work is licensed under the MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+//
+// This script utilises or modifies code from other projects or publications.
+// Please see the attributions below for more information:
+//
+// 1. Copyright (c) 2020 ValgoBoi <https://github.com/ValgoBoi/clover-noise>
+//    MIT License (MIT)
+//    https://github.com/ValgoBoi/clover-noise/blob/master/LICENSE
+//
+// 2. Copyright (c) 2015 Michael Feldstein <https://github.com/msfeldstein/glsl-map>
+//    MIT License (MIT)
+//    https://github.com/msfeldstein/glsl-map/blob/master/LICENSE.md
+//
+// 3. Cubic Pulse noise adapted from "Useful Little Functions" by Inigo Quilez
+//    MIT License (MIT)
+//    https://www.iquilezles.org/www/articles/functions/functions.htm
+//
+// xs noise/clover2D [Mode] [Direction] [Scale] [Contrast] [Shift] [Noise] [Tile X] [Tile Y]
+//
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { name = 'Mode'  var = 'm_mode'  range = '0 1'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Direction'  var = 'm_direction'  range = '0 1'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Scale'  var = 'm_scale'  range = '1 20'  value = '5'  step = '0.05'  precision = '2' }
+// arg : { name = 'Contrast'  var = 'm_contrast'  range = '0 100'  value = '50'  step = '1'  precision = '0' }
+// arg : { name = 'Shift'  var = 'm_shift'  range = '0 100'  value = '50'  step = '1'  precision = '0' }
+// arg : { name = 'Noise'  var = 'm_noise'  range = '0 100'  value = '5'  step = '1'  precision = '0' }
+// arg : { name = 'Tile X'  var = 'tile_x'  range = '0 40'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Tile Y'  var = 'tile_y'  range = '0 40'  value = '0'  step = '1'  precision = '0' }
+// xs_end
+
+int mode = int(m_mode);
+int direction = int(m_direction);
+float noise = m_noise / 200.0;
+float shift = m_shift / 100.0;
+float contrast = m_contrast / 100.0;
+vec3 tile = vec3(tile_x, tile_y, 0.0);
+
+float POINT_SPREAD = 0.1;
+float PI = radians(180.0);
+
+float hash(vec2 p) {
+	return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x))));
+}
+
+vec2 offset(vec2 p, float hash) {
+	vec2 offset = vec2(sin(hash * PI * 100.0), cos(hash * PI * 100.0)) * floor(hash * 100.0 + 100.0) * 0.01 + 0.5;
+	return p + offset * POINT_SPREAD * 2.0 + 0.5 - POINT_SPREAD;
+}
+
+float clover_noise_2d(vec2 p) {
+	vec2 p_floor = floor(p);
+
+	vec2 c_11 = offset(p_floor, hash(p_floor));
+	vec2 c_10 = p_floor + vec2(0, -1);
+	c_10 = offset(c_10, hash(c_10));
+	vec2 c_12 = p_floor + vec2(0, 1);
+	c_12 = offset(c_12, hash(c_12));
+	vec2 c_01 = p_floor + vec2(-1, 0);
+	c_01 = offset(c_01, hash(c_01));
+	vec2 c_21 = p_floor + vec2(1, 0);
+	c_21 = offset(c_21, hash(c_21));
+
+	vec2 d_p_c11 = vec2(p.y - c_11.y, p.x - c_11.x);
+	vec2 m_p_c11 = d_p_c11 * c_11;
+
+	vec2 side_nx = m_p_c11 - d_p_c11 * c_01;
+	vec2 side_px = m_p_c11 - d_p_c11 * c_21;
+
+	vec2 a, c, d;
+
+	if ((side_nx.y - side_nx.x < 0.0 && p.x < c_11.x) || (side_px.y - side_px.x > 0.0 && p.x >= c_11.x)) {
+		vec2 side_py = m_p_c11 - d_p_c11 * c_12;
+
+		if (side_py.y - side_py.x > 0.0) {
+			a = c_12;
+			c = c_01;
+			d = vec2(-1.0, 1.0);
+		} else {
+			a = c_21;
+			c = c_12;
+			d = vec2(1.0, 1.0);
+		}
+	} else {
+		vec2 side_ny = m_p_c11 - d_p_c11 * c_10;
+
+		if (side_ny.y - side_ny.x > 0.0) {
+			a = c_10;
+			c = c_21;
+			d = vec2(1.0, -1.0);
+		} else {
+			a = c_01;
+			c = c_10;
+			d = vec2(-1.0, -1.0);
+		}
+	}
+
+	d = offset(p_floor + d, hash(p_floor + d));
+
+	vec2 f = a;
+	vec2 g = c;
+	vec2 h = d;
+
+	vec2 ac = a - c;
+	vec2 bd = c_11 - d;
+
+	if (ac.x * ac.x + ac.y * ac.y < bd.x * bd.x + bd.y * bd.y) {
+		vec2 pa = p - a;
+
+		if (pa.x * ac.y - pa.y * ac.x > 0.0) {
+			h = c_11;
+		}
+	} else {
+		vec2 pb = p - c_11;
+
+		if (pb.x * bd.y - pb.y * bd.x > 0.0) {
+			f = c_11;
+		} else {
+			g = c_11;
+		}
+	}
+
+	vec2 bc_v0 = g - f;
+	vec2 bc_v1 = h - f;
+	vec2 bc_v2 = p - f;
+	float den = 1.0 / (bc_v0.x * bc_v1.y - bc_v1.x * bc_v0.y);
+	float v = (bc_v2.x * bc_v1.y - bc_v1.x * bc_v2.y) * den;
+	float w = (bc_v0.x * bc_v2.y - bc_v2.x * bc_v0.y) * den;
+	float u = 1.0 - v - w;
+
+	v = v * v * v;
+	w = w * w * w;
+	u = u * u * u;
+	float s = 1.0 / (u + v + w);
+	v *= s;
+	w *= s;
+	u *= s;
+
+	float fv = hash(f);
+	float gv = hash(g);
+	float hv = hash(h);
+
+	return u * fv + v * gv + w * hv;
+}
+
+float range(float value, float inMin, float inMax, float outMin, float outMax) {
+	return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);
+}
+
+float pal(float i) {
+	float f = floor(mix(0.0, float(i_num_color_sels), i));
+	return color_sel(f);
+}
+
+float cubicPulse(float c, float w, float x) {
+	x = abs(x - c);
+	if (x > w) {
+		return 0.0;
+	} else {
+		x /= w;
+		return 1.0 - x * x * (3.0 - 2.0 * x);
+	}
+}
+
+float map(vec3 v) {
+	vec3 uv = floor(v) / i_volume_size + tile;
+
+	if (direction == 1) {
+		uv.z = 1.0 - uv.z;
+	}
+
+	float p1 = clover_noise_2d(uv.xy * m_scale);
+	float f;
+
+	if (mode == 0) {
+		f = hash(vec2(hash(uv.xy), uv.z));
+	} else if (mode == 1) {
+		f = hash(vec2(hash(uv.zz), uv.z));
+	}
+
+	p1 = cubicPulse(p1, contrast, shift);
+	float p2 = p1 + range(f, 0.0, 1.0, -1.0, 1.0) * noise;
+
+	return p1 >= uv.z ? pal(p2) : 0.0;
+}
