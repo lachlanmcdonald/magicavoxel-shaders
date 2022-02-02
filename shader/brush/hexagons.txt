@@ -1,0 +1,89 @@
+// Copyright (c) 2022 Lachlan McDonald
+// This work is licensed under the MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+//
+// xs brush/grid [Color A] [Color B] [Thickness] [Size X] [Size Y] [Size Z]
+//
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { name = 'Scale'  var = 'm_scale'  range = '1 100'  value = '10'  step = '1'  precision = '0' }
+// arg : { name = 'Outline'  var = 'm_outline'  range = '0 100'  value = '5'  step = '1'  precision = '0' }
+// arg : { name = 'Iterations'  var = 'm_iterations'  range = '1 3'  value = '1'  step = '1'  precision = '0' }
+// xs_end
+
+float HEX_FACTOR = 0.8660254037844386;
+float HASHSCALE1 = 0.1031;
+float outline = m_outline / 100.0;
+float scale = m_scale / 2.0;
+int iters = int(m_iterations);
+
+vec2 hexFromCart(vec2 p) {
+	return vec2(p.x / HEX_FACTOR, p.y);
+}
+
+vec2 cartFromHex(vec2 g) {
+	return vec2(g.x * HEX_FACTOR, g.y);
+}
+
+vec2 nearestHexCell(in vec2 pos) {
+	// integer coords in hex center grid -- will need to be adjusted
+	vec2 gpos = hexFromCart(pos);
+	vec2 hex_int = floor(gpos);
+
+	// adjust integer coords
+	float sy = step(2.0, mod(hex_int.x+1.0, 4.0));
+	hex_int += mod(vec2(hex_int.x, hex_int.y + sy), 2.0);
+
+	// difference vector
+	vec2 gdiff = gpos - hex_int;
+
+	// figure out which side of line we are on and modify
+	// hex center if necessary
+	if (dot(abs(gdiff), vec2(HEX_FACTOR * HEX_FACTOR, 0.5)) > 1.0) {
+		vec2 delta = sign(gdiff) * vec2(2.0, 1.0);
+		hex_int += delta;
+	}
+
+	return hex_int;
+}
+
+float hexDist(vec2 p) {
+	p = abs(p);
+	return max(dot(p, vec2(HEX_FACTOR, 0.5)), p.y) - 1.0;
+}
+
+float hash12(vec2 p) {
+	vec3 p3  = fract(vec3(p.xyx) * HASHSCALE1);
+	p3 += dot(p3, p3.yzx + 19.19);
+	return fract((p3.x + p3.y) * p3.z);
+}
+
+struct Cell {
+	float h;
+	float uv;
+	vec2 pos;
+};
+
+Cell find_cell(vec2 pos, float seed) {
+	vec2 cell_pos = nearestHexCell(pos);
+	float cell_uv = abs(hexDist(pos - cartFromHex(cell_pos)));
+	float c = hash12(cell_pos + vec2(seed));
+	return Cell(c, cell_uv, cell_pos);
+}
+
+float pal(float p) {
+	float f = floor(mix(0.0, float(i_num_color_sels), p));
+	return color_sel(f);
+}
+
+float map(vec3 v) {
+	vec3 p = floor(v) / i_volume_size - 0.5;
+	float d = 0.0;
+
+	for (int i = 0; i < iters; i += 1) {
+		Cell z = find_cell(p.xy * m_scale * pow(2.0, float(i)), 0.0);
+		d = fract(d + z.h);
+	}
+
+	return p.z < d ? pal(d) : 0.0;
+}
