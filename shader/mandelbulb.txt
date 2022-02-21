@@ -1,0 +1,56 @@
+// xs_begin
+// author : 'ephtracy'
+// arg : { var = 'm_degree' name = 'Degree' value = '3'   range = '3 64'    step = '1'    precision = '0' }
+// arg : { var = 'm_iters' name = 'Iterations' value = '8'   range = '2 64'    step = '1'    precision = '0' }
+// xs_end
+
+//===== built-in args =====
+// uniform vec3		i_volume_size;		// volume size [1-256]
+// uniform float	i_color_index;		// current color index [0-255]
+// uniform int		i_num_color_sels;	// number of color selections [1-255]
+
+//===== built-in functions =====
+// float voxel( vec3 v );				// get voxel color index
+// float color_sel( float k );			// get kth selected color index
+// vec4 palette( float index );			// get palette color
+
+int iters = int(m_iters);
+
+vec3 powern( vec3 v, float n ) {
+	float r = length( v );
+	float phi = atan( v.y, v.x );
+	float theta = atan( length( v.xy ), v.z );
+
+	r = pow( r, n );
+	phi *= n;
+	theta *= n;
+
+	return r * vec3(
+		sin( theta ) * vec2( cos( phi ), sin( phi ) ),
+		cos( theta )
+	);
+}
+
+float pal(float p) {
+	float f = floor(mix(0.0, float(i_num_color_sels), p));
+	return color_sel(f);
+}
+
+// generate a new voxel color index [0, 255] at position v ( v is at the center of voxel, such as vec3( 1.5, 2.5, 4.5 ) )
+float map( vec3 v ) {
+	float n = max( m_degree, 4.0 );
+
+	vec3 center = i_volume_size * 0.5;
+
+	float size = min( min( center.x, center.y ), center.z );
+
+	vec3 u = ( v - center ) / size * 1.1;
+
+	for ( int i = 0; i < iters; i++ ) {
+		u = powern( vec3(u), n ) + u;
+	}
+
+	// return length(normalise(u)) > 0.5 ? distance(vec3(0.5), v / i_volume_size) : 0.0;
+	return u.z;
+	// return i_color_index * step( length( u ), 2.0 );
+}
