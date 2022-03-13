@@ -8,6 +8,15 @@
 // author : '@lachlanmcdonald'
 // xs_end
 
+bool isSelectedPal(float p) {
+	for (int i = 0; i < i_num_color_sels; i += 1) {
+		if (p == color_sel(float(i))) {
+			return true;
+		}
+	}
+	return false;
+}
+
 float map(vec3 v) {
 	float a[256];
 	int count = 0;
@@ -15,7 +24,7 @@ float map(vec3 v) {
 	for (float z = 0.0; z <= i_volume_size.z; z += 1.0) {
 		float k = voxel(vec3(v.xy, z));
 
-		if (k != i_color_index) {
+		if (isSelectedPal(k) == false) {
 			a[count] = k;
 			count += 1;
 		}
