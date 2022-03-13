@@ -93,7 +93,10 @@ for shader_key, props in SHADERS.items():
 				print('Missing name attribute: ', param)
 
 	# Console command instructions
-	param_strings = ' '.join([ '[{}]'.format(x['name']) for x in props['params'] ])
+	if 'params' in props:
+		param_strings = ' '.join([ '[{}]'.format(x['name']) for x in props['params'] ])
+	else:
+		param_strings = ''
 	header.append('xs {} {}'.format(shader_key, param_strings))
 
 	# MagicaVoxel configuration
