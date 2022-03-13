@@ -10,7 +10,7 @@
 //    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
 //    https://www.shadertoy.com/view/XdSyzK
 //
-// xs brush/hex_grid [Scale] [Outline] [Seed]
+// xs brush/hex_tiles [Scale] [Outline] [Seed]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
