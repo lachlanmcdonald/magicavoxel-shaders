@@ -33,7 +33,25 @@ cites:
     Cubic Pulse noise adapted from "Useful Little Functions" by Inigo Quilez
     MIT License (MIT)
     https://www.iquilezles.org/www/articles/functions/functions.htm
+  hex_grid_marching: |
+    "Hex grid traversal" by mattz
+    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+    https://www.shadertoy.com/view/XdSyzK
 shaders:
+  brush/hex_tiles:
+    license: by-nc-sa-3.0
+    cites:
+      - hex_grid_marching
+    params:
+      - name: Scale
+        var: m_scale
+        range: 1 100
+        value: 10
+      - name: Outline
+        var: m_outline
+        range: -100 100
+        value: 0
+      - type: seed
   erode:
     params:
       - name: Threshold
