@@ -2,54 +2,56 @@
 // This work is licensed under the MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 //
-// xs primitive/prism [Mode] [Size X] [Size Y]
+// xs primitive/prism [Mode] [Size X] [Size Y] [Steps]
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { name = 'Mode'  var = 'm_mode'  range = '0 1'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Mode'  var = 'm_mode'  range = '0 2'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Size X'  var = 'm_size_x'  range = '0 256'  value = '12'  step = '1'  precision = '0' }
 // arg : { name = 'Size Y'  var = 'm_size_y'  range = '0 256'  value = '12'  step = '1'  precision = '0' }
+// arg : { name = 'Steps'  var = 'm_steps'  range = '0 128'  value = '0'  step = '1'  precision = '0' }
 // xs_end
 
 float PI2 = acos(-1.0) * 2.0;
-
 int mode = int(m_mode);
-vec2 width = vec2(min(m_size_x, i_volume_size.x / 2.0),
-				  min(m_size_y, i_volume_size.y / 2.0));
 
-float check(float pos, float width, float max_pos) {
-	if (pos <= width) {
-		if (mode == 0) {
-			return pos / width * i_volume_size.z;
-		} else if (mode == 1) {
-			float d1 = pos / width;
-			return sin(PI2 * (d1 / 4.0)) * i_volume_size.z;
-		}
-	} else if (pos >= max_pos - width) {
-		if (mode == 0) {
-			return (max_pos - pos) / width * i_volume_size.z;
-		} else if (mode == 1) {
-			float d1 = (max_pos - pos) / width;
-			return sin(PI2 * (d1 / 4.0)) * i_volume_size.z;
-		}
-	} else {
-		return i_volume_size.z;
-	}
+float pal(float p) {
+	float f = floor(mix(0.0, float(i_num_color_sels), p));
+	return color_sel(f);
 }
 
-vec2 check(vec2 pos, vec2 dim) {
-	float x = check(pos.x, dim.x, i_volume_size.x);
-	float y = check(pos.y, dim.y, i_volume_size.y);
-	return vec2(x, y);
+float range(float value, float inMin, float inMax, float outMin, float outMax) {
+  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);
 }
 
-vec2 roundTowards(vec2 v, float d) {
-	v.x = v.x < d ? d : v.x;
-	v.y = v.y < d ? d : v.y;
-	return v;
+float smootherstep(float a, float b, float x) {
+  x = clamp((x - a) / (b - a), 0.0, 1.0);
+  return x * x * x * (x * (x * 6.0 - 15.0) + 10.0);
 }
 
 float map(vec3 v) {
-	vec2 j = roundTowards(check(v.xy, width), 1.0);
-	return all(lessThanEqual(v.zz, j)) ? i_color_index : 0.0;
+	vec3 uv = v / i_volume_size;
+	vec2 s = vec2(min(m_size_x, i_volume_size.x / 2.0),
+				  min(m_size_y, i_volume_size.y / 2.0)) / i_volume_size.xy;
+
+	if (mode == 0) {
+		uv.x = min(clamp(uv.x / s.x, 0.0, 1.0), clamp((1.0 - uv.x) / s.x, 0.0, 1.0));
+		uv.y = min(clamp(uv.y / s.y, 0.0, 1.0), clamp((1.0 - uv.y) / s.y, 0.0, 1.0));
+	} else if (mode == 1) {
+		uv.x = min(smoothstep(0.0, s.x, uv.x), smoothstep(1.0, 1.0 - s.x, uv.x));
+		uv.y = min(smoothstep(0.0, s.y, uv.y), smoothstep(1.0, 1.0 - s.y, uv.y));
+	} else if (mode == 2) {
+		uv.x = min(smootherstep(0.0, s.x, uv.x), smootherstep(1.0, 1.0 - s.x, uv.x));
+		uv.y = min(smootherstep(0.0, s.y, uv.y), smootherstep(1.0, 1.0 - s.y, uv.y));
+	}
+
+	float m = 1.0 / i_volume_size.z;
+	float d = range(min(uv.x, uv.y), 0.0, 1.0, m, 1.0);
+
+	if (m_steps > 0.0) {
+		float k = 1.0 / m_steps;
+		d = d - mod(d, k) + k;
+	}
+
+	return d >= uv.z ? pal(uv.z) : 0.0;
 }

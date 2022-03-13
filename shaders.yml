@@ -678,7 +678,7 @@ shaders:
   primitive/prism:
     params:
       - type: mode
-        range: 0 1
+        range: 0 2
       - name: Size X
         var: m_size_x
         type: position
@@ -687,6 +687,10 @@ shaders:
         var: m_size_y
         type: position
         value: 12
+      - name: Steps
+        var: m_steps
+        range: 0 128
+        value: 0
   pyramid:
     cites:
       - clover-noise
