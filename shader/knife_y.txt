@@ -1,0 +1,30 @@
+// Copyright (c) 2022 Lachlan McDonald
+// This work is licensed under the MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+//
+// xs knife_y
+//
+// xs_begin
+// author : '@lachlanmcdonald'
+// xs_end
+
+float map(vec3 v) {
+	float a[256];
+	int count = 0;
+
+	for (float y = 0.0; y <= i_volume_size.y; y += 1.0) {
+		float k = voxel(vec3(v.x, y, v.z));
+
+		if (k != i_color_index) {
+			a[count] = k;
+			count += 1;
+		}
+	}
+
+	if (v.y >= float(count)) {
+		return 0.0;
+	} else {
+		int n = int(v.y);
+		return a[n];
+	}
+}

@@ -38,6 +38,12 @@ cites:
     Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
     https://www.shadertoy.com/view/XdSyzK
 shaders:
+  knife_x:
+    license: mit
+  knife_y:
+    license: mit
+  knife_z:
+    license: mit
   brush/hex_tiles:
     license: by-nc-sa-3.0
     cites:
