@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Copyright (c) 2022 Lachlan McDonald
+# Copyright (c) 2023 Lachlan McDonald
 # This work is licensed under the MIT License (MIT)
 # https://github.com/lachlanmcdonald/magicavoxel-shaders
 from os import path
