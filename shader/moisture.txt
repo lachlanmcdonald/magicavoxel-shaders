@@ -1,0 +1,151 @@
+// Copyright (c) 2023 Lachlan McDonald
+// This work is licensed under the MIT License (MIT)
+// https://github.com/lachlanmcdonald/magicavoxel-shaders
+//
+// This script utilises or modifies code from other projects or publications.
+// Please see the attributions below for more information:
+//
+// 1. Copyright (c) 2020 ValgoBoi <https://github.com/ValgoBoi/clover-noise>
+//    MIT License (MIT)
+//    https://github.com/ValgoBoi/clover-noise/blob/master/LICENSE
+//
+// 2. Copyright (c) 2011 Stefan Gustavson <https://github.com/ashima/webgl-noise>
+//    MIT License (MIT)
+//    https://github.com/ashima/webgl-noise/blob/master/LICENSE
+//
+// xs_begin
+// author : '@lachlanmcdonald'
+// arg : { name = 'Target Color'  var = 'm_target_color'  range = '0 255'  value = '184'  step = '1'  precision = '0' }
+// arg : { name = 'Direction'  var = 'm_direction'  range = '0 1'  value = '1'  step = '1'  precision = '0' }
+// arg : { name = 'Min Length'  var = 'm_min_length_z'  range = '1 128'  value = '4'  step = '1'  precision = '0' }
+// arg : { name = 'Max Length'  var = 'm_max_length_z'  range = '1 128'  value = '16'  step = '1'  precision = '0' }
+// arg : { name = 'Scale'  var = 'm_scale'  range = '0.5 20'  value = '1'  step = '0.5'  precision = '2' }
+// arg : { name = 'Flip'  var = 'm_flip'  range = '0 1'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Jitter'  var = 'm_jitter'  range = '0 10'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Seed'  var = 'global_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
+// xs_end
+
+float m_min_length = min(m_min_length_z, m_max_length_z);
+float m_max_length = max(m_min_length_z, m_max_length_z);
+
+float hash(vec2 p, float seed) {
+	p += seed + global_seed;
+	return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x))));
+}
+
+float hash(vec3 co, float seed) {
+	float a = hash(co.xy, seed);
+	return hash(vec2(a, co.z), seed);
+}
+
+vec3 mod289(vec3 x) {
+	return x - floor(x * (1.0 / 289.0)) * 289.0;
+}
+
+vec2 mod289(vec2 x) {
+	return x - floor(x * (1.0 / 289.0)) * 289.0;
+}
+
+vec3 mod7(vec3 x) {
+	return x - floor(x * (1.0 / 7.0)) * 7.0;
+}
+
+vec3 permute(vec3 x) {
+	return mod289((34.0 * x + 10.0) * x);
+}
+
+vec2 cellular(vec2 co, float jitter) {
+	float K = 0.142857142857;
+	float Ko = 0.428571428571;
+	vec2 Pi = mod289(floor(co));
+ 	vec2 Pf = fract(co);
+	vec3 oi = vec3(-1.0, 0.0, 1.0);
+	vec3 of = vec3(-0.5, 0.5, 1.5);
+	vec3 px = permute(Pi.x + oi);
+	vec3 p = permute(px.x + Pi.y + oi);
+	vec3 ox = fract(p * K) - Ko;
+	vec3 oy = mod7(floor(p * K)) * K - Ko;
+	vec3 dx = Pf.x + 0.5 + jitter * ox;
+	vec3 dy = Pf.y - of + jitter * oy;
+	vec3 d1 = dx * dx + dy * dy;
+	p = permute(px.y + Pi.y + oi);
+	ox = fract(p * K) - Ko;
+	oy = mod7(floor(p * K)) * K - Ko;
+	dx = Pf.x - 0.5 + jitter * ox;
+	dy = Pf.y - of + jitter * oy;
+	vec3 d2 = dx * dx + dy * dy;
+	p = permute(px.z + Pi.y + oi);
+	ox = fract(p * K) - Ko;
+	oy = mod7(floor(p * K)) * K - Ko;
+	dx = Pf.x - 1.5 + jitter * ox;
+	dy = Pf.y - of + jitter * oy;
+	vec3 d3 = dx * dx + dy * dy;
+	vec3 d1a = min(d1, d2);
+	d2 = max(d1, d2);
+	d2 = min(d2, d3);
+	d1 = min(d1a, d2);
+	d2 = max(d1a, d2);
+	d1.xy = (d1.x < d1.y) ? d1.xy : d1.yx;
+	d1.xz = (d1.x < d1.z) ? d1.xz : d1.zx;
+	d1.yz = min(d1.yz, d2.yz);
+	d1.y = min(d1.y, d1.z);
+	d1.y = min(d1.y, d2.x);
+	return sqrt(d1.xy);
+}
+
+float pal(float p) {
+	if (m_flip) {
+		p = 1.0 - p;
+	}
+
+	float f = floor(mix(0.0, float(i_num_color_sels), p));
+	return color_sel(f);
+}
+
+float dist(vec3 co) {
+	float f = cellular(co.xy / m_scale, 1.0);
+	return mix(m_min_length, m_max_length, f);
+}
+
+float map(vec3 v) {
+	float index = voxel(v);
+	
+	if (index > 0.0) {
+		float jitter = mix(-m_jitter, m_jitter, hash(v, 0.0)) * 0.1;
+
+		if (index == m_target_color) {
+			float d = dist(v);
+			return pal(0.0 + jitter);
+		} else if (m_direction == 0.0) {
+			for (int i = int(m_max_length); i > 0; i -= 1) {
+				vec3 p = v + vec3(0.0, 0.0, float(i));
+				vec3 k = voxel(p);
+
+				if (k == m_target_color) {
+					float d = dist(p);
+
+					if (i <= d) {
+						float f = float(i) / d;
+						return pal(f + jitter);
+					}
+				}
+			}
+		} else if (m_direction == 1.0) {
+			for (int i = 0, l = int(m_max_length); i < l; i += 1) {
+				vec3 p = v - vec3(0.0, 0.0, float(i));
+				vec3 k = voxel(p);
+
+				if (k == m_target_color) {
+					float d = dist(p);
+
+					if (i <= d) {
+						float f = (float(i) / d);
+						return pal(f + jitter);
+					}
+				}
+			}
+		}
+	}
+
+	return voxel(v);
+}
