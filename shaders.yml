@@ -784,6 +784,38 @@ shaders:
       - name: Headroom
         var: m_headroom
         type: size
+  moisture:
+    cites:
+      - clover-noise
+      - webgl-noise
+    params:
+      - name: Target Color
+        var: m_target_color
+        type: color1
+      - name: Direction
+        var: m_direction
+        range: 0 1
+      - name: Min Length
+        var: m_min_length_z
+        range: 1 128
+        value: 4
+      - name: Max Length
+        var: m_max_length_z
+        range: 1 128
+        value: 16
+      - name: Scale
+        var: m_scale
+        range: 0.5 20
+        value: 1
+        step: 0.5
+        precision: 2
+      - name: Flip
+        var: m_flip
+        range: 0 1
+      - name: Jitter
+        var: m_jitter
+        range: 0 10
+      - type: seed
 types:
   mode:
     name: Mode
