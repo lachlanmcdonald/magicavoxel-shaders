@@ -9,27 +9,34 @@ DIR = path.dirname(path.realpath(__file__))
 
 with open(path.join(DIR, 'shaders.yml')) as f:
 	data = yaml.safe_load(f)
-	SHADERS = {k: v['params'] for k, v in data['shaders'].items()}
+
+	SHADER_PARAMS = { key: (item['params'] if 'params' in item else []) for key, item in data['shaders'].items() }
 	TYPES = data['types']
+	BASE_PARAMS = data['base_param']
 
 lines = []
 toc = []
 
-for shader_path, args in SHADERS.items():
+for shader_path, params in SHADER_PARAMS.items():
 	shader_name = shader_path.split('/')[-1]
-
 	xs_args = []
-	example_args = []
+	example_params = []
 
-	for arg in args:
-		if 'type' in arg and arg['type'] in TYPES:
-			arg.update({
-				**TYPES[arg['type']],
-				**arg,
+	if params:
+		for param in params:
+			param.update({
+				**BASE_PARAMS,
+				**param,
 			})
 
-		xs_args.append('[{}]'.format(arg['name']))
-		example_args.append(str(arg['value']))
+			if 'type' in param and param['type'] in TYPES:
+				param.update({
+					**TYPES[param['type']],
+					**param,
+				})
+
+			xs_args.append('[{}]'.format(param['name']))
+			example_params.append(str(param['value']))
 
 	# TOC
 	toc.append('- [{}](#{})'.format(shader_name, shader_name))
@@ -44,16 +51,15 @@ for shader_path, args in SHADERS.items():
 	lines.append('ID | Argument | Type | Range')
 	lines.append('-- | -------- | ---- | -----')
 
-	for index, arg in enumerate(args):
-		arg_value = arg['value'] if 'value' in arg else '—'
-		arg_type = 'Integer' if arg['decimal'] == 0 else 'Float'
-		arg_range = '-'.join(arg['range'].split(' ')) if 'range' in arg else '—'
-
-		lines.append('`{}` | **{}** | {} | {}'.format(index, arg['name'], arg_type, arg_range))
+	for index, param in enumerate(params):
+		arg_value = param['value'] if 'value' in param else '—'
+		arg_range = '-'.join(param['range'].split(' ')) if 'range' in param else '—'
+		arg_type = 'Integer' if param['precision'] == 0 else 'Float'
+		lines.append('`{}` | **{}** | {} | {}'.format(index, param['name'], arg_type, arg_range))
 
 	lines.append('\nExample:\n')
 	lines.append('```')
-	lines.append('xs {} {}'.format(shader_path, ' '.join(example_args)))
+	lines.append('xs {} {}'.format(shader_path, ' '.join(example_params)))
 	lines.append('```\n[Top](#)')
 
 
