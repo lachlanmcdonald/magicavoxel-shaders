@@ -96,7 +96,7 @@ vec2 cellular(vec2 co, float jitter) {
 }
 
 float pal(float p) {
-	if (m_flip) {
+	if (m_flip > 0.0) {
 		p = 1.0 - p;
 	}
 
@@ -105,8 +105,8 @@ float pal(float p) {
 }
 
 float dist(vec3 co) {
-	float f = cellular(co.xy / m_scale, 1.0);
-	return mix(m_min_length, m_max_length, f);
+	vec2 f = cellular(co.xy / m_scale, 1.0);
+	return mix(m_min_length, m_max_length, f.x);
 }
 
 float map(vec3 v) {
@@ -121,12 +121,12 @@ float map(vec3 v) {
 		} else if (m_direction == 0.0) {
 			for (int i = int(m_max_length); i > 0; i -= 1) {
 				vec3 p = v + vec3(0.0, 0.0, float(i));
-				vec3 k = voxel(p);
+				float k = voxel(p);
 
 				if (k == m_target_color) {
 					float d = dist(p);
 
-					if (i <= d) {
+					if (float(i) <= d) {
 						float f = float(i) / d;
 						return pal(f + jitter);
 					}
@@ -135,12 +135,12 @@ float map(vec3 v) {
 		} else if (m_direction == 1.0) {
 			for (int i = 0, l = int(m_max_length); i < l; i += 1) {
 				vec3 p = v - vec3(0.0, 0.0, float(i));
-				vec3 k = voxel(p);
+				float k = voxel(p);
 
 				if (k == m_target_color) {
 					float d = dist(p);
 
-					if (i <= d) {
+					if (float(i) <= d) {
 						float f = (float(i) / d);
 						return pal(f + jitter);
 					}
