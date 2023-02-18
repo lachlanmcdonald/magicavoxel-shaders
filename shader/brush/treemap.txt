@@ -17,7 +17,7 @@
 //
 // xs_begin
 // author : '@lachlanmcdonald'
-// arg : { name = 'Mode'  var = 'm_mode'  range = '0 2'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Mode'  var = 'm_mode'  range = '0 4'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Direction'  var = 'm_direction'  range = '0 5'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Iterations'  var = 'm_iters'  range = '2 32'  value = '8'  step = '1'  precision = '0' }
 // arg : { name = 'Min Size'  var = 'm_min_size'  range = '0 100'  value = '10'  step = '1'  precision = '0' }
@@ -68,8 +68,8 @@ Box reshapeBox(Box k, bool horz, float f, vec2 p) {
 }
 
 float pal(float i) {
-	float f = floor(mix(0.0, float(i_num_color_sels), i));
-	return color_sel(f);
+	float f = mix(0.0, float(i_num_color_sels), i);
+	return color_sel(floor(f));
 }
 
 vec2 range(vec2 value, vec2 inMin, vec2 inMax, vec2 outMin, vec2 outMax) {
@@ -132,16 +132,21 @@ float map(vec3 v) {
 		}
 	}
 
+	float k = pow(2.0, float(iter_limit));
+	float height = hash(p.xy / k);
+
 	if (mode == 0) {
-		float k = pow(2.0, float(iter_limit));
-		float h1 = hash(p.xy / k);
-		float h2 = hash(p.yx / k);
-		return h1 >= uv.z ? pal(h2) : 0.0;
+		float random_color = hash(p.yx / k);
+		return height >= uv.z ? pal(random_color) : 0.0;
 	} else if (mode == 1) {
-		float area = 1.0 - ((b.to.x - b.from.x) * (b.to.y - b.from.y) * float(iter_limit));
-		return area >= uv.z ? pal(area) : 0.0;
+		return height >= uv.z ? pal(height) : 0.0;
 	} else if (mode == 2) {
-		float area = (b.to.x - b.from.x) * (b.to.y - b.from.y) * float(iter_limit);
-		return area >= uv.z ? pal(area) : 0.0;
+		return height >= uv.z ? pal(1.0 - height) : 0.0;
+	} else if (mode == 3) {
+		float z = range(uv.z, 0.0, height);
+		return height >= uv.z ? pal(z) : 0.0;
+	} else if (mode == 4) {
+		float z = range(uv.z, 0.0, height);
+		return height >= uv.z ? pal(1.0 - z) : 0.0;
 	}
 }
