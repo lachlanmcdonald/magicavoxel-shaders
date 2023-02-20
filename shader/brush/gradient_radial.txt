@@ -18,7 +18,7 @@
 // xs_begin
 // author : '@lachlanmcdonald'
 // arg : { name = 'Mode'  var = 'm_mode'  range = '0 5'  value = '0'  step = '1'  precision = '0' }
-// arg : { name = 'Direction'  var = 'm_direction'  range = '0 2'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Direction'  var = 'm_direction'  range = '0 5'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Flip'  var = 'm_flip'  range = '0 1'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'X Position'  var = 'm_pos_x'  range = '0 100'  value = '50'  step = '1'  precision = '0' }
 // arg : { name = 'Y Position'  var = 'm_pos_y'  range = '0 100'  value = '50'  step = '1'  precision = '0' }
@@ -30,7 +30,6 @@
 
 int mode = int(m_mode);
 bool flip = m_flip > 0.0;
-int direction = int(m_direction);
 vec2 position = vec2(m_pos_x, m_pos_y) / 100.0;
 float scale = m_scale / 100.0;
 float noise = m_noise / 100.0;
@@ -89,6 +88,9 @@ float map(vec3 v) {
 	float d;
 	float r;
 
+	bool invert = floor(m_direction / 3.0) > 0.0;
+	int direction = int(mod(m_direction, 3.0));
+
 	if (direction == 0) {
 		d = distance(position, v.zy / i_volume_size.zy) * scale;
 
@@ -129,5 +131,8 @@ float map(vec3 v) {
 	}
 
 	vec3 k = vec3(d) + ((r - 0.5) * noise);
+	if (invert) {
+		k.z = 1.0 - k.z;
+	}
 	return pal(k.z);
 }

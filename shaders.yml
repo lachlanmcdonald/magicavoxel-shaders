@@ -172,9 +172,8 @@ shaders:
       - type: mode
         range: 0 5
       - type: direction
-        range: 0 2
-      - type: direction
-        name: Flip
+        range: 0 5
+      - name: Flip
         var: m_flip
         range: 0 1
       - name: X Position
