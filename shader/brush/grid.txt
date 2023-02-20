@@ -9,9 +9,9 @@
 // arg : { name = 'Color A'  var = 'm_color_a'  range = '0 255'  value = '1'  step = '1'  precision = '0' }
 // arg : { name = 'Color B'  var = 'm_color_b'  range = '0 255'  value = '2'  step = '1'  precision = '0' }
 // arg : { name = 'Thickness'  var = 'm_thickness'  range = '1 256'  value = '1'  step = '1'  precision = '0' }
-// arg : { name = 'Size X'  var = 'm_size_x'  range = '1 256'  value = '1'  step = '1'  precision = '0' }
-// arg : { name = 'Size Y'  var = 'm_size_y'  range = '1 256'  value = '1'  step = '1'  precision = '0' }
-// arg : { name = 'Size Z'  var = 'm_size_z'  range = '1 256'  value = '1'  step = '1'  precision = '0' }
+// arg : { name = 'Size X'  var = 'm_size_x'  range = '1 256'  value = '4'  step = '1'  precision = '0' }
+// arg : { name = 'Size Y'  var = 'm_size_y'  range = '1 256'  value = '4'  step = '1'  precision = '0' }
+// arg : { name = 'Size Z'  var = 'm_size_z'  range = '1 256'  value = '4'  step = '1'  precision = '0' }
 // xs_end
 
 float thickness = m_thickness - 1.0;

@@ -416,15 +416,19 @@ shaders:
       - name: Thickness
         var: m_thickness
         type: size
+        value: 1
       - name: Size X
         var: m_size_x
         type: size
+        value: 4
       - name: Size Y
         var: m_size_y
         type: size
+        value: 4
       - name: Size Z
         var: m_size_z
         type: size
+        value: 4
   primitive/stairs:
     params:
       - type: mode
