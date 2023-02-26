@@ -276,12 +276,22 @@ shaders:
       - clover-noise
     params:
       - type: mode
-        range: 0 2
+        range: 0 1
       - name: Size
         var: m_size
         range: 3 40
         value: 8
+      - name: Line Color
+        var: m_line_color
+        type: color2
+        value: 10
+      - name: Line Width
+        var: m_line_width
+        type: position
+        value: 1
       - type: noise
+        name: Jitter
+        var: m_jitter
       - type: seed
   brush/bricks:
     cites:
