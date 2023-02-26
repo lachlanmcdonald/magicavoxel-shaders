@@ -44,7 +44,7 @@ shaders:
     license: mit
   knife_z:
     license: mit
-  brush/hex_tiles:
+  brush/tiles_hex:
     license: by-nc-sa-3.0
     cites:
       - hex_grid_marching
