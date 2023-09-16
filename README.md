@@ -1,7 +1,7 @@
 # magicavoxel-shaders
 
 [![Release](https://img.shields.io/badge/dynamic/json.svg?label=Release&url=https%3A%2F%2Fapi.github.com%2Frepos%2Flachlanmcdonald%2Fmagicavoxel-shaders%2Freleases&query=%24%5B0%5D.name&color=green)][release-link]
-[![Supports](https://img.shields.io/badge/MagicaVoxel-0.99.6.4-green.svg)][mv-link]
+[![Supports](https://img.shields.io/badge/MagicaVoxel-0.99.7.1.beta-green.svg)][mv-link]
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)][license-link]
 
 > A collection of shaders for [MagicaVoxel](https://ephtracy.github.io/) to generate geometry, noise, patterns, and simplify common and repetitive tasks.
