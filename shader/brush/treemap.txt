@@ -16,7 +16,7 @@
 // xs brush/treemap [Mode] [Direction] [Iterations] [Min Size] [Bias] [Edge] [Seed]
 //
 // xs_begin
-// author : '@lachlanmcdonald'
+// author : '@lmcdx.bsky.social'
 // arg : { name = 'Mode'  var = 'm_mode'  range = '0 4'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Direction'  var = 'm_direction'  range = '0 5'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Iterations'  var = 'm_iters'  range = '2 32'  value = '8'  step = '1'  precision = '0' }

@@ -3,7 +3,7 @@
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 //
 // xs_begin
-// author : '@lachlanmcdonald'
+// author : '@lmcdx.bsky.social'
 // arg : { name = 'Spacing'  var = 'm_spacing'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
 // xs_end
 

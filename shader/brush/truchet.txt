@@ -16,7 +16,7 @@
 // xs brush/truchet [Mode] [Size] [Line Color] [Line Width] [Jitter] [Seed]
 //
 // xs_begin
-// author : '@lachlanmcdonald'
+// author : '@lmcdx.bsky.social'
 // arg : { name = 'Mode'  var = 'm_mode'  range = '0 1'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Size'  var = 'm_size'  range = '3 40'  value = '8'  step = '1'  precision = '0' }
 // arg : { name = 'Line Color'  var = 'm_line_color'  range = '0 255'  value = '10'  step = '1'  precision = '0' }

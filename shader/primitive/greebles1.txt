@@ -5,7 +5,7 @@
 // xs primitive/greebles1 [Mode] [Count] [Width] [Height] [Depth] [Seed]
 //
 // xs_begin
-// author : '@lachlanmcdonald'
+// author : '@lmcdx.bsky.social'
 // arg : { name = 'Mode'  var = 'm_mode'  range = '0 1'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Count'  var = 'm_count'  range = '1 256'  value = '32'  step = '8'  precision = '0' }
 // arg : { name = 'Width'  var = 'm_width'  range = '1 256'  value = '4'  step = '1'  precision = '0' }

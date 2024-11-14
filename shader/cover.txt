@@ -12,7 +12,7 @@
 // xs cover [Headroom] [Noise] [Seed]
 //
 // xs_begin
-// author : '@lachlanmcdonald'
+// author : '@lmcdx.bsky.social'
 // arg : { name = 'Headroom'  var = 'm_headroom'  range = '1 256'  value = '1'  step = '1'  precision = '0' }
 // arg : { name = 'Noise'  var = 'm_noise'  range = '0 100'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Seed'  var = 'global_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }

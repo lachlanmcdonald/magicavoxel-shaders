@@ -12,7 +12,7 @@
 // xs noise [Target Color] [Size X] [Size Y] [Size Z] [Seed]
 //
 // xs_begin
-// author : '@lachlanmcdonald'
+// author : '@lmcdx.bsky.social'
 // arg : { name = 'Target Color'  var = 'm_target_color'  range = '0 255'  value = '1'  step = '1'  precision = '0' }
 // arg : { name = 'Size X'  var = 'm_size_x'  range = '1 256'  value = '1'  step = '1'  precision = '0' }
 // arg : { name = 'Size Y'  var = 'm_size_y'  range = '1 256'  value = '1'  step = '1'  precision = '0' }

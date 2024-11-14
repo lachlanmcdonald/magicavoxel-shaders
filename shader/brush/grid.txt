@@ -5,7 +5,7 @@
 // xs brush/grid [Color A] [Color B] [Thickness] [Size X] [Size Y] [Size Z]
 //
 // xs_begin
-// author : '@lachlanmcdonald'
+// author : '@lmcdx.bsky.social'
 // arg : { name = 'Color A'  var = 'm_color_a'  range = '0 255'  value = '1'  step = '1'  precision = '0' }
 // arg : { name = 'Color B'  var = 'm_color_b'  range = '0 255'  value = '2'  step = '1'  precision = '0' }
 // arg : { name = 'Thickness'  var = 'm_thickness'  range = '1 256'  value = '1'  step = '1'  precision = '0' }

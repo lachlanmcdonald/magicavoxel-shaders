@@ -5,7 +5,7 @@
 // xs brush/diagonal [Direction] [Width A] [Width B] [Width C] [Width D] [Offset] [Shuffle]
 //
 // xs_begin
-// author : '@lachlanmcdonald'
+// author : '@lmcdx.bsky.social'
 // arg : { name = 'Direction'  var = 'm_direction'  range = '0 5'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Width A'  var = 'm_width_a'  range = '0 32'  value = '2'  step = '1'  precision = '0' }
 // arg : { name = 'Width B'  var = 'm_width_b'  range = '0 32'  value = '0'  step = '1'  precision = '0' }

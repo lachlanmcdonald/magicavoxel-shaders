@@ -16,7 +16,7 @@
 // xs grass_fit [Mode] [Density] [Height] [Seed]
 //
 // xs_begin
-// author : '@lachlanmcdonald'
+// author : '@lmcdx.bsky.social'
 // arg : { name = 'Mode'  var = 'm_mode'  range = '0 4'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Density'  var = 'm_density'  range = '1 256'  value = '2'  step = '1'  precision = '0' }
 // arg : { name = 'Height'  var = 'm_strand_height'  range = '1 256'  value = '10'  step = '1'  precision = '0' }

@@ -12,7 +12,7 @@
 // xs random [Threshold] [Color]
 //
 // xs_begin
-// author : '@lachlanmcdonald'
+// author : '@lmcdx.bsky.social'
 // arg : { name = 'Threshold'  var = 'm_threshold'  range = '0 100'  value = '50'  step = '1'  precision = '0' }
 // arg : { name = 'Color'  var = 'm_color'  range = '0 255'  value = '1'  step = '1'  precision = '0' }
 // xs_end

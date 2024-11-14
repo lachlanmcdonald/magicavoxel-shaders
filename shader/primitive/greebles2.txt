@@ -5,7 +5,7 @@
 // xs primitive/greebles2 [Mode] [Min] [Max] [Depth] [Seed]
 //
 // xs_begin
-// author : '@lachlanmcdonald'
+// author : '@lmcdx.bsky.social'
 // arg : { name = 'Mode'  var = 'm_mode'  range = '0 2'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Min'  var = 'm_min'  range = '1 256'  value = '4'  step = '1'  precision = '0' }
 // arg : { name = 'Max'  var = 'm_max'  range = '1 256'  value = '8'  step = '1'  precision = '0' }

@@ -5,7 +5,7 @@
 // xs slice_z [Offset] [Count]
 //
 // xs_begin
-// author : '@lachlanmcdonald'
+// author : '@lmcdx.bsky.social'
 // arg : { name = 'Offset'  var = 'm_offset'  range = '0 256'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Count'  var = 'm_count'  range = '0 256'  value = '0'  step = '1'  precision = '0' }
 // xs_end
