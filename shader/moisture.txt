@@ -16,7 +16,7 @@
 // xs moisture [Target Color] [Direction] [Min Length] [Max Length] [Scale] [Flip] [Jitter] [Seed]
 //
 // xs_begin
-// author : '@lachlanmcdonald'
+// author : '@lmcdx.bsky.social'
 // arg : { name = 'Target Color'  var = 'm_target_color'  range = '0 255'  value = '1'  step = '1'  precision = '0' }
 // arg : { name = 'Direction'  var = 'm_direction'  range = '0 1'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Min Length'  var = 'm_min_length_z'  range = '1 128'  value = '4'  step = '1'  precision = '0' }

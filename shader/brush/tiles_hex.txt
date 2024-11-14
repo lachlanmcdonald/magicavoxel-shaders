@@ -13,7 +13,7 @@
 // xs brush/tiles_hex [Scale] [Outline] [Seed]
 //
 // xs_begin
-// author : '@lachlanmcdonald'
+// author : '@lmcdx.bsky.social'
 // arg : { name = 'Scale'  var = 'm_scale'  range = '1 100'  value = '10'  step = '1'  precision = '0' }
 // arg : { name = 'Outline'  var = 'm_outline'  range = '-100 100'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Seed'  var = 'global_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }

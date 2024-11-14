@@ -16,7 +16,7 @@
 // xs noise/terrain [Mode] [Direction] [Scale] [Iterations] [Octaves] [Contrast] [Shift] [Gain] [Lacunarity] [Noise] [Tile X] [Tile Y]
 //
 // xs_begin
-// author : '@lachlanmcdonald'
+// author : '@lmcdx.bsky.social'
 // arg : { name = 'Mode'  var = 'm_mode'  range = '0 1'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Direction'  var = 'm_direction'  range = '0 1'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Scale'  var = 'm_scale'  range = '5 200'  value = '50'  step = '1'  precision = '0' }

@@ -5,7 +5,7 @@
 // xs primitive/stairs [Mode] [Direction] [Count] [Height]
 //
 // xs_begin
-// author : '@lachlanmcdonald'
+// author : '@lmcdx.bsky.social'
 // arg : { name = 'Mode'  var = 'm_mode'  range = '0 2'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Direction'  var = 'm_direction'  range = '0 3'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Count'  var = 'm_count'  range = '1 256'  value = '5'  step = '1'  precision = '0' }

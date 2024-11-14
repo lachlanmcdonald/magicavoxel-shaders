@@ -10,7 +10,7 @@ import re
 
 DIR = path.dirname(path.realpath(__file__))
 TAB_EXPR = re.compile('^( {4})+', re.MULTILINE)
-AUTHOR = '@lachlanmcdonald'
+AUTHOR = '@lmcdx.bsky.social'
 ARG_FORMAT = "{} = '{}'"
 FIX_GLOBAL_VARS = {
 	'iArgs': 'i_args',

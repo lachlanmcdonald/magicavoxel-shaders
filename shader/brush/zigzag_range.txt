@@ -5,7 +5,7 @@
 // xs brush/zigzag_range [Direction] [Width]
 //
 // xs_begin
-// author : '@lachlanmcdonald'
+// author : '@lmcdx.bsky.social'
 // arg : { name = 'Direction'  var = 'm_direction'  range = '0 3'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Width'  var = 'm_width'  range = '1 256'  value = '2'  step = '1'  precision = '0' }
 // xs_end

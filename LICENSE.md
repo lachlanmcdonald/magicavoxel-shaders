@@ -2,7 +2,7 @@ The MIT License (MIT)
 
 Copyright (c) 2023 Lachlan McDonald  
 https://github.com/lachlanmcdonald/magicavoxel-shaders  
-https://twitter.com/lachlanmcdonald
+https://bsky.app/profile/lmcdx.bsky.social
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

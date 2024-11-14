@@ -5,7 +5,7 @@
 // xs primitive/prism [Mode] [Size X] [Size Y] [Steps]
 //
 // xs_begin
-// author : '@lachlanmcdonald'
+// author : '@lmcdx.bsky.social'
 // arg : { name = 'Mode'  var = 'm_mode'  range = '0 2'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Size X'  var = 'm_size_x'  range = '0 256'  value = '12'  step = '1'  precision = '0' }
 // arg : { name = 'Size Y'  var = 'm_size_y'  range = '0 256'  value = '12'  step = '1'  precision = '0' }

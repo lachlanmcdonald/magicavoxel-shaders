@@ -16,7 +16,7 @@
 // xs brush/gradient_radial [Mode] [Direction] [Flip] [X Position] [Y Position] [Scale] [Power] [Dither] [Seed]
 //
 // xs_begin
-// author : '@lachlanmcdonald'
+// author : '@lmcdx.bsky.social'
 // arg : { name = 'Mode'  var = 'm_mode'  range = '0 5'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Direction'  var = 'm_direction'  range = '0 5'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Flip'  var = 'm_flip'  range = '0 1'  value = '0'  step = '1'  precision = '0' }

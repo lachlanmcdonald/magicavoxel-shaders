@@ -5,7 +5,7 @@
 // xs soil_replace [Color] [Headroom]
 //
 // xs_begin
-// author : '@lachlanmcdonald'
+// author : '@lmcdx.bsky.social'
 // arg : { name = 'Color'  var = 'm_color'  range = '0 255'  value = '1'  step = '1'  precision = '0' }
 // arg : { name = 'Headroom'  var = 'm_headroom'  range = '1 256'  value = '1'  step = '1'  precision = '0' }
 // xs_end

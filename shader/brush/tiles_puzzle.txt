@@ -12,7 +12,7 @@
 // xs brush/tiles_puzzle [Mode] [Size X] [Size Y] [Line Color] [Line Width] [Noise] [Seed]
 //
 // xs_begin
-// author : '@lachlanmcdonald'
+// author : '@lmcdx.bsky.social'
 // arg : { name = 'Mode'  var = 'm_mode'  range = '0 4'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Size X'  var = 'm_size_x'  range = '1 256'  value = '4'  step = '1'  precision = '0' }
 // arg : { name = 'Size Y'  var = 'm_size_y'  range = '1 256'  value = '4'  step = '1'  precision = '0' }

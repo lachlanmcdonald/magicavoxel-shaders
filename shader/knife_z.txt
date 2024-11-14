@@ -5,7 +5,7 @@
 // xs knife_z
 //
 // xs_begin
-// author : '@lachlanmcdonald'
+// author : '@lmcdx.bsky.social'
 // xs_end
 
 bool isSelectedPal(float p) {

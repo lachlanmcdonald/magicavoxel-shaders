@@ -5,7 +5,7 @@
 // xs brush/tiles [Width] [Height] [Depth] [Offset X] [Offset Y] [Offset Z]
 //
 // xs_begin
-// author : '@lachlanmcdonald'
+// author : '@lmcdx.bsky.social'
 // arg : { name = 'Width'  var = 'm_width'  range = '1 256'  value = '2'  step = '1'  precision = '0' }
 // arg : { name = 'Height'  var = 'm_height'  range = '1 256'  value = '2'  step = '1'  precision = '0' }
 // arg : { name = 'Depth'  var = 'm_depth'  range = '1 256'  value = '2'  step = '1'  precision = '0' }

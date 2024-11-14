@@ -12,7 +12,7 @@
 // xs heightmap [Blur] [Auto Balance] [Reverse]
 //
 // xs_begin
-// author : '@lachlanmcdonald'
+// author : '@lmcdx.bsky.social'
 // arg : { name = 'Blur'  var = 'm_blur'  range = '0 10'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Auto Balance'  var = 'm_auto'  range = '0 1'  value = '1'  step = '1'  precision = '0' }
 // arg : { name = 'Reverse'  var = 'm_reverse'  range = '0 1'  value = '0'  step = '1'  precision = '0' }
