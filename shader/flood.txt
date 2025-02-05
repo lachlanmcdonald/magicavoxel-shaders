@@ -1,11 +1,11 @@
-// Copyright (c) 2022 Lachlan McDonald
+// Copyright (c) 2023 Lachlan McDonald
 // This work is licensed under the MIT License (MIT)
 // https://github.com/lachlanmcdonald/magicavoxel-shaders
 //
 // xs flood [Height]
 //
 // xs_begin
-// author : '@lachlanmcdonald'
+// author : '@lmcdx.bsky.social'
 // arg : { name = 'Height'  var = 'm_height'  range = '1 256'  value = '1'  step = '1'  precision = '0' }
 // xs_end
 

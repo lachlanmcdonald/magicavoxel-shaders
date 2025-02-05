@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Copyright (c) 2022 Lachlan McDonald
+# Copyright (c) 2023 Lachlan McDonald
 # This work is licensed under the MIT License (MIT)
 # https://github.com/lachlanmcdonald/magicavoxel-shaders
 from os import path
@@ -10,7 +10,7 @@ import re
 
 DIR = path.dirname(path.realpath(__file__))
 TAB_EXPR = re.compile('^( {4})+', re.MULTILINE)
-AUTHOR = '@lachlanmcdonald'
+AUTHOR = '@lmcdx.bsky.social'
 ARG_FORMAT = "{} = '{}'"
 FIX_GLOBAL_VARS = {
 	'iArgs': 'i_args',
