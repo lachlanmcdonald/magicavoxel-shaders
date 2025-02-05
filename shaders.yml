@@ -169,6 +169,9 @@ shaders:
       - interweaved-gradient-noise
       - clover-noise
     params:
+      - type: toggle
+        name: Guides
+        var: m_debug
       - type: mode
         range: 0 6
       - name: Start X%
@@ -198,6 +201,12 @@ shaders:
       - type: noise
         name: Dither
         range: 0 50
+      - name: Align
+        var: m_align
+        type: toggle
+      - name: Reverse
+        var: m_reverse
+        type: toggle
       - type: seed
   brush/gradient_radial:
     cites:
@@ -865,6 +874,11 @@ shaders:
         range: 0 10
       - type: seed
 types:
+  toggle:
+    range: 0 1
+    value: 0
+    step: 1
+    precision: 0
   mode:
     name: Mode
     var: m_mode

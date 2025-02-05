@@ -1,0 +1,14 @@
+{
+	"files.associations": {
+		"**/shader/**/*.txt": "glsl"
+	},
+	"cSpell.words": [
+		"@lmcdx.bsky.social",
+		"MagicaVoxel",
+		"bvec",
+		"fract",
+		"i_num_color_sels",
+		"ivec",
+		"ValgoBoi"
+	],
+}
