@@ -62,12 +62,12 @@ float scanLines(vec3 co) {
 	return mod(co.z, 2.0) / 2.0;
 }
 
-float scanLineshash(vec3 co) {
+float scanLinesHash(vec3 co) {
 	float r = hash(co.zz, 0.0);
 	return mod(co.z, 2.0) / 2.0 + r - 0.5;
 }
 
-float wavehash(vec3 co) {
+float waveHash(vec3 co) {
 	float r = hash(co.xy, 0.0);
 	return mod(co.z, 2.0) / 2.0 + r - 0.5;
 }
@@ -121,11 +121,11 @@ float map(vec3 v) {
 	} else if (mode == 1) {
 		r = hash(v, 0.0);
 	} else if (mode == 2) {
-		r = scanLineshash(v);
+		r = scanLinesHash(v);
 	} else if (mode == 3) {
 		r = scanLines(v);
 	} else if (mode == 4) {
-		r = wavehash(v);
+		r = waveHash(v);
 	} else if (mode == 5) {
 		r = orderedDither(v);
 	}

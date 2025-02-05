@@ -17,9 +17,9 @@
 //
 // xs_begin
 // author : '@lmcdx.bsky.social'
-// arg : { name = 'Mode'  var = 'm_mode'  range = '0 5'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Mode'  var = 'm_mode'  range = '0 6'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Direction'  var = 'm_direction'  range = '0 5'  value = '0'  step = '1'  precision = '0' }
-// arg : { name = 'Dither'  var = 'm_noise'  range = '0 50'  value = '25'  step = '1'  precision = '0' }
+// arg : { name = 'Dither'  var = 'm_noise'  range = '0 50'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Seed'  var = 'global_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
 // xs_end
 
@@ -55,12 +55,12 @@ float scanLines(vec3 co) {
 	return mod(co.z, 2.0) / 2.0;
 }
 
-float scanLineshash(vec3 co) {
+float scanLinesHash(vec3 co) {
 	float r = hash(co.zz, 0.0);
 	return mod(co.z, 2.0) / 2.0 + r - 0.5;
 }
 
-float wavehash(vec3 co) {
+float waveHash(vec3 co) {
 	float r = hash(co.xy, 0.0);
 	return mod(co.z, 2.0) / 2.0 + r - 0.5;
 }
@@ -145,11 +145,11 @@ float map(vec3 v) {
 	} else if (mode == 1) {
 		r = hash(v, 0.0);
 	} else if (mode == 2) {
-		r = scanLineshash(v);
+		r = scanLinesHash(v);
 	} else if (mode == 3) {
 		r = scanLines(v);
 	} else if (mode == 4) {
-		r = wavehash(v);
+		r = waveHash(v);
 	} else if (mode == 5) {
 		r = bayerOrderedDithering4x4(v);
 	} else if (mode == 6) {
