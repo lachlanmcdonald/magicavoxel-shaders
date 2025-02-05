@@ -19,7 +19,7 @@
 // author : '@lachlanmcdonald'
 // arg : { name = 'Mode'  var = 'm_mode'  range = '0 5'  value = '0'  step = '1'  precision = '0' }
 // arg : { name = 'Direction'  var = 'm_direction'  range = '0 5'  value = '0'  step = '1'  precision = '0' }
-// arg : { name = 'Dither'  var = 'm_noise'  range = '0 50'  value = '0'  step = '1'  precision = '0' }
+// arg : { name = 'Dither'  var = 'm_noise'  range = '0 50'  value = '25'  step = '1'  precision = '0' }
 // arg : { name = 'Seed'  var = 'global_seed'  range = '1 100'  value = '1'  step = '1'  precision = '0' }
 // xs_end
 
@@ -65,7 +65,7 @@ float wavehash(vec3 co) {
 	return mod(co.z, 2.0) / 2.0 + r - 0.5;
 }
 
-float orderedDither(vec3 co) {
+float bayerOrderedDithering4x4(vec3 co) {
 	co = co - 0.5;
 	mat4 m = mat4(0.0,    0.5,    0.125,  0.625,
 				  0.75,   0.25,   0.875,  0.375,
@@ -75,6 +75,51 @@ float orderedDither(vec3 co) {
 	int x = int(mod(co.x + co.y, 4.0));
 	int z = int(mod(co.z, 4.0));
 	return m[x][z];
+}
+
+float bayerOrderedDithering8x8(vec3 co) {
+	co = co - 0.5;
+
+	mat4 m1 = mat4(0.0,     0.50793, 0.12698, 0.63492,
+				   0.76190, 0.25396, 0.88888, 0.38095,
+				   0.19047, 0.69841, 0.06349, 0.57142,
+				   0.95238, 0.44444, 0.82539, 0.31746);
+
+	mat4 m2 = mat4(0.03174, 0.53968, 0.15873, 0.66666,
+				   0.79365, 0.28571, 0.92063, 0.41269,
+				   0.22222, 0.73015, 0.09523, 0.60317,
+				   0.98412, 0.47619, 0.85714, 0.34920);
+
+	mat4 m3 = mat4(0.04761, 0.55555, 0.17460, 0.68253,
+				   0.80952, 0.30158, 0.93650, 0.42857,
+				   0.23809, 0.74603, 0.11111, 0.61904,
+				   1.0,     0.49206, 0.87301, 0.36507);
+
+	mat4 m4 = mat4(0.01587, 0.52380, 0.14285, 0.65079,
+				   0.77777, 0.26984, 0.90476, 0.39682,
+				   0.20634, 0.71428, 0.07936, 0.58730,
+				   0.96825, 0.46031, 0.84126, 0.33333);
+
+	int x = int(mod(co.x + co.y, 8.0));
+	int z = int(mod(co.z, 8.0));
+	int matX = x / 4;
+	int matZ = z / 4;
+	int localX = x % 4;
+	int localZ = z % 4;
+
+	if (matZ == 0) {
+		if (matX == 0) {
+			return m1[localZ][localX];
+		} else {
+			return m2[localZ][localX];
+		}
+	} else {
+		if (matX == 0) {
+			return m3[localZ][localX];
+		} else {
+			return m4[localZ][localX];
+		}
+	}
 }
 
 float map(vec3 v) {
@@ -106,7 +151,9 @@ float map(vec3 v) {
 	} else if (mode == 4) {
 		r = wavehash(v);
 	} else if (mode == 5) {
-		r = orderedDither(v);
+		r = bayerOrderedDithering4x4(v);
+	} else if (mode == 6) {
+		r = bayerOrderedDithering8x8(v);
 	}
 
 	vec3 k = p + ((r - 0.5) * noise);
