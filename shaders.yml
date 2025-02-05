@@ -157,9 +157,44 @@ shaders:
       - clover-noise
     params:
       - type: mode
-        range: 0 5
+        range: 0 6
       - type: direction
         range: 0 5
+      - type: noise
+        name: Dither
+        range: 0 50
+      - type: seed
+  brush/gradient_free:
+    cites:
+      - interweaved-gradient-noise
+      - clover-noise
+    params:
+      - type: mode
+        range: 0 6
+      - name: Start X%
+        type: norm_pos
+        value: 25
+        var: m_ax
+      - name: Start Y%
+        type: norm_pos
+        value: 25
+        var: m_ay
+      - name: Start Z%
+        type: norm_pos
+        value: 25
+        var: m_az
+      - name: Stop X%
+        type: norm_pos
+        value: 75
+        var: m_bx
+      - name: Stop Y%
+        type: norm_pos
+        value: 75
+        var: m_by
+      - name: Stop Z%
+        type: norm_pos
+        value: 75
+        var: m_bz
       - type: noise
         name: Dither
         range: 0 50
@@ -839,6 +874,11 @@ types:
   color2:
     range: 0 255
     value: 2
+  norm_pos:
+    range: 0 100
+    value: 0
+    step: 1
+    precision: 0
   position:
     range: 0 256
   size:
